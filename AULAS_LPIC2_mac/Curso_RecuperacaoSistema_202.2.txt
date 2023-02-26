@@ -1,0 +1,198 @@
+Recuperção caso de falha
+ MBR (master boot Record) 512 Bytes
+	446 Boot Loader
+	64 Partition Table
+	2 validation check
+   No primeiro setor do disco bootavel
+   informcões do GRUB
+   Armazena o Grub
+
+ BOOT /BIOS  (Tem print de tela) (procura o MBR e executa o q esta dentro)
+   Bios 	> MBR 		> BootLoader 	> Kernel 	> init
+   POST		chama		chama Kernel	chama 		programas
+   (selfTeste 	Bootloader	initrd		/sbin/init	runlevel
+    Bios)			GRUB		Drivers		target
+   Executa MBR
+
+
+
+
+
+
+ GRUB2
+	Modular
+	Suporte UEFI e BIOS
+	Scripts
+	Multiplas plataformas
+
+ Olhar tela com diferencia Grub2 e Legancy
+
+  GRUB LEGANCY
+	  /boot/grub/menu.lst
+	  hda1 = hd0,0	
+
+	grub-install /dev/hda
+	grub-install '(hd0)'
+
+  Grub2
+
+	 hda1 = hd0,1 ou hd0,msdos1 (particao do tipo MBR)
+	 hda5 = hd0,1 ou hd5,gpt5 (Particao GPT sem a limitação)
+
+	 grub-install <device>
+	 update-grub  (constroi o /boot/grub/
+	 grub-mkconfig -o
+	 /boot/grub/grub.cfg
+
+  Configuracoes
+	/boot/grub/grub.cfg
+		mostra o a particao do /boot e o /
+	/etc/default/grub
+		mostra coniguracoes gerais
+	
+Resolvendo problemas com o MENU
+	no Menu aperta o E (editar opcoes de inicialicação)
+	na linha que tem a imagem começa com linux
+		no final dela coloca o runlevel 1 ou s (single mode)
+		Nao grava, vale apenas para esse boot
+	outra opcao é colocar no final init=/bin/bash (inicia so o bash)
+		Nao monsta s particoes (bom para fazer fsck nas particoes)
+
+		ao boot entra com senha de root para entra ou crt+d volta boot no modo default
+	
+	Posso umount /home  e fazer um fsck -f /home (checar)
+
+	mount -o remount,rw /home  (remonta a particao em rs) (assim nao faz o fsck)
+
+
+Outro Recurso no MENU (mudando o boot por outro kernel)
+	Pressionando C entra no Grub Shell
+		ls - mostra os discos e particoes
+		ls -l (hd0,msdos1)/ com a barra mostra o conteudo
+		cat (hd0,msdos1)/grub/grub.cfg
+	
+	Boot manual
+		ls -l (hd0,msdos1)/ 
+		set root=(hd0,msdos1)
+		linux /vmlinuz-4.9.0-6-amd64 root=/dev/sda3
+		initrd /initrd.img-4.9.0-6-amd64
+		>boot
+
+
+ UEFI (Substitui a Bios)
+	Unified extensible firmware interface
+
+   UEFI 	> BootLoader 	> Kernel 	> init
+   Le		chama Kernel	chama 		programas
+   Particao	initrd		/sbin/init	runlevel
+    ESP		GRUB		Drivers		target
+   Executa 
+   Bootloader
+
+	  Não le dados do MBR e sim do ESP (EFI System Partition)
+	  Montada no /boot/efi
+	  usa FAT
+	  Usa preferencialmente GPT ao invés de FAT
+	  Suporta paes acima de 2TB
+
+	Implementa o Boot Seguro (com imagem assinada)
+	Possui modo compatibilidade com Bios( pode ter baseado em mbr)
+	UEFI Boot Manager (tem F2 F10) 
+		efibootmgr - usado para configura pelo SO
+
+  Na pratica
+	df -T 
+	particao /dev/sda1  que e o /boot/efi (do tipo VFAT)
+	/boot/efi - arquivos de config (ESP - UEFI procura por essa particao no boot)
+	/boot/efi/ubunto  - arquivos os bootloader do Ubunto,outros diretorios sao do  windows etc
+	efibootmgr - mostra sequencia de boot, etc
+		-v tras mais informacoes (sistema, bootmanager, etc
+
+	fdisk -l
+		mostra o type como GPT (Particoes)
+
+	df - se nao aparecer /boot/efi, porque nao esta usando
+
+
+Simulando problemas
+	Kernel corrompido (não adianda editar o singlemode
+
+	Necessario fazer boot Live(cd de recuperacao)
+	fazer mounts nas particoes
+		mount /dev/sda1 /mnt/boot_tmp
+		mount /dev/sda3 /mnt/barra_tmp
+		mount /dev/sda2 /mnt/home_tmp	
+		cp a imagem para o caminho do /boot
+
+
+	caso algum particao não monte (/ home ou etc).
+		Necessario editar o /etc/fstab no /
+	se a particao / estiver como read only
+		mount -o remount,rw /dev/sda3 /
+		agora consegue edita /etc/fstab  (pode corrigir o que e mapeado)
+
+
+	Apagando a MBR(Sem grub e sem Bootloaders)
+	
+	obs: dd if=/dev/sda of=backup.mbr bs=512 count=1 (backup da mbr)
+
+	Restaurar o MBR, entra com o Linux Live(mint tem)
+	    geralmente quando faz dual boot com Windows pode danificar MBR
+	
+	fdisk -l (sem MBR as particoes não sao encontrados)
+	apt-get install testdisk (recupera discos e tabela particao)
+	testdisk
+		Create (ja visualiza discos)
+		 escolhe INTEL (tipo particao GPT)
+			analyse e quick search
+		  <Enter> e Write partiction table
+		  Reboot
+	Agora recuprar o Grub com grub-install
+	 Entrar com o linux live
+	 fdisk -l (agora aparacem as particoes
+	  mkdir /mnt/home_tmp
+	  mkdir /mnt/boot_tmp
+  	  mount /dev/sda1 /mnt/boot_tmp
+
+	  grub-install /dev/sda --boot-directory=/mnt/boot_tmp
+	  reboot
+
+	Agora refazer o grub usando o linux real
+	  fazer o grub-install /dev/sda (fazer com o boot do Ubunto)
+
+		
+	https://livecdlist.com/ (lista de Linux Lives)
+	
+	
+NVMe
+  Discos tipo SSD  ( no linux sao mapeados /dev/nvme)
+   interface para usar com discos ssd
+
+
+
+EXERCICIOS
+	1. Utilize o GRUB Shell para realizar manualmente o boot por alguma imagem do kernel disponível em seu ambiente.
+
+	Na tela inicial do GRUB, usar a tecla “c”
+	Alguns dos comandos que podem ser utilizados:
+	ls
+	ls -l (hd0,msdos1)/
+	set root=(hd0,msdos1) : definir a partição em que se encontra o diretório /boot
+	linux /vmlinuz-X.Y.Z root=/dev/sda1 : definir a imagem a ser usada durante o boot e em qual partição o diretório / deve ser montado
+	initrd /initrd.img-X.Y.Z : definir a imagem de InitRD que deve ser utilizada
+	boot : realizar o boot pelas configurações definidas manualmente no GRUB Shell
+
+	
+	2. Execute o comando de verificação do disco “fsck” em todas as partições do seu ambiente utilizando o modo single ou o boot via shell.
+
+	3. Faça o Download de uma distribuição Linux com modo Live, inicie o sistema, monte as partições e reinstale o GRUB.
+
+	Faça o download de uma ISO de sua preferência. Esse site contém uma lista: http://livecdlist.com/
+	Indique nas informações de boot da máquina (virtual ou real) que o boot deve ser feito via CD/DVD
+	Durante o processo de boot indique a opção de modo Live, não Instalação
+	Após iniciado o sistema monte suas partições no diretório /mnt, conforme demonstrado na aula “Recuperação na Prática”
+	Execute o comando de instalação do GRUB: # grub-install /dev/sdX --boot-directory /mnt/diretorio-boot
+	Faça um reboot, removendo o CD/DVD/Imagem Live
+	Se desejar, ao final do processo, reiniciando o sistema normalmente, execute novamente o comando “grub-install /dev/sdX”
+	
+

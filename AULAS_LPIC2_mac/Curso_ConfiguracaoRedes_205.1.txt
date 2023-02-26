@@ -1,0 +1,146 @@
+ifconfig e route
+
+	ifconfig (pacote net-tools)
+	
+	ifconfig enp0s3 down (baixar)
+	ifconfig enp0s3 down (subir)
+
+	ifconfig -a (mostra todas interface mesmo as que não estao ativas)
+		por padrao so mostra as interfaces ativas
+
+	ifconfig enp0s2 10.0.0.50  (colocar ip fixo na interface)
+		se nao colocar a mascara usa a padrao
+	
+	ifconfig enp0s2 10.0.0.50 255.255.255.0  coloar o ip e mascara
+	ifconfig enp0s2 10.0.0.50 255.255.255.0 up sobre a interface com os ips
+	
+	colocar mais 1 ip associado
+		ifconfig enp0s3:0 172.16.32.50
+
+	ifconfig enp0s3 add 150.150.150.150 outra maneira de add ip na placa
+
+	MacAddress	ether é o mac da placa
+			posso adicionar outro mac
+			ipconfig enp0s3 hw ether 08:08:08:08:08:08
+
+	
+
+  route
+	route add -net 192.168.10.0/24 gw 192.168.1.55
+	route add -net 10.0.0.0	/24 gw 192.168.1.70 add touta saindo pela 192
+	route add -net 10.1.0.0	/24 gw 192.168.1.71  enps03  (usa outra interface)
+
+	route l default (apaga o default gw)
+	route add default gw 192.168.1.1
+
+
+	route -n
+	route del -net 10.1.0.0/24 (remove uma rota)
+
+
+
+comando IP
+
+	ip link show (estatisticas e info do link)
+	ip address show  ou ip address show enp0s3
+	ip -6 addr show mostra so ip do IPV6
+	
+	ip address add 10.0.0.0/24 dev enp0s3  (seta o ip)
+	
+	ip route show (mostra as rotas)
+
+	ip route add 172.16.30.0/24 via 192.168.1.80 (adicionar uma rota)
+
+	ip route del default(add e remover (REMOVER E ADCIONAR default gw)
+	ip route add defaulst via 192.68.1.1
+
+	 route add -net 10.20.30.0 netmask 255.255.255.0 gw 192.168.1.50
+
+
+ARP
+No ifconfig pode pegar o macAddress no ether
+
+	tabela de relacionamento de ip e macaddress. Comando manipula tablea do Kernel de arp
+	
+	arp -n  mostra a list com os ips/macaddress de todos que se comunica
+		so em fazer o ping, a maquina ja fica listada na tabela arp
+
+	arp -d 192.168.1.220 remove essa entrada
+	arp -s 192.168.1.222 b3:b3:b2:b3:b3 adiciona esse entrada
+
+	vim arquivoteste.txt
+		cria varias entradas com ip e mac
+		arp -f arquivoteste
+		arp-f sem o arquivo na frente ele pega do /etc/ethers
+		
+	
+
+	yum install arpwatch
+		monitora quando tem mudanças da tabela
+		pode enviar um email informando a mudança do mac ou ip
+
+	systemctl status arpwatch
+	config fica /etc/default	
+	arpwatch -d  fica em modo de debug e vai mostrando o que acontece
+	
+
+REDE sem FIO (wifi)
+	systemctl stop networkmanager
+	
+	iw dev wlp2s0 link
+	iw dev wlp2s0 scan  fazer scan
+	iw wlp2s0 up
+		iw dev wlp2s0 link
+	iw dev wlp2s0 scan - para scanear as rede wifi
+
+
+   iwlist  - pegar info de interfaces de redes
+	iwlist wls0p3 list
+		Pega  qualidade do sinal e outras informacoes
+	
+  iwconfig - como se fosse o ifconfig oara wifi
+	iwlist wlp2s0 list
+	iwconfig wlp2s0 essid TP-LINK  conecta na rede wifi TP-LINK
+	iwconfig wlp2s0	  lista para mostrar
+
+	iwconfig wlp2s0 key s:01225  define a senha
+		mostra a chave em Encrypted
+
+	iwconfig wlp2s0 ap 00:1f:b3:b3:be  adicionei o mac do roteador, pegar info com o iwlist
+
+	dhclient - pegar ip automatico conectando
+	iwconfig wlp2s0
+
+
+  Conectar outro router usando o wpa
+	wpa_passphrase TP_LINK_Escritorio 01222Dai gera info do psk, chave de acesso
+	wpa_passphrase TP_LINK_Escritorio 01222Dai > /etc/wpa-supplicant.conf
+	wpa_supplicante -c /etc/wpa_supplicant.conf -b -d -i wlp2s0
+		iwconfig wlp2s0 para lista a coneção
+	dhclient wlp2s0
+
+
+
+EXERCICIOS
+1. Utilizando o comando ifconfig, configure o IP 10.10.10.20, máscara 255.255.255.0, como um IP/ Mask adicional em sua interface de rede.
+	# ifconfig <interface>:0 10.10.10.20 netmask 255.255.255.0
+	# ifconfig <interface>:sub1 10.10.10.20/24
+	# ifconfig <interface> add 10.10.10.20/24
+
+2. Adicione uma rota para a rede 172.32.16.0/24, utilizando como gateway o IP 10.10.10.200.
+
+	# route add -net 172.32.16.0/24 gw 10.10.10.200
+	# ip route add 172.32.16.0/24 via 10.10.10.200
+
+3. Adicione manualmente na tabela ARP do sistema a referência do IP 10.10.10.111 para o MAC Address 01:01:01:02:02:02
+
+ 	# arp -s 10.10.10.111 01:01:01:02:02:02
+
+4. Via linha de comando, verifique todas as redes wireless que podem ser encontradas pela sua interface de redes sem fio.	
+
+	# iw dev wlp2s0 scan
+	# iwlist wlp2s0 scanning
+
+	
+	
+	

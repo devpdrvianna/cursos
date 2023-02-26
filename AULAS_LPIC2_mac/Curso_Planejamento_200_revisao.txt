@@ -1,0 +1,278 @@
+200.1 – Medir e Resolver Problemas de Uso de Recursos
+Comando iostat
+
+Função: Relatório de uso de CPU e I/O de dispositivos de armazenamento
+
+Uso e Principais Opções:
+
+# iostat : Mostra o relatório da CPU e de I/O, desde a inicialização do sistema
+
+# iostat -m : Informações em MB
+
+# iostat -h : Formato número simplificado (human)
+
+# iostat -c : Dados de CPU
+
+# iostat -d : Dados de I/O por Dispositivo (Device)
+
+# iostat -p : Dados de I/O por Partição
+
+# iostat <x> : Atualiza o relatório a cada x segundos
+
+# iostat <x> <y> : Atualiza o relatório a cada x segundos por y vezes
+
+Tipos de consumidores de CPUs:
+
+%user – Aplicações a nível de usuário
+%nice – Aplicações a nível de usuário com definições de nice (alteração de prioridade)
+%system – Execuções no nível do sistema, kernel (tratamento de interrupts, gerenciamento de recursos de hardware, etc)
+%iowait – % do tempo em que as CPUs ficaram ociosas devido a leitura e escrita no disco
+%steal – % de tempo que uma CPU virtual aguardou pela CPU real enquanto o hypervisor do sistema estava servindo outra CPU virtual
+%idle – % de tempo que as CPUs ficaram realmente ociosas, desconsiderando as escritas de IO
+Comando vmstat
+
+Função: Alternativa ao iostat. Informações sobre processos, memória, paginação, I/O, Swap e CPU
+
+Uso e Principais Opções:
+
+# vmstat : Mostra as informações desde a inicialização do sistema
+
+# vmstat -d : Estatísticas dos dispositivos de armazenamento (disco)
+
+# vmstat -p /dev/particao : Estatística de uma partição específica
+
+# vmstat <x> : Atualiza o relatório a cada x segundos
+
+# vmstat <x> <y> : Atualiza o relatório a cada x segundos por y vezes
+
+Informações Importantes:
+
+A primeira coluna “r”, indica a quantidade de processos executando ou aguardando por execução (runnable processes)
+A segunda coluna “b”, indica processos em estado “ininterruptamente dormentes” (uninterruptible sleep / dormant). Processos podem ficar nesse estado enquanto aguardam um retorno de I/O em disco.
+
+Comando mpstat
+
+Função: Estatísticas detalhadas das CPUs
+
+Uso e Principais Opções:
+
+# mpstat : Mostra as informações desde a inicialização do sistema
+
+# mpstat <x> : Atualiza o relatório a cada x segundos
+
+# mpstat <x> <y> : Atualiza o relatório a cada x segundos por y vezes
+
+Comando sar
+
+Função: Exibir informações estatísticas e históricas do uso de diversos recursos do sistema
+
+Uso e Principais Opções:
+
+# sar : Uso das CPUs
+
+# sar -u : Uso das CPUs
+
+# sar -r : Uso da Memória
+
+# sar -S : Uso da área de Swap
+
+# sar -n DEV: Estatísticas de tráfego de todas as interfaces
+
+# sar -b : Estatísticas de I/O
+
+# sar -d : Uso de I/O por dispositivo
+
+# sar -B : informação sobre paginação
+
+# sar -f <arquivo> : Exibe as estatísticas de algum arquivo específico. Utilizado para ver dados de dias anteriores.
+
+# sar <x> : Atualiza o relatório a cada x segundos
+
+# sar <x> <y> : Atualiza o relatório a cada x segundos por y vezes
+
+Informações Importantes:
+
+O processo/script sa1 é configurado na crontab e é responsável por coletar e armazenar os dados. O sa1 é uma variante do sadc (system activity data collector)
+Os registros são armazenados no diretório /var/log/sysstat (padrão Debian) ou /var/log/sa (padrão RedHat)
+
+
+Comando netstat
+
+Função: Exibir conexões de rede, sockets, tabelas de roteamento, estatísticas das interfaces e etc.
+
+Uso e Principais Opções:
+
+# netstat -i : Lista as interfaces de rede e suas respectivas estatísticas de tráfego
+
+# netstat -s : Estatísticas de cada protocolo de rede
+
+# netstat -a: informações de todos os sockets, em estado listening ou não
+
+Comando ss
+
+Função: Traz informações semelhantes ao netstat, usado para verificar conexões de rede, socket, interfaces e etc
+
+Uso e Principais Opções:
+
+# ss -s : Resumos das conexões e sockets
+
+# ss -l : Conexões em estado listen
+
+# ss -t -a: Exibe todos sockets TCP
+
+# ss -ltn : Exibe sockets TCP em estado listen. O -n faz com que os nomes não sejam “resolvidos”
+
+Informações Importantes:
+
+O comando netstat busca as informações dos arquivos da partição virtual /proc enquanto que o ss obtém as informações diretamente do espaço de memória do kernel
+
+
+Comando iptraf (ou iptraf-ng)
+
+Função: Monitoração do tráfego pelas interfaces de rede em tempo real através de uma interface gráfica mas que não precisa de um servidor X, podendo ser utilizado via SSH.
+
+Uso e Principais Opções:
+
+IP traffic monitor: Monitor do tráfego de pacotes em tempo real
+General interface statistics: Tráfego por interface de rede
+Detailed interface statistics: Tráfego detalhado por interface, mostrando detalhes por protocolo
+Statistical breakdown: Permite agrupar o volume de tráfego por tamanho dos pacotes e por porta
+LAN station monitor: Monitoração a nível de rede (ethernet) e MAC address
+Filters: Permite criar e gerenciar filtros para limitar a exibição dos pacotes
+
+
+Comando ps
+
+Função: Exibe informações detalhadas dos processos em execução
+
+Uso e Principais Opções:
+
+# ps -ely | grep “^D” : Exibe todos os processos que estão em estado Dormant ou “Uninterruptible Sleep”. É o mesmo estado exibido na segunda coluna do comando vmstat. Indica que o processo está aguardando pelo retorno de alguma atividade de I/O.
+
+Informações Importantes:
+
+RSS (Resident Set Size) : Indica a quantidade de memória alocada na RAM para o processo
+VSZ (Virtual Memory Size) : Indica toda a memória que o processo tem acesso no sistema, inclusive o espaço de memória utilizado pelas bibliotecas compartilhadas que ele utiliza.
+
+
+Comando pstree
+
+Função: Exibe a árvore de processos e os relacionamentos entre processos pai e filho.
+
+Uso e Principais Opções:
+
+# pstree : Exibe toda a árvore de processos
+
+# pstree -p : Exibe a árvore de processos incluindo os respectivos PIDs
+
+
+
+Comando w
+
+Função: Exibe os usuários logados e o que eles estão executando no s
+
+
+Comando lsof
+
+Função: Exibe os arquivos abertos permitindo associar esses arquivos a seus processos.
+
+Uso e Principais Opções:
+
+# lsof -p PID : Exibe todos os arquivos abertos relacionados ao processo PID
+
+# lsof arquivo : Exibe o processo associado ao arquivo
+
+# lsof -i :80 : Exibe todas as conexões abertas na porta 80, através do arquivo aberto pelo socket.
+
+
+
+Comando top
+
+Função: Exibir os processos do sistema em uma interface que possibilita a monitoração em tempo real
+
+Uso e Principais Opções:
+
+F (shift f) : Permite a administração dos campos, selecionados quais campos de cada processo serão exibidos. A opção “s” define o campo que ordenará a listagem.
+Comando htop
+
+Função: Possui a mesma função do comando top mas com recursos adicionais
+
+Uso e Principais Opções:
+
+# htop -p PID : Exibe apenas as informações do processo especificado
+
+# htop -d 100 : Atualiza os dados a cada 10 segundos.
+
+Opção l : Lista os arquivos abertos pelo processo selecionado
+Opção h : Ajuda
+Opção H : Exibe/Oculta as threads dos processos
+
+
+
+Comando iotop
+
+Função: Monitor que exibe quanto cada processo está fazendo de I/O.
+
+
+
+Comando uptime
+
+Função: Exibe a quanto tempo o sistema está ativo, quantos usuários estão conectados e o load average.
+
+Informações Importantes:
+
+O load average é uma métrica que indica, de maneira geral, a quantidade de processos em execução ou na fila de execução das CPUs. São exibidos 3 valores de médias, a cada 1, 5 e 15 minutos.
+
+
+O Espaço de Swap
+
+Informações Importantes:
+
+De maneira geral, a área de swap é um espaço em disco (através de um arquivo ou partição) que será utilizado caso o espaço de memória RAM seja completamente utilizado.
+É recomendado, mas não obrigatório, que um sistema Linux possua uma área de swap
+O uso constante da área de swap não é desejado visto que a leitura e escrita em disco é bem mais lenta que em memória RAM, fazendo assim com que os processos e o sistema tenha seu desempenho prejudicado.
+O uso constante da área de swap indica que alguma ação de capacidade deve ser feita no ambiente, como por exemplo, inclusão de novos servidores ao cluster, aumento de memória RAM, ajuste de configuração na aplicação e etc.
+O espaço alocado e utilizado da swap pode ser visto em comandos como cat /proc/swaps, free, entre outros.
+Swapon -s
+
+
+200.2 – Prever Necessidades Futuras de Recursos
+Softwares para análise de dados, monitoração e planejamento de crescimento:
+
+collectd
+
+Função: Daemon que coleta informações de recursos do sistema e os armazena em arquivos no formato RRD (Round Robin Database).
+
+Site https://collectd.org/
+
+Informações importantes: O collectd é baseado em Plugins e o arquivo de configuração basicamente determina quais serão utilizados e as principais opções sobre eles. O parâmetro que determina o carregamento de um plugin é o LoadPlugin.
+
+RRDTool
+
+Função: Ferramenta que coleta e armazena informações de recursos do sistema, gera relatórios gráficos e permite que estes dados sejam utilizados também por outras aplicações como o Cacti.
+
+Site: https://oss.oetiker.ch/rrdtool/
+
+Cacti
+
+Função: Utiliza os dados gerados pelo RRDTool para gerar relatórios gráficos mais elaborados e em tempo real. Também permite a monitoração através do protocolo SNMP (Simple Network Management Protocol).
+
+Site: www.cacti.net
+
+MRTG (Multi Router Traffic Grapher)
+
+Função: É focado na monitoração de tráfego de rede, apesar de também poder ser usado para recursos de hardware. Também pode monitorar via SNMP.
+
+Site: https://oss.oetiker.ch/mrtg/
+
+Nagius
+
+Função: Solução completa de monitoramento centralizados de diversos elementos da rede, como computadores, servidores, roteadores, switchs, impressoras e etc. A coleta de dados é feita através de agentes ou protocolos como o SNMP. Um dos principais recursos é enviar alarmes aos administradores a partir dos dados coletados.
+
+Site: https://www.nagios.com/
+
+Icinga 2
+
+Função: Assim como o Nagius, é uma solução completa de monitoramento e alarmes. De maneira geral possui as mesmas funções e modo de funcionamento.
+
+Site: https://www.icinga.com/products/icinga-2/

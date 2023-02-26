@@ -1,0 +1,56 @@
+BOOT LOADER ALTERNATIVOS (GRUB2 padrao)
+	SysLinux
+		criado para tipo FAT (msdos) 
+		usado em pendrives de recuperacao
+		
+		outros adicionados no projeto
+		EXTLINUX
+		ISOLINUX
+		PXELINUX
+EXTLINUX
+  criado para lidar com arqUivos nativos do linux ext* brtfs e xfs
+  pega informacoes do /boot/extlinux
+  config em extlinux.cnf
+
+ISOLINUX
+	boot para cdrom ISO 9660
+	usado LivesCDs ou LiveDVDs
+	diretorio /boot/isolinux
+	bootloader é isolinux.bin
+	config em isolinux.cfg
+
+PXELINUX
+	Boot via rede (pre-Boot execution enviroment)
+	o carregado é envia pela rede
+		pxelinux.0 
+	A placa de rede precisa suportar o processo
+	no Cliente a configurção e feita na BIOS ou UEFI
+		indica que o boot é via pxe
+
+ No servidor de pxe, ele tem servico de Tftp Server
+	fornece 2 arquivos que ficam
+		/tftpboot/pxelinux.0
+		/tftpboot/pxelinux.cfg
+
+
+UEFI Secure Boot
+	So vai carregar imagem do kernel assinadas
+	o Bootloader shim.efi que lida com certificados e chaves
+	e encaminha fluxo para grubx64.efi
+
+Systemd-boot
+	Bootloader do systemd
+	Criado funcionar UEFI
+	gerenciado comando bootctl (similar ao efibootmgr
+
+U-BOOT
+	usados em sistemas embarcados
+	Rodas em carros, geladeiras, celulares
+	suporta multiplas arquiteturas
+	ex: Android 
+
+
+
+Na Prática	
+	
+

@@ -1,0 +1,184 @@
+Comlilação
+	Configurar - Compilar e instalar
+
+  Configurar (rodar os comandos em /usr/src/linux)
+	apt-get install build-essential
+	apt-get install bison
+	apt-get install flex
+		para para compilar
+	yum groupinstall "Development Tools" (padrao redHt)
+	
+  1 forma
+	make config (faz varias perguntas) (passa de 100 perguntas)
+
+  2 forma
+	apt-get install ncurses-dev (yum install ncurses-devel)
+     make menuconfig (abre um menu)
+		* Roda no kernel
+		M Roda como modulo
+		<> Roda como modulo ou no kernel
+	ao salvar gera o arquivo .config
+
+     make oldconfig (pega o atual e faz perguntas em cima)
+	salva o config atual e cria um novo
+	
+	posso copiar o /boot/config-4.9.0-6-amd64 (config atual)
+		e compilr o novo kernel usando o config atual
+	renomear para .config
+	
+	posso fazer o load do arquivo pela ferramenta.
+
+
+  Mais ferramentas graficas
+	make xconfig
+		apt-get install pkg-config
+		apt-get install pkg-config g++ liqt4
+	tb salva o .config
+	
+	make gconfig
+		apt-get install gtk+2.0 glib-2.0 libglade2-dev
+	tb salva o .config
+		
+
+     Motivos compilar kernel
+	caso queria habilitar recurso especifico gerenciar a cpu
+	fazendo system e desabilitar coisas que nao precisa
+	
+
+  arquivo /usr/src/linux/Makefile
+	pode editar o EXTRAVERTION=111
+
+	/usr/src/linux/.config
+	no General Setup
+	LOCALVERSION=Curso Lpi2 (pode cair em prova)
+
+
+COMPILAÇÃO
+	compilar e gerar a imagem
+	
+	/usr/src/linux/make bzImage(demora cerca 40mim e precisa de espaço
+	make -j2 bzImage posso usar 2 processo em paralelo
+	
+		Precisa ir instalando os pacotes que faltam
+		apt-get install libesl-dev libssl-dev
+
+		gerou a imagem em:	
+		  /usr/src/linux/arch/x86/boot/bzImage
+
+
+	make -j2 modules (compilar os modulos)(demora cerca de 2h)
+	
+	
+	make clean (limpar arquivos compilação que foi feito, tanto modulos como o kernel) Se for começar de novo etc, pode apresentar problemas..
+
+	make mrproper (alem de limpar os arquivos de compilação, limpa tb o .config)
+	
+
+	Compilação para centOS
+	No CentOS 7, com as versões atuais do kernel, provavelmente ocorrerão erros no processo de compilação e geração do bzImage, nesse caso será necessário uma atualização da versão do GCC, o procedimento abaixo pode ser utilizado:
+
+		# sudo yum install centos-release-scl
+		# sudo yum install devtoolset-7-gcc*
+		# scl enable devtoolset-7 bash
+		# which gcc
+		# gcc --version
+
+
+INSTALAÇÃO
+	/usr/src/linux
+	make modules_install
+
+	cp arch/x86/boot/bzImage /boot	
+	mv /boot/bzImage /boot/vmlinuz-4.16.9111-amd64
+	
+	ou 
+	/usr/src/linux/ make install
+		ja faz a copia para para /boot
+		ja atualizou o update-grup (atualiza o /boot/grup/grup.cfg
+		
+	uname -a
+	
+	ou manualmente
+
+	mkinittramfs -o /boot/initrd.img-4.16.9111 4.16.9111
+	mkinitrd -k 4.16.9111 -o /boot/initrd
+
+	update-grub
+	
+	update-initramfs -c -k 4.16.9111
+
+ Complemmento
+	Como é compactado o initrd
+	
+
+
+
+PACOTES de LIMPEZA
+	Pode fazer a compilação em uma maquina
+		nas outras copia o novo kernel e veja na maquina
+
+
+	deb-pkg faz a compilação mas gera o processo e conjunto de pacotes
+
+	make rpm-pkg(gera imagem compilada e arquivos)
+	make binrpm-pkg so a imagem compilada
+
+	dkms (frameWork feito pela Dell) FrameWork que pode integrar os modulos
+		apt-get install dkms
+		apt-get install zfs-dkms (inalar o modulo)
+
+	/usr/src/zfs-0.6.5.9/dkms.conf (configura alguns opções)
+
+	dkms status (mostra modulos integrados) 
+	dkms remove zfs/0.6.5.9 --all
+		
+	
+  	dracut
+		update-initramfs -u (atualizar o processo de boot)
+
+		no redhat chama dracut
+		o mkinitrd vai chamar o dracut
+
+		dracut --force (atualiza o initd )
+
+
+Com relação às opções do make para limpeza do diretório de fontes, além do clean e do mrpropper, vale mencionar o distclean:
+
+	Com o “make distclean“, além de ser removido tudo que já é removido pelo mrpropper, também são apagados arquivos de backup, temporários, dumps, ou seja, tudo que não é disponibilizado originalmente com o código fonte.
+
+	Mais detalhes na documentação oficial do make.
+
+
+EXERCICIO
+  1. Usando o código fonte dos exercícios da sub-tópico anterior e tendo como base a configuração do seu kernel atual, faça a compilação e instalação de um novo kernel em seu sistema com as seguintes características:
+
+		Desabilite o Suporte a Rádio Amador
+		Desabilite os sistemas de Arquivo GFS2 e OCFS2
+		Integre o suporte a EXT4 ao kernel, não via módulo
+
+	
+	1.Copiar o arquivo /boot/config-`uname -r` para o /usr/src/linux/.config ou fazer o Load desse arquivo dentro do make menuconfig/gconfig/xconfig
+	2.Utilizar o “make menuconfig/gconfig/xconfig” para configurar as seguintes opções:
+	Networking Support > Amateur Radio Support = Desabilitar
+	File systems > The Extended 4 (ext4) filesystem = Mudar de “M” para “*”
+	File systems > GFS2 file system support = Desabilitar
+	File systems > OCFS2 file system support = Desabilitar
+	3.Sair e Salvar (Se foi feito o Load pelo menuconfig, não esquecer de Salvar como .config)
+	4.Compilar Kernel: make bzImage
+	5.Compilar Módulos: make modules
+	6.Instalar Kernel: make install
+	7.Instalar Módulos: make modules_install
+
+
+
+
+
+	
+
+	
+	
+
+
+	
+	
+	

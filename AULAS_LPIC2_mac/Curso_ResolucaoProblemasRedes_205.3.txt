@@ -1,0 +1,212 @@
+
+Problemas de rede
+
+ ifconfig -a
+	se as interfaces estao ativas
+	Netmask e se a mascara esta correta com a rede logica
+	estatistiscas (pacotes recebidos e transmitidos)
+	   erros pode ser geraçao do pacotes formçao
+	   dropped pacotes perdisdos por falha na comunicação
+	   overruns pacotes descartados por sobrecarga na fila
+  	   frames foram descartadas por nao estar no formato correto
+	   carrier problemas de interferencia no cabeamento
+	   collisions acontacia quando usavamos hubs equipamentos antidos
+
+ route -n
+ 	ver se a rota padrao esta ativa
+	
+ ping echo request e recebe echo reply
+	quando recebe DUP - duplicate and damaged packets (2 interfaces respondendo)
+	
+	PING 192.168.1.255 (192.168.1.255): 56 data bytes
+	64 bytes from 192.168.1.19: icmp_seq=0 ttl=255 time=9.3 ms
+	64 bytes from 192.168.1.250: icmp_seq=0 ttl=255 time=78.8 ms (DUP!)
+	64 bytes from 192.168.1.250: icmp_seq=1 ttl=255 time=9.2 ms
+	64 bytes from 192.168.1.19: icmp_seq=1 ttl=255 time=43.5 ms (DUP!)
+
+ traceroute
+	trabalha com udp
+ 
+ mtr  - similar ao traceroute  mostra estartistica
+	mtr www.lpi.org  
+
+	gera um painel e fica monitorando 
+
+ netstat e ss
+	ver conexoes ativas da prõpria maquina
+	netstat -ntu
+	netstat -lntu mostra so os listenning
+
+	tem os STATE
+		LISTEN
+		ESTABILISHED (com tempo via TIME-WAIT)
+		CLOSE-WAIT
+		TIME-WAIT
+		
+
+
+CONFIGURACOES DE REDE
+ definicoes fixa persistentes
+	usa o networkmanager
+	systemctl stop NetworkManager (para não confundir os estudos)
+   no Ubunto
+	vi /etc/network/interfaces
+		incluir dados abaixo no arquivo
+	
+		auto lo enp0s3 enp0s8
+		iface enp0s3 inet static
+			address 172.10.10.10
+			netmask 255.255.255.192
+			gateway 172.10.0.1
+			dns-nameserver 8.8.8.8 (não pega do resolv.conf
+		
+		iface enp0s8 inet dhcp
+		:wq!
+	systemctl restart networking
+	ifconfig  valida as interfaces
+	route -n  valida o gateway
+
+  No centos
+	/etc/sysconfig/network-scripts/
+	cada interface tem ifcfg-
+
+	BOOTPROTO ="static" ou "dhcp"
+	DEVICE="enp0s3"
+ 	ONBOOT="yes"
+	IPADDR=192.168.1.230
+	NETMASK=255.255.255.0
+	HWADDR= (se quiser colocar o macaddress)
+	:wq!
+
+	/etc/sysconfig
+		arquivo network 
+			GATEWAY=192.168.1.1
+		:wq!
+
+	CONFIGURACOES DO NetworkManager
+ 	/etc/NetworkManager/  ficam as configuracoes gerais do Networkmanager
+	/etc/NetworkManager/System-connections ficam as conexoes feitas
+
+	
+ nmcli
+	interface mostra informcoes da conexoes da placa
+		
+	nmcli device show
+	nmcli connection show
+
+
+DNS CLIENT
+	/etc/resolv.conf
+		nameserver 8.8.8.8
+		domain dominioteste.com.br
+		search dominioteste.com.br aula.com.br lpic2.com.br
+
+	/etc/hosts
+		127.0.0.1 localhost
+		192.168.0.2 centos.com.br
+	
+	/etc/networks
+		rede-interna 192.168.1.0
+	route -n (a rede-interna vai aparecer nas rotas)
+
+	/etc/hostname
+		nome da maquina
+	
+	/etc/nsswitch.conf
+		mostra oonde ele vai buscar primeiro o dns por exemplo (files dns)
+
+   Analise de DNS
+	hostname - comando que mostra o nome da maquina
+		-d mostra o dominio
+		-f mostra o nome e dominio completo
+		-i e -I que exibem informações sobre o endereço IP da máquina.
+	
+	host <ip>  faz um nslookup
+		-t mx ele procura o registro de mx do domiino message exchenge 
+		-n ns quem e o name server
+		-a todas as informacoes disponiveis
+ 
+		-v ele usa todos os search do resolv.conf(testa em  cada dominio)
+
+	dig ou nslookup faz consulta de DNS
+	dig lpi.org @8.8.8.8
+		
+		
+	se precisar yum install dnsutils
+
+
+ANALISAR LOGS SYSTEM
+	dmesg - mostra um buffer interno do kernel 
+		interface que nao subiu ou deu problema
+	
+	/var/log/syslog(ubunto)	- mostra todos os logs, do que aconteceu inclusive o que tem o dmesg
+	/var/log/message(centos)
+
+	journalctl (mesmo que /var/log/message)
+		-u NetworkManager  so mostra do service NetworkManager
+		--since 15:00
+		--since "today"
+		-k so kernel
+
+
+host.allow host.deny
+	TCP Wrapper
+	le primeiro o allow e depois o deny
+	quando os 2 estao vazios, tudo e liberado
+		configrar o allow
+			ALL: 192.168.1.* EXECPT 192.168.1.1
+	
+	Atenção para os formatos aceitos nos arquivos principalmente na identificação de redes lógicas:
+
+	192.168.1.
+	192.168.1.0/255.255.255.0
+	192.168.1.0/24
+	192.168.2.*
+	*.example.com
+
+
+EXERCICIOS
+	1. Utilizando os arquivos de configuração do seu sistema, não o NetworkManager, configure de maneira fixa as seguintes propriedades:
+
+	IP : 10.0.0.10
+	Máscara: 255.255.255.0
+	Gateway: 10.0.0.1
+	Servidor DNS Primário: 10.0.0.5
+	Servidor DNS Secundário: 1.1.1.1
+
+
+	Padrão Debian Configurar o /etc/network/interfaces da seguinte maneira:
+		auto <interface>
+		iface <interface> inet static
+		address 10.0.0.10
+		netmask 255.255.255.0
+		gateway 10.0.0.1
+		dns-nameservers 10.0.0.5 1.1.1.1
+		(o DNS também pode ser configurado no /etc/resolv.conf)
+	Padrão Red Hat Configurar o /etc/sysconfig/network-scripts/ifcfg-<interface>:
+		DEVICE=<interface>
+		BOOTPROTO=static
+		IPADDR=10.0.0.10
+		NETMASK=255.255.255.0
+		ONBOOT=yes
+		Configurar o /etc/sysconfig/network
+		GATEWAY=10.0.0.1
+		Configurar o /etc/resolv.conf
+		nameserver 10.0.0.5
+		nameserver 1.1.1.1
+
+
+
+2. Utilizando o servidor de DNS 1.1.1.1, identifique os servidores de e-mail responsáveis pelo domínio kernel.org.
+
+	# host -t mx kernel.org 1.1.1.1
+	# dig -t mx kernel.org @1.1.1.1 +short
+
+
+3. Utilize os arquivos de configuração do TCP Wrapper (hosts.allow e hosts.deny) para definir que apenas os endereços da rede 192.168.1.0/24, o IP 10.0.0.50, além do localhost, possam utilizar o servidor SSH local.
+
+	/etc/hosts.allow
+	sshd: 192.168.1.* 10.0.0.50 localhost
+	/etc/hosts.deny
+	sshd: ALL
+

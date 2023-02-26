@@ -1,0 +1,277 @@
+Operando Sistemas de arquivos
+
+fstab
+  /etc/fstab
+	
+<fs>	<mountPoint>	<type>	<options> <DUMP> <pass>
+
+	fs - Pode usar o UUID, Label, ou caminho
+	MountPoint - ponto de montagem
+	Type - tipo da particao pode ser ext4, 
+	DUMP - Ferramenta usada para backup mas ninguem usa mais
+	PASS- faezr o verificaçao, padrao o / é o 1 e demais 2, e o 0 nao e verificada (como se fosse o fsck)
+
+/dev/sr0	/media/cdrom0	udf,iso9660 		user,noauto	0	0
+/dev/sdb1	/opt/montagem	ext4			defauls 	0	2 
+
+
+	mount -a - monta tudo que estiver com a opcao auto do fstab
+	no Defauls está incluso a opcao auto
+
+	df-T mostra os tipos particoes
+
+comando Mount
+	async - quando grava em disco, nao vai direto ao disco, grava antes em cache(padrao)
+	auto - monta no boot do sistema e no mount -a
+	noauto - ao contrário
+	defauls - grupo opcoes (rw,suid,dev,exec,auto, nouser and async)
+
+	dev - vai ser interpretados tipos de caractar /dev de bloco device
+	exec permite execução de binarios
+	group - permite usuarios que sao dono do device que faz parte do grupo
+
+	suid permite permissoes especiais 
+	owner permite monta se for dono do device
+	
+	remount se ja esta montada e quer remontar
+	
+	sync - grava tudo direto no disco, pode causar latencia
+
+	user - qualquer usuario possa montar, mas so quem montou pode desmontar
+	nousers - qualquer usuario pode montar e qualquer usuario pode desmontar
+
+	nouser - proibe usuario comum montar
+
+	mount uid=ricardo so o usuario 1000 pode escrever
+		gid=grupo so o group pode escrever
+		So funciona com FAt ou como Auto no Tipo de particao formatada em Vfat
+		a particao é montada como Ricardo ou grupo como donos (owner do device)
+
+ se estiver no fstab pode montar o disco especificando somente o fs ou ponto de montagem
+	
+	se tiver owner no options do device do fstab
+	ls -la /dev/sdb1   root root /dev/sdb1  
+	pode mudar o dono do device com chown teste /dev/sdb1
+	agora o login teste pode desmontar o device com opcao owner
+
+
+MOUNT
+	mount | grep sd (mostra todos os devices)
+
+	cat /proc/mount
+	cat /etc/mtab  > self/mount
+	
+	mount -a monta tudo com auto
+	-t ext4   so mostra o tipo ext4	
+	
+	mount (se esta no fstab pode colocar so o device ou o ponto de montagem)
+	mount /dev/sdb1
+
+	mount /dev/sdb1 /opt/teste  (ai monta em local diferente)
+	
+	mount -t vfat /dev/sdb1 /opt/teste (o disco preci estar formatado cm vfat)
+
+	mount -o ro,user,auto,exec /dev/sdb1 /opt/teste
+		-o para definir as opcoes
+
+	umount -a desmonta todas as particoes do fstab
+	umount /dev/sdb1
+
+blkid
+	traz o id das particoes, label
+
+	mount -U c2e8-fc3a /opt/teste
+	mount UUID=c2e8-fc3a /opt/teste
+
+	mount LABEL=particaoX /opt/teste
+
+
+  EX
+	/dev/nvme0n1: PTTYPE="gpt" 
+	/dev/nvme0n1p1: SEC_TYPE="msdos" UUID="451D-8C4B" TYPE="vfat" PARTLABEL="EFI 		System Partition" PARTUUID="74b0ae88-2ee0-4576-bd88-dbd5a36dbc3e"
+
+	[root@500010376164-lx intel]# blkid /dev/nvme0n1p3
+	/dev/nvme0n1p3: UUID="a2323c98-91f6-4c6b-b822-d4017f162680" TYPE="crypto_LUKS" 		PARTUUID="e1a55688-8e5c-4d85-b12b-cc474ee9cb83" 
+
+
+	
+lsblk
+	-f traz tb o ID e o Label se tiver
+
+NAME                           MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+loop0                            7:0    0 199.4M  1 loop  /var/lib/snapd/snap/code/62
+loop1                            7:1    0  99.2M  1 loop  /var/lib/snapd/snap/core/10958
+loop2                            7:2    0  99.2M  1 loop  /var/lib/snapd/snap/core/10908
+nvme0n1                        259:0    0 238.5G  0 disk  
+├─nvme0n1p1                    259:1    0   200M  0 part  /boot/efi
+├─nvme0n1p2                    259:2    0     1G  0 part  /boot
+└─nvme0n1p3                    259:3    0 237.3G  0 part  
+  └─luks-a2323c98-91f6-4c6b-b822-d4017f162680
+
+
+
+e2label /dev/sda3
+	mostra o label de uma particao
+	
+findfs UUID=j3hkh2kh-32b3-3b2bk
+
+	[root@500010376164-lx intel]# findfs UUID=a2323c98-91f6-4c6b-b822-d4017f162680
+	/dev/nvme0n1p3
+
+
+findmnt
+	outra forma de ver os pontos de montagem/particao
+
+TARGET                                SOURCE         FSTYPE   OPTIONS
+/                                     /dev/mapper/centos-root
+                                                     xfs      rw,relatime,seclabel,attr2
+├─/sys                                sysfs          sysfs    rw,nosuid,nodev,noexec,rel
+│ ├─/sys/kernel/security              securityfs     security rw,nosuid,nodev,noexec,rel
+│ ├─/sys/fs/cgroup                    tmpfs          tmpfs    ro,nosuid,nodev,noexec,sec
+│ │ ├─/sys/fs/cgroup/systemd          cgroup         cgroup   rw,nosuid,nodev,noexec,rel
+│ │ ├─/sys/fs/cgroup/devices          cgroup         cgroup   rw,nosuid,nodev,noexec,rel
+│ │ ├─/sys/fs/cgroup/net_cls                            /dev/mapper/centos-home
+
+
+
+sync - sincroniza o que esta no cache e grava em disco, forca a gravacao
+
+
+
+
+SWAP (pode criar atraves de particao ou arquivos)
+	free -h
+
+	fdisk /dev/sdb (criar a particao)
+		Tipo de particcao como swap (tipo 82)
+	mkswap /dev/sdb2  (formatar como swap)
+	swapon /dev/sdb2  
+	free -m Mostra o 
+	cat /proc/swaps
+	swapon -s (tb mostra o swap)
+	vim /etc/fstab	
+		/dev/sdb2	swap 	swap	defaults	0	0
+
+	
+	swapoff /dev/sdb2 (deslga o swap)
+	swapon -a (monta todos os Swaps no fstab como auto)
+
+
+  Criando swap arquivo
+	dd if=/dev/zero of=/arquivoswap bs=1024 count=1000 (1024*1000= 1Gb)
+	ls -lh /arquivoswap
+	mkswap /arquivoswap
+	chmod 0600 /arquivoswap	
+	swapon /arquivoswap
+
+	vi /etc/fstab
+	  /arquivoswap swap swap defauts 0 0 
+
+	cat /proc/swaps
+
+
+systemd
+	cd /etc/systemd/system (pode ser no /lib/systemd/system
+
+	vi opt-montagem.mount
+		[unit]
+		Description=Ponto de montagem Teste
+		
+		[Mount]
+		what=/dev/sdb1
+		where=/opt/montagem
+		Type=ext4
+		Options=defaults
+	
+		[Install]
+		Wantedby=multi-user.target
+	:wq!
+
+	systemctl status opt-montagem.target
+	systemctl daemon-reload (Quando cria, precisa rodar atualizar)
+	systemctl status  (mostra como iniciado)
+
+	Precisar formatar disco fsck.ext4 /dev/sdb1
+ 	
+	systemctl enable opt-montagem.target 
+
+
+	Pode constrolar as particoes do fstab
+	systemctl status home.mount
+
+	cat /etc/systemd/system/opt-montagem.mount
+
+
+
+EXERCICIO
+1. Configurar o sistema para que o diretório /tmp seja montado em uma partição específica. Faça a configuração pelo UUID da partição, use o tipo de filesystem ext4 e habilite a checagem do fsck.
+
+
+	Crie uma partição, com o fdisk ou parted, e o formate usando o mkfs.ext4; Identifique o UUID da partição por algum dos comandos:
+	# blkid
+	# lsblk -f
+	Configure o /etc/fstab:
+	UUID=<UUID>     /tmp     ext4     defaults     0     2
+
+2. Crie uma partição e a monte no diretório /opt/exercicio. Permita que qualquer usuário possa montar essa partição, mas apenas quem a montou possa desmontá-la. Configure também para que a partição não seja montada durante o boot. Faça a montagem com o uso do comando “mount”.
+	
+	Crie uma partição e a formate com o filesystem desejado; Crie o diretório /opt/exercicio; Configure a partição no /etc/fstab:
+	/dev/sdX     /opt/exercicio     auto     defaults,user,noauto     0     0
+	
+	# mount /opt/exercicio
+	ou
+	# mount /dev/sdX
+
+
+3. Crie uma partição de 1Gb e a adicione à area de Swap de maneira permanente.
+
+	Crie uma partição, com o fdisk ou parted; Crie a área de swap para a partição criada:
+	# mkswap /dev/sdX
+	Configure o /etc/fstab
+	/dev/sdX none swap sw 0 0
+	"Inicie" a área de swap:
+	# swapon -a
+	ou
+	# swapon /dev/sdX
+	Verificar com o comando:
+	# swapon -s 
+	# cat /proc/swaps
+
+4. Crie um arquivo de 500M e o adicione à área de Swap de maneira permanente.
+		
+	Criar o arquivo de swap:
+	# dd if=/dev/zero of=/arquivoswap bs=1024K count=500
+	# mkswap /arquivoswap
+	Configure o /etc/fstab
+	/arquivoswap none swap sw 0 0
+	Habilitar a área de Swap:
+	# swapon -a
+	ou
+	# swapon /arquivoswap
+	Verificar com o comando:
+	# swapon -s
+	ou
+	# cat /proc/swaps
+
+
+5. Configure um ponto de montagem de uma partição qualquer para o diretório /opt/exerc5, via Unit do Systemd. Configure para que esse ponto de montagem seja para apenas leitura e que seja permanente:
+
+	Crie uma partição e a formate com o filesystem desejado; Crie o diretório /opt/exerc5; 
+No diretório /lib/systemd/system ou /etc/systemd/system, crie o arquivo opt-exerc5.mount, com a seguinte configuração:
+	[Unit]
+	Description=Exercicio 5
+	[Mount]
+	What=/dev/sdX
+	Where=/opt/exerc5
+	Type=ext4
+	Options=defaults,ro
+	[Install]
+	WantedBy=multi-user.target
+	Faça um reload do systemd:
+	# systemctl daemon-reload
+	Verifique o status do ponto de montagem:
+	# systemctl status opt-exerc5.mount
+	Habilite o ponto de montagem para ser iniciado no boot:
+	# systemctl enable optexerc5.mount
+
+

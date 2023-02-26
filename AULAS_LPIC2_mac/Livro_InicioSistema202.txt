@@ -1,0 +1,83 @@
+202-1 Personalizar o Inicio do sistema
+	Boot
+		Bios>>BootLoader(lilo ou Grub)>>Kernel>>init(pid=1)>>Servicos (definios /etc/rc.5- conforme links para /etc/initab
+	o que foi configurado em /etc/init.d/ será carregado os scripts 
+
+	
+
+Admnistração de serviços
+	ferramentas para ativar e desativar scripts
+		chkconfig (redhat)
+			chkconfig --list nome_serviço
+			chkconfig --level 345 ntpd off (desativa o ntp para niveis 3,4,5)
+			chkconfig --level 345 ntpd on (liga o serviço) 
+		update-rc.d (Debian)
+			update-rc.d nome_serviço start 21 2 3 4 5 . stop 19 0 1 6
+
+			update-rc.d -f nomeServiço remove (o -if forçe a remoção, mesmo que ainda esteja presente)
+				-n faz apenas uma simulação e testar o comando remove
+
+
+202.2 Recuperação do sistema 
+
+Recuperação setor de boot
+  Após boot com ausxilio de uma midia bootavel, acessar o boot e executar o comando grub
+  grup - entre no prompt interativo do grup
+	pode usar o kernel (hd0,0) indica estao na primeira disco, primeira partição
+
+	pode ser usado o comando para achar o local do prmeiro estago estar
+		find /boot/grub/stage1
+		root (hd0) (informar ao grup que os arquivos foram instalado na 0)
+		setup (hd0) (Reinstalação do MBR na primeira partição
+		quit (sai prompt do grub)
+		
+		pode ser editado em /boot/grub/menu.lst
+
+
+Falha serviços
+	Pode entrar como e para obter a linha de comendo
+	no Lilo basta incluir o comando ao lado do nome do kernel
+
+	em geral pode entrar no sistema em modo Single User, usando o nivel 1 ou s
+	 	Nesse modo não carrega rede
+	Caso o modo single nao inicialize, pode ser carregado a linha de comando e solicitado o Bash logo apos o Kernel init=/bin/bash(substitui o comando init pelo interpretadr Bash)
+
+	Em seguida o / é remontado com rw, pois o o kernel havia montado ele como somente r
+		fazer mautenção nos arquivos
+
+  	Pode usar o /etc/inittab mudando o nivel de boot proximo boot
+
+ 	Pode montar a partição como somente leitura para manutenção		
+		mount -o remount.ro /
+		pode ser usado para alterar senhas de usuarios 
+
+
+Falha no sistema de arquivos
+	entrar com a senha do root
+ 	fsck - ferramentas para ajudar na correção de erro no HD
+
+ telinit 1 - mudará para o nivel 1 de boot , sem rede 
+
+ 
+ Para caerregar o Kernel, niveis:
+
+0	O nível zero define um desligamento elegante e rápido do sistema.
+1,s	O nível um é utilizado para manutenção do sistema, também chamado de monousuário (single user). Somente o essencial é executado.
+2	Modo multiusuário com compartilhamento de arquivos NFS desabilitado.
+3	Modo multiusuário com todos os serviços habilitados, mas sem interface gráfica para o login no sistema.
+4	Não utilizado.
+5	Modo multiusuário com todos os serviços habilitados, interface gráfica X11 e login em modo gráfico.
+6	O nível seis é parecido com o nível zero, mas executa o reboot da máquina.
+	
+
+
+
+	
+
+						
+
+
+	
+	 
+
+	

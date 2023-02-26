@@ -1,0 +1,294 @@
+200.1 Medir e resolver problemas
+	Ligar as 2 maquinas virtuais
+	acessar adesktop@192.168.10.10 (ips de cada imagem)
+
+	instalar 
+		vi /etc/apt/source.list
+			comentar cdrom
+			deixar ativo Stretch update e main contrib
+
+		apt-get update
+		apt-get sysstat net-tools
+			agora tem o ifconfig, route, iostat
+
+		ou 
+		yum install sysstat net-tools	
+		
+	iostat - relatorio de uso de CPU quando dispositivo armazenamento
+		estatista de input e output
+
+		Tempo medio de cpu 
+			user - uso de cpu por usuario              
+			nice - uso do que foi feito nice
+			system(kernet)  - uso do kernel
+			iowait - quanto tempo esperou de leitura e escrita em disco			steal - (USADO EM MV) Quanto tempo cpu da VM esperou a CPU real
+			idle - tempo que ficou em idle (ociosa)
+
+		
+		Device:(mostra medidas para disco)
+			tps - tranferencia por segundo
+			Kb_real/s
+			Kb_wrtn/s
+			kb_read
+			Kb_write
+
+		-m mostra todos os dados em Mb
+		-h modo human
+		-c mostra somente CPU
+		-d Mostra somente os devices
+		-p mostra apenas partições
+
+		iostat -c 2 (gera o relatório a cada 2 segundos)
+			na primeira mostra as medidas desde que ligou a maquina
+			nas demais mostra os ultimos 2 segundos
+
+		iostat -d 2 5 (gera a cada 2 segundos por 5 vezes)
+		
+
+	Linux 3.10.0-1160.62.1.el7.x86_64 (500010376164-lx.itau.corp.ihf) 	05/02/2022 	_x86_64_	(8 CPU)
+
+	avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+		   6.33    0.21    3.26    0.05    0.00   90.15
+
+	Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn
+	nvme0n1           2.30        15.69        29.94    2914260    5560237
+	dm-0              2.38        15.62        29.93    2901062    5558169
+	dm-1              0.38         6.61         1.74    1228333     322598
+	dm-2              0.00         0.01         0.00       2204          0
+	dm-3              2.01         8.99        29.49    1669349    5476104
+
+
+	vmstat - Informacoes sobre processos, memoria, paginação, bloco de IO
+		r - esta na fila do processamento (runnable process)
+		b - está em estado blockeado(uniterruptable sleep)
+
+		-d mostra os dispositivos (escritas e total de IO)
+		-p /dev/sda8 mostra a partição especifica (precisa especificar)
+		vmstat 2 5  (mostra a cada 2 segundos por 5 vezes)
+
+
+	procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+	 r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+	 0  0      0 1434208   3684 3670272    0    0    30    57   43  109  7  3 90  0  0
+
+		
+	
+	mpstat - informações de cpu
+		tem algums coisa a mais(importante conhecer o comando)
+
+
+	nfsiostat
+
+		O comando nfsiostat funciona como comando iostat, mas apenas para os pontos de montagem NFS do sistema.
+
+		Lembrando que o NFS (Network File System) é um protocolo que permite a montagem de sistemas de arquivos 		remotos, através da rede. Estudaremos o NFS mais a fundo no tópico 209.2, do exame 202.
+
+	cifsiostat
+
+	A função do cifsioistat é a mesma do comando anterior, mas ao invés de ser focado nas montagens de filesystems NFS, 		ele exibe as informações dos sistemas de arquivos montados com o CIFS.
+
+	O CIFS (Common Internet File System) é também um protocolo de redes cujo uso mais comum é o compartilhamento de 	arquivos via rede, muito usado em ambientes Windows, e suportado pelo Samba, que será estudado no tópico 209.1, 	referente ao exame 202.
+
+
+
+	sar - mostrar os recursos de hardware(tempo medio de entrada e saida para device)
+		mostra dados de CPU de 10 em 10 mim
+	/etc/defalut/sysstat (habilitar o Sar para coletar)
+		ENABLE=TRUE
+
+		(CentOs)
+		systemctl start sysstat.services
+		systemctl enable sysstat.services
+
+		cat /etc/cron.d/sysstat  (mostra que ele coleta a cada 10 mim)
+			no crontab chama o sa1 a cada 10 mim
+
+  		guarda no /var/log/sysstat , no centOs /var/log/sa 
+
+	sar e sar -u o mesmo
+	
+	sar -f sa10 (mostra dados do dia 10)
+	sar -r mostra dados de memória
+	
+	sar -s mostra dados de swap
+	sar -n DEV mostra as inteface de rede, devices
+	sar -d mostra a escrita em disco
+		o lsblk pega o MAj:MIN que o sar usa
+
+	sar -B dados de paginação de memória
+	sar -r -f sa08 consumo de memória do dia 08
+	sar -u 2 5 mostra dados de cpu a cada 2 segundos , por 5 vezes (pega online e consulta o log que coleta a cada 10mim)
+
+
+		08:40:01 PM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+		08:50:01 PM     all      1.00      0.00      0.27      0.04      0.00     98.70
+		09:00:01 PM     all      0.23      0.00      0.08      0.03      0.00     99.66
+		09:10:01 PM     all      0.19      0.00      0.07      0.03      0.00     99.70
+		09:20:02 PM     all      4.53      0.00      1.38      0.05      0.00     94.03
+		09:30:01 PM     all      3.28      0.00      0.97      0.06      0.00     95.70
+
+
+
+		A partir do CentOS 8 (e equivalentes), o agendamento das execuções dos processos do sysstat passou a ser 			feito através do systemd-timer ao invés da crontab.
+
+		Dessa forma, não há mais o arquivo /etc/cron.d/sysstat e sim os seguintes arquivos:
+
+		/usr/lib/systemd/system/sysstat-collect.service
+		/usr/lib/systemd/system/sysstat-collect.timer
+		/usr/lib/systemd/system/sysstat-summary.service
+		/usr/lib/systemd/system/sysstat-summary.timer
+		/usr/lib/systemd/system/sysstat.service
+		O sysstat-collect é o serviço e o agendamento para o processo sa1, que coleta os dados e armazenar dados 			binários nos logs em /var/log/sa/saXX.
+
+		O sysstat-summary é referente ao sa2, cria um relatório diário (em formato texto, não binário) nos logs em 
+		/var/log/sa/sarXX.
+
+		Após instalar o sysstat é preciso iniciar e habilitar os serviços para que os dados passem a ser coletados 			regularmente.
+
+		systemctl start sysstat sysstat-collect.timer sysstat-summary.timer
+
+		systemctl enable sysstat sysstat-collect.timer sysstat-summary.timer
+
+
+	netstat - Mostra conexao de rede, rotas etc
+
+		netstat -i - todas as interfaces de rede e as estatisticas 
+			mesmos dados do ifconfig
+
+		-s mostra as estatisticas por protocolo
+			ip, icmp, udp, tcp
+
+		-a mostra todos os sockets (estando listening ou nao)
+		
+	ss - comando visa substitui o netstat(vem como padrão)
+		/proc/sys  - ele vai direto na memoria do \Kernel
+		
+
+		-s mostra as estatistica de pacotes(resumo)
+		-l conexões em listening
+		-t conexões tcp
+		-n não traduz os nomes(mostra so ip)
+
+	iptraf-ng - (apt-get install iptraf  ou yum install iptraf) - estatistca por Grafico
+	Monitor ao ambiente em tempo real
+ 	porta com maior trafico,
+	estatitisca por ethernet
+	
+	posso fazer filtro de rafego
+	pode monitorar remotamente
+
+
+  Processos - recursos
+
+	ps axu | less
+		
+		VSZ - toda memoria que o pgm pode acessar (ele é maior pois aloca, dimensionamento)
+			Esse tem todos os processo inclusive a reserva alocada do RSS, por isso é sempre maior
+		RSS - toda memoria RAM que esta alocada para o pgm
+	
+	ps -ely e 
+		Mostra os processos inclusivse a informação esta em D na primeira coluna (dormant-dormindo) Processos dormindo,
+		Primeira coluna é a informação do vmstat (o b)
+
+		S   UID   PID  PPID  C PRI  NI   RSS    SZ WCHAN  TTY          TIME CMD
+		S     0     1     0  0  80   0  7284 48538 ep_pol ?        00:00:07 systemd
+		S     0     2     0  0  80   0     0     0 kthrea ?        00:00:00 kthreadd
+		S     0     4     2  0  60 -20     0     0 worker ?        00:00:00 kworker/0:0H
+		S     0     6     2  0  80   0     0     0 smpboo ?        00:00:00 ksoftirqd/0
+		S     0     7     2  0 -40   -     0     0 smpboo ?        00:00:00 migration/0
+
+
+	pstree mostra os processo em format de arvore
+		-p mostra os processos
+		
+	w quem esta conectado na maquina e qual processo rodando. Uso de CPD, Idle, quando o usuario esta consumindo.
+
+	lsof - identifica processsos  com o arquivos, usa muito para rede (socket), relaciona o arquivo com o a rede e open fila (função principal listar arquivos abertos)
+	-p 28201 (mostra os arquivos abertos desse processo)
+	 	Mostra todas as bibliotecas compartilhadas, e mais
+	lsof /home/user/arquivo.txt  mostra qual processo o arquivo esta relacionado
+	lsof -i :22  Mostra todas as conexoes estabelecidas nas portas 22
+
+
+
+
+  TOP
+	Load average Ultimo media nos 1 5 15 minutos
+	%CPU se estiver mais de 100% porque esta usando mais de 1 CPU
+
+	shift + f - pode ordenar os campos, seleciona o item 
+		Pode selecionar um sem o * e esse será incluido no TOP
+		Ordenar, seleciona o item ja com * e aperta o S (ordena pelo item)
+  HTOP - não é instalado por padrao
+		apt-get install htop
+	Mostra o consumo por CPU, memoria e Swap
+	apertar l(listar) mostra os open files do processo que esta rodando
+
+	htop -p 28828 (faz o detalhe somente desse processo)
+	htop -d 100 (intervalo delay de atualização da tela do HTOP 100=10segundos)
+
+ iotop - monitora o IO
+	yum install iotop
+	Mostra os processos que causa mais escrita em disco
+	o que faz mais io
+
+
+
+ uptime - mostra o load average e outros
+	Se tem 1 CPU > abaixo de 1,  4 CPU > abaixo de 4 (Se valor for maior pode estar criando fila_
+	media em 1 5 15 inutos
+	aparece tb no top
+
+ free -h
+	swap - usado quando o necessário for maior que a memória ram
+		Mais lento, não é interessante o uso
+		não é obrigatório, mas se esta entrando no swap algo precisa ser feito
+		
+		cat /proc/swaps
+			cria arquivo que é o swap
+			Pode ser utilizar uma partição para swap /dev/dm-1
+
+
+  EXERCICIOS
+	1.  Identifique a % de utilização da CPU pelas aplicações de usuários neste momento em seu sistema.
+	iostat -c 1
+	mpstat 1
+	sar 1
+
+	2. Identifique a média da % da CPU em estado ocioso desde que o sistema foi iniciado:
+	iostat -c
+	mpstat
+
+	3. Identifique a quantidade média de transferências por segundo em seus dispositivos de disco desde a inicialização do sistema:
+	iostat
+	
+	4. Qual a partição do seu sistema que teve o maior volume escrita em disco desde o início do sistema?
+	iostat -p
+
+	5. Verificar se, no dia de hoje, seu sistema utilizou a área de swap em algum momento.
+	Utilizar o comando “sar -S” e verificar se em algum momento a coluna “kbswpused” foi diferente de 0.
+	6. Verificar no dia de ontem, ou na última vez que a máquina foi utilizada, o momento de maior utilização da CPU.
+		Navegar até o diretório /var/log/sysstat (debian) ou /var/log/sa (RH)
+		Através do comando ls -ltr, identificar o arquivo sa99 que possui as informações de ontem
+		Executar: # sar -f sa99
+		Observar a coluna %user ou %idle (oposto)
+
+	
+	7. Verificar se há em alguma de suas interfaces de erro, pacotes apresentando erros no envia ou recebimento:
+	A informação pode ser obtida através do comando “netstat -i”. Os campos RX-ERR e TXERR, além dos campos referentes a DRP e OVR.
+
+	8. Verificar a quantidade de conexões TCP em estado Listen neste momento:
+
+		A informação pode ser obtida através do comando: “netstat -tln” ou “ss -tln”.
+
+	9. Escolha um processo em seu sistema e verifique quantos arquivos abertos estão associados a esse processo.
+	Obter a informação através do comando “lsof -p PID”.
+
+	10. Identificar qual o espaço reservado à área de swap em seus sistema e se ela foi criada através de partições ou arquivos.
+	Obter as informações pelo comando “cat /proc/swaps” e “free”.
+
+	
+		
+		
+
+

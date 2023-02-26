@@ -1,0 +1,99 @@
+Componetes do Kernel
+	]
+	Applications
+		*
+	Nucleo do sistema	
+		*
+	Memoriria-cpu-disco
+
+ kernel monolitico 
+	Tudo é feito e processado dentro do kernel
+
+ Micro kernel
+	Tem o micro kernel(mach e varios server que falam com software 
+
+
+ O kernel do linux é monolitico mas é modular (Kernel Hibrido)
+	ele chama varios modulos 
+	Placa de som, video, file system, recurso USb
+	chama só os modulos que vai usar (ex: plugar o USB)
+
+
+ www.kernel.org (disponibilizar as versôes)
+	mainline - novas implementações (BETA)
+	Stable - versao estavel
+	Longterm - versão anterior que sao mantidas
+
+	Mainline: árvore mantida pelo Linus Torvalds, em que todas as novas funcionalidades são implementadas e desenvolvidas;
+	
+Stable: Quando o mainline é liberado (released), é considerado “stable”;
+	
+	Longterm: Versões do kernel que são oficialmente mantidas. Correções importantes de bugs e segurança também são aplicadas nessas versões.
+	
+	EOL (End of Life): Indica que em breve este release do kernel deixará de ser mantido.
+	Vale a pena a leitura dos links abaixo:
+
+	https://www.kernel.org/category/releases.html
+	https://www.kernel.org/category/faq.html
+	
+ 4.16.9.20
+	4 - versao
+	16 release
+	9 - incrementacoes da release ou patch oficial
+	20- release secundária das distribuições
+
+	uname -r 
+	lsb_release -a
+	
+	cat /etc/redhat-release
+Cat 
+
+
+ LOCALIZAÇÂO
+	/usr/src - fontes do kernel
+	no dia dia não precisa das fontes do kernel para rodar o sistema. 
+		lista de arquivo com os linux-headers
+		Ex. linux-header-4.15.0-20
+
+	o Arquivo baixar vem como XZ
+	tar J(ou xvf) linux-4.16.9.tar.xz
+
+	ln -s linux-4.16.9  linux (criar um ln apontando para o kernel atual)
+	Entrando no Linux tem o Documentation
+	/usr/src/linux/documentation (caminho da documentacao)
+
+  O kernel compilado fica no /boot
+	arquivo com a versao atual do linux vmlinux-4.15.0-20-generic 
+
+  Tipos de imagems podem ser 
+		zImagem - limitação de 512 Kb(carregda na low Memory-640Kb)
+		bzImage - (big zImage - não tem limite de tamanho)
+
+		Ambos são comprimidos usando o gzip
+
+  Modulos
+	/lib/modules
+		cd /lib/modules/$(uname -r)
+		1 diretorio para cada versõo kernel
+	as extensões de arquivo modulos são .ko
+
+		modules.dep - mostra todos os modulos disponiveis e quais as dependencias
+
+ 	/lib/modules/kernel/drivers (tem os drivers da maquina)
+
+
+Exercicios
+	1. Identifique a versão e o release do kernel em uso do seu sistema.
+	uname -r
+
+	2. Faça o download do release atual do kernel e o descompacte no diretório correto. Crie também o link simbólico referenciando ao diretório do código fonte.
+		Faça o download do site www.kernel.org
+		Descompacte o arquivo no diretório /usr/src/
+		# tar xvf arquivo.tar.xz (na versão atual do tar o uso do J, para indicar o tipo XZ, é opcional)
+		Dentro do diretório /usr/src/ criar o link “linux”
+		# ln -s linux-A.B.C linux
+
+	 3. Veja o tamanho da imagem do kernel em uso no seu sistema.
+	ls -lh /boot/vmlinuz-`uname -r`
+
+	

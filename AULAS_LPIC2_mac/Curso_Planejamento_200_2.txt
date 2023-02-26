@@ -1,0 +1,90 @@
+Ferramentas Monitoração - Prever recursos futuros
+   yum install collectd
+	deamnon que roda e coleta informações (semelhante mas coleta mais que o SAR)
+
+	cd /var/lib/collectd/rrd
+		vai ter arquivos rrd, estrutura para guardar informações
+	informações, memoria, cpu, usuario, bateia, disk
+
+	/etc/collectd/collectd.conf (configura o que vai monitorar)
+
+	Extrair informação atraves do rrdtool (solução em WEB, grafico, etc)
+	pode se integrar ao collectd (so que o collectd não tem grafico)
+
+	Mais sobre o collectd:
+	Na aula comentei pouco sobre as configurações do collectd.conf, não é mesmo necessário saber detalhadamente suas opções, mas é importante entender como ele funciona de maneira geral.
+
+	Ele é baseado em Plugins e o arquivo de configuração basicamente determina quais serão utilizados e as principais opções sobre eles.
+
+	Vale a pena ler os comentários padrão do arquivo collectd.conf e o man do arquivo, especialmente a parte da descrição:
+
+	“This config file controls how the system statistics collection daemon collectd behaves. The most significant option is LoadPlugin, which controls which plugins to load. These plugins ultimately define collectd’s behavior. If the AutoLoadPlugin option has been enabled, the explicit LoadPlugin lines may be omitted for all plugins with a configuration block, i.e. a <Plugin...> block.”
+	
+
+	O iptraf disponibiliza uma interface visual para monitorar em tempo real o tráfego de pacotes nas interfaces de rede do sistema.
+	
+
+  cacti - usa os dados do rrdtool (tem mais gráficos) usa o php
+
+  MRTG - Solução focado monitoração trafego de rede
+		usa o SNMP
+		usado em roteadores e switch
+		Monitora as interfaces de rede
+
+  Nagios - Solução mais completa
+	protocolo, database, banda, 
+	envia alarmes
+	Monitora varias maquinas
+	Um agente coleta as informações e envia para o Nagios server, ou coleta via snmp de switchs
+
+	gera relatorio online
+	envia alertas
+	
+
+  icinga2 - Algo semelhante ao Nagios
+	consulta maquina via agente, snmp
+	monitora perfomance
+	monitoração via comando
+	se integra com Ansible, Elastic, Puppet, Chef
+	envia alarmes
+
+
+links
+	https://oss.oetiker.ch/rrdtool/
+	https://www.cacti.net/
+	https://oss.oetiker.ch/mrtg/
+	https://www.nagios.org/
+	https://icinga.com/products/
+	https://pt.wikipedia.org/wiki/Simple_Network_Management_Protocol
+
+A documentação a seguir fala sobre o que deve ser considerado com relação à performance, escala e tunning em servidores Web, no caso o Apache mas serve para todos. Vale muito a leitura:
+
+https://httpd.apache.org/docs/trunk/misc/perf-scaling.html (Mostra todos os comando e monitoração do topico.
+
+
+EXERCICIO
+	Com base nas informações obtidas pelos comandos estudados no sub-tópico 200.1, avalie seu ambiente de testes, ou algum outro que tenha acesso, e defina se nos itens abaixo os recursos estão “Corretamente Dimensionados”, “Superdimensionados” ou “Subdimensionados”.
+
+	a) Quantidade e Capacidade de CPUs
+
+	b) Espaço disponível de memória RAM
+
+	c) Espaço da área de Swap
+
+
+	a) Quantidade e Capacidade de CPUs
+	Você pode chegar a essa conclusão analisando os históricos de utilização e ociosidade das CPUs pelo comando “sar” e verificando se estão ocorrendo momentos de excessiva utilização.
+	Outra informação que vale ser analisada é o “Load Average”. Em geral, ele deve manterse em um valor abaixo da quantidade de CPUs/Cores do sistema, o comando “sar -q” permite você observar o histórico de “Load Average”.
+	Comandos como top e htop também vão ajudar nessa monitoração e análise.
+	
+	b) Espaço disponível de memória RAM
+	O histórico de consumo de memória RAM pode ser obtido através do comando “sar -r”.
+	Informações do uso atual pode ser vista pelos comandos “free”, “vmstat”, “top” e “htop”.
+	Nesse caso também é essencial observar se a área de swap tem sido constantemente utilizada. Se sim, deve haver um redimensionamento do tamanho da RAM e/ou da arquitetura em geral (clusters e etc).
+	
+	c) Espaço da área de Swap
+	O histórico de uso da área de Swap pode ser obtido pelo comando “sar -S”.
+	Informações do uso atual pode ser vista pelos comandos “free”, “cat /proc/swaps”, “top” e “htop”.
+	Em todos os casos, implementação de ferramentas como o Cacti ou MRTG irão ajudar a fazer uma análise ainda mais detalhada e gerar relatórios gráficos que podem até ser apresentados a outras áreas da empresa.
+
+  

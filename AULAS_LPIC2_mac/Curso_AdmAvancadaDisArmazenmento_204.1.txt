@@ -1,0 +1,118 @@
+RAID   0,1,5
+	RAID 0 - Extensão (2 discos de 10Gb, tem 20Gb no total)
+	RAID 1 - Espelhamento (2 discos de 10Gb, tem total de 10Gb)
+	RAID 5 - 3 ou mais discos (Cria bits de paridade, 3 discos de 10Gb, fico com 20Gb pois 10Gb é de paridade)
+
+	
+  yum instal  mdadm (multplus devices, gerenciar RAID)
+
+	Particionar 
+	fdisk /dev/sdc  
+		Criar as particoes
+		precisa mudar o tipo de partição (t)
+		 escolher o tipo fd (Linux auto Raid)
+	P lista as particos
+	w salva
+
+Criar RAID0
+	mdadm -v --create /dev/md0 -l0 -n2 /dev/sdc1 /dev/sdd1  (criar 1 Raid0 com 2 discos)	-n2 (2 discos) -l0 (raid 0)
+	mkfs.ext4 /dev/md0  (formata)
+
+     Para ver
+	lsblk 
+	mdadm --detail /dev/md0
+	cat /proc/mdstat	(mostra detalhes do Raid)
+		Personalities : raid0
+		md0 : active  sdd1 e sdc1
+		20995136 blocks	
+	mount /dev/md0 /mnt/raid0
+	
+Para ativar ele para inicar no boot
+	mdadm -v --detail --scan >> /etc/mdadm/mdadm.conf
+
+
+
+Criar Raid 1
+	mdadm -v --create /dev/md1 -l1 -n2 /dev/sdc2 /dev/sdd2  (criar 1 Raid1 com 2 discos)	-n2 (2 discos) -l1 (raid 1)
+	mkfs.ext4 /dev/md1  (formata)
+	
+	mdadm --detail /dev/md1
+	cat /proc/mdstat	(mostra detalhes do Raid)
+		md1 : active  sdd2 e sdc2
+		20995136 blocks	1. [2/2]
+	mdadm -v --detail --scan >> /etc/mdadm/mdadm.conf (aqui ele vai lista o md0 e md1) Entao precisa editar o mdadm.conf para nao ficar duplicado
+
+	mkdir /mnt/raid1
+	mount /dev/md1 /mnt/raid1
+	df -h
+
+	mdadm --manage /dev/md1 --fail /dev/sdc2 (simula uma falha)
+	cat /proc/mdstat	
+		md1 : active  sdd2 (F) e sdc2
+		20995136 blocks	1. [2/1]  [u_]
+	
+	mdadm --details /dev/md1
+
+   para removre 1 hd
+	mdadm /dev/md1 -r /dev/sdd2  (remove o hd sdd2 do raid)
+	cat /proc/mdstat
+   para add
+	mdadm /dev/md1 -a /dev/sdd2  (add o hd sdd2 do raid)
+	ct /proc/mdstat 
+		mostra como recuperando
+		mostra a prograssão
+
+    pra baixar
+	mdadm --stop /dev/md0
+	mdadm --assemble --run /dev/md0 (comando para subir o raid ou sincronizar)
+
+    para examinar
+	mdadm --examine /dev/sdc2
+		mostra dados do disco 
+
+   acabar com todos
+	mdadm --stop /dev/md0
+	mdadm --assemble -scan (sobe tudo de novo)
+	
+	mdadm --stop /dev/md0
+	mdadm --remove /dev/md0
+	vim /etc/mdadm/mdadm.conf e comentar as linhas mountagem
+	mdadm --assemble --scan (Ele continua encontrando pois ainda estao no s dispositivos e precisa zerar
+	mdadm --zero-superblock /dev/sdd1	
+	mdadm --zero-superblock /dev/sdd2	
+
+
+Criar Raid5 
+	mdadm -v --create /dev/md0 -l5 -n3 /dev/sdc1 /dev/sdc2 /dev/sdd2  (criar 1 Raid5 com 3 discos)	-n3 (3 discos) -l5 (raid 5)
+	mkfs.ext4 /dev/md0  (formata)
+	
+	mdadm --detail /dev/md0
+	cat /proc/mdstat	(mostra detalhes do Raid inclusive sincronizando)
+	
+
+  simular falha 
+	mdadm --manage /dev/md1 --fail /dev/sdc2 (simula uma falha)
+
+
+
+Exercicios
+	1. Crie um dispositivo do tipo RAID 5 chamado md0, com 3 partições. Faça a montagem do dispositivo no diretório /mnt/raid5.
+
+	# mdadm -v --create /dev/md0 -l5 -n3 /dev/sdb1 /dev/sdc1 /dev/sdd1
+	# mkfs.ext4 /dev/md0 (ou outro filesystem de preferência)
+	# mdadm --verbose --detail --scan >> /etc/mdadm/mdadm.conf
+	# mount /dev/md0 /mnt/raid5 (configure também fstab se preferir)
+
+	2. Simule a falha de um dos dispositivos do RAID md0. Verifique o status do /proc/mdstat após o procedimento. Ao final, restaure o dispositivo de volta ao md0.
+
+	# mdadm --manage  /dev/md0 --fail /dev/sdc1
+	# cat /proc/mdstat
+	# mdadm /dev/md0 -r /dev/sdc1
+	# mdadm /dev/md0 -a /dev/sdc1
+
+	3. Remova totalmente a configuração do RAID md0.
+	
+	Edite o arquivo /etc/mdadm/mdadm.conf e remova a linha referente ao md0; Execute a sequência de comandos:
+	# mdadm --stop /dev/md0
+	# mdadm --zero-superblock /dev/sdb1 /dev/sdc1 /dev/sdd1
+	# mdadm --assemble --scan

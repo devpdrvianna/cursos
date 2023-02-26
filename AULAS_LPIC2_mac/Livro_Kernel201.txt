@@ -1,0 +1,179 @@
+KERNEL:
+
+ Linux tem kernel monolitico mas é modular ( cada modulo é carregado conforme seu uso )
+
+2.6.30.4
+	2 - Versão principal
+	6 - Revisão principal
+	30 - Revisão secundária (recursos como drivers, recursos por ex.)
+	4 - Correções urgentes
+
+Existem os sufixos rc ou mm que representam kernel especifico alterado em relação ao oficial
+	2.6.30-rc5
+
+ Versões do Kernel 
+	/usr/src
+	/usr/src/linux-2.6.30
+
+	/usr/src/linux/Documentation (documentação)
+
+	após compilar fica em /usr/src/linux/arch/x86/boot
+
+ Tamanho do Kernel
+	zImage e bzImage
+		zImagem - tamanho maximo 512 (kernels mais antigos)
+		bzImage - Não tem a limitação de tamanho
+
+ 201.2  Compilando:
+	
+	Customização : Configuração - compilação - instalação
+
+   configuração
+		make menuconfig (interface configuração)
+			rodar dentro do 
+			gera o .config no diretório do codigo fonte do volante 
+	
+	outras alternivas  Qt e Grk executado na interface X
+
+    comandos configurar o Kernel
+	make config - configura através de perguntas e respostas
+	make oldconfig - restaura todas as configurações do arquivo .config
+	make xconfig
+	make menuconfig
+	make gconfig
+
+
+   Compilação
+		
+	make mr proper - apagar antigas dependencias
+	make clean - apaga arquivos compilados anteriormente (mantem as configuções)
+	
+	make -j4 bzImage(ou zImage) - compila o kernel em 4 processo paralelos aproveitando os processadores
+
+	make modules - Compila os modulos separadamente
+	
+   Instalação	
+	precisa copiar o kernel compilado para o dir /boot
+	de /usr/src/linux/arch/x86/boot/image ou /usr/src/linux/arch/x86/boot/image/bzImage
+		para /boot e renomear como algo vmlinuz-2.6.28-abc
+
+	em seguida intalar os modulos
+		make modules_intall - será criado dir em /lib/modules/2.6.28 
+		gera no mesmo diretorio o modules.dep (interdependencias)
+
+Initial Ram Disk
+	Configura aruivo que são carregados em memória.  
+		Geralmente arquivo oferecem suporte para carregar discos, acesso controladoras de disco etc
+
+	mkinitrd e mkinitramfs 
+ 
+ 	mkinitrd
+		mkinitr -c -k 2.6.30 -m xfs -o /boot/initrd-2.6.30.gz
+
+	mkinitramfs 
+		config /etc/initramfs-tools/initramfs.conf
+		mkinitramfs -o /boot/initramfs-2.6.30 2.6.30
+		update-initramfs (atualiza conforme initramfs.conf
+
+Atualizando Bootloader
+	lilo
+		fazer alteracoes em /etc/lilo.conf
+			alterar o image = , initrd = , label
+		executar lilo para ativar alterações
+		
+	grub
+		config o /boot/grub/menu.lst
+			alterar a linha kernel, initrd
+		o Kernel vai aparecer automatico no menu de inicio sistema
+			não precisa rodar comando após alterar
+
+
+201.3 Patch: no kernel
+	2.6.30.5.bz2 é o quinto path corretivo do 2.6.30
+		os patch são fornecidos no www.kernel.org
+	os patchs devem ser aplicados apenas para a versão principal
+
+	comando para atualiza é: patch
+		executar no dir /usr/src/linux
+	comandos:
+		cd /usr/src/linux
+		wget http://kernet.org/pub/linux/kernel/v2.6/patch-2.6.30.3.bz2
+		bzcat patch-2.6.30.3.bz2 | patch -p1	
+			
+	Os patchs com 4 numero, alteração na 4 parte, devem ser removidos antes o anterior
+		bzcat patch-2.6.30.3.bz2 | patch -p1 -R
+		bzcat patch-2.6.30.4.bz2 | patch -p1
+
+	os patch na terceira camada devem ser instalados na sequencia
+
+	bzcat patch-2.6.30.bz2 | patch -p1
+	bzcat patch-2.6.31.bz2 | patch -p1
+	bzcat patch-2.6.32.bz2 | patch -p1
+	etc
+
+201.4 Kernel personalizado
+	
+	No config do make menuconfig
+		* compilado interno kernel
+		M - compliado como modulo
+		branco - serao descartados
+		[] - so podem ser compilados como internos
+		<> - podem ser compilados internos ou externos
+
+	Principais configurações
+		sao guardadas em /etc/src/linux/.config
+	
+	Empacotar o Kernel
+		make rpm-pkg - compilado e com codigo fonte
+		make binrpm-pkg - somente o kernel
+		make deb-pkg
+		make tar-pkg - arquivo Tar sem compromisso
+		make targz-pkg - Tar com compressao
+		make tarbz2-pkg - Tar compressao bz2
+
+ 201.5 Investigar Kernel no Boot
+	uname -a mostra todas informações od kernel
+		pega as informacçoes em /proc/sys/kernel
+
+	Modulos
+	 ficam em /lib/modules/$(uname -r)/
+	modules.dep - mostra todos os modulos disponiveis e quais as dependencias
+
+	para adicionar modulo (modprobe(verifica dependencias) ou insmod)
+
+	o comando depmod -a gera o arquivo modules.dep que mostra todos os modulos disponiveis e quais as dependencias
+	
+	lsmod lista os modulos
+		quando não aparece modulos de depencia, foram compilados intternos no kernel
+		se o mod for pre requisito nao consegue ser descarregado
+		nome_modulo bytes num_modulos_dep nome_modulos_dep
+
+	rmmod <nome_modulo> - descarregar o modulo, se estiver ocioso, nao sendo usado pelo dspositivo
+	modprobe -r - descarrega o modulos e todas as dependencias
+	 modprobe -r snd-hda-inter
+
+	modinfo <nome_modulo>  - mostra as informações descrições do modulo
+	modinfo -p <nomeModulo> - mostra apenas informações sem alias
+	
+  	Parametros para modulo
+
+	modinfo -p <modulo>  olha os parametros aceitaveis
+	modprobe snd-hda-intel model=3stack
+		parametros são guardados em /etc/modprobe.d/modprobe.conf
+		nesse tb podem ser configurados carregar outros programas junto com o mod
+		Tembém pode configurar execução programas ao descarregar modulos
+
+
+	
+		
+	
+	
+
+
+
+
+	
+		
+
+
+	

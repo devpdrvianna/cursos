@@ -1,0 +1,135 @@
+
+Kernel controla acesso a arquivos e diretorios
+	acesso aos dispositivos (SCSI, SATA) ssd
+	interação com o sistema de arquivos (ext2, ext3, ext4, xfs, reiserfs
+	
+ Montagem dos sistema de arquivo, ponto de montagemm feito pelo mount
+
+	mount -t tipo dispositivo diretório
+		-t determina o sistema de arquivos	
+	mount - mostra o que está montado
+		pode consultar em /etc/mtab
+		outro item /proc/mounts (tem opção rootfs - Ramdisk)
+
+		Caso o ponto de montagem ja esteja defido em /etc/fstab
+			será necessário que o mount forneca apenas o caminhi para a partição ou para o ponto de montagem
+		
+		umount caminho ponto de montagem ou partição para desmontar mesmo nao estando no fstab
+	
+
+	Tabela sistema de arquivo -fstab
+		fica no /etc/fstab
+Dispositivo	Ponto montagem	SistArquivos	opções	 Dump  fsck				
+/dev/home 	/home    	xfs     	defaults  0      0
+/dev/swap 	swap     	swap    	defaults  0      0
+
+
+
+Sistema de arquivos
+
+	Aqui você indica o sistema de aquivos utilizado, sendo comum o uso do "auto" em drivers de CD-ROM, 		disquetes e até mesmo em pendrives.
+
+Os sistemas de arquivos mais comuns são: swap, ext2, ext3, ext4, ReiserFS, XFS, JFS, VFAT, NTFS, entre
+
+  Opções	
+	w - permissão de leitura e escrita
+	ro - permissão de leitura apenas
+	suid - permite a utilização do bit suid (set-user-identifier) ou sgid (set-group-identifier)
+	nosuid - não permite a utilização do bit suid ou sgid, tratando como arquivos comuns
+	Mais opções:
+	dev - permite a criação de arquivos de dispositivos
+	nodev - não permite a criação de arquivos de dispositivos
+	exec - permite execução de binários
+	noexec - não permite a execução de binários
+	auto - monta automaticamente no boot
+	noauto - não monta no boot
+	user - pode ser montado por usuários simples
+	nouser - só pode ser montado pelo root
+	sync - gravação síncrona do dispositivo, ou seja, grava no disco assim que o comando é executado.
+	async - gravação assíncrona do dispositivo, ou seja, grava na memória primeiro e depois no disco.
+	defaults - rw, suid, dev, exec, auto, nouser, e async
+
+  fsck Opção de verificação da partição onde: 
+	0 - não verifica
+	1 - prioridade de verificação (partição do sistema, /)
+	2 - prioridade de verificação (outras partições)
+
+ mount -a - Monta automático partiçoes do fstab (execeto noauto)
+ umount -a desmonta particoes do fstab que estao sem uso
+
+ UUID - cada dispositivivo tem o seu identificador
+	comando para ver é blkid
+
+	assim no fstab 
+		UUID="75e64f36-eaca-4f6c-8633-a2249085efd4" / xfs noatime,nodiratime,logbufs=8 1 1
+  SWAP
+	/dev/sda2 swap swap defaults 0 0
+
+	Caso o sistema esteja lento check a memoria e crie mais Swaps
+	mkswap <caminho partição>  configura partição como Swap
+	swapon <caminho partição> ativa a partiçao como swap
+		para desativar swapoff <caminho partição>
+		swapoff -a desativa todos swap mapeados em /etc/fstab e /proc/swaps (exceto noauto)
+
+	swapfile.bin pode ser usado como swap, basta formataro arquivo (dd if=/dev/zero of=swapfile.bin bs=1024 cont=256)	
+	mkswap swapfile.bin
+	swapon swapfile.bin
+		-a Ativas todas as partições no fsttab (exceto com noauto)
+		-a -e Partições nao encontradas, sao ignordas sem aviso
+		-L nome Usa partição com label
+		-p o-32767 Define a area de prioridade do swap
+		-s Mostra o uso de cada swap
+		-U id usa partição com UUID 
+
+ comando sync -  Synchronize cached writes to persistent storage
+	Dados são gravados em cache para depois gravar no disco
+	o Sync força a gravação no disco
+	por isso precisa desmontar o disco para fazer o eject
+
+
+203.2 Manutenção de um sistema de arquivos
+	criar a partição com o fdisk / cfdisk
+	formatar com mkfs ou mke2fs ou mkfs.ext4
+		usar o -t e indicar o sistema
+	
+ para criar uma partição ext3 (3 formas)
+	mkfs -t ext3 /dev/hd6
+	mkfs.ext3 /dev/hd6
+	mkefs -j /dev/hd6
+
+ converter o ext2 para ext3 sem perda de dados
+	tune2fs -j /dev/hd6 (onde hd6 é o ext2)
+	
+ Verificando e corrigindo
+	
+	dumpe2fs - dump ext2/ext3/ext4 filesystem information
+	prints the super block and blocks group information for the filesystem present on device.
+
+	dumpe2fs -f /dev/hd6 - mostra informações de baixo nivel para ext2 e ext3 ext4
+	  -h mostra uma visao geral
+
+	o tune2fs - adjust tunable filesystem parameters on ext2/ext3/ext4 filesystems
+
+		-l  mostra todas as opções
+		-c - determina o numero de montagem para ser checada pelo fsck
+		-i 1d(m meses) determina o tempo maximo ate que a partição seja verificada
+		-j Atribui o sistema journalling ao ext2
+
+
+	reiserfs-tune altera propriedades de journallinge ou UUID(-u) ou label(-l)	
+
+	xfs-info /home - informaçoes como tamanho e numero de blocos
+	xfs-check Verifica inconsistencia
+	xfs-repair - corrigir erros
+		devem ser feitos em partições desmontadas e ou somente leitura
+
+
+
+
+	
+
+
+
+
+
+

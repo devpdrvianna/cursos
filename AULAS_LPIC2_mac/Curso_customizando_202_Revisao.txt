@@ -1,0 +1,193 @@
+202.1 – Customizando o Sistema de Inicialização SysV-init (e systemd)
+SysV – Init
+
+Funcionamento: O SysV utiliza o conceito de runlevels que definem os grupos de aplicações que serão iniciados em cada nível, sendo eles:
+
+	0 = Desligamento (Halt)
+	1 (s) = Modo Mono-Usuário (single user), ou de manutenção
+	2 – 5 = Modos Multi-Usuários, com variações conforme a distribuição
+	6 = Reboot
+
+Principal Arquivo de Configuração:
+	/etc/inittab
+Configuração do Runlevel Default (Padrão) no arquivo /etc/inittab:
+	id:2:initdefault:
+	Localização dos Scripts de Inicialização:
+
+	/etc/init.d/
+
+Diretórios dos Runlevels:
+
+	/etc/rc*.d/
+	Cada diretório contém links para os scripts presentes no diretório /etc/init.d/, indicando quais processos devem ser iniciados ou mortos.
+
+Principais Comandos e Opções:
+	runlevel : Exibe o runlevel utilizado anteriormente e o atual
+	init / telinit : Troca para outro runlevel
+	update-rc.d : Gerencia os runlevels e os links do diretório /etc/rc*.d/ em sistemas padrão 
+
+Debian
+	# update-rc.d process disable 4 : Desabilita o serviço “process” do runlevel 4
+	# update-rc.d process enable 4 : Habilita o serviço “process” no runlevel 4
+	# update-rc.d process remove : Remove todas as configurações do serviço “process”
+	-f: A opção -f força a remoção de todos os links simbólicos do /etc/rcX.d/, mesmo que o script do serviço ainda ainda exista no /etc/init.d/
+	# udpate-rc.d process defaults : Restaura as configurações default para o serviço “process”
+
+chkconfig : Gerencia os runlevels e os links do diretório /etc/rc*.d/ em sistemas 
+padrão RedHat
+	# chkconfig : mostra as configurações atuais
+	# chkconfig –list process : Exibe as configurações do serviço “process”
+	# chkconfig –level 45 “process” off : Desabilita o serviço “process” dos runlevels 4 e 5
+	# chkconfig –level 4 “process” on : Habilita o serviço “process” no runlevel 4
+	systemd
+
+Funcionamento
+
+	Ao invés de trabalhar com runlevels, o systemd trabalha com Units e Targets.
+
+	Uma unidade é identificada como nome.tipo, possuindo então um arquivo de configuração. Target é um tipo de Unit que agrupa várias Units, sendo de certa forma correspondente ao conceito de Runlevel usado no SysV.
+
+	É importante mencionar que o systemd mantém compatibilidade com o SysV e os scripts init no padrão LSB, que por exemplo definem os “runlevels” default de cada serviço.
+
+
+Diretórios em que se localizam os arquivos de configuração das Units:
+
+	/etc/systemd/system
+	/run/systemd/system
+	/lib/systemd/system
+	Os arquivos de configuração podem estar localizados em qualquer dos diretórios acima, mas seguem a seguinte ordem de prioridade: /etc/system tem maior prioridade, seguido do /run/systemd e o /lib/systemd tem a menor prioridade.
+
+	O target Default, que será iniciado após o processo de boot, é definido pelo arquivo default.target, que em geral é um link simbólico para algum dos targets do sistema.
+
+Principais Comandos e Opções:
+	systemd-delta : Analisa os 3 diretórios de configurações e indica quando há arquivos iguais se sobrepondo ou até se completando.
+	systemctl : Principal comando de gerenciamento dos serviços do systemd.
+	list-units : Lista todas as Units do sistema
+	default : Entra no target default
+	isolate “target” : Entra em um target específico
+	stop / start / status “process” : Realiza ações em um serviço específico
+	enable / disable “process” : Define se um processo deve ou não ser iniciado após o boot
+	daemon-reload : Re-lê as configurações do daemon do systemd
+	
+LSB (Linux Standard Base)
+Conjunto de especificações que visam definir um padrão para as diversas distribuições Linux, entre elas:
+
+	Bibliotecas instaladas por padrão
+	Comandos
+	Hierarquia do sistema de arquivos
+	Níveis de Execução
+	etc
+
+
+202.2 – Recuperação do Sistema
+	GRUB 2 e GRUB Legacy
+
+O GRUB 2 é uma nova implementação do Bootloader GRUB e é atualmente o padrão utilizado
+O GRUB 2 é modular, suporta scripts, pode ser utilizado tanto com firmware BIOS quanto UEFI, suporta múltiplas plataformas, além de diversas outras características que o tornaram muito mais flexível e moderno.
+
+A tabela abaixo contém as principais diferenças entre as duas implementações:
+ Ver imagens 
+
+
+BIOS e UEFI
+
+	BIOS = Basic Input Output System
+	UEFI = Unified Extensible Firmware Interface
+	BIOS e UEFI são duas implementações diferentes para o firmware de um sistema
+	A BIOS carrega o bootloader através da área de MBR (Master Boot Record)
+	O UEFI obtém os bootloaders específicos através do ESP (EFI System Partition), uma partição do tipo FAT normalmente montada no diretório /boot/efi/
+	O UEFI implementa o recurso de Boot Seguro, em que antes de realizar o boot ele verifica se as imagens estão devidamente assinadas
+	Dentro da partição ESP, os bootloaders podem ser reconhecidos pela “extensão” .efi
+	No Linux, o UEFI pode ser verificado e configurado pelo comando “efibootmgr”
+
+NVMe (Non-Volatile Memory Express)
+	Usado para discos SSD (Solid-State Drive)
+	Interface criada pela Intel para que o os discos SSDs sejam usados no barramento PCI Express
+	Em sistemas Linux é mapeado como /dev/nvme*
+
+Procedimentos de Recuperação do Sistema
+
+Boot em Modo Single (Mono-Usuário)
+	Na tela inicial do GRUB, usar a tecla “e” para editar uma das entradas
+	Incluir no parâmetro “linux”, uma das opções: 1, s, single
+	Pressionar Ctrl X ou F10 pra realizar o Boot
+	Informar a senha de root para entrar no modo de manutenção
+	Nesse modo, todas as partições serão montadas normalmente e o administrador pode realizar as devidas configurações.
+	Também poderá desmontar as partições visto que não haverá serviços em execução. Com as partições desmontadas pode realizar por exemplo fsck checagens do disco com o uso do comando fsck.
+	Após a manutenção de uma partição, ela pode ser remontada, como leitura e escrita, através do comando abaixo:
+	mount -o remount,rw /
+
+Boot Direto no Bash
+	Na tela inicial do GRUB, usar a tecla “e” para editar uma das entradas
+	Incluir no parâmetro “linux”, a opção “init=/bin/bash”
+	Pressionar Ctrl X ou F10 pra realizar o Boot
+	Após o boot será iniciado diretamente o bash, ao invés do init (SysV/systemd)
+	Nesse modo, as partições não são montadas, e os procedimentos de manutenção de disco e partições podem ser realizados
+	Uso do GRUB Shell
+
+Na tela inicial do GRUB, usar a tecla “c”
+O GRUB Shell permite que o administrador verifique as informações das partições do sistema e dê instruções para que seja realizado um novo boot
+
+Alguns dos comandos que podem ser utilizados:
+ls
+ls -l (hd0,msdos1)/
+set root=(hd0,msdos1) : definir a partição em que se encontra o diretório /boot
+linux /vmlinuz-X.Y.Z root=/dev/sda1 : definir a imagem a ser usada durante o boot e em qual partição o diretório / deve ser montado
+initrd /initrd.img-X.Y.Z : definir a imagem de InitRD que deve ser utilizada
+boot : realizar o boot pelas configurações definidas manualmente no GRUB Shell
+
+
+Boot através de CD/DVD Live
+
+Iniciar o sistema através de um CD/DVD Live ao invés dos discos do sistema
+Útil quando os bootloaders como GRUB e a área da MBR possuem erros ou algum tipo de corrompimento.
+O comando “install-grub /dev/sdX” pode ser usado para reinstalar o GRUB
+O comando “update-grub” pode ser utilizado para corrigir e atualizar as configurações do GRUB
+
+
+202.3 – Carregadores de Boot Alternativos
+
+SYSLINUX
+Bootloader Linux criado para trabalhar com filesystems do tipo FAT (MS-DOS)
+Usado por exemplo em pendrives de recuperação
+Com o tempo foram adicionados ao projeto o suporte a outros bootloaders:
+EXTLINUX
+ISOLINUX
+PXELINUX
+
+EXTLINUX
+
+Usado em sistemas de arquivos nativos do Linux (ext*, brtfs e xfs)
+Obtém as informações do diretório /boot/extlinux
+Configuração em extlinux.cnf
+
+ISOLINUX
+Carregador de boot para CD-ROMs com filesystem ISO 9660
+Usado em LiveCDs e LiveDVDs
+Armazenado normalmente no diretório /boot/isolinux/
+O arquivo de bootloader é o isolinux.bin e o de configuração isolinux.cfg
+
+PXELINUX
+PXE : Pre-Boot Execution Environment
+Usado para Boot via interface de rede
+O carregador de boot (pxelinux.0) é enviado via rede ao cliente
+A placa de rede deve suportar o recurso
+No cliente a configuração é feita na BIOS ou UEFI
+O PXE Server também deve conter um DHCP e um TFTP
+Arquivos disponibilizados pelo TFTP
+/tftpboot/pxelinux.0
+/tftpboot/pxelinux.cfg
+
+Systemd-boot
+Bootloader do “pacote” systemd
+Criado para funcionar com firmware UEFI
+
+U-Boot
+The Univesal Boot Loader
+Usado em sistemas embarcados (embedded)
+Suporta múltiplas arquiteturas
+
+UEFI Secure Boot
+O UEFI suporta o Boot Seguro
+O Boot Seguro faz com que o UEFI só carregue imagens digitalmente assinadas
+O Linux carrega o bootloader shim.efi para lidar com os certificados e chaves, e então encaminha o fluxo para o grubx64.efi (padrão)

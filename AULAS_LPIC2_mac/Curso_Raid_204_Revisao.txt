@@ -1,0 +1,337 @@
+ Ajustando o Acesso aos Dispositivos de Armazenamento
+   Tipo Dispositivos
+   IDE/ATA - cada barramento possuiam 2 interfaces
+	Master e Slave
+	hda(primario) hdb(secundario) hdc(primario) hdd(secundario)
+
+   SATA
+	1 device por barramento
+	sda sdb sdc
+	
+   SCSI
+	8 bits 7 dispositivos + controladora
+	16 bits 15 dispositivos + constroladora
+
+	sda sdb sdc sdd
+
+      Identificadores 	
+	channel ID
+	SCSI-ID 0 a 7(controladora) ou 0 a 15 para 16bits
+
+	LUN Logical Unit Number
+	identifica a unidade logica	
+
+
+hdparm (discos IDE e SATA)
+	Definne parametros no SATA/IDE
+	hdparm /dev/sda
+		-i informacoes de dispositivo
+		-t teste de velocidade de leitura
+		-d1 força o disco IDE para usar o DMA
+
+sdparm (SCSI e SATA)
+	sdparm /dev/sda
+	
+sysctl	fs.file-max  (alterar parametros do \Kernel em execução
+	-w fs.file-max=5000
+	
+
+nvme  usado em SSD
+	nvme list
+	ls -la /dev/nv*
+
+fstrim - usado para descartar blocos que nao estao sendo usado
+	desfragmentaçao de discos SSD
+	O disco precisa suportar
+	-a faz em todos os sistema montados
+	
+tune2fs
+	-l /dev/sda
+		Erros behavior: mostra erros
+	-s /dev/sda
+		melhor o uso do bloco em fS grandes
+	-O definir opcoes de montagem (no fstab tem preferencias)
+
+
+
+NAS/SAS
+	NAS varios HDs de armazenamento, o SRV monta o drive no NAS e faz acesso a dados
+	Ponto centralizado de acesso
+	
+	SAN é uma rede em fibra com varios NAS ligados entre si, todos conectados a um switch de fibra, esse ambiente é chamado de SAN
+
+   Protocolos
+	FCP - Fibre channel Protocol mapeamento do protocolo SCCI
+	O SRV comunica através de uma rede de fibras, o switch conecta no Fiber channel que acessa os NAS
+	
+	
+	FCoE - Fibra canal sobre Ethernet
+		O SRV comunica somente com a rede normal, o switch conecta no Fiber channel que acessa os NAS	
+	iSCSI - Mapeamento do protocolo SCSI sobre ip
+	  Nao tem mais fiber channel, tanto os \srvs como os NAS estao conectados via IP
+
+AoE - ATA sobre Ethernet 
+	funciona de forma semelhante que o iSCSI
+
+	
+   SAN
+	WWID e WWN  s"ao equivalente ao MAC na rede ethernet(identificador unico)
+
+   	LUN identificador unidade logica (HD, Storage)
+	
+		ls -l /dev/disk/by-id/
+			lista mostrando os wwn dos discos
+		multipath -l - configura muitplus caminhos
+	
+		cat /proc/scsi/scsi
+		/lib/udev/scsi_id -g /dev/sda  pega o identificados do SCSI
+
+
+
+Como Configurar o iSCSI
+	apt-get install tgt open-iSCSI
+	yum install  targetcli iSCSI-initiator-cli
+	
+	vi /etc/tgt/targets.conf
+		<target iqn.2018-06.br.com.dominioteste.linux-debian:target1>
+		backing-store /dev/sdd		
+		</target>
+
+	systemctl restart tgt
+	tgt-admin --show
+	
+   no Cliente
+	iscsiadm -m discovery -t sendtragets -p 192.168.1.20
+	iscsiadm -m node -p 192.168.1.210 --target=iqn.2018-06.br.com.dominioteste.linux-debian:target1 --login
+	iscsiadm -m session -p3 (informacao da conexao ele fez)
+
+	
+	/var/lib/SCSI/nodes
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/configure-iscsi-target-initiator-on-centos-7-rhel7.html
+
+	
+No Cliente 
+	pd aux |  grep iSCSId
+	deamon
+	/etc/iSCSI/iSCSId.conf
+	/etc/iSCSI/initiatorname.iscsi
+
+
+	olhar para prova o iscsid.conf
+		parametro nao cai
+		Ele é o cliente e vai no srv scsi para conectar
+		node.stratup=automatic ou manual (a sessao ira iniciar automatico)
+
+	no Mount
+	_netdev   Usa em ponto de montagem que exige conexão de rede. Usado para prevenir depois que a rede foi montada, melhorar a estabilidade.
+
+	
+
+Exercicios
+	
+1. Adicione um novo dispositivo de armazenamento em sua máquina virtual, crie 2 partições e as disponibilize via iSCSI usando através de 2 targets diferentes.
+
+Criar as partições com o uso do fdisk ou parted; Definir o filesystem das partições através do mkfs, dessa forma o Initiator conseguirá utilizar a partição; Instalar o tgt (Debian) e configurar o arquivo /etc/tgt/targets.conf conforme o exemplo:
+<target iqn.2018-06.br.com.dominioteste.linux-debian:target1>
+backing-store /dev/sdd1
+</target>
+
+<target iqn.2018-06.br.com.dominioteste.linux-debian:target2>
+backing-store /dev/sdd2
+</target>
+
+Reinicie o tgt:
+# systemctl restart tgt
+
+Verifique se os dispositivos estão disponíveis:
+# tgt-admin –show
+
+Se estiver utilizando um sistema baseado em RedHat, como o CentoOS, instale o targetcli e utilize os procedimentos do link abaixo: https://www.itzgeek.com/how-tos/linux/centos-how-tos/configure-iscsi-target-initiatoron-centos-7-rhel7.html
+
+	
+
+2. Acesse os 2 targets configurados no exercício 1 e os monte nos diretórios /mnt/iscsi1 e /mnt/iscsi2.
+
+Instalar os pacotes iscsi-nitiator-utils (CentoOS) ou open-iscsi (Debian); Descobrir os targets disponíveis:
+# iscsiadm -m discovery -t sendtargets -p IP-Servidor-Target
+
+Conectar aos targets:
+# iscsiadm -m node -p IP-Servidor-Target --target=iqn.XXXXX:target1 --login
+# iscsiadm -m node -p IP-Servidor-Target --target=iqn.XXXXX:target2 --login
+
+Verificar se a conexão está ativa e em quais devices os targets foram mapeados:
+# iscsiadm -m session -P3
+
+Montar os dispositivos:
+# mount /dev/sdX /mnt/iscsi1
+# mount /dev/sdY /mnt/iscsi2
+
+
+
+
+
+LVM - Logical volume manager
+	Flexibilidade quando gerenciar volumes
+	
+
+	yum install lvm2
+	/etc/lvm/lvm.conf
+		funcionamento do lvm (config geral)
+	
+	fdisk -l 
+	precisa definir tipo de disco
+
+	Mudar o tipo para 8e - Linux lvm
+	n
+	p
+	+10G
+	n
+	t
+	1
+	8e
+
+	pvcreate /dev/sdc1  (criar Volumes fisicos) fazer com todos os particoes
+	pvs ou pvdisplay para mostra a lista de volumes criados
+
+	Criar o grupo
+	vgcreate grupo1 -s2 /dev/sdc1 /dev/sdc2 /dev/sdd1
+	vgs
+	vgdisplay ver mais detalhes
+	
+	vgchange -a y grupo1  (ativar o volume grupo)
+	
+	lvcreate -l 10000
+		  -L10G grupo1  -n lv_teste
+
+
+	lvcreate -l 10G grupo-1
+
+	ls -la /dev
+	ls -la /dev/mapper
+
+	lvcreate -l 3000 grupo1 e lv tieste2)
+	
+	lvs
+
+	mkfs.ext4 /dev/mapper/grupo1-lv_teste
+	mount /dev/grupo1/lv_teste1/  /mnt/teste1
+
+
+  Atenção para localização dos LV na estrutura de diretórios:
+
+	/dev/mapper/VG-LV
+	/dev/dm-X
+	/dev/VG/LV
+
+
+	pvs lista os fiscos volumes
+	vgs lista os volume grupo
+	lvs logical volumes
+	
+	pvcreate /dev/sdd2
+	pvs aparece  hd mas sem esta alocado
+	vgextend grupo1 /dev/sdd2
+
+     aumentar tamanho do Volume logico
+
+	lvextend -L15Gb /dev/grupo1/lv_teste1
+	
+	resize2fs /dev/grupo1/lv_teste
+		fez o resize online
+		pode aumentar o tamanho da partição
+
+	
+	remover o fisical volume
+	vgreduce group1 /dev/sdd2
+
+Criar um Snapshot
+	lvcreate -L1Gb -s -n teste snapshot /dev/grupo2/aula
+
+	mount /dev/grupo2/teste snpshot /mnt/teste1
+	umount /mnt/teste1
+	lvremove /dev/grupo2/teste-snapshot
+
+ 	pv - fisical volume
+	vg - volugrupo
+	lv - Logical volume
+
+
+
+
+EXERCICIO
+	1. Utilizando o LVM, crie a estrutura abaixo:
+
+
+
+Incorreto
+Utilizando o fdisk, crie 5 partições, cada uma com os tamanhos que serão utilizados nos PVs. Para o exercício, podem ser todas em um mesmo disco, ou utilizando mais de um disco. No fdisk, definir o tipo da partição como “8e”; Crie os 5 PVs:
+	# pvcreate /dev/sdX1
+	# pvcreate /dev/sdX2
+	# pvcreate /dev/sdX3
+	# pvcreate /dev/sdX4
+	# pvcreate /dev/sdX5
+Crie os VGs grupo1 e grupo2:
+	# vgcreate grupo1 -s10 /dev/sdX1 /dev/sdX2 /dev/sdX3
+	# vgcreate grupo2 /dev/sdX4 e /dev/sdX5
+Ative os VGs:
+	# vgchange -a y grupo1
+	# vgchange -a y grupo2
+Crie os LVs:
+	# lvcreate -L20G grupo1 -n lv_exerc1
+	# lvcreate -L10G grupo1 -n lv_exerc2
+	# lvcreate -L15G grupo2 -n lv_exerc3
+
+2. Utilize o FS ext4 em todos os LVs e os monte nos seguintes diretórios:
+
+	lv_exerc1 → /mnt/exerc1
+	lv_exerc2 → /mnt/exerc2
+	lv_exerc3 → /mnt/exerc3
+
+	Criar os diretórios /mnt/exec1, /mnt/exec2, /mnt/exec3; Seguir com os seguintes comandos:
+	# mkfs.ext4 /dev/grupo1/lv_exerc1
+	# mkfs.ext4 /dev/grupo1/lv_exerc2
+	# mkfs.ext4 /dev/grupo2/lv_exerc3
+	# mount /dev/grupo1/lv_exerc1 /mnt/exerc1
+	# mount /dev/grupo1/lv_exerc2 /mnt/exerc2
+	# mount /dev/grupo2/lv_exerc3 /mnt/exerc3
+
+
+3. Você notou que o diretório /mnt/exerc3, que no momento tem 15G de espaço disponível, precisará ter 40G de capacidade. Faça os procedimentos necessários para criar esta disponibilidade.
+	
+
+
+
+O diretório /mnt/exerc3 usa o LV lv_exerc3, que pertence ao VG grupo2, que tem no momento uma capacidade de 30G, dessa forma, você terá que aumentar a capacidade do VG grupo2, incluindo novos PV(s), e então aumentar o tamanho do LV; Criar mais uma partição, com tamanho de 20G, chamada por exemplo, /dev/sdYY. Definir o tipo “8e” na partição; Criar um PV a partir dessa nova partição:
+# pvcreate /dev/sdYY
+
+Adicionar o novo PV ao VG grupo2
+# vgextend grupo2 /dev/sdYY
+
+Aumentar o tamanho do LV lv_exerc3 para 40G
+# lvextend -L40G /dev/grupo2/lv_exerc3
+ou
+# lvextend -L+25G grupo2/lv_exerc3
+
+Redimensionar o FS ext4 para o novo tamanho
+# resize2fs /dev/grupo2/lv_exerc3
+
+4. O diretório /mnt/exerc1 não é mais necessário e o LV lv_exerc1 pode ser excluído. Aproveite também para reduzir o tamanho do VG grupo1, removendo todos os PV que não estão alocados.
+
+	Desmontar o /mnt/exerc1
+# umount /mnt/exerc1
+	Excluir o LV lv_exerc1
+# lvremove /dev/grupo1/lv_exerc1
+	Verificar o uso dos PV
+# pvs
+ou
+# pvdisplay	
+	Remover do VG grupo1 os PVs que não estão sendo utilizados
+# vgreduce grupo1 /dev/sdXX
+	Remover os PVs
+# pvremove /dev/sdXX
+
+ 
+
+5. Criar um Snapshot do LV lv_exerc2 chamado “exerc-snap”.
+
+5. Criar um Snapshot do LV lv_exerc2 chamado “exerc-snap”.

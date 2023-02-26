@@ -1,0 +1,95 @@
+206.1 Compilar e instalar programas
+
+
+Instação de codigo fonte
+	Geralmente se usa do /usr/src
+	formatos
+		emacs-26.1.tar.xz
+		links-2.16.tar.bz2
+		dos2unix-7.4.0.tar.gz
+	Descompattar
+		gz - tar zxvpf dos2unix-7.4.0.tar.gz
+			ou gunzip dos2unix-7.4.0.tar.gz (extrai o tar edepois abre o tar)
+			   tar xvpf dos2unix-7.4.0.tar.gz
+
+		bz2 - tar jxvpf links-2.16.tar.bz2
+			ou bunzip2
+
+		xz tar Jxvpf emacs-26.1.tar.xz
+			ou unxz 
+
+ Instalando depois de descompatar /usr/src
+	README - dados sobre o pgm
+	INSTALL - como instalar
+	configure - script de configuração, pega informacoes da maquina para depois faezr a compilacao do pacote.
+	makefile.in - arquivo base para gerar o Makefile
+	
+	./configure (ele iniciar em pegar informação e criar a configuraçcao) ele gera o Makefile
+	./configure --prefix=/opt/teste   ele vai instalar no /opt/file
+		o Makefile tem todos os parametros onde será instalado
+	make - vai compilar todo o codigo, gera no diretorio o compliado e o programa link
+	make install - vai colocar o programa no diretorio que foi customizado
+		ele jogou no /opt/teste porque foi setado para isso. 
+
+	Precisa instalar o Development-tools para que tenha o gcc compilador de c
+
+	
+	Makefile configuração (targets) 
+		possui targets para voce chamar junto com o Makefile
+		make install
+		make unistall
+		make clean
+
+	o make usa muito o comando install (tem parametrso copiar com permissao  e outros)
+		ex: sudo install ./arq1 ./arq2  /opt/src/arqinstall 
+
+	https://www.geeksforgeeks.org/install-command-in-linux-with-examples/#:~:text=install%20command%20is%20used%20to,etc%20depending%20on%20their%20distribution.
+
+	
+	
+	https://makefiletutorial.com/
+	https://www.gnu.org/software/make/manual/html_node/Standard-Targets.html
+
+
+
+
+PATCH
+	patch < arquivo-patch  - ele aplica o patch no determinado arquivo.  É a diferença do patch anterior
+	
+	patch -R < arquivo-patch
+
+	patch -p3 < arquivo-patch (retira do caminho setado as barras relacionados ao caminho de onde ele precisa instalar.  Assim ele consegue instalar no diretorio atual diferente do que esta configurado no arquivo-patch
+
+
+
+APLICAR PATH no KERNEL
+	/usr/src
+	kernel 5.13 para 5.13.1
+	
+	com um diretorio com os path /patches/patch-5.13.1.xz e patch-5.13.2.xz
+	patch-kernel /usr/src/linux ../patches/  (ela vai efetuando os patchs um a um a cada vez que roda o comando.)
+		Vai fazendo de um em um
+
+	outra opção
+	  xz -dc  ../patches-5.13.1.xz | patch -p1 --dry-run (d-descompact c-stdout -p1-voltar diretorio --dry-run-modo teste,so me diz o que faria)
+
+		
+
+
+EXERCICIOS
+	1. Instale via código fonte o shell “fish”.
+	Acesse o site oficial do projeto e faça o download do código fonte:
+		https://fishshell.com/
+		https://github.com/fish-shell/fish-shell/releases/download/2.7.1/fish-2.7.1.tar.gz
+	Copie o código fonte para o diretório /usr/src e o descompacte:
+		# tar zxvpf fish-2.7.0.tar.gz
+	Faça a configuração utilizando como diretório base para instalação o /opt/fish
+		# mkdir /opt/fish
+		# ./configure --prefix=/opt/fish
+		* Caso sejam indicados softwares dependentes, instale-os.
+	Compile o software
+		# make
+	Instale o software
+		# make install
+	Execute o shell que foi instalado:
+		/opt/teste/bin/fish

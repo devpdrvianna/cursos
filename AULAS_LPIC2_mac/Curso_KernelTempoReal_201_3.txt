@@ -1,0 +1,125 @@
+Gerenciamento e tratamento de problema
+
+   uname -a
+	todos itens
+	-r release (mais importante)
+	-n nome da maquina
+	-v versao da compilação (Data que compilou)
+	-m arquitetura (x86_64)
+
+	 pega do /proc/sys/kernel
+	 cat version
+	 cat osrelease
+
+    Mudar parametros do Kernel em tempo real
+	/proc/sys
+	cat file-max  (numero maximo de arquivos que o kernel pode abrir)
+	cat /proc/sys/fs/file-mas
+	ou sysctl fs.file-max( e como s eja estivesse no /proc/sys)
+	sysctl -a mostra todos os parametros
+
+       Para alterar
+	echo 100000 > /procv/sys/fs/file-max
+	ou
+	sysctl -w fs.file-max=100001
+
+	cat /proc/sys/fs/file-max
+	sysctl fs.file-max
+
+	vi /etc/sysctl.conf (Configuracoes valem apos o boot)
+		fs.file-max=100002
+	ou no /etc/sysctl.d
+	
+
+  lspci - o que esta conectado ao barrameto PCI
+	lspci -s 00:03 -v
+
+  lsusb
+	lsusb -d 4h44:4242 -v
+	lsusb -s 001:008 -v
+
+  lsdev | less
+	traz informações de devices e precisa instalar 
+		apt-get install procinfo
+	
+  dmesg ler msg do kernek ring buffer(algo que esta em memoria)
+
+
+  moduloes
+	/lib/modules/$(uname -r)/
+		extensoes .ko
+		modules.deb
+		modules.order
+
+	depmod -a (vai atualizar todos os modulos do kernel)
+		quando atualiza novo modulos(fazer as referencias)
+
+	lsmod (lista os modulos carregados)
+		se nao estiver descrito o modulo, porque e interno
+
+	modinfo <modulo> mostra info do modulo
+	modinfo -p somente mostra os parametros
+	
+	insmod <caminho completo do modulo>  pode ser visto pelo modinfo
+		nao verifica dependencias
+
+	rmmod para remover
+	
+	modprobe -r psmouse	
+	lsmod | grep psmouse
+	modprobe psmouse
+	lsmod | grep psmouse
+
+	modinfo -p r8169
+	modprobe r8169 debug=16
+
+
+  configurações de modulos
+	/etc/modules.conf 
+	/etc/modprobe.d
+		cat blacklist.conf	
+		cat iwlwifi.conf
+			remove acao faz quando baixa
+			install se um modulo for carregado e outro modulo tb carrega
+			options modulo index=-2 definição de modulo
+	
+
+
+   UDEV
+	udevadm monitor - Monitorar devices
+	 configuração 
+		/etc/udev/udev.conf
+		/etc/udev/rules.d (regras do udev)
+
+		/lib/udev/rules.d(na pratica usa esse)
+
+EXERCICIO
+	1. O parâmetro do kernel localizado em /proc/sys/net/ipv4/icmp_echo_ignore_all pode fazer com que o sistema não responda a pacotes ICMP ECHO. Utilize esse parâmetro para impedir (de maneira temporária) que o sistema responda a requisições de ping.
+
+	# echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
+	ou
+	# sysctl -w /proc/sys/net/ipv4/icmp_echo_ignore_all=1
+
+
+	2. O parâmetro /proc/sys/kernel/pid_max indica o valor máximo de um PID que o kernel pode trabalhar. Aumente de maneira permanente esse valor para 50000.
+	Editar o arquivo /etc/sysctl.conf
+	Adicionar a entrada: kernel.pid_max=50000
+
+	3. Em seu sistema, procure por detalhes do dispositivo de áudio conectado à sua placa PCI e visualize os detalhes.
+	lspci |grep -i audio
+     00:05.0 Multimedia audio controller: Intel Corporation 82801AA AC'97 Audio Controller (rev 01)
+	lspci -s 00:05 -v
+	
+
+	4. Configure, de maneira permanente, os seguintes comportamentos para o módulo psmouse:
+
+	Definir a opção “resync_time” para o valor 0
+	Fazer com que sempre que o módulo psmouse for iniciado com sucesso, a mensagem “O módulo psmouse foi carregado” seja exibida no terminal.
+	Fazer com que sempre que o módulo psmouse for descarregado com sucesso, a mensagem “O módulo psmouse foi descarregado” seja exibida no terminal.
+
+		Criar no diretório /etc/modprobe.d/ o arquivo configura-psmouse.conf
+	Realizar as seguintes configurações:
+		install psmouse /sbin/modprobe --ignore-install psmouse && /bin/echo "O modulo psmouse foi carregado"
+		remove psmouse /sbin/rmmod psmouse && /bin/echo "O modulo psmouse foi descarregado"
+	options psmouse resync_time=0
+

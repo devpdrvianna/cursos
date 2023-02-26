@@ -1,0 +1,220 @@
+206.1 – Compilar e Instalar Programas pelo Código Fonte
+
+Compressão
+
+Comandos usados para comprimir e descomprimir:
+
+	Gzip = gzip / gunzip / tar z
+	Bzip2 = bzip2 / bunzip2 / tar j
+	xz = xz / unxz / tar J
+	Para realizar o processo de compilação de um software, ele normalmente é descompactado no diretório /usr/src, que é por padrão o diretório de fontes do sistema.
+
+Comando/Script configure
+
+	Função: O primeiro passo, após a descompactação da fonte, é utilizar o script configure, que é disponibilizado junto com as maiorias do código fonte, para configurar o arquivo “Makefile”, que será utilizado durante o processo de compilação.
+
+	O arquivo “Makefile.in” serve como base para o “configure” que então irá gerar o “Makefile”.
+
+Uso e Principais Opções:
+
+	# ./configure
+
+Uma opção comum de ser utilizada como o configure é o –prefix, que indica em qual diretório a aplicação será instalada no final do processo.
+
+	# ./configure –prefix=/opt/software/
+
+Comando make
+
+Função: O comando “make” fará a compilação do código fonte, utilizando como base o arquivo Makefile, gerando no final do processo o binário executável do software.
+
+Uso e Principais Opções:
+
+	# make
+
+Comando make install
+
+Função: O comando “make install” copiará os binários, bibliotecas, arquivos de configuração e afins para os diretórios definidos para o software, configurado no Makefile.
+
+Uso e Principais Opções:
+
+	# make install
+
+Comando patch
+
+Função: Aplica as diferenças definidas em um arquivo de patch ao(s) arquivo(s) de código fonte presentes, da versão anterior.
+
+Um arquivo de patch é um diff entre dois arquivos ou entre dois diretórios, normalmente entre o diretório de código fonte de uma nova versão com a versão anterior.
+
+	Uso e Principais Opções:
+
+	Aplicando um patch:
+
+	# patch < arquivo.patch
+
+	Revertendo um patch
+
+	# patch -R < arquivo.patch
+
+	Opções:
+
+	-p, ex -p0, -p1, -p2… : Remove <num> / do nome do caminho do arquivo. -p0 não modifica em nada. -p1 remove apenas a barra inicial.
+
+
+	206.2 – Operações de Backup
+	Mídias para Backup
+
+Discos
+	Vantagens:
+	Velocidade no Acesso (Localização da Informação)
+	Facilidade de Gerenciamento
+	Sempre pronto para uso
+	Desvantagens:
+	Menor vida útil
+	Mais frágil
+Fitas
+	Vantagens
+	Durabilidade (pode durar até 30 anos)
+	Compacta / Facilidade de Transporte
+	Baixo custo por GB
+	Grande Capacidade
+	Desvantagens
+	Gravação e Acesso Sequencial
+	Na necessidade de uso, a fita correta deve ser localizada
+CD/DVD/Blu-Ray
+Pendrives/Cartões de Memória
+
+Tipos de Backup
+
+Backup Full – Backup Completo
+	Vantagens:
+	Processo de geração e recuperação mais simples
+	Desvantagens:
+	Maior demora na geração de cada backup
+	Ocupa mais espaço
+Backup Incremental – Após um backup full, os backups seguintes copiam apenas os dados alterados desde o backup imediatamente anterior
+	Vantagens:
+	Backups são gerados mais rapidamente
+	Ocupa menos espaço em disco
+	Desvantagens:
+	Necessidade de maior controle e organização
+	Processo de recuperação mais lento e trabalhoso. Todos os backups desde o full devem ser recuperados.
+Backup Diferencial – Após um backup full, os backups seguintes copiam apenas os dados alterados a partir do backup full.
+	Vantagens:
+	Recuperação mais simples. Apenas o backup full e um backup diferencial precisam ser recuperados.
+	Desvantagens:
+	Exige maior volume de dados se comparados com o backup incremental
+	Soluções de Backup Open Source
+
+Bacula
+Amanda
+Bareos (fork do Bacula)
+BackupPC
+
+Diretórios para Backup
+
+Diretórios normalmente incluídos nos processos de backup: /home – Arquivos e Diretórios dos Usuários
+
+	/etc – Arquivos de configuração do S.O. e das aplicações e serviços
+	/var
+	/var/log – Arquivos de log
+	/var/db, /var/lib – Banco de Dados
+	/var/spool/mail – E-mails
+	/var/www – Páginas web hospedadas no servidor
+	/usr e /opt – Caso se deseje um backup das aplicações instaladas.
+
+Comando tar
+
+Função: Realizar atividades de arquivamento, agrupamento e compactação de conjuntos de arquivos.
+Uso e Principais Opções:
+
+	-c –create : Criar um novo agrupamento de arquivos
+	-x –extract : Extrair arquivos
+	-t –list : Listar o conteúdo de um arquivo
+	–exclude : Excluir um arquivo ou diretório do tar
+	-g –listed-incremental : Fazer um backup incremental
+	# tar -cf arquivo.tar /etc
+	# tar -c /etc > arquivo.tar
+
+	# tar -cf /dev/st0 /etc : Criar o backup em um dispositivo de fita
+	# tar -xf /dev/nst0 : Extrair os dados de uma fita
+	# tar -cf backup.tar -g controle.txt /etc : Criar um arquivo para backup incremental
+
+Comando cpio
+Função: Criar/Extrair arquivos agrupados no formato cpio.
+
+Uso e Principais Opções:
+
+	# find /etc/*.conf | cpio -o > backup.cpio : Gerar um arquivo
+	# cpio -ivdm < backup.cpio : Extrair um arquivo completo
+	# cpio -ivdm < backup.cpio ‘*.bin’ : Extrair apenas alguns arquivos do .cpio
+	# find /etc/*.conf | cpio -o | gzip -c > backup.cpio : Gerar um arquivo comprimido
+
+Comando dd
+Função: Fazer uma cópia completa de ou para uma partição.
+
+Uso e Principais Opções:
+
+	# dd if=/dev/sda1 of=backup.img
+	# dd if=backup.img of=/dev/sda1
+
+Comando scp/ssh
+Função: Enviar ou obter arquivos de forma segura entre hosts.
+Uso e Principais Opções:
+
+	# scp arquivo.tgz usuario@host:/diretorio : Enviando um arquivo
+	# scp usuario@host:/diretorio/arquivo.tgz . : Obtendo um arquivo
+
+Comando rsync
+Função: Copiar arquivos entre diretórios de uma mesma máquina ou remotamente, mantendo os arquivos/diretórios em sincronia.
+Uso e Principais Opções:
+	-a : Arquive mode. Inclui diversas opções, entre elas faz a cópia recursiva, mantém permissões e data/hora.
+	-r : Copia recursiva de diretórios
+	-u : Copia apenas arquivos modificados desde a última execução
+	-z : Comprime os arquivos durante o processo de transferência
+	-p : Mantém as permissões
+	-v : Modo de detalhamento
+	–progress : Mostra o progresso durante as transferências
+	–delete : Remove os arquivos no destino caso eles não existam mais na origem
+	-e ssh: Faz a conexão segura via SSH
+	# rsysnc -auv –delete /var/log usuario@host-remoto:/opt/backup/
+
+	# rsync -ru -e ssh /var/log usuario@host-remoto:/opt/backup/
+
+Comando mt
+
+Função: Gerenciar dispositivos de fita
+
+Uso e Principais Opções:
+Os dispositivos de fita são mapeados no Linux como /dev/st0 e /dev/nst0. Os dispositivos /dev/st0 são rebobinados automaticamente após uma operação, os nts0 precisam ser rebobinados via comando.
+
+	# mt -f /dev/st0 <opção>
+	rewind : rebobina a fita
+	offline : rebobina e descarrega a fita do dispositivo
+	status : mostra um status da fita
+	erase : apaga o conteúdo da fita
+
+206.3 – Notificar os Usuários do Sistema
+Comando wall
+
+Função: Enviar uma mensagem a todos os usuários logados no sistema
+Uso e Principais Opções:
+
+	# wall mensagem
+	# echo “mensagem” | wall
+	# cat arquivo | wall
+
+Comando shutdown
+Função: Enviar comandos para que o sistema seja reiniciado ou desligado, possibilitando o agendamento e envio de mensagens personalizadas aos usuários conectados.
+
+Uso e Principais Opções:
+	-H –halt : “Desliga” o sistema operacional.
+	-P –poweroff : “Desliga” o sistema operacional e a energia da máquina (se suportado)
+	-r –reboot : Reinicializa o sistema
+	-c : Cancela a operação programada anteriormente
+	–no-wall : Não envia nenhuma mensagem aos usuários
+	# shutdown -r 18:00 “O sistema será reinicializado”
+
+Arquivos de Configuração de Mensagens
+	/etc/issue – Mensagem exibida antes de um login local
+	/etc/issue.net – Mensagem exibida antes de um login remoto
+	/etc/motd – “Message of the day”. Mensagem exibida após o login.

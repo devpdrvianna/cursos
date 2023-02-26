@@ -1,0 +1,212 @@
+Montagem automatica	(auto FS)
+
+	apt-get install autofs (yum install autofs)	
+
+	vim /etc/auto.master
+		criar no inicio do arquivo
+		/mnt/autofs	/etc/auto.ricardo  --timeout 15
+		:wq!
+
+	vim /etc/auto.ricardo
+		ricardo -fstype=auto  :/dev/sdb1  (ou -fstype=nfs 10.10.2.2:/dev/sdb1)
+		:wq!
+
+	mkdir /mnt/autofs
+	systemctl restart autofs.ricardo
+	ao dar o cd /mnt/autofs/ricardo e ai ele auto monta
+	cd sair dele e depois de 15 segundos ele desmonta
+
+Usando Systemd
+	cd /etc/systemd/system
+	vim mnt-automount.mount
+		[Unit]
+		Description-Teste de montagem automatica
+		
+		[Mount]
+		What=/dev/sdb2
+		Where=/mnt/automount
+		TimeoutIdleSec=15
+	
+		[Install]
+		WantedBy=multi-user.target
+		:wq!
+
+	vim mnt-automount.automount
+	[unit]
+	Descrition=Auto Montagem
+	
+	[Automount]
+	Where=/mnt/automount
+
+	[Install]
+	WantedBy=multi-user.target
+	:wq!
+	
+	systemctl daemon-reload
+	systemctl status mnt-autommount.automount	
+	
+	cd /mnt/automount  Ao entrar no diretorio ele auto monta.
+	
+
+
+Gravacao em CDROM
+	apt-get install wodim genisoimage udftools (ou o cdttools)
+
+	/usr/bin/cdrecord link para o wodim
+
+	mkisofs Link para o genisoimage	
+
+
+	mount /dev/cdrom /media (monta o cdrom)
+	umoun/media
+	
+	dd if=/dev/sr0 of=imagem-cd.iso  (extrar do cdrom e criar uma imagem)
+	
+	cdrecord dev=/dev/sr0 imagem-cd.iso (gravando a imagem no cdrom)
+
+	mkisofs -o imagem.iso /home/ricardo (cria a imagem.iso com os arquivos do dir)
+	mount imagem.iso /media
+
+	mkisofs -o imagem2.iso /home/ricardo /home/teste (coloca os 2 na iso)
+	mkisofs -o imagem3.iso -graft-points dir1=/home/ricardo dir2=/home/teste
+		Ele separa na iso cada diretorios com dir1 e dir2
+	
+	Extensoes para o iso9660 (cdrom)
+	
+	mkisofs -J -o imagem-joliet.iso /home/ricardo (-J trata o nome dos arquivo para nome longos, com acentos, codificação ok)
+	
+	mkisofs -R -o imagem-rock.iso /home/ricardo (-R trata o nomes longos, copia links, tratar acentuação, e pega as permissoes corretos)
+
+	mkisofs -eltorito-alt-boot -o imagem-joliet.iso /home/ricardo (fazer midia com boot)
+
+	mkisofs -hps-creator (cria um cd que pode ser lido no MAC)
+
+	outro FS para cdrom	
+	mkisofs -udf (Padrao sendo criado para substituir o iso9660)
+		mkisofs -o imagem-udf.iso -udf /home/ricardo
+
+	
+
+Como Criptografar a Partição 	
+	yum install cryptsetup
+	
+	importante e bom ler o man
+		dm-crypt ou luks encrypt
+	
+	fdisk -l
+	Se for crytografar vai perder os dados
+	
+	cryptsetup -v --verify-passphrase luksformat /dev/sdb2
+		YES
+		Enter passphrase: lpic-2-linux
+		
+	lsblk - Mostra o /dev/sdb2 como Crypto_LUKS		
+	
+     Ativar a particao
+	cryptsetup open --type luks  /dev/sdb2 part-segura
+		passphrase :  Senha do comando anterior
+
+	lsblk -f - mostra uma perninha como part-segura associado ao sdb2
+	ls -la /dev/mapper/*
+
+   Formatar
+	mkfs.ext4 /dev/mapper/part-segura
+	
+	cryptsetup status part-segura
+
+   Para mountar
+	mount /dev/mapper/par-segura /mnt/luks
+	
+   dmsetup ls (ferramenta para ver essas partiçoes)
+
+	cryptsetup close part-segura  - fechar a particao
+		não consegue montar mais e nao aparece 
+			lsblk - f e ou dmsetup ls
+	cryptsetup open --type luks /dev/sdb2 part-segura
+	lsblk -f (agora aparece de novo)
+
+	mount /dev/mapper/par-segura /mnt/luks
+	df -T
+	
+   Montar automatico
+	/etc/crypttab
+		part-segura  /dev/sdb2  none  luks
+      
+     caso nao queria digitar a senha
+	cria um arquivo para digitar a senha vim /senha (adicionar a senha)
+	edita /etc/crypttab para part-segura  /dev/sdb2  /senha  luks
+	cryptsetup luksAddkey /dev/sdb2 /senha
+
+
+	/etc/fstab 
+		/dev/mapper/part-segura /mnt/luks auto defaults 0 0 
+	
+		
+   Outro comando
+	cryptsetup luksDump /dev/sdb2 (vai mostrar as chaves e cabecalho)
+	mostra que se pode ter até 8 Key SLOT, chaves
+
+	cryptsetup luksDump /dev/nvme0n1p3
+
+
+EXERCICIOS
+	
+	1. Utilizando o autofs, crie um ponto de montagem automático para /mnt/auto/curso, utilizando algum dos devices configurados em seu sistema.
+	Criar o diretório /mnt/auto 
+	Configuração do /etc/auto.master
+		/mnt/auto /etc/auto.curso --timeout 30
+	Configuração do arquivo /etc/auto.curso
+		curso -fstype=auto :/dev/sdXY
+
+	2. Utilizando o systemd, configure um ponto de montagem automático para /opt/exercicio, utilizando algum dos devices configurados em seu sistema.
+	
+
+	Configuração do arquivo opt-exercicio.mount
+	[Unit]
+	Description=Exercício
+	[Mount]
+	Where=/opt/exercicio
+	What=/dev/sdXY
+	[Install]
+	WantedBy=multi-user.target
+	
+	Configuração do arquivo opt-exercicio.automount
+	[Unit]
+	Description=Exercicio
+	[Automount]
+	Where=/opt/exercicio
+	[Install]
+	WantedBy=multi-user.target
+	
+	Realizar um reload no systemd:
+	# systemctl daemon-reload
+	
+	
+	
+	
+3. Crie um arquivo de imagem ISO 9660, contendo todo o conteúdo do diretório /etc, de forma que sejam mantidas as devidas propriedades, permissões e nomes dos arquivos e diretórios
+	# mkisofs -R -o imagem.iso /etc
+
+	4. Configure uma de suas partições (sem uso) para funcionar de maneira criptografada, utilizando o padrão LUKS, sendo montada no diretório /opt/luks, após a digitação da senha durante o processo de boot.
+
+	Preparar o device e definir uma senha:
+	# cryptsetup -v –verify-passphrase luksFormat /dev/sdXY
+	
+	Ativar a criptografia do device
+	# cryptsetup luksOpen /dev/sdXY nome-virtual
+	[ou] # cryptsetup open --type luks /dev/sdXY nome-virtual
+	
+	Formatar a partição com algum sistema de arquivos
+	# mkfs.<fs> /dev/mapper/nome-virtual
+
+	Configurar o arquivo /etc/crypttab
+	nome-virtual /dev/sdXY none luks
+	
+	Configurar o /etc/fstab
+	/dev/mapper/nome-virtual /opt/luks auto defaults 0 0
+
+
+
+	
+	
+	

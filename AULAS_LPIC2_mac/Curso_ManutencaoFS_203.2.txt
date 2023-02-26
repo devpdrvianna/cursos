@@ -1,0 +1,211 @@
+Comandos de manutenção
+
+
+mkfs (formatar)
+	mkfs -t ext3 /dev/sdb3
+	mkfs.ext3 /dev/sdb3
+	
+	[root@500010376164-lx intel]#  mkfs
+	mkfs         mkfs.cramfs  mkfs.ext3    mkfs.fat     mkfs.msdos   mkfs.xfs     
+	mkfs.btrfs   mkfs.ext2    mkfs.ext4    mkfs.minix   mkfs.vfat
+
+	mkfs.ext4 -c /dev/sdb3 (checa se tem bad Block antes de criar)
+
+	
+
+
+  mke2fs (para ext2,3,4) especifico para esses
+
+
+mkswap (formatar particao para swap
+
+dumpe2fs (mostra informacoes sobre alguma particao). Ext2/ext3/ext4
+	dump2fs -h /dev/sdb3 (vol name, UUID, quando foi criada)
+		reserved block count: Espaço reservdo e somente root escreve)
+			padrao 5%
+		-f traz mais infor que o -h (grupo de blocos)
+		-b mostra bad block identificados
+
+	ext2 nao tem journal e o ext3 tem
+
+tune2fs - Para customizar o FS. (para ext2,3,4)
+	-l lista as propriedades do file system mesmo dump2fs -h
+
+	-c max_mount_counts (numero maximo de montagem ate o fsck
+	
+	-L "particao Aula" /dev/sdb3 (define label)
+	
+	-c10 /dev/sdb3 (a cada 10 montagem faz o fsck
+	-i30d a cada 30 dias faz a checagem
+	-m1 /dev/sdb3  (muda o reserved block de 5 para 1%)
+
+	tune2fs -j /dev/sdb3 (fizer em um ext2 ele via o ext3, adiciona o Journal)
+
+	
+debugfs alteracao de baixo nivel na particao
+	muito usado no ext2 para recuperacao de dados
+
+badblock - verifica a checagem mesmo que fcsk -c
+	badblock /dev/sdb3 -o arquivo_saida
+
+
+
+fsck  checa e repara o fs linux
+	[root@500010376164-lx intel]# fsck
+	fsck         fsck.cramfs  fsck.ext3    fsck.fat     fsck.msdos   fsck.xfs     
+	fsck.btrfs   fsck.ext2    fsck.ext4    fsck.minix   fsck.vfat    
+
+
+e2fsck (voltado para ext2,3 ou 4)
+
+	fsck /dev/sdb3
+		-t ext3 /dev/sdb3
+		fsck.ext3 /dev/sdb3
+	fsck.ext3 /dev/sdb3 -f -y (checa tudo, se for -n não corrigge nada, so checa)
+	fsck.ext3 /dev/sdb3 -f -c  checar por badBlock (bloco que nao pode ser usado
+	-p ja vai corrigindo igual o -y
+	so consegue checar se a particao estiver desmontada
+	
+	para checar o / precisa entrar em modo single, para poder desmontar.
+
+
+
+btrfs  (B Tree file system)
+	Moderno
+	Foco em tolerancia a falhas e facilidade de manutencao
+	feito por grupos empresas Oracle Redhat Intel Suse facebook
+	usado pensuse facebook
+	
+	Suporte a Raid 0,1 10 
+	subVolumes
+	SnapShots
+	Compressao direto FS(Zlib LZO)
+	converasao do ext3 e 4 para btrfs
+
+
+	cat /proc/filesystems (lista de fs que o linux suporta)
+	o btrsf esta como modulo entao "modprobe btrfs"
+	cat /proc/filesystems vai aarecer
+
+	apt-get install btrfs-tools
+		Gerenciar Raid, snapshot etc
+
+	
+	mkfs.btrfs /dev/sdb5
+	mkfs.btrfs /dev/sdb6 
+	btrfs filesystem show (mostras as particoes)
+	
+	mount /dev/sdb5 /mnt/btrfs1
+	btrfs subvolumes create /mnt/btrfs/sub1
+	btrfs subvolumes create /mnt/btrfs/sub2
+
+	btrfs subvolumes list -t /mnt/btrfs/  (-t para ver mais detalhes)
+	
+	btrfs subvolumes show /mnt/btrfs/sub1
+	mkdir /mnt/subvolume1
+	
+	mount -o subvol=sub1 /dev/sdb5 /mnt/subvolume1/
+
+SnapShot	
+	btrfs subvolume snapshot /mnt/subvolume1 /mnt/subvolume1/snap1
+	btrfs subvolumes list /mnt/btrfs/ -t
+
+
+
+RAID
+	mkfs.btrfs -d raid1 /dev/sdb5 /dev/sdb6 -f (-f para forcar)
+	mount /dev/sdb6 /mnt/btrfs1 (se montar pelo sdb5 ou 6 ele monta como se fosse um disco só, pois os 2 estao em raid0
+
+	
+Converter ext4 para btrfs
+	desmontar a particao
+	btrfs-convert /dev/sdb3 (vai converser de ext4 para btrfs sem perder dados)
+	
+
+
+ZFS
+	File system da SUn Solaris e mantido Orcle
+	OpenZFS - opcao de codigo aberto
+	foco na integridade dos dados
+	facilidade gerenciamento
+	Sistemas em pools / escalabilidade  (Bem parecido com LVM (discos fisico conectados a um volume virtual)
+	RAID
+
+
+XFS
+	Desenvol Silicon Graphics
+	Robusto
+	Trabalha com arquivos grandes
+	desfragmentacoa online
+	
+	apt-get install xfsprigs e xfsdumps
+
+	xfs_info /dev/sdb5 
+		propriedades da particao
+	xfs_repair(inclui o check) - COmo se fosse o fsck
+		xfs_repair /dev/sdb5
+	xfsdump - Cria um backup incremental do file system
+	xfsrestore faz o restore
+	
+
+SMART
+	Ajuda a monitora o HD, o device de armazenamento
+	Erro e saude no disco
+	fazer alarmes e relatorios
+	o Disco precisa suportar o recursos de smart
+
+	apt-get instal smartmontools  (instala todos os pacotes)
+	
+	smartd - deamon fica rodando e monitorando
+		self monitor
+
+	smartctl -i /dev/sda (informacoes do disco)
+	/etc/smartd.conf
+	smartctl
+		-i /dev/sda informacoes do disco
+		-a longa lista de detalhes do disco
+		-h - de healthy - verificar a saude do disco (se passou ou nao)
+
+	
+EXERCICIOS
+	1. Crie uma partição do tipo ext4 que tenha os seguintes parâmetros:
+	
+	Criar a partição utilizando o parted ou fdisk; Formatar com o comando:
+	# mkfs.ext4 <partiçao>
+	a) Label = Exercicios do Topico 203
+	# tune2fs -L “Exercicios do Topico 203” <particao>
+	b) Quantidade de Montagens entre checagens do dispositivo: 100
+	# tune2fs -c100 <particao>
+	c) Tempo entre verificações do dispositivo: 20 dias
+	# tune2fs -i20d <particao>
+	d) Blocos Reservados: 2%
+	# tune2fs -m2 <particao>
+	
+	2. Faça a verificação do filesystem de uma de suas partições do seu sistema, de forma que nada seja corrigido, apenas verificado.
+	
+	# fsck -f -n
+
+3. Crie uma partição que utilize o filesystem btrfs e crie nela 3 Subvolumes (SubVol1, SubVol2 e SubVol3).
+	
+	# mkfs.btrfs 
+	# mount /mnt/exercicio/ 
+	# btrfs subvolume create /mnt/exercicios/SubVol1
+	# btrfs subvolume create /mnt/exercicios/SubVol2
+	# btrfs subvolume create /mnt/exercicios/SubVol3
+
+	
+	
+	4. Utilizado a partição do exercício anterior, crie um Snapshot do SubVol3.
+
+	# btrfs subvolume snapshot /mnt/exercicios/SubVol3 /mnt/exercicios/SubVol3/Snapshot
+
+	
+	5. Utilizando o smartd, verifique as informações do seu disco e se ele suporta o recurso de SMART. Verifique também o status da saúde do disco.
+
+	# smartctl -i /dev/sda (exemplo)
+	# smartctl -H /dev/sda
+
+
+	
+
+

@@ -1,0 +1,173 @@
+Operacoes backup
+
+  Midias de backup
+	Disco e fita
+	cd/dvd/blu-ray
+	pendrive/cartoes
+
+  Disco
+	Hds
+	Racks de HD
+	HotPlug
+	
+  vantagens em Disco
+	Velocidade de acesso
+	Dispinibilidade
+	Facilidade gerenciamento
+
+  	Vida util menor
+	mais sensivel
+
+  Fita 
+	Durabilidade 20 a 30 anos
+	Compacta / facil transporte
+	Custo baixo / GB
+	Capacidade 
+
+	o acesso é sequencial demorado
+	ela fica OFFLine, procurar a fita e colocar na unidade
+
+  Tipo Backup
+	FULL - completo, com todos os dados
+	Incremental - copia so a diferença do anterior
+	Diferencial - copia o que foi diferente sempre do backup full
+
+  Solucoes open source backup
+	Bacula  https://www.bacula.org/  (tem interface grafic)
+	Amanda	http://www.amanda.org/
+	Bareos  https://www.bareos.org/en/
+	BackupPC https://backuppc.github.io/backuppc/
+
+ diretorios fazer backup
+	/home  Arquivos usuarios
+	/etc  config do SO e Apps
+	/var  log,db lib, spool/mail, www
+	/usr e /opt  Softwares instalados
+
+
+
+COMANDOS BACKUP
+
+ tar - comando usado para fazer backups
+	--exclude=  Nao incluir parte do backup, ou excluir o prorpio arquivo
+	-c criar
+	-x extrair
+	-t --list  testar
+	-g --listed-incremental  fazer backup incremental
+
+	-cvf testebkp.tar /etc   criar verbose files  
+	-czvf  vai zipar gz
+
+   para Fita
+	tar -cvf /dev/nst0 /etc (ou st0 que rebobina a fita, o nst0 não rebobina)
+	tar -xvf /dev/st0  extrair da fita
+
+	tar -cvf backup.tar -g controle.txt /etc  (-g controle.txt faz incremental)
+		cria aquivo novo em /etc
+		tar -cvf backup_incrt1.tar -g controle.txt /etc
+	
+	geralmente nao se usa o z para compactar pois a fita ja compacta via hardware
+
+  cpio
+	find /etc/*.conf | cpio -vo > backup.cpio
+	
+	find /etc/*.conf | cpio -o | gzip -c > backup.cpio.gz (compactado)
+
+	cpio -ivdm < backup.cpio
+	gunzip backup.cpio.gz e depois faz o comando acima
+
+  dd 
+	dd if=/dev/sda1 of=backup.img (copia a particao interia inclusive espaco vazio
+	dd if=backup.img of=/dev/sda1
+
+  mt - Controle magnetic tape
+	mt -f /dev/nst0 rewind (rebobinar a fita)
+	mt -f /dev/nst0 offline (faz rebobina e eject)
+  	mt -f /dev/nst0 status mostra o statis da fita
+	mt -f /dev/nst0 eod moviemnta a fita até a ultma informacao gravada
+novo
+
+TRANSFERENCIA
+	scp 
+		scp backup.cpio  ricardo@192.168.1.13:~ricardo/testebkp/ 
+
+	tar cf - /etc | ssh ricardo@192.168.1.13 'cat > ~ricardo/testebkp/novo-backup.tar'
+
+
+	rsync
+		yum install rsysnc
+		rsync -aruz /etc ricardo@192.168.1.3:/home/ricardo/teste-bkup (r-recursive, u-update, z-compactar na transferencia)
+		--delete ele vai remover quando for syncronizar
+
+		rsync -e ssh -aruz /etc ricardo@192.168.1.3:/home/ricardo/teste-bkup (r-recursive, u-update, z-compactar na transferencia)  -ssh faz a conexao via ssh
+
+	
+
+EXERCICIOS
+	
+1. Utilize o tar para gerar um comano que faça um backup de todo o home do seu usuário, gerando em seu próprio diretório de usuário um arquivo chamado backup-home-<ano>-<mes>-<dia>.tgz.
+
+Utilize algum algoritmo de compactação, considere que o backup será gerado semanalmente por exemplo através da crontab e não inclua os diretórios ~/Downloads/ e o backup da execução anterior.
+	
+	tar zcvpf $HOME/backup-home-`date +%Y-%m-%d`.tgz --exclude=$HOME/Downloads --exclude=$HOME/backup-home*.tgz $HOME
+
+
+2. Utilize alguma das ferramentas disponíveis para enviar de maneira segura o backup gerado no exercício anterior para um servidor remoto no diretório /opt/backup.
+
+	
+	# scp $HOME/backup-home*.tgz usuario@IP:/opt/backup
+ou
+	# rsync -avue ssh $HOME/backup-home*.tgz usuario@IP:/opt/backup
+
+
+
+206.3 NOTIFICAÇÃO DE USUARIOS
+
+	wall 
+		wall "Msg de teste"
+		cat msg.txt | wall
+
+	shutdown / reboot / halt/ poweroff
+	systemctl reboot/poweroff/halt
+	
+	halt - somente para o sistema
+	poweroff - ele para e tenta desligar a maquina
+	
+	shutdown (padrao ele avisa que vai delligar em 1 mim e msg e renviada a todos)
+	shutdown -c cancela
+	shutdown -r +5 "So sera desliga em 5 mim"
+	shutdown -c "Operaecho cao cancelada"
+	shutdown -H 18:00 --no-wall  (agenda shutdown sem msg para usuarios)
+
+	
+  msg login na sessao login
+	vim /etc/issue msg que aparece antes do login
+		\d
+
+	vim /etc/issue.net Msg para quem faz login remoto
+
+	vim /etc/motd  msg será exebida apos o login local e remoto
+	
+EXERCICIOS
+	
+1. Envie uma mensagem que informe a todos os usuários logados no sistema a quantidade de usuários conectados no momento.
+
+	# echo "Total de usuários conectados no momento: `who | wc -l`." | wall
+
+2. Utilize um comando para reiniciar o sistema daqui a 10 minutos, enviando ao mesmo tempo uma mensagem para que os usuários salvem seus documentos.
+
+	# shutdown -r +10 “Atenção: O sistema será reiniciado em 10 minutos. Salvem seus documentos”
+
+3. Exiba a seguinte mensagem antes que os usuários (locais ou remotos) façam o login no sistema:
+
+“ATENÇÃO: O sistema está enfrentando dificuldades de performance que estão sendo analisadas. Evite executar atividades que possam piorar o problema”
+	
+	A mensagem deve ser configurada nos arquivos /etc/issue.net e /etc/issue.
+
+4. Exiba a seguinte mensagem após o login do usuário:
+
+“CUIDADO: Você está conectado a um ambiente de PRODUÇÃO”
+
+	A mensagem deve ser configurada no arquivo /etc/motd
+
+

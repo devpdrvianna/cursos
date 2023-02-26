@@ -1,0 +1,113 @@
+System V
+Sysinit
+	niveis de 0 a 6
+	/etc/inittab
+		Default runlevel
+			id:2:initdefault:
+		0-halt
+		6- reboot
+		1ous single user
+		2-5 multi users
+
+	/etc/init.d (script de cada processo)
+	   posso ./collectd status
+	   /etc/init.d/collectd start
+	
+	Run level diretorios
+	  ls -ld /etc/rc.*
+	  cd /etc/rc2.d
+		Links simbolicos indo para /etc/initd/script
+		  s01anacron
+			s-start (processo vai iniciar)
+			k-kill (processo vai morrer)
+			01 - mostra a ordem que sera executado
+
+	  ls -l /etc/rc*.d/*collectd*
+	  update-rc.d collectd disable 5 (desabilita o collectd no nivel 5)
+	  update-rc.d collectd enable 4
+	  update-rc.d collectd remove (remove todos os niveis)
+	  update-rc.d collectd defaults (restaura o default nos niveis)
+	  -n (so simula e faz teste)
+	  -f força para efetuar
+	
+	  chkconfig (lista tudo) mostra os processos e niveis que estao habilitados
+	  chkconfig --list network
+          chkconfig --level 45 network off (desabilita o  4 5 nivei)
+	  chkconfig --level 5 network on 
+
+
+	  runlevel (mostra o nivel que eu estou iniciado)
+	  init 3 (muda para run Level 3)
+          telinit 3 (mesmo, muda para o run level 3)
+
+
+Systemd
+	(servicos, deamons, units)
+
+	/lib/systemd/system (ad units ficam aqui)
+		(timers, sockets, services, target)
+	  cat ssh.service
+		detalhes de execução, reload,
+	default.target > graphical.target (chama o target principal)
+	
+	ls -la *.target (faz a inicializacao dos runlevels)
+		runlevel5.target > graphical.target
+
+	/etc/systemd/system (tem os mesmos arquivos /lib) 
+		Aqui tem preferencia, tudo que esta aqui)
+		o que tiver aqui sobrepoe o /lib/systemd/system
+
+	/run/systemd/system (+priorida /lib e - prioridade /etc
+
+	ordem de prioridade
+	 /etc/systemd/ > /run/systemd > /lib/systemd	
+
+	systemd-delta (lista tudo nos 3 diretorios e estão sobrescrevendo)
+	   Ele valida se está sobrecrevendo o outro
+
+	systemctl list-units (lista as unidades e descrição e status)
+	   default - vai para target defaut
+	   isolate multiuser.target (muda para o runlevel multiuser)
+	   status cron (mostra o status do servico)
+	   stop - para eo servico
+	   start - inicia o servico
+	   enable - habilita o servico para inicializar no boot
+	   disable - desabilita o servico para iniciaizar no boot
+	   deamon-reload (inicia os parametros do systemd)
+
+    	   
+	
+LSB (Linux standard base)
+	 Padrão de funcionamento(comandos, bibliotecas, parametros, padrão das distribuições)
+	 O debian nao esta nesse padrao LSB mas disponibiliza um pacote para compatibilizar
+	 A maior parte das distribuições não seguem o padrão
+
+	https://pt.wikipedia.org/wiki/Linux_Standard_Base
+	https://wiki.linuxfoundation.org/lsb/start
+
+
+
+EXERCICIOS
+	1. Considerando o uso do SysV, utilize o comando de gerenciamento de runlevels padrão de sua distribuição para configurar o serviço “cron” para ser executado apenas nos runlevels 4 e 5.
+
+	No caso do Debian:
+	# update-rc.d cron disable 2
+	# update-rc.d cron disable 3
+	  No caso do Padrão RedHat
+	# chkconfig --level 23 cron off
+	
+2. Identifique o runlevel ou target padrão utilizado em seu sistema:
+
+Sendo systemd:
+	# ls -l /lib/systemd/system/default.target
+	(ou)
+	# systemctl get-default
+	Sendo init:
+	# grep default /etc/inittab
+	* Para saber se o seu init funciona via SysV ou systemd, basta executar o seguinte comando:
+	# grep Name /proc/1/status
+
+
+
+
+		
