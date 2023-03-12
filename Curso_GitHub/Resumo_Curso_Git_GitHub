@@ -38,7 +38,7 @@ COMANDOS DO GIT
 		git remote add origin https://github.com/devpdrvianna/curso_git.git (configurar o seu repositório remoto, onde deseja subri o codigo)
  			PARA MUDAR depois de configurado -  git remote set-url origin https://github.com/devpdrvianna/curso_git.git
 			COM TOKEN  git remote set-url origin https://devpdrvianna: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@github.com/devpdrvianna/cursos.git
-	Criado o token para linux: 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
+	Criado o token para linux: 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
 		git push -u origin main (ou somente git push - para subir o codigo)
 
 
