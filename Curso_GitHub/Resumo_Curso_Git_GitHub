@@ -37,8 +37,8 @@ COMANDOS DO GIT
 		git branch -M main (configurar localmente o nome do branch principal - o padrão é main)	
 		git remote add origin https://github.com/devpdrvianna/curso_git.git (configurar o seu repositório remoto, onde deseja subri o codigo)
  			PARA MUDAR depois de configurado -  git remote set-url origin https://github.com/devpdrvianna/curso_git.git
-			COM TOKEN  git remote set-url origin https://devpdrvianna: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@github.com/devpdrvianna/cursos.git
-	Criado o token para linux: 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
+			COM TOKEN  git remote set-url origin https://devpdrvianna:github_pat_11AXTVF7A0gsqjp6HHLt0N_lMbyEbwyi5gGRiAIQJlhYSB4MF7UEiKyTeZkK@github.com/devpdrvianna/cursos.git
+	Criado o token para linux: ghp_AVfTjILUoC29UKwub0OTzln
 		git push -u origin main (ou somente git push - para subir o codigo)
 
 
