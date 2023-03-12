@@ -1,0 +1,335 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red251\green0\blue7;\red251\green0\blue7;
+\red234\green234\blue234;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;
+\cssrgb\c93333\c93333\c93333;\cssrgb\c100000\c100000\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 207.2\
+Criar e fazer manuten\'e7\'e3o Zona especifica \
+\
+	editar o /etc/named.conf\
+	\
+		zone \'93dominioexemplo.com.br\'94 IN \{\
+			type master;\
+			file \'93dominioexemplo.zone\'94\
+		\};\
+\
+   Configurar a zone\
+	/var/named\
+	criar o dominioexemplo.com\
+		$TTL 1h\
+		@	IN	SOA	   centos.dominioexemplo.com.br.	admin.dominioexemplo.com.br. (\
+				Importante ter o .  e a ordem \'e9 o dom\'ednio master e depois o email para entrar em contato\
+				no @ \'e9 p mesmo que  dominioexemplo.com.br.  \
+				depois do SOA se colocar so o centos sem o ponto ele completa com o dominioexemplo.com.br.  \
+			01		;	serial\
+			28800	;	refresh (8H)\
+			7200		;	retry. (2H)\
+			604800	;	expire  (7d)\
+			3600		;	negative caching (1h)\
+		)\
+\
+			o que vem depois de ; \'e9 coment\'e1rio\
+			Para mostrar que teve mudan\'e7a, so mudar o numero do serial, se usa o padr\'e3o de data 20220604, pode usar numero sequencial\
+			Refresh - de quanto em quanto tempo o Slave vai vir olhar se tem mudan\'e7as.\
+			Se o slave n\'e3o consegui baixar dados, quanto tem depois ele retorna\
+			Expire quanto tempo expira informa\'e7\'f5es no Slave\
+			Negative quando tempo a cache negativo fica\
+\
+				NS 	centos.dominioexemplo.com.br.\
+			@	IN 	NS debian.dominioexemplo.com.br.\
+				MX	5	mail      (Maior prioridade)\
+				MX	10	mail2\
+\
+			centos	A	192.168.1.220	;  glue record ( Quando coloco DNS do mesmo dom\'ednio)\
+			debian	A	192.168.1.210	;  glue record\
+			interno	A	192.168.2.111\
+			mail		A	192.168.1.220\
+			www		CNAME	centos\
+			ftp		CNAME	debian. Ou debian.dominioexemplo.com.br.\
+			@		IN	TXT	\'93Exemplo de text\'94. Forma de enviar msg em texto para quem registra\
+			outro		AAAA	xxxx.xxxxx.xxxxx.xxxxx 	para informar ipv6\
+\
+			www		A	172.10.10.2. (Road robbing n\'e3o pode ter o registro com CNAME junto. www CNAME)\
+			www		A	172.10.10.3\
+			www		A	172.10.10.3.  (v\'e1rios ops mesmo host, road robbing)\
+\
+			:wq!\
+\
+			named-checkzone dominioexemplo.com.br /var/named/dominioexemplo.zone. (Valida config das zonas)\
+\
+\
+	Tipos de dns :  	https://en.wikipedia.org/wiki/List_of_DNS_record_types\
+	\
+\
+\
+	comando whois mostra os registros desse dom\'ednio\
+		whois www.dominio.com\
+\
+\
+SLAVE.  (Configuracao para transferir a Zona e sincronizar aqui)\
+	/etc/bind/named.conf.local    (para debian)\
+\
+		zone \'93dominioexemplo.com.br\'94  \{\
+				type slave;\
+				masters \{192.168.1.220; \};\
+				file \'93dominioexemploSLV.zone\'94;\
+		\};\
+\
+		rndc  reconfig    \
+		\
+		listar em /var/cache/bind. Cria aqui o dominioexemploSLV.zone. (esse e o arquivo relacionado a zona do master)\
+		para ler usar o comando named-compilezone \
+\
+\
+		no log o AXFR significa transferencia de ZOna\
+\
+		ele sempre vai olhar o master e so baixa se o numero se Serial no master estiver maior. (Quando mudar o serial do Master ele atualiza e tb segue com a verifica\'e7\'e3o conforme configurado no Refresh do SOA)\
+\
+		Forca uma transferencia de zona\
+			dig @192.168.1.220 axfr dominioexemplo.com.br\
+\
+\
+\
+FORWARD\
+	/etc/named.conf.options.  no centos /etc/named.conf e precisa criar o forwarders \
+\
+		forwarders \{\
+			192.168.1.220;\
+		\};	\
+\
+		named-checkconf /etc/bind/named.conf\
+\
+		rndc reload\
+\
+	Direcionando apenas um dominio para fazer forward\
+		/etc/bind/named.conf.local\
+			zone \'93dominioexemplo.com.br\'94 IN \{\
+				type forward;\
+				forwarders \{ 192.168.1.220; \}\
+			\};\
+\
+		/etc/bind/named.conf.option \
+			dnssec-validation no;\
+\
+\
+		named-chekconf /etc/bind/named.conf\
+		rndc flush\
+		rndc reload\
+\
+\
+\
+DNS REVERSO\
+	/etc/named.conf\
+			zone \'931.168.192.in-addr.arpa\'94 IN \{\
+				type master;\
+				file \'931.168.192.in-addr.arpa.zone\'94;\
+			\};\
+\
+	/var/named/\
+		criar o  1.168.192.in-addr.arpa.zone\
+			\
+				$TTL 1h\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		@	IN	SOA	   centos.dominioexemplo.com.br.	admin.dominioexemplo.com.br. (\
+			01		;	serial\
+			28800	;	refresh (8H)\
+			7200		;	retry. (2H)\
+			604800	;	expire  (7d)\
+			3600		;	negative caching (1h)\
+		)	\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 				NS 	centos.dominioexemplo.com.br.\
+				NS 	debian.dominioexemplo.com.br.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+111				PTR interno.dominioexemplo.com.br.\
+210				PTR	debian.dominioexemplo.com.br.\
+220				PTR centos.dominioexemplo.com.br.\
+1				IN	PTR	roteador.dominioexemplo.com.br.\
+			\
+		:wq!\
+		\
+		rndc reconfig	\
+\
+\
+\
+EXERCICIOS\
+\
+	
+\fs29\fsmilli14592 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Utilize os exerc\'edcios a seguir para praticar os comandos, configura\'e7\'f5es e recursos estudados nesse sub-t\'f3pico.\
+\pard\pardeftab720\sa510\partightenfactor0
+\cf2 Busque uma solu\'e7\'e3o antes de checar as respostas poss\'edveis.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sa510\partightenfactor0
+\ls1\ilvl0
+\f1\b \cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1.
+\f0\b0 \'a0Crie um registro do tipo master chamado exerciciolpi.com.br. Esse registro deve conter no\uc0\u8232 m\'ednimo as seguintes configura\'e7\'f5es:\
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\partightenfactor0
+\ls1\ilvl1\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 TTL de 12 horas\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Servidor NS chamado ns1.exerciciolpi.com.br e ter\'e1 IP 200.201.202.203\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O e-mail do administrador do dom\'ednio ser\'e1 contato@exerciciolpi.com.br\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Criar um glue record\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O servidor de e-mails ser\'e1 o mx.exerciciolpi.com.br e ter\'e1 IP 200.201.202.210\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O endere\'e7o www.exerciciolpi.com.br ter\'e1 o IP 200.201.202.220\
+\ls1\ilvl1\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O endere\'e7o sistema.exerciciolpi.com.br ter\'e1 o mesmo IP do endere\'e7o www\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \uc0\u8232 \
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 \strokec3 	Configurar no /etc/named.conf:\
+
+\f2 \cb5 		zone "exerciciolpi.com.br" IN \{\cb1 \
+\cb5 			type master;\cb1 \
+\cb5 			file "exerciciolpi.zone";\cb1 \
+\cb5 		\};\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	\
+		\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 	Criar o arquivo de zona /var/named/exerciciolpi.zone:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf3 \cb5 		$TTL 12h\cb1 \
+\cb5 		@ IN SOA ns1.exerciciolpi.com.br. contato.exerciciolpi.com.br. (\cb1 \
+\cb5 		2018032801 ; serial\cb1 \
+\cb5 		28800 ; refresh\cb1 \
+\cb5 		7200 ; retry\cb1 \
+\cb5 		2419200 ; expire\cb1 \
+\cb5 		150 ; negative caching\cb1 \
+\cb5 		)\cb1 \
+\cb5 		NS ns1\cb1 \
+\cb5 		MX 5 mx\cb1 \
+\cb5 		ns1 A 200.201.202.203\cb1 \
+\cb5 		mx A 200.201.202.210\cb1 \
+\cb5 		www A 200.201.202.220\cb1 \
+\cb5 		sistema CNAME www\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 	Reiniciar o servidor DNS:\
+
+\f2 \cb5 		# rndc reconfig/reload\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb6 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 2.
+\f0\b0 \'a0Configurar um servidor como slave do dominio exerciciolpi.com.br.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf3 \cb4 \strokec3 	Configurar no /etc/named.conf:\
+
+\f2 \cb5 		zone "exerciciolpi.com.br" \{\cb1 \
+\cb5 			type slave;\cb1 \
+\cb5 			file \'93exerciciolpi.zone\'94;\cb1 \
+\cb5 			masters \{ IP; \};\cb1 \
+\cb5 		\};\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 Reiniciar o servidor DNS:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf3 \cb5 		# rndc reload\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb6 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 3.
+\f0\b0 \'a0Configure uma zona de DNS Reverso que resolva os seguintes IPs e Nomes:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 172.32.16.1 = roteador.exerciciolpi.com.br\cb1 \
+\ls2\ilvl0\cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 172.32.16.10 = interno.exerciciolpi.com.br\cb1 \
+\ls2\ilvl0\cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 172.32.16.20 = intranet.exerciciolpi.com.br\cb1 \
+\ls2\ilvl0\cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 172.32.16.30 = proxy.exerciciolpi.com.br\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 	Configurar no /etc/named.conf:\
+
+\f2 \cb5 		zone "16.32.172.in-addr.arpa" IN \{\cb1 \
+\cb5 		type master;\cb1 \
+\cb5 		file "16.32.172.in-addr.arpa.zone";\cb1 \
+\cb5 	\};\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 	Criar o arquivo de zona /var/named/16.32.172.in-addr.arpa.zone:\
+
+\f2 \cb5 	$TTL 3h\cb1 \
+\cb5 	@ IN SOA ns1.exerciciolpi.com.br. contato.exerciciolpi.com.br. (\cb1 \
+\cb5 		2018032801 ; serial\cb1 \
+\cb5 		28800 ; refresh\cb1 \
+\cb5 		7200 ; retry\cb1 \
+\cb5 		2419200 ; expire\cb1 \
+\cb5 		150 ; negative caching\cb1 \
+\cb5 	)\cb1 \
+\cb5 	NS ns1.exerciciolpi.com.br.\cb1 \
+\cb5 	1 PTR roteador.exerciciolpi.com.br.\cb1 \
+\cb5 	10 PTR interno.exerciciolpi.com.br.\cb1 \
+\cb5 	20 PTR intranet.exerciciolpi.com.br.\cb1 \
+\cb5 	30 PTR proxy.exerciciolpi.com.br.\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 	Reiniciar o servidor DNS:\
+
+\f2 \cb5 	# rndc reconfig/reload\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+}

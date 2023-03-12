@@ -1,0 +1,201 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red234\green234\blue234;
+\red251\green0\blue7;\red251\green0\blue7;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c93333\c93333\c93333;
+\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid3\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh22400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Pop3 / Map\
+\
+\
+POP\
+Porta 11o / 995 (pop3s)\
+\
+Download de emails ( deleta do servidor)\
+\
+O email pode ser lido offline\
+Nao faz sicronimo de entre diferentes dispositivos \
+\
+\
+IMAP\
+\
+Porta 143/993\
+Ver e acessar emails sem deletar\
+Precia estar online\
+Recomendado quando acessa em v\'e1rios dispositivos\
+Sincroniza os diret\'f3rios dos diferentes dispositivos\
+\
+Yum install dovcot\
+Apt-get install dovcot-imapd dovcot-popd\
+\
+\
+	/etc/dovcot/dovcot.conf\
+\
+		protocols = pop3 imap\
+\
+	
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Um outro par\'e2metro importante presente no arquivo dovecot.conf \'e9 o \'93
+\f1\b verbose-proctitle
+\f0\b0 \'93. A configura\'e7\'e3o permite que sejam exibidas mais informa\'e7\'f5es das conex\'f5es ativas na descri\'e7\'e3o do processo, visto pelo comando ps, por exemplo o nome do usu\'e1rio e IP.
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+	
+\f2\fs29\fsmilli14592 \cf2 \cb4 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 # Show more verbose process titles (in ps). Currently shows user name and  IP address. Useful for seeing who are actually using the IMAP \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb4 \strokec2 	verbose_proctitle = yes\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f0 \cf2 \cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://cursos.linuxsemfronteiras.com.br/courses/preparatorio-para-certificacao-lpic-2/lessons/211-2-gerenciando-a-entrega-de-e-mails/"}}{\fldrslt 
+\f1\b\fs21\fsmilli10944 \cf3 \strokec3 \
+}}\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+	/etc/dovcot/conf.d/10-auth.conf\
+			auth_mechanisms = plain login    (pode: plain login digest-md5 cram-md5 ntlm rap apop anonymous geeapi top key )\
+\
+\
+	/etc/dovcot/conf.d/10-mail.conf\
+		mail_location = \
+\
+	/etc/dovcor/conf.d/10-master.conf\
+		defini\'e7\'e3o das portas TCP Imap e pop\
+\
+	\
+		/etc/dovcot/conf.d/20-imap.conf.  e /etc/dovcot/conf.d/20-pop.conf\
+	Mail max userip_connections =5\
+\
+\
+	systemctl	restart dovcot\
+\
+\
+SSL / TLS\
+	/etc/dovcot/conf.d/10-ssl.conf\
+		ssl = required   (abre as portas para conexoes seguras\
+\
+	ssl_cert = 			Gerar as chave e certificados\
+	ssl_key = \
+\
+	ssl_protocols = !SSLv2\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	/etc/dovcot/conf.d/10-master.conf		definir as postas nos blocos d eInet_lister\
+\
+		netstat -nalp \
+	/usr/libexec/dovecot/mkcert.sh. para gerar as chaves .pem\
+	\
+	como testar openssl s_client -connect 127.0.0.1:993\
+	como testar openssl s_client -connect 127.0.0.1:995\
+\
+ Procedimento completo usando openssl\
+	https://wiki2.dovecot.org/SSL/CertificateCreation\
+\
+\
+COMANDOS DOVCOT\
+	doveconf  -  mostra tudo que foi configurado\
+	doveadm - \
+		doveadm config e o mesmo que o doveconf\
+				reload faz o reload das confifugracoes\
+				who para ver quem esta conectado no momento\
+				user Ricardo  - pega info dos usuarios\
+\
+			\
+\
+COURIER\
+	era usado anteriormente para acessar pop3/imap\
+\
+	apt-get install. Courier-imap  courrier-pop\
+	netstat -nalp|grep courier\
+		mostra as portas 110 143 993 995\
+\
+	/etc/courier/imapd\
+	/etc/courier/pop3d\
+\
+\
+\
+\
+EXERCCIOS\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1.
+\f0\b0 \'a0Siga as explica\'e7\'f5es das aulas habilitando os servi\'e7os POP3, POP3S, IMAP e IMAPS\
+\
+	\cf5 \cb6 \strokec5 Seguir o passo a passo explicado nas aulas.
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 	\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 2.\'a0
+\f0\b0 Configure o Dovecot para apresentar a mensagem \'93Bem-vindo ao Dovecot do Curso LPIC-2\'94 no acesso aos servi\'e7os. Por exemplo:\
+\
+	
+\f2 \cf2 \cb4 \strokec2 # telnet 0 143\
+\pard\pardeftab720\partightenfactor0
+\cf2 Trying 0.0.0.0...\
+Connected to 0.\
+Escape character is '^]'.\
+* OK [CAPABILITY IMAP4rev1 LITERAL+ SASL-IR LOGIN-REFERRALS ID ENABLE IDLE STARTTLS AUTH=PLAIN AUTH=LOGIN] Bem-vindo ao Dovecot do Curso LPIC-2.\
+# telnet 0 110\
+Trying 0.0.0.0...\
+Connected to 0.\
+Escape character is '^]'.\
++OK Bem-vindo ao Dovecot do Curso LPIC-2.\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf5 \cb6 \strokec5 	Edite o arquivo /etc/dovecot/dovecot.conf, definindo o seguinte par\'e2metro:\
+
+\f2 \cb4 	login_greeting = Bem-vindo ao Dovecot do Curso LPIC-2.\
+
+\f0 \cb6 	Fa\'e7a um reload das configura\'e7\'f5es\
+
+\f2 \cb4 	# doveadm reload\
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb4 \strokec2 \
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 3.
+\f0\b0 \'a0Configure o Dovecot, para que em conex\'f5es seguras ele n\'e3o aceite os seguintes protocolos:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 SSLv2\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 SSLv3\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 TLSv1\cb1 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8259 	}\cf5 \cb6 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Edite o arquivo /etc/dovecot/conf.d/10-ssl.conf, editando o seguinte par\'e2metro:\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2
+\f2 \cf5 \cb4 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8259 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 ssl_protocols = !SSLv2 !SSLv3 !TLSv1\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2
+\f0 \cf5 \cb6 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8259 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 Fa\'e7a um reload das configura\'e7\'f5es:\
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2
+\f2 \cf5 \cb4 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8259 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec5 # doveadm reload\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0 \cf2 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+}

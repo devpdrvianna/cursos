@@ -1,0 +1,112 @@
+curso puppet
+
+Links
+
+https://www.puppet.com/
+	Entrar em products > Documentations > Open source
+
+Docs
+https://www.puppet.com/docs/puppet/7/puppet_index.html
+
+
+Sites 
+https://mundodevops.com/blog/iniciando-no-puppet-do-zero-ao-essencial/
+
+
+valida codigo
+puppet parser validate userCreate.pp
+
+executa sem efetivar as alteracoes
+puppet apply  userCreate.pp --noop
+
+
+Executa
+puppet apply  userCreate.pp
+
+
+
+codigo criar arquivo
+file { "/tmp/testdir":
+	ensure => "directory",
+}
+
+
+file { "/tmp/testdir/testfile":
+	ensure => "present",
+	owner => "homeuser",
+	group => "homeuser",
+	mode => "0644",
+}
+
+
+codigo Install and Running Service
+package { 'ntp':
+  ensure => "present"
+}
+
+file { "/etc/ntp.conf":
+    ensure => "present",
+    content => "server 0.centos.pool.ntp.org iburst\n" 
+
+}
+service { "ntpd":
+    ensure => "running",
+}
+
+
+Definindo Class
+
+#define class
+
+class ntpclass {
+
+ #Install Service 
+ package { 'ntp':
+  ensure => "present"
+}
+ #Config file
+ file { "/etc/ntp.conf":
+    ensure => "present",
+    content => "server 0.centos.pool.ntp.org iburst\n" 
+
+ }
+
+ #Begin Service
+ service { "ntpd":
+    ensure => "running",
+    enable => "true",
+ }
+
+}
+
+#Declaration of a class (se nao incluir não faz nada)
+include ntpclass
+
+
+
+To connect agent to master
+
+In Master
+	no diretorio do manivest criar
+		/etc/puppetlabs/code/environments/production/manifests/
+	arquivo de configuraç"ao com as Class
+	arquivo site.pp com os Node (criar tb o defauls {} para não dar erro nos demais agents sem node definido)
+
+ para comunicar
+	puppet agent -tv -noop (sem operação)
+	puppet agent -tv (fazer o agent comunicar e pegar as diretivas no master)
+
+
+
+comandos:
+puppet parser validate <arquivo.pp>
+puppet apply <arquivo.pp> --noop
+puppet apply <arquivo.pp>
+
+Help
+puppet describe <type>   (user file package etc)
+
+
+
+
+

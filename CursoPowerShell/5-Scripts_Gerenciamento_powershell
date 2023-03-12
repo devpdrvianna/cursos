@@ -1,0 +1,162 @@
+Gerenciamento remoto
+	Precisa habilitar o Gerencimento remoto
+	Cnstruido sobre WinRM
+	
+	No Windowsn habilitar o acesso remoto do PowerShell
+		Enable-PSRemoting
+		A
+		A
+
+	No outro maquina
+		Get-HotFix  (olha od hotfix)
+		Get-HotFix -id KB4343898 (saber se esse foi instalado)
+
+		Invoke-Command -CompututerName ws2012R2 -ScriptBlock {
+			Get-HotFix -id KB4343898 }
+
+		  Ele faz uma conexão, executa e traz a msg par aconsole atual;
+
+		
+		Enter-PSSession ws2012r2 (entra na maquina remota)
+			Get-HotFix -id KB4343898  (posso rodar comandos)
+
+		Exit-PSSession
+
+	
+
+Sessao Persisent
+	Comandos constinuam na sessao remota
+	
+	#Exemplo de conexão persistente
+	Clear-Host
+	
+	#variavel
+	$s = New-PSSession - name ws2012r2
+	Invoke-Command -Session $s -ScriptBlock {
+		$i = 0
+		While($true)
+		{ 
+		$i++
+		Write-Host "Vou contar até $i"
+		Sleep 1
+		if ($i -ge 1000) {break}
+		}
+		} -Asjob -jobName LongoTrabalho
+
+	Para ver o que esta rolando la
+		Get-PSSession
+		Get-job -Name LongoTrabalho | Receive-Job -Keep
+
+	Para disconectar
+		Disconnect-PSSession $s
+
+	Para receber o status do Job remoto
+		Receive-PSSession $s		
+ 		Get-job -Name LongoTrabalho | Receive-Job
+
+	Get-job -Name LongoTrabalho | Stop-Job
+
+
+
+Acesso a equipamentos fora do dominio
+	No Srv
+		winrm set winrm/config/client @{TrustedHosts="KaLinWin"}
+
+	No PowerShell
+		Get-Item WSMan:\localhost\Client\TrustedHosts
+		Set-Item WSMan:\localhost\Client\TrustedHosts "Client"
+		Set-Item WSMan:\localhost\Client\TrustedHosts "KALIWIN" -Concatenate (caso queira adicionar mais 1
+
+	Na maquina que vou fazer o acesso
+		Set-Item WSMan:\localhost\Client\TrustedHosts '*'
+
+		Test-Connection ws2012r2
+		New-PSSession -ComputerName ws2012r2 -Credencial mcsesolution\administrator	
+
+
+
+
+CREDENCIAIS - Salvar
+	Clear-Host
+	$cred = Get-Credencial mcsesolution\administrator  (Abre uma tela par vc entra com a senha e salva na variavel)
+	$rede = New-PSSession -ComputerName (Get-Content c:\scripts\servers.txt) -Credential $cred
+	
+	Invoke-Command $rede { Get-Service }
+	
+
+PowerShell Web Access
+		#instalação PSWA
+		Install-WindowsFeature -name WindowsPowerShellWebAccess -ComputerName WSPOSH -IncludemanagmentTools
+		#unInstall-WindowsFeature -name WindowsPowerShellWebAccess
+	
+		Install-PswaWebApplication -WebApplicationName PSWA -UseTestCertificate
+		#unInstall-PswaWebApplication -WebApplicationName
+
+		Add-PswaAuthorizationRule - ComputerGroupName * -configurationname * -UserGroupName *
+
+		Get-PswaAuthorizationRule 
+		#Remove-PswaAuthorizationRule -Id 0
+
+
+  Para acessar remoto https://<endereço>/pswa
+
+
+
+
+
+
+RENOMEANDO COMPUTADORES
+	
+	$info = Get-WmiObject -Class Win32_ComputerSystem
+	$info
+	
+	$info.name
+	$info.Rename("WSPOSH")
+	
+	Restart-computer
+	Hostname
+	
+
+
+ALTERANDO O IP DNS GW ADD DOMAIN
+	
+	Get-NetIPConfiguration	
+	
+	#IP FIXO	
+	Get-NetIPAddress 192.168.1.102 -InterfaceAlias Ethernet -DefaultGateway 192.168.1.1 -AddressFamily IPV4 -PrefixLength 24
+	Set-DnsClientServerAddress - InterfaceAlias Ethernet -serverAddress 192.168.1.123
+	
+	#DHCP
+	Set-NetIPInterface -InterfaceAlias Ethernet -Dhcp Enabled
+	Set-DnsClientServerAddress - InterfaceAlias Ethernet -ResetServeraddress
+	
+	 #Adicionar no dominio
+	Add-Computer -ComputerName WSPOSH -DomainName "Mcsesolution.local" -restart
+
+
+
+
+Gerenciando AD através do PowerShell
+	No servidor
+		Get-Command -Module ActiveDirectory
+		(Get-Command -Module ActiveDirectory).count  (mostra 147)
+		
+		Get-Command new-ad*  (mostra comandos para criar)
+		Get-Command Get-ad*  (Comando de Get)
+				
+
+		New-ADUser Curso.POSH -DisplayName Usurio
+		Get-ADUser Curso.POSH	(Ver se existe)
+		Get-ADUser Curso.POSH | Remove-Aduser	
+
+		Get-ADUser Daniel.donda -Properties *  (Mostra as prorpiedades)
+		Get-ADUser Daniel.donda -Properties LastLogonDate
+		Get-ADUser -Filter * | Whare {$_.enable -eq $false} (procuta todos nao habilitados)
+		Get-ADUser -Filter * | fl name  (formato de lista para os nomes)	
+		Get-ADUser -Filter * | Export-Csv c:\listauser.csv
+		Get-ADUser -Filter * -Properties * | select -Property GivenName, DisplayName
+		import-Csv c:\listauser.csv
+		
+	
+
+	

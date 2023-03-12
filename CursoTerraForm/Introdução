@@ -1,0 +1,36 @@
+Link com repositórios
+https://gitlab.com/terraform-basico-ao-avancado
+
+
+
+Precisa
+	conta aws
+	conta azure
+	vscode
+	terraform
+
+
+Instalação do terraform
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+
+Comando para rodar container do Terraform:
+
+docker run -it --name <NOME DO CONTAINER> -v <DIRETÓRIO DO HOST>:<DIRETÓRIO DO CONTAINER> --entrypoint /bin/sh hashicorp/terraform
+
+Exemplo do vídeo:
+
+docker run -it --name terraform -v /home/danielgil/files/curso-terraform/:/mnt/curso-terraform --entrypoint /bin/sh hashicorp/terraform
+
+docker run -it --name terraform -v /home/danielgil/files/curso-terraform/:/mnt/curso-terraform --entrypoint /bin/sh hashicorp/terraform
+
+
+
+Documentacao - Bem rica com exemplos
+https://developer.hashicorp.com/terraform/language
+https://registry.terraform.io/browse/providers
+https://registry.terraform.io/browse/modules
+
+
+
+
+

@@ -1,0 +1,248 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red251\green0\blue7;
+\red234\green234\blue234;\red251\green0\blue7;\red3\green45\blue153;\red255\green255\blue255;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;
+\cssrgb\c93333\c93333\c93333;\cssrgb\c100000\c0\c0\c20000;\cssrgb\c0\c25950\c66514;\csgray\c100000;\csgray\c0\c0;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh22400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 212.4 Testes e scan de portas\
+\
+	telnet localhost 25\
+\
+	nc 192.168.1.210 25\
+	nc -l 1234  Abre uma pista de listen\
+	\
+	netstat \'97tcp \'97listen (conex\'f5es abertas) \
+	netstat -nalp | grep 111\
+	\
+	nestat -nlp lista portas indo escutadas nao traduzindo\
+	netstat -np. Lista portas  com conex\'e3o estabelecidas\
+\
+	nmap -sT -p1-200 localhost  (Todas as postas abertas no range)\
+\
+	\
+	nmap -sU -p1-200 localhost.  (Portas UDP)\
+	nmap -O localhost. (identifica o SO da maquina)\
+	\
+	nmap -A localhost  (Traz um relat\'f3rio completo de cada porta). Vers\'e3o do servi\'e7o, etc\
+\
+  \
+  \
+IDS e IPS. Sistema de detec\'e7\'e3o de intrus\'e3o.\
+	IDS  (Intrusion Detection System) - Snort\
+	IPS (intrusion prevention system) - fail2ban\
+	\
+   Snort(IDS)\
+	analista padr\'f5es de trafego que avalia se \'e9 tentativa de invas\'e3o\
+		alertas via log, SNMP, email\
+		maquina dedicada\
+		maquina precisa estar analisando o trafego\
+	\
+		apt_get install snort\
+		/etc/snort/snort.conf\
+			/snortdebian.conf\
+		/rules/ Sao as regras para ele usar e identificar os padr\'f5es\
+\
+	\
+   Fail2ban\
+	apt-get install fail2ban\
+	tentativas de login no ssh, telnet, squid etc\
+	/etc/fail2ban \
+		fail2ban.conf (configuroes gerais)\
+		jail.conf. (configura\'e7\'f5es de regras do que vai ser bloqueado quando)\
+		\
+		iptables -L -n\
+			Chain f2b-sshd (ele cria essa chain no iptables para poder fazer os bloqueios)\
+\
+		\
+    OpenVAS\
+		Open Vulnerability Assessment System.  (PenTest)\
+\
+		Tem um servidor com base e d tempo em tempo faz testes de invas\'e3o automatizados e programados\
+	\
+		NVT - Network Vulnerability test\
+\
+\
+Boletins de seguran\'e7a\
+\
+	SecurityFocus -  Site com informa\'e7\'f5es de Vulnerabilidades descobertas\
+	US-CERT - Time de combat a seguran\'e7a \
+	Cert.br - informa\'e7\'f5es sobre vulnerabilidade\
+	Debian.org/security\
+	\
+\
+	https://bugtraq.securityfocus.com/archive\
+	https://www.cisa.gov/uscert/\
+	https://www.cert.br/\
+	https://www.debian.org/security/\
+\
+\
+EXERCICIOS\
+	
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1.
+\f0\b0 \'a0Verifique todas as portas TCP e UDP atualmente abertas em sua(s) m\'e1quina(s) de testes.\
+		\
+		
+\f2 \cf4 \cb5 \strokec4 # nmap -sTU localhost\
+\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 2.
+\f0\b0 \'a0Configure as seguintes propriedades no servi\'e7o Jail2Ban:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Nunca bloquear o IP 192.168.1.1\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Tempo de bloqueio padr\'e3o de 1 hora\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Bloqueio ap\'f3s 3 tentativas falhas\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f2 \cf4 \cb5 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb6 \strokec4 	Alterar os seguintes par\'e2metros no arquivo /etc/fail2ban/jail.conf\
+
+\f2 \cb5 	ignoreip = 127.0.0.1/8 192.168.1.1\cb1 \
+\cb5 	bantime = 3600	\cb1 \
+\cb5 	maxretry = 3\
+
+\f0 \cb6 	Reinicar o fail2ban	\
+
+\f2 \cb5 	# systemctl restart fail2ban\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 \cb5 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 3.
+\f0\b0 \'a0Por padr\'e3o, apenas o controle ao SSH \'e9 habilitado no Fail2Ban. Habilite tamb\'e9m o controle no acesso ao servidor FTP vsftpd.
+\f2 \cf4 \cb5 \strokec4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 	\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb6 \strokec4 	No arquivo /etc/fail2ban/jail.conf, procurar pelo bloco [vsftpd] e adicionar a seguinte configura\'e7\'e3o:\
+
+\f2 \cb5 	enabled = true\
+
+\f0 \cb6 	A mesma configura\'e7\'e3o tamb\'e9m pode ser feita em arquivos no diret\'f3rio /etc/fail2ban/jail.d/;\
+\'a0\
+	Reiniciar o servidor Fail2Ban:\
+
+\f2 \cb5 	# systemctl restart fail2ban\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf4 \cb5 \strokec4 \
+\cf7 \cb8 \
+\cb9 \
+\
+212.5.  OPEN VPN\
+	PORTA PADRAO UDP 1194\
+	Static Key Cliente e servidor usam a mesma chave\
+	Public Key - sao certificado e chaves que s\'e3o compartilhadas\
+\
+	tap - N\'edvel de ethernet Layer 2 usando bridges (usa outros protocos de rede)\
+	tun - Nivel de rede layer 3 Roteando IP\
+\cb8 \
+\
+	https://openvpn.net/community-resources/how-to/\
+	https://community.openvpn.net/openvpn/wiki/BridgingAndRouting\
+\
+\
+ Pratica\
+	apt-get install openvpn ou yum install openvpn\
+\
+	/etc/openvpn\
+	gerar a chave. Openvpn \'97genkey \'97secreto static.key\
+	scp static.key Ricardo@192.168.1.210:\'98/\
+\
+	no 192.168.1.210 copiar para o /etc/openkey\
+\
+	continuando \
+	/etc/openvpn cria o vi client.conf\
+									remote 192.168.1.210\
+									dev tun\
+									ifconfig 10.0.0.20 10.0.0.10 (ip local e remoto)\
+									keepalive 10 60\
+									ping.timer-rem\
+									persist-tun\
+									persist-key\
+									secret static.key\
+									nobind (se clocar essa op\'e7\'e3o o cliente conecta com uma posta socket, porta alta e nao a 1194)\
+\
+\
+	no servidor /etc/openvpn. Vi server.conf\
+			dev tun\
+			ifconfig 10.0.0.10 10.0.0.20\
+			keepalive 10 60\
+			ping-timer-rem\
+			persist-tun\
+			persist-key\
+			secret static.key\
+			push \'93dhcp-option DNS 8.8.8.8\'94\
+			status /var/log/openvpn-status.log\
+\
+\
+	/usr/share/doc/openvpn/exemples (varies exemplos de configura\'e7\'f5es )\
+\
+	Iniciando\
+		servidor  Openvpn server.conf & ou openvpn \'97config server.conf \'97deamon\
+		Cliente	openvpn client.conf &\
+\
+	netstat -nalp | grep openvpn (Roda na posta 1194)\
+\
+	ifconfig\
+		\'e9 criado um interface tun0:\
+		\
+\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f0 \cf2 \cb3 \strokec2 Sobre a op\'e7\'e3o \'93
+\f1\b status
+\f0\b0 \'93, quando usada no cliente ou em inst\'e2ncias rodando no modo point-to-point, o arquivo gerado conter\'e1
+\f1\b \'a0estat\'edsticas de tr\'e1fego
+\f0\b0 . J\'e1 em inst\'e2ncias funcionando como servidores conter\'e1 a lista de clientes conectados e a tabela de roteamento.\
+Outra op\'e7\'e3o importante \'e9 a \'93
+\f1\b client-to-client
+\f0\b0 \'93: Como o modo de servidor OpenVPN lida com v\'e1rios clientes por meio de uma \'fanica interface tun ou tap, ele \'e9 efetivamente um roteador. A flag \'96client-to-client diz ao OpenVPN para rotear internamente o tr\'e1fego cliente-para-cliente em vez de enviar todo o tr\'e1fego de origem do cliente para a interface TUN / TAP. Quando esta op\'e7\'e3o \'e9 usada, cada cliente \'93ver\'e1\'94 os outros clientes que est\'e3o conectados no momento. Caso contr\'e1rio, cada cliente ver\'e1 apenas o servidor. N\'e3o use essa op\'e7\'e3o se voc\'ea quiser fazer o firewall do tr\'e1fego de t\'fanel usando regras personalizadas por cliente.\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 1.
+\f0\b0 \'a0Configure uma VPN utilizando o tipo de device TAP, em que o servidor VPN ter\'e1 o IP 172.16.32.100 e o cliente 172.16.32.200.
+\f2 \cf7 \cb8 \strokec4 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf7 \
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb6 \strokec4 	No arquivo de configura\'e7\'e3o do servidor, definir os seguintes par\'e2metros:\
+
+\f2 \cb5 	dev tap\cb1 \
+\cb5 	ifconfig 172.16.32.100 255.255.255.0\cb1 \
+\cb5 	* Pela configura\'e7\'e3o em modo TAP, \'e9 exigida a m\'e1scara\cb1 \
+\cb5 	secret static.key\
+
+\f0 \cb6 	No arquivo de configura\'e7\'e3o do cliente, definir os seguintes par\'e2metros:\
+
+\f2 \cb5 	remote IP-Servidor\cb1 \
+\cb5 	dev tap\cb1 \
+\cb5 	ifconfig 172.16.32.200 255.255.255.0\cb1 \
+\cb5 	secret static.key\
+
+\f0 \cb6 	Iniciar os servi\'e7os:	\
+
+\f2 \cb5 	# openvpn server.conf &\cb1 \
+\cb5 	# openvpn client.conf &\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf7 \cb8 \strokec4 \
+\
+\
+}

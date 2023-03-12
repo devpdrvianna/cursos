@@ -1,0 +1,302 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red59\green104\blue231;
+\red251\green0\blue7;\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c29020\c50196\c92549;
+\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh19180\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 208.2.  Https - Apache\
+\
+	Criptografia SSL/TLS   \
+			TLS \'e9 o SSL melhorado\
+\
+			SSL cliente -> SSL Server\
+			Hello ->\
+			<- cipher suit e o Certificado chave publica do SRV\
+			-> Envia a chave secreta e certificado\
+			e o hand shake e concluido\
+\
+			https porta 443 (autenticacao)\
+			cliente faz acesso\
+			servidor envia o certificado do dominio\
+			Navegado valida o certificado do CA e indica o site como seguro (inicia comunica\'e7\'e3o)\
+\
+\
+			Gerar certificado\
+			Administrador do SRV gera o CSR Certificate Signing Request\
+			o CSR \'e9 enviado para o SA Cettification Authority)\
+			o CA valida as informa\'e7\'f5es do csr e gera certificado digital\
+			o Administrator instala o certificado do Servidor Web\
+\
+\
+	https://www.ibm.com/docs/en/ibm-mq/9.0?topic=tls-overview-ssltls-handshake\
+\
+\
+\
+GERANDO CERTIFICADO\
+	yum install mod_ssl\
+	\
+		cd /etc/httpd/conf/\
+		grep -r ssl_module  *\
+\
+		./conf.d/ssl.conf\
+			listem 443 https\
+			SSLEngine on  (o que hablita o SSL)\
+\
+		apachectl restart\
+		\
+\
+   Processo de gerar o certificado\
+		cd /etc/ssl/certs\
+			openssl genres -des3 -out dominioexemplo.com.br.key 1024. (Importante e gera a chave ). Pede senha\
+				gera dominioexemplo.com.br\
+\
+			openssl req -new -key dominioexemlo.com.br -out dominioexemplo.com.br.csr\
+				pede informa\'e7\'f5es (pais, localidade, nome organiza\'e7\'e3o, unidade, common name CN(*dominioexemplo.com.br)\
+						gera o dominioexemplo.com.br.csr\
+			\
+\
+			cd /etc/pki/ca\
+			/etc/pki/tls/misc/ca.pl -newca  (   script pata assinar a pr\'f3pria chave)\
+			gera o cacert.pen\
+\
+			cp /etc/ssl/certs/dominioexemlo.com.br.csr. newreq.pen\
+			/etc/pki/tls/misc/CA.pl -signreg\
+			
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+No\'a0
+\f1\b CentOS 8
+\f0\b0 , o CA.pl est\'e1 no
+\f1\b \'a0/usr/bin/CA.pl, 
+\f0\b0 e n\'e3o no /etc/pki/tls/misc/CA.pl, ou seja, j\'e1 est\'e1 no PATH do sistema.\
+					Caso ele n\'e3o esteja presente, instale o pacote \'93openssl-perl\'94.
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+			cp newcert.pen /etc/ssl/certs/dominioexemplo.com.br.crt\
+\
+			/etc/ssl/certs\
+				dominioexemplo.com.br.crt\
+				dominioexemplo.com.br.csr\
+				dominioexemplo.com.br.key \
+\
+\
+INSTALA\'c7AO DO CERTIFICADO \
+\
+		/etc/httpd/conf\
+			vi httpd.conf\
+				a config de ssl precisa ser feito dentro de um virtual host\
+\
+			<VirtualHost 192.168.1.220:443>\
+				ServerName www.dominioexemplo.com.br\
+				DocumentRoot /var/www/html\
+				redirect /antigo.html /teste.php\
+				SSLEngine on    (Importante para prova)\
+				SSLCertificateFile /etc/ssl/certs/dominioexemplo.com.br.crt. (Esse e o certificado que o servidor responde quando o cliente acessa o servidor)\
+				SSLCertificateKeyFile /etc/ssl/certs/dominioexemplo.com.br.key \
+			</VirtualHost>\
+\
+		apachctl configtest\
+		apachectl restart\
+\
+\
+			/etc/pki/CA/cacert.pem (copiar para maquinas )\
+			nas maquinas, importa esse dentro do Navegador\
+			\
+			Precisa copiar e importar no vanegado pois o o certificado foi auto assinado.  Se gerar um certificar por um dos CA do mundo, n\'e3o precisa pois o navegador vai conhecer o certificado e CA, pois sera conhecido por uma empresa conhecida.\
+\
+\
+\
+DEFINE ACESSO SO PARA QUEM TIVER CHAVE ESPECIFICA\
+\
+			As configura\'e7\'f5es precisa estar dentro de um virtual Ho\
+\
+	cd /var/www/html/cert\
+\
+	/etc/httpd/conf\
+			vim hrttpd.conf\
+			  <VirtualHost 192.168.1.220:443>\
+				ServerName www.dominioexemplo.com.br\
+				DocumentRoot /var/www/html\
+				redirect /antigo.html /teste.php\
+				SSLEngine on    (Importante para prova). \
+				SSLCertificateFile /etc/ssl/certs/dominioexemplo.com.br.crt. (Esse e o certificado que o servidor responde quando o cliente acessa o servidor)\
+								Certificado do dominio\
+				SSLCertificateKeyFile /etc/ssl/certs/dominioexemplo.com.br.key (Chave usada no certificado no dominio)\
+				\
+				SSLCACertificateFile /etc/ssl/certs/cacert.pem. ( Certificado do CA, o SSLVerifyClient usa esse arquivo para validar o certificado que recebe\
+						o SSLCACertificatePath tb pode ser usado para um diret\'f3rio com os certificados\
+				<Directory /var/www/html/cert>\
+					SSLVerifyClient require\
+				</Directory>\
+			    </VirtualHost>\
+\
+		apachctl configtest\
+		apachectl restart\
+\
+	\
+		Se acessar de outro maquinas o SSL n\'e3o funciona, precisa importar a chave\
+		Gerando no srv\
+			cd /etc/ssl/certs\
+			openssl genres -des3 -out usuario.key 2048\
+			openssl req -new -key usuario.key -out usuario.csr\
+			cd /etc/pki/CA\
+				cp /etc/ssl/certs/usuario.csr newreq.pem\
+				/etc/pki/tls/misc/CA,pl -signer\
+					gera o newcert.pem\
+					cp newcert.pem /etc/ssl/certs/\
+					mv newcert.pem usuario.crt\
+					\
+				Gerar uma chave combinado com o certificado\
+				openssl pkcs12 -export -inkey usuario.key -in usuario.crt -out usuario.p12\
+				  	Pede senha do usuario.key e a chave que precisa digitar no navegado\
+\
+				copiar esse arquivo para a maquina (usuario.p12)\
+				Depois importar no navegador no local do certificaste\
+\
+\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+O\'a0
+\f1\b SSLCACertificateFile
+\f0\b0 \'a0tamb\'e9m \'e9 utilizado para informar um certificado intermedi\'e1rio que venha a ser fornecido pelo CA.\
+
+\f1\b O que \'e9 um Certificado Intermedi\'e1rio?
+\f0\b0 \
+A autoridade de certifica\'e7\'e3o raiz ou a \'e2ncora confi\'e1vel pode assinar e emitir\'a0
+\f2\i certificados intermedi\'e1rios
+\f0\i0 . Certificados intermedi\'e1rios (tamb\'e9m conhecidos como\'a0
+\f2\i intermedi\'e1rio
+\f0\i0 ,\'a0
+\f2\i subordinado ou
+\f0\i0 \'a0
+\f2\i CAs emissoras
+\f0\i0 ) fornecem uma estrutura flex\'edvel para conferir a validade da \'e2ncora de confian\'e7a (chain of trust) a certificados de entidades intermedi\'e1rias e finais adicionais na cadeia. Nesse sentido, os certificados intermedi\'e1rios cumprem uma fun\'e7\'e3o administrativa; cada intermedi\'e1rio pode ser usado para uma finalidade espec\'edfica \'96 como a emiss\'e3o de SSL /TLS ou certificados de assinatura de c\'f3digo \'96 e pode at\'e9 ser usado para\'a0conferir\'a0a confian\'e7a da CA raiz para outras organiza\'e7\'f5es.\
+Os certificados intermedi\'e1rios tamb\'e9m fornecem um buffer entre o certificado da entidade final e a CA raiz, protegendo a chave raiz privada do comprometimento. Para CAs publicamente confi\'e1veis (incluindo SSL.com), o CA / f\'f3rum do navegador\'a0Requisitos de linha de base\'a0na verdade, pro\'edbe a emiss\'e3o de certificados de entidade final diretamente da CA raiz, que deve ser mantida offline com seguran\'e7a. Isso significa que qualquer cadeia de confian\'e7a de certificado confi\'e1vel publicamente incluir\'e1 pelo menos um certificado intermedi\'e1rio.\
+Fonte e mais sobre \'93Chain of Trust\'94:\'a0{\field{\*\fldinst{HYPERLINK "https://www.ssl.com/faqs/what-is-a-chain-of-trust/"}}{\fldrslt \cf4 https://www.ssl.com/faqs/what-is-a-chain-of-trust/}}\
+
+\f1\b Resumindo:
+\f0\b0 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+SSLCertificateFile \'96 Arquivo que cont\'e9m o certificado do servidor web (.crt)\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+SSLCertificateKeyFile \'96 Arquivo que cont\'e9m a chave privada (.key)\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+SSLCACertificateFile \'96 Arquivo que cont\'e9m o certificado do CA ou do Intermedi\'e1rio do CA (.pem)\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+\
+CONFIGURACOES EXTRAS DE SSL - Configura\'e7\'f5es de seguran\'e7a\
+\
+\
+	/etc/httpd/cont.d/ssl.conf\
+\
+			SSLPROTOCO  -all -SSLv2 -SSLv3	(tipo de protocolos)\
+			SSLCipherSuite HIGH:3DES: !aNULL:!MD5 (tipo de algoritmos)		\
+			SSLHonorCipherOrder on (seguir a ordem de prioridades do SSLCipherSuite )\
+\
+			\
+			\
+	curl \'97head http://192.168.1.220\
+			tras o cabe\'e7alho \
+				Vers\'e3o do php, vers\'e3o p perl,  do navegado, versa do SO (ideal \'e9 limitar essas informa\'e7\'f5es)\
+\
+		/etc/httpd/cont.d/ssl.conf\
+			ServerTokens ProductOnly\
+				\
+		Assim so vai mostrar a vers\'e3o do o apache, mais nada\
+				\
+			ServerSignature off (ou email). (Mostra assinatura n\'e3o importante para mundo externo)\
+			\
+			TraceEnable  off (para investigar problema, esse bloqueia o trace e varias informa\'e7\'f5es\
+\
+	https://ssl-config.mozilla.org/\
+	https://cipherlist.eu/\
+\
+\
+\
+SNI - Server name Indicator\
+		Extens\'e3o do SSL/TLS que possibilita  o uso do VirtualHost por nome em HTTPS\
+			Se a conex\'e3o TLS e feito antes que o servidor conhece o dominio, qua certificado enviar ?\
+\
+\
+\
+			Assim o client (navegador) inclui o endere\'e7o no estabelecimento da conex\'e3o SSL/TLS (handShake)			https://cwiki.apache.org/confluence/display/httpd/NameBasedSSLVHostsWithSNI\
+\
+\
+\
+EXERCICIOS\
+\
+	
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+1.
+\f0\b0 \'a0Fa\'e7a a configura\'e7\'e3o para acesso HTTPS para os 2 endere\'e7os criados nos exerc\'edcios do sub-t\'f3pico 208.1 (www e intranet.dominioexemplo.com.br).\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 	Seguir os passos das aulas para gera\'e7\'e3o e instala\'e7\'e3o dos certificados no modo Self-Signed;\
+	Voc\'ea pode criar e utilizar apenas um certificado, informando como CN (Common Name)\
+	*.dominioexemplo.com.br\cf2 \cb3 \
+\pard\tx566\pardeftab720\partightenfactor0
+\cf2 \
+\
+ 
+\f1\b 2.
+\f0\b0 \'a0Fa\'e7a a configura\'e7\'e3o para que o acesso ao endere\'e7o intranet.dominioexemplo.com.br s\'f3 seja poss\'edvel atrav\'e9s do uso de um certificado pelo cliente.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 	Incluir nas configura\'e7\'f5es do VirtualHost:443 desta URL a configura\'e7\'e3o:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf5 \cb7 	SSLVerifyClient require\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf5 \cb6 	Realizar a configura\'e7\'e3o do par\'e2metro SSLCACertificateFile;\
+	Fazer a cria\'e7\'e3o de um certificado para o usu\'e1rio conforme demonstrado na aula.\
+\pard\tx566\pardeftab720\partightenfactor0
+\cf2 \cb3 \
+\
+ 
+\f1\b 3.
+\f0\b0 \'a0Implemente em sua instala\'e7\'e3o as defini\'e7\'f5es de protocolos e ciphers mais seguros do momento.\
+\
+	\cf5 \cb6 Acessar o site{\field{\*\fldinst{HYPERLINK "https://mozilla.github.io/server-side-tls/ssl-config-generator/"}}{\fldrslt \cf4 \'a0https://mozilla.github.io/server-side-tls/ssl-config-generator/}};\
+\pard\pardeftab720\partightenfactor0
+\cf5 	Selecionar Apache / Modern;\
+	Implementar principalmente as configura\'e7\'f5es:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf5 \cb7 		SSLProtocol\cb1 \
+\cb7 		SSLCipherSuite\cb1 \
+\cb7 		SSLHonorCipherOrder\
+\pard\tx566\pardeftab720\partightenfactor0
+
+\f0 \cf2 \cb3 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+					\
+				\
+		\
+		\
+				\
+\
+				\
+			\
+\
+			\
+			\
+					\
+\
+			\
+			\
+					\
+\
+	}

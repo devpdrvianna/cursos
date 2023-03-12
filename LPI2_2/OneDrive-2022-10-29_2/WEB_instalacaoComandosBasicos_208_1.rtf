@@ -1,0 +1,560 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\froman\fcharset0 Times-Roman;
+\f3\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red251\green0\blue7;
+\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;
+\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid201\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 208.1 - Um dos projeto Http do Apache\
+\
+		Apache os SRVs mais usados no mundo\
+		Apache 31.5% uso no mundo e o engx esta em primeiro lugar33.5%.\
+\
+	apt-get install apache2 (debian) ; ps aux | grep apache\
+	yum instal httpd (centos) ; ps aux | grep httpd\
+	\
+\
+	apachectl (tem nos 2)\
+		no debian tb tem o apache2ctl\
+		\
+	start | stop | graceful | graceful-stop | startup\
+\
+	apachectl stop\
+	ou systemctl stop httpd\
+	\
+	http -v (centOs) ou apache2 -v (debian)	\
+		 Mostra a vers\'e3o\
+		\
+\
+	pstree -p | grep httpd\
+		mostra um processo pai e os outros filhos\
+\
+	pstree -p | grep apache2\
+		processo e treads\
+\
+	gerenciamentos de processos, como ele gerencia os processos\
+		httpd -v\
+			Server MPM: prefork ( trabalha com processo e subprocessos)\
+	\
+		apachectl - v\
+			Server MPM: event (trabalha com treads) - no debian ja vem assim\
+\
+	Localiza\'e7\'e3o dos arquivos e config e m\'f3dulos. (Sistema modular e vai adicionando conforme o uso, python, etc)\
+		/etc/httpd/\
+				conf/httpd.conf.  (principal arquivos de configura\'e7\'e3o)\
+				conf.d (arquivos conf adicionais)\
+				conf.modules.d. (arquivos condifuracao de modulos)\
+				logs _> /var/log/httpd\
+				modules -> /usr/lib64/httpd/modules\
+				run -> /run/httpd  \
+\
+\
+		No debian\
+			/etc/apache2/ \
+				apache2.conf. (Principal arquivo configura\'e7\'e3o)\
+				conf-avaiable\
+				conf-enable\
+				envvars\
+				magic\
+				mods-available\
+				mods-enable\
+				ports.conf\
+				sites-available\
+				sites-enable\
+	\
+\
+	https://httpd.apache.org/\
+	https://w3techs.com/technologies/overview/web_server\
+\
+\
+Principais configura\'e7\'f5es \
+\
+	vi /etc/httpd/httpd.conf (centos)\
+			Muito bem comentado\
+			ServerRoot - principais configura\'e7\'f5es do diret\'f3rio de paginas\
+			Listen 80 - mostra a porta e ip a ser ouvida. (Listen 10.50.10.2:80)\
+\
+			Include conf.modules.d. chama tudo que esta la\
+			User apache   usuario e grui que vai rodar o processo.\
+			Group apache\
+			Serverdmin. root@localhost\
+\
+			Server name www.mydominio.com\
+			DocumentRoot \'93/var/www/htlml\'94     Aonde estar ao inter.html. Arquivos que ser\'e3o servidos\
+\
+			ErroLogs \
+\
+\
+	ps axu | grep httpd\
+		apachectl stop\
+		apachectl start\
+			inicia 5 processos (Padr\'e3o) depois vai abrindo conforme for precisando.\
+\
+		vim /etc/httpd/httpd.conf. (Gerenciameno de processos)\
+			StartServers 7 (abre 7 processos ). Precisa abrir ja com a quantidade de processo que usa no dia.\
+			Maxclients 300. (Tratar 300 conex\'f5es simult\'e2neas)			MinSpareServers 5  Instancias reservas\
+			MaxSpareServers 20 aqui ele pode abrir mas d 20 instancias mas quando n\'e3o estiver usando volta para menos de 20 de novo\
+\
+			MinSparethread. Quando trabalhando com Thread\
+			MaxSpareThread\
+			ThreadPerChild. Numero de thread por processo filho (olhando pelo pstree\
+			MaxRequestPerChield - quantos Request vai tratar\
+\
+\
+	https://httpd.apache.org/docs/2.4/misc/perf-tuning.html (Perfomance tunning do Apache)\
+	https://www.liquidweb.com/kb/apache-performance-tuning-mpm-directives/\
+\
+\
+\
+MODULOS (php/perl)\
+\
+	yum install php\
+	apt-get install php5\
+\
+	instala /etc/httpd/modules/<logulo do php>\
+		  /etc/httpd/conf.d/php.conf   (\
+			<FilesMatch \\.php$>\
+				SetHandle applications/x-httpd-php. ( defini\'e7\'e3o do Manipulador do php)\
+			</FilesMatch>\
+\
+		  	AddType text/html .php.  (Definir o contemTYPE)\
+			DirectoryIndex index.php. (Defini\'e7\'e3o do Index, arquivo default)\
+\
+		/etc/httpd/conf.modules.d/ \
+				vim 10-php.conf\
+					LoadModule php5_module\\libphp5.so\
+\
+		/var/www/html - documents root onde fica o Index\
+\
+    Perl\
+	yum install epel-release						\
+	yum install mod_perl\
+\
+	apt-get install libapache2-mod-perl2(debian)\
+\
+	/etc/httpd/\
+		ls -la ./modules/*perl*. \
+		./conf.modules.d\
+			02-perl\
+		./conf.d/perl.conf\
+			Alias /perl /var/www/perl precisa descimentar\
+			<Diretory /var/www/perl>.  Descomentar esse bloco inteiro\
+				SetHander perl-script  (Defini\'e7\'e3o do manipulador do perl)				..\
+				..\
+			</Diretory>\
+\
+		apachectl restart\
+\
+		script fica em /var/www/perl\
+\
+		\
+   O que \'e9 CGI - https://en.wikipedia.org/wiki/Common_Gateway_Interface\
+			https://en.wikibooks.org/wiki/Apache/CGI\
+\
+\
+ARQUIVOS DE LOG\
+	/etc/httpd/conf\
+			vi httpd.conf\
+				ServerRoot \'93/etc/httpd\'94  Defini a base dos diret\'f3rios\
+				ErrorLog \'93log/erro_log. (A partir do Server Root, o diret\'f3rio Log)\
+				LogLevel warn\
+				\
+				LogFormat <parametros> combined\
+				LogFormat <parametros> common\
+\
+				customLog \'93logs/access_log\'94 combined\
+\
+				criando o meu log\
+					LogFormat \'93%h %t %s %b - %f  - \'94%\{User-Agent\}I\\\'94\'94  curso  (Formata a msg que vai sair no log)\
+					CustomLog \'93logs/curso.log\'94  curso (Configura o arquivo de sa\'edda do log)\
+\
+					CustomLog \'93| /usr/bin/mail -s Logs email@teste.com.br\'94  curso (Quando ver o | \'e9 porque vai executar um comando)\
+\
+				systemctl restart\
+\
+				/etc/httpd/logs\
+\
+\
+    Custom Log Formats - https://httpd.apache.org/docs/current/mod/mod_log_config.html\
+\
+\
+CONTROLE DE ACESSO - USUARIO\
+\
+	/etc/httpd/modules \
+	ls -l *auth*  mostra v\'e1rios tipos de acesso \
+\
+			autentica\'e7\'e3o - login do usuario(usu\'e1rio e senha)  (arquivos come\'e7ando com authn)\
+			autoriza\'e7\'e3o s\'e3o permisionamento	(Arquivos come\'e7ando com Authz)\
+\
+	Controle para  que tem usuario e senha	\
+			/var/wwww/html/topsecret (Nessa pasta tem arquivos que ser\'e3o listados no browser)\
+				htpasswd -s -c /var/www/html/topsecret/.htpasswd ricardo. (Cria o arquivo htpasswd com o usu\'e1rio e senha\
+			\
+			vim /etc/httpd.conf\
+				depois do bloco </Directory>\
+				\
+				<directory /var/www/html >\
+				Options Indexes FollowSymlinks\
+				AllowOverride all\
+				Require all granted\
+				</Directory>		\
+\
+				<Directory /var/www/html/topsecret>\
+				AuthType Basic\
+				AuthName \'93Area Secreta de Acesso\'94\
+				AuthUserFile /var/www/html/topsecret/.htpasswd\
+				Require valid-user\
+				</Directory>\
+				:wq!\
+\
+				apachectl configtest. (Para testar o configurados				apachectl restart\
+\
+				\
+	    Outra forma de validar acesso por usu\'e1rio especifico\
+			vim /etc/httpd/conf/httpd.conf\
+				depois do bloco </Directory>\
+				\
+				<directory /var/www/html >\
+				Options Indexes FollowSymlinks\
+				AllowOverride all\
+				Require all granted\
+				</Directory>		\
+\
+				<Directory /var/www/html/topsecret>\
+				AuthType Basic\
+				AuthName \'93Area Secreta de Acesso\'94\
+				AuthUserFile /var/www/html/topsecret/.htpasswd\
+				 Require user Ricardo e Aluno1\
+				#Require valid-user\
+				</Directory>\
+				:wq!\
+				apachectl restart\
+		\
+							\
+				\
+	Por grupos\
+		cd /var/www/html/topsecret. (Nessa pasta tem arquivos que ser\'e3o listados no browser)\
+				vim .htgroup (Criar esse arquivo com os grupos)\
+					suporte: aluno2 aluno3\
+					admin: Ricardo aluno1\
+\
+				vim /etc/httpd/conf/httpd.conf\
+				depois do bloco </Directory>\
+				\
+				<directory /var/www/html >\
+				Options Indexes FollowSymlinks\
+				AllowOverride all\
+				Require all granted\
+				</Directory>		\
+\
+				<Directory /var/www/html/topsecret>\
+				AuthType Basic\
+				AuthName \'93Area Secreta de Acesso\'94\
+				AuthUserFile /var/www/html/topsecret/.htpasswd\
+				AuthGroupFile /var/www/html/topsecret/.htgroup\
+				Require group suporte\
+				#Require user Ricardo e Aluno1\
+				#Require valid-user\
+				</Directory>\
+				:wq!\
+				apachectl configtest. (Para testar o configurados				apachectl restart		\
+\
+		\
+\
+\
+CONTROLE de ACESSO - IP\
+		cd /var/www/html/admin/  (colocar o acesso dessa esta por ip)		vim /etc/httpd/httpd.conf\
+	\
+				<Directory /var/www/html/admin>\
+				Order Deny, Allow. (Primeiro nego tudo que n\'e3o for permitido)\
+				Deny from all \
+				Allow from 192.168.1.210	 (Permito so esse IP)				</Directory>\
+	\
+				apachectl configtest\
+				apachectl restart\
+	\
+		Quando acessa de uma maquina n\'e3o liberada da erro 403 Forbidden\
+		 	Erros come\'e7am 4xx erros d permiss\'e3o no servidor\
+			Erros come\'e7am com 5xx s\'e3o erro do servidor Server internal erro\
+			1xx - informacionais\
+			2xx - sucesso\
+			3xx - redirecionamentos\
+\
+		OUTRA FORMA\
+\
+				<Directory /var/www/html/admin>\
+				Require ip 192.168.1.210	 (Permito so esse IP)\
+				Require ip 192.168\
+				Require ip 10.0.0.0/16\
+				Require ip dominioexemplo.com.br\
+				</Directory>\
+			\
+		OUTRA FORMA\
+			vim /etc/httpd/httpd.conf\
+				<Directory /var/www/html/admin>\
+					<RequireAll>\
+						Require all granted   (Aqui libero todo mundo e permito apenas o ip abaixo)\
+						Require not ip 192.168.1.210\
+					</RequireAll>\
+		#		Require ip 192.168.1.210	 (Permito so esse IP)\
+		#		Require ip 192.168\
+		#		Require ip 10.0.0.0/16\
+		#		Require ip dominioexemplo.com.br\
+				</Directory>\
+			\
+VIRTUALHOST\
+	Associa\'e7\'e3o do conte\'fado por IP ou por NOME.  Vc pode direcionar dependendo do ip ou do nome.\
+		\
+	PELO IP\
+		Criar 3 IPs para a interface\
+		Criado 3 hosts no DNS (www.dominioexemplo.com.br, www2 e www3)\
+		no /var/www.  Ja tinha o html ai criou o site1 e site2 (dentro html simples) (diret\'f3rios) associar os ips aos conte\'fados.\
+				\
+		vim /etc/httpd/conf/httpd.conf\
+			<VirtualHost 192.168.1.221>\
+				DocumentRoot /var/www/site1\
+				CustomLog \'93logs/acess_site1.log\'94 curso\
+			</VirtualHost>\
+\
+			<VirtualHost 192.168.1.222>  ou < VirtualHost dominioexemplo.com.br>\
+				DocumentRoot /var/www/site2\
+				CustomLog \'93logs/acess_site2.log\'94 curso\
+			</VirtualHost>\
+\
+			apachectl configtest\
+			apachectl restart\
+\
+	POR DOMINIO\
+		/var/named/chroot/var/named\
+		vim dominioexemplo.zone\
+			www www1 e ww2 apontando mesmo ip\
+		\
+	vim /etc/httpd/conf/httpd.conf\
+\
+			<VirtualHost 192.168.1.220>\
+				ServerName www.dominioexemplo.com.br. (ele pega pelo nome e direciona)\
+				DocumentRoot /var/www/html\
+			</VirtualHost>\
+\
+			<VirtualHost 192.168.1.220>\
+				ServerName www2.dominioexemplo.com.br. (ele pega pelo nome e direciona)\
+				DocumentRoot /var/www/site1\
+				CustomLog \'93logs/acess_site1.log\'94 curso\
+			</VirtualHost>\
+\
+			<VirtualHost *>  ou < VirtualHost dominioexemplo.com.br>. (Importante usar * em todos ou o nome dominio em todos)\
+				ServerName www3.dominioexemplo.com.br\
+				DocumentRoot /var/www/site2\
+				CustomLog \'93logs/acess_site2.log\'94 curso\
+			</VirtualHost>			\
+\
+				\
+					apachectl configtest\
+			apachectl restart\
+	\
+				\
+UserDir e Redirecionamentos\
+			UserDir.  Cria uma area pra cada usuario do sistema\
+\
+			/etc/httpd/conf.d/Userdir\
+			#UserDir disable (Comentar)\
+			UserDir public html. (Hbilitar)\
+			\
+			apachectl restart\
+\
+			no perfil do usuario criar o directorio public_html e colocar os arquivo.\
+				\'98user/public_html/ teste1 teste2 teste3\
+			\
+			sestatus\
+			setenforce 0 desabilita o SELINUX\
+					Muda para o permissivos\
+\
+\
+ALIAS\
+		/vat/www/docs (documentos aqui)\
+		vim /etc/httpd/conf/httpd.conf\
+\
+			<directory /var/www\'94 >\
+				Options Indexes FollowSymlinks\
+				AllowOverride all\
+				Require all granted\
+			</Directory>\
+\
+\
+			<VirtualHost 192.168.1.220>\
+				ServerName www2.dominioexemplo.com.br. (ele pega pelo nome e direciona)\
+				DocumentRoot /var/www/site1\
+				CustomLog \'93logs/acess_site1.log\'94 curso\
+				alias     /docs   /var/www/docs. (Direciona internamente para outro conte\'fado.\
+			</VirtualHost>\
+\
+\
+\
+			O Alias desvia do lado do server e o redirect faz do lado do cliente\
+\
+			<VirtualHost 192.168.1.220>\
+				ServerName www2.dominioexemplo.com.br. (ele pega pelo nome e direciona)\
+				DocumentRoot /var/www/site1\
+				CustomLog \'93logs/acess_site1.log\'94 curso\
+				Redirect /google  http://www.google.com.br				Redirect /antigo.html  http://www.dominioexemplo.com.br/teste.php. (redireciona para outro link)\
+			</VirtualHost>\
+\
+\
+\
+\
+\
+\
+EXERCICIO\
+\
+	
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 1.
+\f0\b0 \'a0Utilizando o dom\'ednio criado nos exerc\'edcios do t\'f3pico 207, configure o Apache para atender duas URLs diferentes,\'a0 disponibilizando conte\'fados distintos para os seguintes endere\'e7os:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 www.exerciciolpi.com.br\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 intranet.exerciciolpi.com.br\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb5 \strokec4 \
+Configurar os registros www e intranet na zona de DNS do dom\'ednio exerciciolpi.com.br. Podem apontar para o mesmo IP ou IPs diferentes;\cb1 \
+\cb5 Crie diret\'f3rios espec\'edficos para cada site, por exemplo:\cb1 \
+
+\f3 \cb6 	/var/www/site\cb1 \
+\cb6 	/var/www/intranet\
+
+\f2 \cb5 Crie os hosts virtuais nos arquivos de configura\'e7\'e3o do Apache. No exemplo abaixo o\cb1 \uc0\u8232 \cb5 VirtualHost est\'e1 baseado no nome dos dom\'ednios:\cb1 \
+
+\f3 \cb6 	<VirtualHost IP>\cb1 \
+\cb6 		ServerName www.exerciciolpi.com.br\cb1 \
+\cb6 		DocumentRoot /var/www/site\cb1 \
+\cb6 	</VirtualHost>\cb1 \
+\cb6 	<VirtualHost IP>\cb1 \
+\cb6 		ServerName intranet.exerciciolpi.com.br\cb1 \
+\cb6 		DocumentRoot /var/www/intranet\cb1 \
+\cb6 		</VirtualHost>\
+
+\f2 \cb5 Testar e reiniciar as configura\'e7\'f5es:\cb1 \
+
+\f3 \cb6 	# apachectl configtest\cb1 \
+\cb6 	# apachectl restart\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 2.
+\f0\b0 \'a0Crie um log de acesso para cada URL que contenha as seguintes informa\'e7\'f5es:\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls2\ilvl0\cf2 \cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O Endere\'e7o IP do Cliente\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 A Data e Hora do Acesso\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 A primeira linha do request HTTP\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O arquivo acessado no servidor\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 O Status Code do acesso\cb1 \
+\ls2\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Informa\'e7\'f5es do Navegador utilizado\cb1 \
+\pard\pardeftab720\sa510\partightenfactor0
+\cf2 \cb3 \
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb5 \strokec4 Configurar o LogFormat:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 	LogFormat "%a %t %r %f %s \\"%\{User-Agent\}i\\"" exercicio\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 \strokec4 Configurar cada arquivo de Log dentro do VirtualHost:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 <VirtualHost IP>\cb1 \
+\cb6 	ServerName www.exerciciolpi.com.br\cb1 \
+\cb6 	DocumentRoot /var/www/site\cb1 \
+\cb6 	CustomLog \'93logs/access_site.log\'94 exercicio\cb1 \
+\cb6 </VirtualHost>\cb1 \
+\cb6 <VirtualHost IP>\cb1 \
+\cb6 	ServerName intranet.exerciciolpi.com.br\cb1 \
+\cb6 	DocumentRoot /var/www/intranet\cb1 \
+\cb6 	CustomLog \'93logs/access_intranet.log\'94 exercicio\cb1 \
+\cb6 </VirtualHost>\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f0 \cf2 \cb3 \strokec2 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 		\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 3.
+\f0\b0 \'a0Configurar o Apache e o Sistema para que ao acessar o endere\'e7o intranet.exerciciolpi.com.br/logs sejam exibidos os logs do apache em /etc/httpd/logs. O acesso s\'f3 deve ser liberado para uma lista de usu\'e1rios cadastrados via htpasswd.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 \
+ \cf4 \cb5 \strokec4 Dar as devidas permiss\'f5es de acesso ao diret\'f3rio /etc/httpd/logs:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 		chmod +rx /etc/httpd/logs\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 \strokec4 Criar o arquivo htpasswd:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 		# htpasswd -s -c /var/www/intranet/.htpasswd admin\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 \strokec4 Configurar o acesso ao diret\'f3rio:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 	<Directory /etc/httpd/logs>\cb1 \
+\cb6 		Options Indexes FollowSymLinks\cb1 \
+\cb6 		AllowOverride all\cb1 \
+\cb6 		AuthType Basic\cb1 \
+\cb6 		AuthName "Arquivos de Log - Acesso Restrito"\cb1 \
+\cb6 		AuthUserFile /var/www/intranet/.htpasswd\cb1 \
+\cb6 		Require valid-user\cb1 \
+\cb6 	</Directory>\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 \strokec4 Configurar o Alias no VirtualHost:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 	<VirtualHost IP>\cb1 \
+\cb6 		ServerName intranet.exerciciolpi.com.br\cb1 \
+\cb6 		DocumentRoot /var/www/intranet\cb1 \
+\cb6 		CustomLog \'93logs/access_intranet.log\'94 exercicio\cb1 \
+\cb6 		Alias /logs /etc/httpd/logs\cb1 \
+\cb6 </VirtualHost>\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 \strokec4 Testar e reiniciar o Apache		:\
+\pard\pardeftab720\partightenfactor0
+
+\f3 \cf4 \cb6 \strokec4 		# apachectl configtest\cb1 \
+\cb6 		# apachectl restart\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+}

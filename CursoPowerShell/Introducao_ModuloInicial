@@ -1,0 +1,116 @@
+Curso Power Shell
+	incluido no DOT NET FrameWork
+
+	CLI e o ISE (Integrate Scripting Enviroment
+
+	extensão    *.ps1
+	
+	Versao
+		$PSVersionTable.PSVersion
+		ou Get-Host
+		ou (Get-Host).Version
+
+	Lista de comandos de Command Let do powerShell
+		Get-Command -CommandType Cmdlet
+
+
+		Write-Host "HelloWorld"
+		Write-Host "Red on white text." -ForegroundColor red -BackgroundColor white
+		Get-ChildItem /tmp  (lista o dietorio)
+
+
+	Help
+		Update-Help  Atualiza o help
+
+		Get-Help Write-Host  (traz o help de comando com exemplos)
+		Get-Help Get-Date 
+			Get-Date -Format g
+		
+		Get-Help Get-Date -ShowWindow (abre uma janela de help no Windows)
+
+		
+	Cmdlets Funções alias
+		Get-Command -CommandType Cmdlet | more
+		Get-Command -CommandType function | more
+		Get-Command -CommandType alias | more
+
+		Get-Command -CommandType Cmdlet *eventlog*
+		
+		Get-Command -CommandType alias *dir*
+			Alias           dir -> Get-ChildItem 
+	
+		Set-Alias limpar clear-host
+		
+
+		gps - mostra todos os processos da maquina
+			Alias           gps -> Get-Process 
+
+		
+     Saida de resultado
+		| direciona saida
+		> adiciona
+		>> append
+		2> saida de erro
+		2>>  saida erro com append
+		2>&1
+
+		Get-Process | Format-list | more
+
+		Get-Process | ConvertTo-Html | Out-File "processos.html"star
+		start ./processos.html
+
+		get-date > lista.txt
+		
+
+		Get-Process | Out-GridView
+			Out-Default - envia p/ formatador padrão, cmdlet saida padrao
+			Out-file - envia saida para um arquivo
+			Out-GridView - Envia para uma tabela intereativa
+			Out-Host - Envia para linha de comando
+			Out-Null - Apaga a saida 
+			Out-Printer - Envia saida para uma impressoa
+			Out-String - Envia saida para uma serie strings
+
+
+	Filtrar os resultados
+		get-service | where-object {$_.Status -eq "Running"} Traz da lista de servicos rodando o que esta rodando, olhando a coluna status
+
+			-it menor que
+			-le Meno e igual
+			-gt maior que
+			-ge maior e igual
+			-eq igual
+			-ne não igual
+			-like usar wildcard para comparar
+							
+		get-service (ver os servicos em execução)
+
+		Get-Process | Where-Object {$_.CPU -gt "611"}
+
+
+
+	MODULOS (*.psm1)
+		Get-Module -ListAvailable  (lista os modulos)
+		
+		Get-Module -Module Get-SmbShare (mostra detalhes do que faz o module)
+			Get-SmbShare (mostra todos os share da maquina)
+	
+	  Para instalar modulos
+		Import-Module .\NanoServerImagegenerator.psm1
+		Get-command -Module NanoServerImageGenerator
+	
+	  
+		Get-PSRepository (Motra todos os repositorios)
+
+		Install-Module -Name PSDownr (instala do repositorio)
+			Get-Command -Module PSDownr
+			Get-YoutubeVideo 
+
+
+	  https://mcsesolution.com.br/blog/category/automacao/
+
+			
+		
+	
+
+

@@ -1,0 +1,663 @@
+02-Fundamentos
+
+Conhecer os fundamentos da gestão de produtos digitais, considerando o problema que a disciplina resolve e sua evolução ao longo do tempo;
+
+Entender os papéis e responsabilidades de gerentes de produtos nas empresas;
+
+Diferenciar gestão de projetos e gestão de produtos;
+
+Analisar perspectivas de carreira na área de gestão de produtos;
+
+Avaliar como a gestão de produtos se relaciona com sua carreira considerando suas habilidades atuais e as que precisam ser desenvolvidas.
+
+
+BLOCO1 - GESTÃO DO PRODUTO
+	Pessoas de produto não necessáriamente definem negocio, a não ser que sejam as pessoas de negocio ( Pessoas de produto precisam estar proximo a administração do negocio)
+	Existiram mais de CPO em organizacões, mas terão cada vez menos pessoas pois nem todos serão capaz e experiência e necessária
+	
+	Gestão de produto é a próxima carreira
+		Nós nao executados, mas sim dizemos o que eles precisam estar desenvolvendo
+		Foco em resolver o problema
+		Gestores basicamente pagos para aprender (necessidades, onde tem melehorias, etc)
+		Nós não evoluimos de um dia para o outro, nos evoluimos constantemente	
+
+
+	Ser consistente - Ser constante, descobrir todos os dias os problemas que preciso resolver
+			O que eu construo(Produto) para ser resolvido
+				Constantemente melhorar o processo, melhorias
+			Falar com usuario é importante ara saber se o que estou fazendo é o correto
+
+			Para chegar no final, eu preciso ir cruzando as etapas (oportunidades, entregas, melhorias, o que as pessoas estão pessando)
+
+
+RESUMO DO BLOCO
+
+Estratégia da empresa e estratégia do produto serão cada vez mais sinônimos nos próximos anos.
+
+Haverá mais CPOs e posições de liderança de produto, mas não haverá pessoas suficientes para preenchê-las. Até o final da década, as pessoas que estão começando em Produto agora assumirão essas funções.
+
+Veremos mais segmentação no papel de gerente de produto. Haverá PMs técnicos, PMs voltados para o consumidor, pessoas especializadas em ferramentas internas e B2B.
+
+Existem muitos livros e informações sobre o universo de produtos e é difícil saber quais fontes de informação procurar para se desenvolver.
+
+Consistência tem mais valor que intensidade. Gerentes de produtos são responsáveis por garantir a evolução constante da sua organização: desenhar "linhas de chegada" de acordo com o momento do negócio.
+
+	
+BLOCO2 - FUNÇÃO E RESPONSBILIDADE
+
+	Pessoas de produtos
+	   Pessoas de produto existem para servir os consumidores, atendendo o negocio
+		Ouvimos os problemas do negocio para resolver seus problemas
+	
+	
+	   Importante entregar produto mas o produto não tem fim. O Foco é qualquer resultado, seja ele qual for
+	
+	CAMADAS
+		Product manager
+			-Bussicase (Construir uma visão de produto)
+			-Gestão de portifólio (O produto nem sempre é sozinho)
+			-Segmentção dos usuários (Segmento de usuário - Ex: Pessoas baixa ou alta Renda) o Comportamento da pessoa muda
+			-TradeOffs Definir caminho (Ex: Eu compro ou desenvolvo interno uma ferramenta)
+			-Análise competitiva (Validar se posicionamento do produto está adequado)
+			-Ciclo de vida (Ciclo de amadurecimento, declinio, crescimento etc)
+		
+			Roadmap	Admin
+				-Construção e manutenção do RoadMap
+				-Planejamento das entregas	
+				-Personas e definição de problemas/Necessidade (Perfis de pessoas que quero atender)
+				-Definição de features
+				-A Voz do usuário
+				-Gestão de falhas (Regulamentos e leis que mudam e pode alterar o produto, riscos e regulatorios)
+
+				Backlog admin(PO)
+					-Garantir requisitos prontos
+					-Cuida Backlog
+					-Colaboração com timo desenvolvimento
+					-Acompanhamento de reselases
+
+					*Cuidar da saude o backlup, melhorias, correções etc.
+					
+					
+
+
+	Se não sabe o que precisa ser resolvido, não construa pedaço de software
+	Temos ordens para executar as coisas.
+	papeis e resposnablidades são importantes
+	
+	PO(PAPEL)
+	  Foco no desenvolvimento
+		maximizar o valor do produto e o trabalho do time de desenvolvimento
+		Gerenciar e ordenar as tarefas (backlog)Priorizando e gerenciando estórias, trabaham proximo ao time desenvolvimento.
+
+	PM (FUNÇÂO)
+	  Foco em negócios e estratégia
+	  Resposáveis pela visão que direciona a estartégia do produto, roadmap e o produto ao longo ciclo de vida
+	  Toma decisoes garantindo o foco no negocio, fazendo o tradeoff entre funcionalidades, prazos, custos
+	  Busca ser especialista no mercadoconhecendo clientes/usuarios com profundidade. É a voz do usuario dentro da companhia, mantem foco no problea/necessidade.
+
+
+	  Gerencia do produto -  foco no resultado, foco na estartégia, foco no negócio
+
+	  Entenda qual melhor produto que vai endereçar aquela dor
+	  
+
+Resumo do Bloco
+
+Administração de backlog e administração de roadmap são dois dos papéis comuns de gerentes de produto, mas sua função vai muito além disso.
+
+Pessoas de produto existem para servir aos consumidores, de forma a atender negócios, sendo responsáveis pelos resultados.
+
+É comum termos o sentimento de que o escopo de PMs parece ser impossível de entregar, considerando tantas responsabilidades - mas ninguém faz tudo ao mesmo tempo e o segredo está em saber a melhor ordem das coisas.
+
+
+
+
+BLOCO3 - PRODUTOS E PROJETOS
+
+	Experiência(desejável UX do produto)   X  Rentável(Negócios )   X Viável (Tecnologia Viabilizando a construção)
+	No centro desses 3 fica o PM (Gestão de produto)
+
+  Visão de produto
+	Descreve o futuro que queremos criar
+	trazem propósito 
+	Facilitam a colaboração e motivam as pessoas
+
+	
+		Why(Visão) -> How(Estratégia) -> What(tática)
+
+	Surpreender as pessoas com relações verdadeiras tranformando a experiênca bancária. (C6BANK)
+	
+
+	Momentos dia dia do PM para todos os problemas
+		Incertezas - ainda estamos descobrindo o que fazer (Se mova rapido daqui)
+		Certezas- Estamos construindo (Não deixe as coisas quebrarem)
+
+	Dual track agile	
+		Precisa ver o momento onde precisamos descobrir o que fazer e outro momento com a certeza construir o que descobrimos
+
+	
+
+	Diferença Produto e projeto
+		Projeto - Focam nas eficiênca das  entregas (Escopo meio e entrega)
+	
+		produto - Focam em resltados (Começo(ideia), Meio(Protoripação), Meio(lançamento), Meio(tração), meio(monetização), meio(crescimento)
+
+				Não tem fim, a cada problema ou ideia que tenho, o ciclo se inicia.	
+
+
+Resumo do Bloco
+
+O trabalho de lideranças de produtos está na interface entre 3 áreas: negócios, experiência e tecnologia.
+
+PMs facilitam a colaboração e motivam as pessoas através de um alinhamento de propósito. A comunicação do propósito é feita com ajuda de uma visão de produto.
+
+O exemplo do Banco C6 ilustra o processo de construção de uma visão.
+
+O trabalho de PMs pode utilizar diferentes processos. A escolha do processo depende do momento da organização.
+
+A ideia de dual track agile (trilha dupla ágil) tem a ver com o processo contínuo de navegar entre a incerteza e a certeza, de um lado ganhando clareza sobre os problemas a resolver, de outro construindo soluções para atender esses problemas.
+
+Enquanto projetos têm começo, meio e fim, produtos têm começo, meio, meio, meio...
+
+
+
+BLOCO4 - CARREIRA
+	
+	APM(associate Product manager) -> PM(Product Manager) -> Sr. PM Senior -> GPM(Group) -> Head of PM -> CPO(Chief)
+Product Ops -> TPM Technical PM -> PMM Product Makerting manager
+
+	de APM ate PM Senior - são cargos de execução
+	de GPM a CPO - São cargos de estratégia
+
+  Ferramenta avaliar extensão e profundidade do nosso conhecimento
+	consegu avaliar o que esta defasado ou nao
+	deve ser avaliado por novo e pessoas que ja estejam
+	faz o mapeamento detalhado do conhecimento
+
+
+Resumo do Bloco
+
+O mercado vem estabelecendo um padrão de trilha de desenvolvimento na carreira de produto, que vai do "associate product manager" ao "CPO" da companhia. Também há papéis especialistas surgindo, para atuar com focos específicos, como "technical product manager" e "product marketing manager".
+
+A ferramenta "T-Shaped Product Manager" ajuda você a avaliar a extensão e a profundidade do conhecimento necessário para se desenvolver como Liderança de Produtos, entendendo onde você está atualmente nesse desenvolvimento.
+	
+
+
+BLOCO6
+	Consistencia promove evolução contínua
+	gestao de produtos é uma função estartégia focada em resolver problemas reais e, com isso, alavancar negocios
+	PMs trabalham o tempo todo entre negócios, TECH, e UX(Buscando gerar desejo de uso, retabilidade e viabilidade)
+	Visao de produtos = futuro que vc quer construir (e isso e a base para tudo e vc é o principal pessoa a guardar e promover esse futuro)
+	Praticas ajudam a obter os resultados mas não são o resultados(são meios e não o fim)
+	Suas habilidados podem e devem ser aproveitadas na sua trilha de produtos (nenhum conhecimento é desperdiçado)
+	
+
+Lembre-se
+
+Consistência promove evolução contínua.
+
+Gestão de Produtos é uma função estratégica focada em resolver problemas reais e, com isso, alavancar os negócios.
+
+PMs trabalham o tempo inteiro entre negócios, tech e UX.
+
+Visão de Produto = o futuro que você quer construir. E as pessoas de produto são guardiãs dessa visão.
+
+As práticas (ex: dual track agile, lean startup, design thinking) ajudam a obter resultados, mas elas não são os resultados - o coração da nossa função é gerar os resultados.
+
+Suas habilidades atuais podem e devem ser aproveitadas na carreira de produtos.
+
+
+BLOCO7 - Perguntas
+    Habilidados para desenvolver (Comunicação - Influênciar pessoas)
+    Estratégia do produto e Negócio (Visão do produto para resolver é o futuro) (Negocio trabaha com desafios dos negocio, de regulamentação, brand marca) Produto é um meio para estruturar o negocio.
+
+    Gestor do produto - Pautado em Comunicação, relação e feito em combinação
+		comunicação constante, msg certa para diferentes publicos
+	Poder influenciar pessoas em decisoes do negocio
+	Relação precisa ser pautado em combinar as coisas, definir melhor caminho
+
+   Design de produto - Olha a experiência do produto
+    Product Manager precisa entender os problemas de design que precisa resolver e o Designer precisa mostrar as possbilidade de como resolver como especialistas, usando suas habilidades.
+
+	Processo de aprendizagem precisa ser o mais rapido, entao falhe mais e aprenda mais rapido.  Como podemos aprender mais rapido todas as etapas
+	Esta tudo bem errar se vc está aprendendo.
+	Mostra maturidade aprendendo com erro
+
+	3 principais metodos, Design Thing, Agile Start Up e Agilidade.
+
+	Vc deve sempre ter a visão de produto, as visões passa a não fazer sentido quando não tracionou, e assim precisa ser revisto a visão do produto.
+	
+	No casos de juntar 2 empresas, precisa avaliar o proposito comum, e uma empresa absorve o propósito da outra, e rediscutir o propósto unico.	 
+	
+	
+
+
+CICLO DE VIDA
+
+Objetivos de Aprendizagem
+Entender o conceito de produto digital;
+Reconhecer as fases do ciclo de desenvolvimento de um produto digital e sua relação com as etapas de desenvolvimento de uma empresa;
+Analisar produtos e empresas do mercado identificando seu estágio de desenvolvimento e ciclo de vida.
+Diferenciar o desafio de gerentes de produtos em cada etapa do ciclo de desenvolvimento;
+Diferenciar métricas, processos e ferramentas adequados para o trabalho de PMs em cada fase
+
+
+
+BLOCO-01 - COMPOSIÇÃO DO CICLO
+Ciclo de vida do produto
+	Ciclo de desenvolvimento de um produto -> 
+		definição de problema - definção de produto- desenvolve planejamento - desenvolve monitoramento - lancamento dos resultados -
+
+	O ciclo de vida do produto e a curva S
+		Introdusido - cresce - maturidade e declinio
+		temos o abismo entre os early adopter/inovadores e os Majorities(maioria do mercado)
+	
+			Como cruzar o abismo
+				Entenda o ciclo de adoção tecnlogia
+				Segmente segmente e segmente (segmento de mercado, personas)
+				forneca um produto completo (Entregar produto mais completos)
+				Conhceça sua competição(adeque proposta de valor) (eviste entregar o que as pessoas ja tem)
+
+		atinja product marketing fit
+
+		Na curva S quanto mais a direita, temos mais pessoas usando
+		
+Resumo do Bloco
+
+Ciclo de Vida, "curva S" ou PLC (Product Life Cicle) não é a mesma coisa que ciclo de desenvolvimento de um produto (definição do problema, definição da solução, desenvolvimento, lançamento). O ciclo de desenvolvimento acontece várias vezes ao longo do ciclo de vida do produto.
+
+O "abismo" (chasm) que vai além dos inovadores e early adopters só é cruzado com uma proposta de valor bem ajustada para o grande público.
+
+Para atravessar o abismo: entenda o ciclo de adoção da tecnologia, segmente, forneça um produto completo e conheça sua concorrência (adeque sua proposta de valor).
+
+O produto começa com a busca por market fit, entra numa etapa de escala (ou growth), entra num estágio conhecido como "vaca leiteira" e segue em uma etapa de inovação/disrupção.
+
+BLOCO-02 - DESAFIOS DAS ETAPAS
+	Como sei onde meu produo está atraves de metrica de negocio
+		Metricas orientadas ao negocio, ao cliente, ao produto
+
+	Os Slides possuem a descrição de Metricas e Desafiio por cada fase do ciclo de vida.
+
+Resumo do Bloco
+
+Você sabe onde seu produto está a partir de métricas: "o que não é metrificável é ingerenciável".
+
+É importante ter métricas orientadas ao negócio, métricas orientadas ao cliente e métricas orientadas ao produto.
+
+Para cada fase do ciclo, temos métricas diferentes e desafios diferentes.
+
+Na fase de introdução, o foco é retenção - poucas pessoas usando muito. Como resolver as dores de usuários da melhor maneira possível?
+
+Na fase de crescimento, o foco é entender o que traz mais usuários. Quais são as principais iniciativas para alavancar o uso do produto através do topo do funil?
+
+Na fase de maturidade, o foco é compreender vazamentos em todo o funil. Como simplificar o produto para que a proposta de valor continue relevante no mercado?
+
+Na fase de declínio, o foco é entender a causa do declínio de uso. Como mitigar riscos em novas apostas
+
+
+
+	
+
+RESUMO DA AULA
+Ciclo de desenvolvimento e ciclo de vida de produto são coisas diferentes.
+
+Uma proposta de valor adequada traz usuários. (boa porpsta gera product marketing fit)
+
+Simplifique constantemente seu produto para manter Product Market FIt.
+
+Meça o negócio, o produto e o consumidor o tempo todo.
+
+A atuação de PMs varia de acordo com o momento no ciclo. 
+ 
+	
+
+
+PRODUCT SENSE - PENSAMENTO DE PRODUTOS
+
+BLOCO01 - o Pensamento de produto
+
+	o que os usuarios precisam(Espaço problema)   e  o que o negocio precisam (Espaço da solução)
+		a tecnologia entra para reduzir o espaço do problema e da solução
+			o que as pessoas precisam e o que vc deve entregar
+
+	ProductSense - e a capacidade de entender o que torna um produto excelente (produto util, funcional, amada pela pessoas, usar todos os dias, vendável)  Não existe produto perfeito as pessoas mudam
+
+	Produtos falham o tempo todo. e responsabilidade de pessoas de produto evitar que isso aconteça
+		compreender que o senso de produto o que as pessoas querem que resolva
+	
+
+	Product market fit - estar em um bom mercado com um produto que satisfaça esse mercado (o produto esta no meio)
+
+	Ame o problema e nao a solução
+		Ajuda a evitar armadilhas e focar no principal
+		Eliminar o vies do inovador (nem sempre vc tem que criar coisas novas)
+		Levar a questoes  como:
+			Necessidades (qual o problema)
+			usuarios :(Quem esta enfrentando o problema)
+			mercado:(porque eles estao enfrentando o problema)
+
+		Pense em produtos, nao em features (Funcionalidades)
+			Sair do micro e pensar no macro, buscando entender o problema 
+			Penar no produto e nao se perder em uma das soluções possiveis
+			Ajuda a tornar o trabalho enxuto
+		  Os usuarios nao se importam com funcionalidades, e sim com alcançar seus objetivos		
+
+		
+		Seja especifico e agnosticos
+			Compreender problemas, usuarios, mercado, restrições levam maior parte das decisões de alta qualidade
+			Trabalhar com os fatos como são ao invés de crenças comuns desbloqueia inovações
+
+		
+Resumo do Bloco
+
+O que é o TikTok? Para responder a essa pergunta, precisamos ir muito além do nosso viés de pessoa usuária, pensando na estrutura inteira do negócio.
+
+Product sense é a habilidade perceber o que faz determinado produto ter os resultados que tem, enxergando suas características a partir da perspectiva de negócios, design e tecnologia.
+
+O "espaço do problema" está relacionado ao que usuários precisam, também chamado de Discovery. Discovery é nossa capacidade de entender o que as pessoas precisam ter resolvido.
+
+O "espaço da solução" está relacionado ao que os negócios fornecem, também chamado de Delivery. O Delivery é nossa capacidade de entregar e escalar o que foi descoberto.
+
+A tecnologia é o que reduz a lacuna entre o que você descobriu que as pessoas precisam e o que você deve entregar para essas pessoas, considerando as características do negócio.
+
+Definindo: Product Sense é a capacidade de entender o que torna um produto excelente. Um produto excelente é algo útil, simples, funcional, amado pelas pessoas, vendável.
+
+Esse pensamento inclui a capacidade de ir além do backlog e desafios atuais para avaliar oportunidades emergentes e novos mercados.
+
+Como PMs, devemos direcionar nosso olhar para o que é mais relevante, entendendo a importância da escuta ativa e diferenciais reais que permeiam todo o ciclo de vida do produto.
+
+Produtos falham o tempo todo e é responsabilidade das pessoas de produto evitar que isso aconteça. O maior erro é construir coisas que as pessoas não querem ou não precisam.
+
+Componentes de um pensamento de produtos estruturado: 1) Ame o problema, não a solução; 2) Pense em produtos, não em features; 3) Seja específico e agnóstico.
+
+O modelo de pensamento "lean" ajuda a: evitar armadilhas e focar no principal; eliminar o "viés do inovador"; e direcionar perguntas sobre as necessidades e perfis de usuários e dinâmicas do mercado.
+
+Pensar no produto (e não em features) é não se perder em uma das soluções possíveis, é sair do micro e pensar no macro, entendendo o problema completo. Isso ajuda a tornar o trabalho enxuto, evitando desperdícios de recursos e energia.
+
+  "As pessoas acreditam que o foco é dizer sim para coisa que precisa ser feita. mas não é isso. Significa dizer não para centenas de boas ideias"
+
+
+Steve Jobs
+Usuários não se importam com funcionalidades, mas com alcançar seus objetivos. Quanto mais específicos e agnósticos somos, mais conseguimos compreender e focar nos fatos.
+
+
+
+BLOCO02 - BENEFÍCIOS DO PRODUCT SENSE
+	50% Senso Analiticos
+	30% Senso de execução
+	10% Senso de Product
+
+	Estrategia de produto - testar acapacidade de entender o mercado competitivo
+	Melhoria de produto - Melhorar o produto existente
+	Design do produto  testar combinação de um olhar UX, melhora o Design
+
+	
+	Resolução de problemas, não apenas entregas
+		Foco no usuario e no negocio o tempo todo
+
+
+Benefícios para os Negócios
+
+Recrutamento mais ajustado, validando raciocínio antes do conhecimento técnico. As top 50% na área de produtos são aquelas pessoas que têm senso analítico. As top 30% são aquelas que, além do senso analítico, têm senso de execução. E as top 10% têm também o senso de produto.
+
+Resolução de problemas, não apenas entregas.
+
+Foco no usuário a todo o tempo, especialmente no encaixe entre necessidades e proposta de valor.
+
+Pessoas focadas em objetivos bem definidos e com responsabilidade sobre os resultados.
+
+Liderança por contexto, não por controle.
+
+Benefícios para as pessoas de produto
+
+Trabalhar produtos com estrutura.
+
+Gerar capacidade de empatizar com usuários.
+
+Clareza sobre trade-offs e tomada de decisão consciente.
+
+Transformar ambiguidade em soluções específicas.
+
+Boost na criatividade, saindo do óbvio.
+
+Pensar em escala.
+
+Quebra de grandes problemas em partes menores.
+
+
+
+
+
+COMO DESENVOLVER O PRODUCT SENSE
+
+Product LED GROWTH
+	Quando crescimento do negocio é liderado pelo produto
+	Buscam criar algo que seja novo e valioso
+	Produtos contribuindo ativamente para valor de mercado
+
+	Todos da organização deveriam estar pensando em produto, ter o product sense
+		
+	Design - 
+		contato direto com usuario
+		ideações e experienmentações
+		feedback constante dos usuarios e organozação
+	
+		exposição constante as reações do usuarios
+
+	TECH
+		Planejamento do produto
+		intereções do produto
+		insights e métricas
+		Exposição a falhas e sucessos
+
+	BIZ
+		Comportamento do negócio
+		Movimentações do mercado
+		Posicionamento
+	
+	Reações do USuarios, do produto e do mercado
+	
+
+	Golden Circle
+	Why (porque funciona)
+		how
+			What
+	
+	nao e sbre o seu gosto pessoal, é ter a curiosidade de entender o motivo real de coisa funcionam e outras não funcionam.
+
+	Para conhecer o product sense, precisa de ferramentas para converter o que vc conhece em trabalho
+		Espaço do problema
+			Job to done, continuos discovery
+		Espaço da solução
+			lean canvas
+		
+
+	MAO NA GRAXA
+		Começa pelo usuario
+			Qual problema que precisa resolver (observe a relação das pessoas com o problema)
+			Qual Publico vou resolver o problema e pq?
+			
+		Trabalho a ser realizado
+			Porque eu estou fazendo isso ?  Qual a visão do produto ?
+			Como farei isso ? Qual a declaração das minha intenções ?
+
+		Define objetivos e recursos
+			Que objetivos eu vou estabelecer ? O que exatamente busco alcançar ?
+			De que recursos(pessoas, ferramentas etc) precisarei ? o que farei para alcançar esses objetivos ?
+
+		
+			
+Resumo do Bloco
+
+Product-led growth é quando o crescimento de um negócio é liderado por um produto. O negócio busca criar algo novo e valioso para se destacar, com produtos contribuindo ativamente para seu valor de mercado.
+
+O primeiro passo é lembrar: "meu produto é o que vai levar os negócios para frente".
+
+Para ter um product-led growth, todas as pessoas da organização devem desenvolver um product sense.
+
+Esse desenvolvimento envolve responder continuamente às diferentes dimensões do negócio: é preciso manter uma exposição constante às reações de usuários; manter exposição constante às reações do produto; e manter exposição constante às reações do mercado.
+
+Não é sobre seu gosto pessoal, é sobre ter curiosidade e entender o real motivo dos produtos funcionarem.
+
+Não dá pra ter product sense sem ferramentas e estruturas que ajudem a organizar o pensamento. Existem múltiplas técnicas para trabalhar no "espaço do problema" (ex: jobs-to-be-done, continous discovery) e no "espaço da solução" (ex: lean canvas). Porém, mais importante que as ferramentas, é fazer desse pensamento que explora constantemente a incerteza e a ambiguidade um hábito.
+
+Uma boa maneira de estruturar o pensamento é começar pelo usuário, olhar para o trabalho a ser feito e, por fim, definir objetivos e recursos.
+
+
+
+
+Lembre-se
+
+Pessoas de produto são naturalmente curiosas. Sabe aquela criança que abre o brinquedo para ver o que tem dentro? Pessoas curiosas fazem perguntas ?
+
+Product Sense é a nossa capacidade de entender o que torna um produto excelente. O que o torna útil, agradável, simples...
+
+Product Sense é sobre entender e resolver problemas - e a tecnologia é o elemento que reduz a lacuna entre usuário e negócio.
+
+O que importa é conseguir product-market fit(estar no bom mercado e satisfazer ele), compreendendo usuários e restrições do negócio.
+
+Beneficiando os negócios, o pensamento de produto ajuda a ter comprometimento com objetivos e resultados, criando assim um ambiente propício para liderança.
+
+Beneficiando a atuação de PMs, o pensamento de produto ajuda a dar estrutura para um trabalho onde nenhuma resposta é óbvia, desenvolvendo a capacidade de lidar com a incerteza.
+
+Todas as pessoas da organização deveriam ter product sense - afinal, estão todas expostas aos usuários, produto e mercado.
+
+Crie sistemas para estruturar o trabalho de produtos e o exercite regularmente - product sense é um hábito e pode ser melhorado com o tempo.
+	
+
+Perguntas que foram respondidas
+
+Isso pode ser aplicado em diferentes estágios da empresa? Sim pode. Ciclo de vida, existem empresas em iniciando e ou com bastante maturidade.
+
+Como PM, preciso desenvolver cada vez mais product sense? Que habilidades me ajudam nesse pensamento?  Sim pois isso é um habito, desenvolver a disciplina de se provocar olhando tudo como produto. Curiosidade.
+
+Sou a primeira PM da minha empresa. Como convencer a liderança a confiar no meu product sense? Confiança não se pede, mas sim gerando resultado. Melhor pedir desculpa do que permissão.
+
+O pensamento de produtos é ficar fazendo perguntas sobre tudo? Como saber quais são as perguntas certas?  Sim é ficar fzendo pergunta sobre tudo.
+Não se sabe quais são as perguntas certas, com tempo melhora as perguntas.
+
+O pensamento de produtos te ajuda a tomar decisões mesmo com baixa confiança e segurança? Senso de produto, sim ajuda a ter decisões
+
+Ter product sense é mais importante na hora da estratégia ou na hora da entrega de soluções? O pensamento de produto é trsnversao a tudo, 
+
+Não sou PM, faço gestão de projetos numa empresa tradicional. Posso desenvolver um pensamento de produtos e com isso ajudar os negócios da minha companhia? Sim, pode e deve.
+
+Product sense é importante em uma entrevista de emprego? Como isso é medido? sim o Jeito como vc estrutura o trabalho deve ser feito, como vc pensa no trabalho
+
+Como você desenvolveu seu hábito de pensar produtos?  Muito treino. 
+
+E quando o Product Sense e o OKR dizem coisas diferentes? Como trago minha liderança para esse formato de pensamento? 
+
+Você tem dicas de como convencer as pessoas sobre novas oportunidades ou ideias? 
+
+Como provocar PMs do meu time a desenvolver melhor seu pensamento de produto?  Fazendo perguntas que incomodam, e entendendo em qual o melhor momento para fazer pergunta
+
+
+
+
+
+VISÃO DE PRODUTO
+
+BLOCO01- O FUTURO QUE O PRODUTO IRA CRIAR
+	No goldem circle 
+	
+	Porque (Visão do produto)
+		Como (estratégia - Rodmap)
+			O que	(Tatico - Solução tecnica para construir)
+
+  
+		Resumo do Bloco
+
+A Visão de Produto funciona como uma bússola para as decisões do time; inspira pessoas a criar produtos fantásticos; conecta nosso trabalho a um significado/impacto; orienta o uso de novas tecnologias e tendências
+
+O principal papel da pessoa de produto é entregar times engajados e empoderados ao redor da visão do produto
+
+A visão de produto é o "por que", a estratégia é o "como" e o roadmap é o "o que". Começamos sempre pelo porquê
+
+A visão está para liderança assim como a estratégia está para gestão. A visão inspira, enquanto a estratégia nos ajuda a chegar lá. A visão é o destino final, enquanto a estratégia é o caminho
+
+A visão de produto, somada aos objetivos anuais de negócio, são a base da estratégia
+
+	
+
+BLOCO02 - ARTE VS TÉCNICA
+
+	visão é loguissimo prazo (apple mostrou um produto de 20 anos para frente) é inspiração
+	precisa ser Abrangente
+	não é slogan 
+
+	Resumo do Bloco
+
+A visão de produto é uma ferramenta de persuasão. Tem um pouco de "arte", mas há modelos práticos que ajudam a compor uma boa visão
+
+Visão é longuíssimo prazo. Não dá para validar. Em desenvolvimento de software, ela engloba um prazo de 5-10 anos
+
+Visão deve ser o mais abrangente possível dentro do seu ecossistema de produtos
+
+Visão não é um slogan. É para o time interno, não para usar no marketing
+
+Nos termos do fundador do Nubank, a visão de produto deve ser BHAG (big, hairy, audacious goal): grande, "cabeluda", audaciosa.
+
+O quadro de visão do produto (product vision board) ajuda a descrever e visualizar sua visão e pode ser exibido em conexão com a estratégia em paredes reais ou virtuais (como o Miro) da companhia, para inspirar o time
+
+Grupo alvo: o usuário é o foco da visão de seu produto. Que mercados "mainstream" (economicamente relevantes e bem definidos) esse produto atende?
+
+Necessidades: quais são as necessidades das pessoas que o produto resolve. Que problema ele resolve? Como beneficia usuários? Indique a proposta de valor para cada grupo alvo definido na primeira coluna. Você também pode trazer aqui princípios éticos, mapeando como o produto beneficia usuários sem ferir as pessoas ou o planeta.
+
+Objetivo de Negócio: como produto gera valor para a companhia. Quais são os objetivos de negócio? Como o produto vai beneficiar a companhia? Fale com stakeholders de negócio para descobrir por que a empresa deve investir no seu produto
+
+Produto: a tecnologia que vai construir a ponte entre as necessidades das pessoas e as do negócio. Qual é o produto? O que ele tem de diferente dos outros? Temos conhecimento e tecnologia para desenvolvê-lo? Você pode listar as funcionalidades, sistemas ou interfaces que entregam o valor identificado e tornam o produto único para esse público
+
+Visão: qual é o propósito de criar o produto? Qual é a mudança positiva que ele terá no mundo? Consolide a visão de produto em uma frase grandiosa, capaz de inspirar as pessoas interessadas na construção do produto
+
+
+
+BLOCO03 - Pessoas INTERESSADAS
+	Resumo do Bloco
+
+"Stakeholders" são todas as pessoas interessadas no seu produto.
+
+John Cutler: "As pessoas mais apaixonadas do seu time vão esperar que líderes formem uma estratégia coerente. (...) Escrever três linhas vagas sobre a "visão" é fácil. Também é fácil planejar cada pedaço de trabalho para o ano. É muito mais difícil detalhar uma estratégia que crie espaço para criatividade e ação."
+
+Senso de responsabilidade: todas as pessoas envolvidas no sucesso do produto devem se sentir guardiãs da visão de produto: do C-level ao Business Owner, da pessoa de design à pessoa desenvolvedora
+
+Sua visão de produto pode ser prototipada em formatos que vão além de uma frase, como o vídeo da SpaceX sobre a missão de ir a Marte.
+
+Jared M Spool: "Uma visão de experiência não descreve um novo produto ou serviço. Na verdade, mostra como a vida do usuário muda com as ideias que constituem a visão."
+
+
+BLOCO04 - 
+Lembre-se
+
+A visão garante o foco com espaço para criatividade
+
+A visão é uma ferramenta de liderança
+
+A visão representa o futuro que o produto irá criar, seu impacto no mundo e na vida das pessoas
+	
+
+
+PERGUNTAS
+Qual o primeiro passo para criar uma visão para minha squad?
+
+Quando eu sei que preciso de uma visão de produto?
+
+Sou só um PM, como posso colaborar para a Visão de Produto da companhia?
+
+
+Seguir com as perguntas
+
+Como a visão se relaciona com OKRs?
+
+A visão é uma frase ou um “pitch”? Eu preciso escrever em forma de uma frase ou o vision board preenchido já resolve?
+
+Você tem um exemplo de visão que funcionou bem na sua experiência profissional? Como foi o processo?
+
+Como validar uma Visão de Produto?
+
+De quanto em quanto tempo devo revisitar a visão de produto? 
+
+
+
+
+

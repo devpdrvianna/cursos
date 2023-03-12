@@ -1,0 +1,869 @@
+Construção da Solução
+
+Atividade: Canvas de Proposta de Valor
+
+Vamos começar com mão na massa? Veja o exercício que o André propõe para você aquecer os motores antes de se aprofundar nas técnicas de modelagem de negócios.
+
+Canvas de Proposta de Valor (Value Proposition Canvas)
+
+O "Value Proposition Canvas" ajuda a organizar informações para dar direcionamento para o seu negócio ou produto, mapeando dores e ganhos essenciais a partir de uma dupla perspectiva: do negócio e do cliente.
+
+Crie uma cópia e preencha o Value Propostion Canvas, refletindo sobre a proposta de valor e oportunidades de mercado do seu produto ou negócio com base no que você sabe hoje. 
+
+BLOCO02 - Proposta de Valor & Análise de Mercado
+
+Agora que você aqueceu os motores com o desafio de pensar na sua proposta de valor através do Value Propostion Canvas, o André vai falar um pouco sobre a relação entre proposta de valor e pesquisa de mercado, explorando diferentes formas de você coletar e organizar informações relevantes para seu negócio.
+
+ECONOMAPAS  - Empresa que fornece analises por região por servicços
+
+
+Resumo do Bloco
+
+A análise das dores de usuários é tão importante quanto a análise de mercado e devem ser combinadas na criação de um modelo de negócios em busca de product-market fit.
+
+Além do Value Proposition Canvas, há diferentes métodos de análise de mercado que podem ser divididos em 3 grupos: Mapa de Stakeholders; Tamanho de mercado; Análise demográfica.
+
+Mapa de stakeholders: case venda direta de medicamentos - exemplo do impacto potencial de stakeholders sobre um negócio.
+
+Tamanho de mercado: modelo TAM SAM SOM; modelo de análise de mercado usado na Gympass.
+
+Análise demográfica é quando você reúne dados de um determinado segmento ou lugar para analisar padrões relevantes ao seu negócio.
+
+
+BLOCO03 - Modelagem de Negócios
+
+Este é bem famoso: Business Model Canvas. Nesta parte da aula, André explica como esse modelo de organizar as informações do negócio ajuda a orientar suas decisões - e como podemos usá-lo para entender a estratégia de outras empresas do mercado.
+
+
+Loft descobre imaveis desvalorizados, reforma e revende ganhando dinheiro
+	montou fundo de ações na bolsa voltado para Imveis
+
+
+
+Resumo do Bloco
+
+Um modelo de negócios tem que responder 3 perguntas: quem é o cliente; o que esse cliente valoriza; e como esse negócio faz dinheiro;
+
+O Canvas de Modelo de Negócios é uma forma visual de você organizar suas perguntas e hipóteses relacionadas ao negócio. Ele nasce da ideia central (oferta de valor) e vai se desdobrando nos outros campos. Todas as áreas preenchidas precisam de validação;
+
+A separação entre os blocos do canvas ajuda a orientar e focar estratégias de diferenciação, entendendo as áreas com maior oportunidade no mercado: análise das estratégias de diferenciação de empresas como Nubank, Quinto Andar, Dr. Consulta e Loft;
+
+
+
+BLOCO04 - Modelagem de Negócios em Grandes e Pequenas Empresas
+
+É muito diferente o trabalho de modelagem de negócios em empresas grandes e pequenas? Nesta parte, o André fala sobre estratégias de diferenciação e dá exemplos do Business Model Canvas aplicado.
+
+
+Resumo do Bloco
+
+Cada parte do Business Model Canvas (BMC) é uma potencial área de diferenciação.
+
+Ilustração de processos de validação de modelo de negócios a partir da experiências do expert na EduK e iFood.
+
+Movimentos comuns de mudança de modelo de negócios e seus impactos nas demais áreas do canvas.
+
+
+
+BLOCO05 - Inovação em Modelos de Negócios
+
+Nesta parte, André indica o "caminho das pedras" para a inovação em modelos de negócios e mostra como você pode praticar e desenvolver sua habilidade de modelagem de negócios.
+
+Resumo do Bloco
+
+Inovação em produtos tem prazo de validade; não basta inovar em produtos ou processos, é preciso inovar em modelos de negócios.
+
+O objetivo de um modelo de negócios é criar e capturar valor no mercado.
+
+A inovação em modelo de negócio acontece quando afeta significativamente pelo menos 2 dos componentes do seu modelo de negócio atual.
+
+Exemplos de como empresas digitais mudaram seu modelo de negócios: Quinto Andar, Nubank, PicPay, iFood, Locaweb, Totvs.
+
+É importante compreender os padrões de modelos de negócio e adaptá-los ao seu mercado, sobrepondo a lógica dominante vigente.
+
+
+	As melhores praticas atuais levam a becos sem saida; os melhores caminhos são os caminhos novos e não testados.
+
+
+Lembre-se
+
+O objetivo de um modelo de negócios é criar e capturar valor no mercado.
+
+Um modelo de negócios tem que responder 3 perguntas: quem é o cliente; o que esse cliente valoriza; e como esse negócio faz dinheiro;
+
+O Canvas de Modelo de Negócios é uma forma visual de você organizar suas perguntas e hipóteses relacionadas ao negócio. Ele nasce da ideia central (oferta de valor) e vai se desdobrando nos outros campos. Todas as áreas preenchidas precisam de validação;
+
+Cada parte do Business Model Canvas (BMC) é uma potencial área de diferenciação.
+
+Inovação em produtos tem prazo de validade; não basta inovar em produtos ou processos, é preciso inovar em modelos de negócios.
+
+
+
+ROADMAP E PRIORIZAÇÃO DE FUNCIONALIDADES
+
+
+Roadmap não é palpite
+
+Afinal, o que é um roadmap? Para que ele serve? Nesta primeira parte, descubra onde o roadmap se encaixa no ciclo de desenvolvimento de um produto digital.
+
+Resumo do Bloco
+
+Roman Pichler: "Um roadmap de produto é um plano de alto nível que descreve COMO o produto deve crescer. Ajuda a expressar para onde você pretende levar o produto e por que faz sentido investir nele."
+
+No modelo do golden circle (Simon Sinek), o roadmap é o "como": como vou resolver esse problema?
+
+A estratégia tem que ser realista e tangível para poder ser compartilhada com as pessoas interessadas (stakeholders)
+
+Um bom modelo de roadmap é o "go product roadmap" (Roman Pichler)
+
+Um documento que vai reunir pessoas ao redor de um plano precisa ser muito mais que uma lista de desejos
+
+Roadmap não é documentação - é uma ferramenta de comunicação.
+
+Roadmap permite: vislumbrar os passos e a continuidade do propósito que definimos na visão do produto ao longo dos meses e trimestres; cada pessoa entender como agrega valor para o sucesso do produto, facilitando a colaboração; priorizar sempre que for necessário discutir quando e em que ordem vamos evoluir o produto e qual benefício será gerado; tangibilizar o backlog de trabalho sem a necessidade de entrar em muitos detalhes
+
+Backlog: as tarefas que as pessoas vão executar na construção do produto
+
+As pessoas que devem acessar e ser envolvidas no roadmap são a "squad expandida", composta por engenharia, produto e design + lideranças de negócios
+
+A pessoa de produto é a "dona do roadmap". Isso não quer dizer que ela faz o roadmap sozinha
+
+Um roadmap de produtos eficiente permite acordos vivos ao redor de objetivos estratégicos
+
+
+
+BLOCO02 - A Prática do Roadmap
+
+Vamos à prática: como construir um roadmap que ajuda a comunicar as prioridades do produto para todas as pessoas do time? Que modelos podem ser usados?
+
+
+Resumo do bloco
+
+No "Roadmap de Produto GO", elaborado por Roman Pichler, o "GO" significa = "Goal Oriented", orientado a objetivos/resultados
+
+Antes de iniciar a construção do roadmap, o primeiro passo é ganhar máxima clareza sobre os grandes resultados desejados (ex: aquisição; ativação; retenção)
+
+Período: ajuda na gestão de expectativas, especialmente quando há prazos relacionados à estratégia do negócio. Definir blocos de tempo (ex: "começo do mês") é melhor do que definir datas exatas
+
+Objetivo: a alavanca de negócio que seu time vai trabalhar. Foque em "outcomes" (resultados de impacto) em não em "outputs" (entregas feitas)
+
+Métricas: são elas que determinam se o objetivo buscado foi alcançado.
+
+Funcionalidades: uma visão de alto nível das funcionalidades que podem nos ajudar a alcançar os objetivos, preferencialmente validadas através de experimentos
+
+Nome: use para mapear versões ou dar um nome divertido para determinada entrega
+
+
+
+BLOCO03 - O Poder do Ciclo
+
+Nesta última parte, Leticia fala sobre como manter vivo seu roadmap e introduz alguns modelos de priorização de entregas.
+
+Resumo do Bloco
+
+O prazo de revisão de seu roadmap depende de algumas variáveis, como a maturidade do produto e a estabilidade do mercado
+
+Ferramentas de priorização: matriz de impacto e esforço; RICE (alcance, impacto, confiança e esforço); pontuações ponderadas; kano (funcionalidade x satisfação); MoSCow
+
+Fazer um review/showcase é importante para reconhecer e celebrar o trabalho que foi feito, validando as decisões do roadmap
+
+
+
+Lembre-se
+
+Antes de tudo, defina a visão de produto e alinhe com stakeholders
+
+Construir produto é um ciclo
+
+Roadmap não é lista de desejos
+
+Pessoas de negócio e operação são parte do time
+
+Não fale "quando vamos entregar", mas "que valor vamos entregar".
+
+
+Perguntas e Respostas
+
+Nas perguntas e respostas, Leticia explora os principais desafios da construção de roadmaps, passando por prazos, ferramentas, metas e relação com as lideranças.
+
+Existe problema em ter um prazo definido? Como lidar com um prazo?
+	Tem produto que tem data(Bacen, regulamentacao, data de lançamento-Feira etc...)
+	Foco no que esta fazendo, no que vou entregar
+
+	Data retiradas nao sei de onde, geralmente e tirado de algum doc, ou fala que é facil	
+	
+Existe problema em ter muitas mudanças no roadmap?
+	Pode ser falta de clareza , do negocio ou mapeamento, se mudar muitas vezes. Ajustes sao normais
+
+Qual seria o tempo ideal de previsão de um roadmap?
+	
+
+Meu stakeholder está cobrando um roadmap, por onde preciso começar?
+
+Eu sou líder de PMs, qual meu papel com relação ao roadmap de uma squad?
+	papel e dar clareza na visao do produto, ajudar 
+
+Eu preciso de 2 roadmaps separados para discovery e para delivery? Ou tudo se combina no mesmo roadmap?
+
+O Roadmap é um documento que as pessoas acessam com frequência ou é uma apresentação mostrada apenas em reuniões importantes?
+
+Quais são as suas ferramentas preferidas para criar e comunicar um roadmap claro?
+
+Me dá alguns exemplos de como criar empatia do time com o usuário. Como envolver pessoas engenheiras? E de negócio?
+
+Como lidar com efeito top down no roadmap?
+
+Vale chamar stakeholder para a priorização?
+
+Como comunicar roadmap para a alta liderança?
+
+Ficou alguma dúvida que você gostaria de ver respondida?
+
+
+
+
+O Processo de UX
+
+O que é User Experience (UX)? Por que essa área vem se tornando tão valiosa para os negócios? Vamos começar entendendo melhor a área de UX e como ela se desdobra em um processo na construção de produtos e serviços digitais.
+
+Resumo do Bloco
+
+Entre 1983 e 2017 o mercado passou de mil profissionais de UX para 1 milhão de profissionais no mundo. Estima-se que até 2050 haverá 100 milhões de profissionais nessa área.
+
+"User experience não se resume a um layout bonito, mas sim à forma como você experiencia um produto ou serviço." - Don Norman
+
+O que o UX Design pode fazer pelo seu projeto: CRIAR um novo produto ou serviço; DESCOBRIR o que pode ser mudado caso as metas não estejam sendo alcançadas; MELHORAR um produto que já existe; VALIDAR se o produto atende aos clientes; PADRONIZAR os elementos visuais/funcionais do seu produto; REESTRUTURAR a organização da sua empresa de forma estratégica.
+
+A forma (visual / interações) são apenas a superfície visível do trabalho de UX. Antes dessa superfície existe um longo e complexo processo de trabalho que passa por: estratégia (objetivo do negócio / solução para as pessoas); escopo (requerimentos / conteúdos); estrutura (mapa do site / fluxogramas); e esqueleto (wireframes).
+
+"Design não é só deixar bonito; é sobre ter relevância no mercado e resultados significativos." - John Maeda
+
+O pensamento de design (design thinking) preza por mais contato, observação e empatia com as pessoas que vão usar o produto. Isso permite projetar experiências mais adequadas e traz maior possibilidade de inovar e trazer vantagem competitiva real.
+
+O processo de design alcança isso com ciclos de trabalho compostos essencialmente por 5 etapas: 1) entender o problema; 2) pesquisar; 3) gerar ideias; 4) prototipar e testar; e 5) entregar e aprender.
+
+Esse processo é também chamado de duplo diamante ("double diamond"), porque define um movimento contínuo de divergir - convergir - divergir - convergir.
+
+A investigação, protipação e validação de ideias no processo de UX deve ajudar a mitigar riscos de valor, de viabilidade e de negócios.
+
+A construção de uma boa experiência do usuário envolve o fortalecimento de uma cultura empresarial que busca entender os comportamentos das pessoas para melhorar sua entrega continuamente, com base em insumos reais.
+
+
+BLOCO02 - UX ou Uai... Que trem é esse?
+
+Antes de seguir, vamos clarear a diferença entre UX e UI - uma dúvida muito frequente na área - e entender como acontece o trabalho de designers na prática.
+
+
+Resumo do bloco
+
+É difícil definir onde começa e onde termina o trabalho de UX design: seu escopo sempre flutua entre o caos (ideias, hipóteses, sistemas complexos) e a clareza (pesquisas, protótipos, análises, validações).
+
+UX (user experience): trabalho focado em análises e validações para a estratégia - como opera, pesquisas, acessibilidade, usabilidade, métricas, protótipos, personas, objetivos.
+
+UI (user interface): trabalho focado em tangibilizar e refinar a execução da solução - como parece, design visual, interações, animações, imagens/ilustrações, tipografia/cores, layouts, design system, protótipos.
+
+
+
+BLOCO03 - Resumo do bloco
+
+É difícil definir onde começa e onde termina o trabalho de UX design: seu escopo sempre flutua entre o caos (ideias, hipóteses, sistemas complexos) e a clareza (pesquisas, protótipos, análises, validações).
+
+UX (user experience): trabalho focado em análises e validações para a estratégia - como opera, pesquisas, acessibilidade, usabilidade, métricas, protótipos, personas, objetivos.
+
+UI (user interface): trabalho focado em tangibilizar e refinar a execução da solução - como parece, design visual, interações, animações, imagens/ilustrações, tipografia/cores, layouts, design system, protótipos.
+
+
+Resumo do Bloco
+
+Hoje, um time de UX nas empresas de alto crescimento é composto por pessoas com diferentes especializações, como: UX designer, UI designer, user researcher, product designer, UX writer.
+
+Novos papéis vêm se consolidando conforme a área cresce e se desenvolve, como: design lead, head de design, UX manager, UX strategist, design ops, behavior designer, principal de UX.
+
+O que fazer como PM para contribuir com o processo de UX: participe - será um exercício rico, principalmente se você nunca participou de pesquisa empática antes; viabilize tempo para as descobertas; busque as informações que seu time precisa; facilite o acesso e viabilize as conversas; oriente o time de design em relação aos objetivos e interesses do negócio.
+
+É importante fazer fluir a comunicação entre o time de PM e o time de UX, alinhando a linguagem e olhando para os mesmos resultados. Muitas ferramentas de comunicação e colaboração podem ajudar nesse processo, como organizadores de tarefas (Ex: Trello, Notion) e murais virtuais (Ex: Miro, Mural). E existem também modelos de rituais e reuniões que podem ajudar no alinhamento entre os times (Ex: Daily, Design Critique, Planning, Review).
+
+
+BLOCO04 - Estudos de caso
+
+Dois casos trazidos pela Nath ajudam a entender o potencial de impacto que o design pode ter em um produto ou negócio.
+
+
+
+Perguntas que foram respondidas
+
+A pesquisa com consumidores é a mesma que a pesquisa etnográfica que UX Researchers fazem?
+	Profissional de UX Research tem tecnicas a mais e esta mais propenso a pegar mais insights
+
+
+Num processo de design, é importante definir antes se o objetivo é: criar, descobrir, melhorar, validar, etc.?
+	não decidir so pela pesquisa, mas tb por testes, hipoteses etc
+
+Existem processos diferentes para diferentes níveis de maturidade do produto? (desenvolvimento, crescimento, maturidade...)
+	Processo parecido com Double Diamond. 
+ 
+Como o design pode contribuir na prática com a construção da visão do produto?
+	Ele ajuda a empresa a entender o comportamento, o uso do produto, pessoas
+
+
+Quão constante deve ser a participação do PM no processo de Design?
+
+Em quais etapas do processo de UX design a(o) product manager deve participar?
+
+Quem é responsável pela elaboração e análise das pesquisas, PMs ou o time de UX?
+	
+
+Quantos e quais designers meu produto/time precisa ter? Como saber a hora de contratar?
+
+Como se dá a relação entre PM e designers na decisão de qual caminho seguir com o produto no longo prazo?
+
+Na sua experiência, quais são os desafios mais comuns na relação entre PMs e UXs?
+	Talvez o UX designer nao entenda tanto do negocio, assim precisa desenvolver a pessoa (alinhar espectativa)
+	
+
+
+Meu produto não tem UX, o que eu faço?
+
+Para fazer um bom produto precisa ter toda essa "galera" (diferentes papéis de design)?
+	um bom produto sim precisa de todos os papeis
+	em um produto de garagem o criador acaba fazendo tudo
+
+
+Preciso contratar um designer pro meu produto, como eu acho a pessoa certa? Alguma recomendação?
+	confecciona a lista do que vc precisa para despois procurar o profissional
+
+Quando é necessário contratar uma consultoria de UX Design?
+	Quando tem uma visao e ja alinhou com o Ex lider, e que ja alinhou para frente e a equipe não ira suprir as necessidades
+
+Na minha empresa, temos designers em vários squads, mas não tem uma área ou liderança específica de design, com diretrizes gerais para o time. Nesse caso, quem lidera e alinha os processos de UX?
+	
+	
+
+
+
+Se ouve falar muito de design sprint, e times de produto acabam utilizando esse processo pra quase toda ou toda abordagem e problema. Ele é ideal pra tudo mesmo ou quais os tipos de desafios que ele se encaixa melhor?
+
+
+
+Todo processo de design sempre passa por uma parte crítica onde o time tem mais dúvidas e incertezas do que quando começou. Como lidar com isso e manter o progresso dentro do processo?
+
+Na sua opinião, qual foi o segredo do processo da Nuconta (do nubank) ser tão bem sucedido?
+
+Tem negócios que não são focados nas pessoas - e nesse caso não precisariam de um trabalho de UX?
+
+
+
+Você lembra algum caso em que foi muito difícil para você confiar no processo - mas no fim deu certo?
+
+Qual é a diferença essencial entre o processo de UX em um produto com poucos usuários x um produto gigante em relação ao foco?
+
+Há sempre um perigo de patinar em algumas partes do processo de design. Como manter o processo ágil?
+	Para não patinar, bate papo com o UX, em uma conversa sai varias ideias.  Trabalhar em rede é otimo para evoluir com novas ideias
+
+
+
+
+
+
+DESIGN COMPORTAMENTAL NA CONSTRUÇÃO DE PRODUTOS DIGITAIS
+
+Chegou o momento de dar um mergulho rápido no universo do design comportamental, uma disciplina super importante quando falamos de design centrado nas pessoas.
+
+
+
+BLOCO01 - O que é design comportamental
+
+Vamos começar entendendo o conceito de design comportamental e por que essa disciplina é relevante na construção de produtos digitais.
+
+Resumo do Bloco
+
+O design comportamental é uma disciplina dentro do design que investiga métodos de influenciar o comportamento humano.
+
+Comportamento é o conjunto de ações de um indivíduo observáveis objetivamente e seu procedimento diante de estímulos sociais ou sentimentos e necessidades íntimas.
+
+Design comportamental une os princípios de design com áreas como psicologia, sociologia, antropologia e neurociência. Quanto mais designers e PMs entendem o comportamento humano, melhor conseguem ajudar as pessoas a agir e tomar decisões.
+
+Produtos, serviços e experiências são veículos de mudanças comportamentais. Por isso, o design comportamental vai além da facilidade de uso (usabilidade) para identificar formas de persuasão.
+
+Design comportamental parte do pressuposto de que a solução a ser desenvolvida tem uma relação intensa com o comportamento de seus usuários e nos permite direcionar seu comportamento para algum caminho pré-estabelecido.
+
+Times de produtos digitais precisam usar o design comportamental para construir produtos que levam em consideração as expectativas, racionalidade e frustração de usuários.
+
+Existe uma correlação entre design comportamental e economia comportamental. A economia comportamental estuda as influências cognitivas, sociais e emocionais do comportamento econômico das pessoas.
+
+Designers e PMs podem usar os princípios do design e da economia comportamental para apresentar as informações certas (e a quantidade certa) para envolver usuários passo a passo e orientá-los em direção ao call to action final desejado.
+
+
+BLOCO02 - Processos cognitivos
+
+Vamos agora para uma visão geral de como nossa mente funciona e de onde vêm as bases para a tomada de decisão das pessoas.
+	Resumo do Bloco
+
+Entender processos cognitivos ajuda a entender "como o ser humano funciona" - como absorvem novos conhecimentos e tomam decisões baseadas nesses conhecimentos.
+
+O processo cognitivo pode ser separado em 6 partes: percepção, atenção, memória, linguagem, pensamento, emoção.
+
+Percepção: nos permite organizar e entender o mundo a nossa volta, através de estímulos que recebemos dos sentidos.
+
+Atenção: nos permite concentrar em um estímulo ou atividade para processá-lo mais profundamente depois.
+
+Memória: nos permite codificar, armazenar e recuperar informações do passado. É o processo básico para aprendizagem e nos permite criar um sentido de identidade.
+
+Linguagem: nossa principal ferramenta de comunicação, que nos permite expressar os pensamentos e sentimentos.
+
+Emoção: reações interiores complexas e incontroláveis, positivas ou negativas, ante o que percebemos ou lembramos.
+
+
+BLOCO03 - Vieses cognitivos
+
+Vieses cognitivos são "atalhos" nos nossos processos cognitivos que podem influenciar diretamente como construímos novos produtos e soluções. Entenda quais são e como trabalhar com esses vieses para construir produtos melhores.
+	
+
+Resumo do Bloco
+
+Viés (em inglês "bias") é uma tendência a seguir um certo caminho ou agir de determinada maneira. São atalhos mentais que tornam o pensamento mais fácil e rápido.
+
+Os vieses podem tanto ser pré-julgamentos de usuários ao usar um produto ou serviço quanto podem influenciar nossas próprias decisões na construção do produto.
+
+Um viés cognitivo muito comum é você achar que conhece seus usuários mesmo sem nunca ter feito uma pesquisa em profundidade.
+
+Viés de ancoragem: a ordem como recebemos as informações contribui para determinar o curso das nossas percepções.
+
+Viés de confirmação: informações que confiram nossas crenças recebem atenção especial. Temos mais propensão a procurar e concordar com aquilo que ajuda a reforçar ou confirmar nossas hipóteses.
+
+Efeito halo: as primeiras impressões pesam bastante no julgamento. O quanto achamos um produto atraente influencia nosso julgamento sobre esse produto.
+
+Efeito placebo: um remédio, mesmo falso, pode fazer efeito se acreditarmos que ele irá funcionar. Isso pode acontecer em situações que são controladas por nossa mente.
+
+Validação social: é quando você observa uma pessoa validando um produto e isso influencia sua percepção sobre esse produto.
+
+Viés de automação: temos propensão a favorecer sugestões de sistemas automatizados.
+
+Efeito padrão: utilização da nossa preguiça de agir em favor de uma determinada escolha, como o "próximo episódio" automático da Netflix, onde você não precisa fazer nada para continuar assistindo.
+
+Efeito dinheiro invisível: temos maior disposição para gastar quando não podemos ver diretamente o dinheiro que está sendo gasto.
+
+Viés de curiosidade: um produto restrito, apenas para membros, que usa a dinâmica "member get member" gera curiosidade, interesse e FOMO ("fear of missing out", medo de ficar de fora.)
+
+Viés de status: as pessoas tomam decisões movidas pelo status que vão adquirir a partir do que adquirem ou fazem, como comprar um iPhone porque ele é um indicador de pessoas de alta renda.
+
+Viés de escassez: a sensação de que você precisa aproveitar os recursos oferecidos antes que perca a chance, como quando você ganha um número limitado de convites para chamar outras pessoas.
+
+Viés de simplificação: quanto mais simples (menos etapas, menos escolhas) mais fácil de tomar uma decisão. Você pode aproveitar esse efeito usando estímulos que facilitam a decisão ("compre com um clique") ou dificultam ("tem certeza que deseja exlcuir esse arquivo?")
+
+
+
+
+Lembre-se
+
+Podemos usar os vieses cognitivos das pessoas para influenciá-las a tomar boas decisões, tomando cuidado para não oferecer escolhas demais a ponto de frustrar as pessoas.
+
+Tome cuidado com vieses cognitivos na construção de produtos digitais.
+
+O processo cognitivo é complexo e depende de cada pessoa, respeite a maneira de pensar e decidir de cada usuário.
+
+Os modelos mentais das pessoas é evolutivo. Precisamos alinhar constantemente nosso produto com o que acontece no mundo ao redor.
+
+A ética é importante no design comportamental. Não use "dark patterns" (padrões sombrios) para influenciar usuários.
+
+
+Perguntas que foram respondidas
+
+Em que fase do desenvolvimento do produto acontecem as discussões sobre design comportamental?
+
+Como saber o limite entre influenciar um comportamento de maneira valiosa para as pessoas vs. influenciar o comportamento com foco apenas no negócio?
+
+Você acha que produtos de grande escala podem investir em design comportamental para ter impactos sociais positivos na sociedade?
+
+Que livros eu posso ler para me aprofundar em design comportamental?
+
+Os "processos cognitivos" são uma linguagem para descrever o comportamento das pessoas? Pode ajudar na comunicação entre UX e PMs?
+
+Como estudar o comportamento das pessoas para gerar aprendizado?
+
+
+
+
+MÉTODOS ÁGEIS E PROCESSOS DE TECNOLOGIA
+
+BLOCO01 - PMs & Devs
+
+Como é o relacionamento entre PMs (lideranças de produto) e Devs (pessoas desenvolvedoras)? Quais são seus papéis e qual a necessidade de PMs terem background técnico?
+
+Resumo do Bloco
+
+O mais importante em um time de produto é ter um objetivo claro, além das especialidades necessárias para atingi-lo.
+
+O papel de PMs no time de produto é liderar e inspirar o time (não "chefiar"); garantir que o time esteja fazendo as coisas certas, que vão gerar mais valor; evitar trabalho jogado fora (mas às vezes acontece); e (frequentemente) ajudar a organizar o time.
+
+Não precisa de background técnico para liderar desenvolvimento de produto - mas precisa topar aprender um pouco sobre bancos e estruturas de dados (e talvez SQL); lógica de programação; arquitetura; APIs; Processo de deploy e release. Isso é importante para poder conversar com o time sobre as soluções e entender os trade-offs. Se não sabe, pergunte!
+
+No caso de produtos mais técnicos é diferente, PMs com background técnico terão mais habilidade de gerar valor entendendo a tecnologia por trás da solução.
+
+Papéis de PMs
+
+No "espaço do problema", o papel é trazer objetivos e propósito; trazer a visão dos clientes, usuários e stakeholders; definir claramente o problema a ser trabalhado; definir as métricas relevantes (a acompanhar); comunicar e explicar as decisões.
+
+No "espaço da solução", seu papel é conduzir e facilitar a definição da solução, buscando clareza compartilhada (shared understanding); dar visibilidade para trade-offs entre valor, usabilidade e viabilidade.
+
+No "delivery", seu papel é facilitar a comunicação entre as pessoas do time e stakeholders; conduzir o planejamento do time, orientado para a geração de valor; desempatar decisões que surjam no desenvolvimento.
+
+No "pós-delivery", seu papel é trazer os resultados para o time.
+
+PMs não têm como garantir segurança psicológica para o time, mas pode fomentar, fazendo fluir o conhecimento e o trabalho de todas as especialidades mais técnicas.
+
+Papéis de Devs
+
+No "delivery" é onde está o core do seu trabalho, que é construir, testar, identificar débitos técnicos e garantir qualidade no código do produto.
+
+No "pós-delivery", seu papel é monitorar performance e corrigir bugs.
+
+É cada vez mais importante trazer o time de tecnologia para as etapas anteriores do ciclo, nos papéis certos e no momento certo, para viabilizar soluções melhores e mais eficientes.
+
+No "espaço da solução", seu papel é também desenhar soluções (não somente técnicas); levantar novas tecnologias; identificar restrições; perguntar e questionar.
+
+No "espaço do problema" é mais difícil envolver pessoas que estão focadas no desenvolvimento. Mas sempre convide! Quando devs participam de processos de discovery podem contribuir muito perguntando e questionando, além de poderem entender o objetivo mais claramente e criar empatia com usuários e clientes.
+
+
+BLOCO02 - Agilidade na Prática
+
+Antes de seguir, vamos entender melhor o conceito de agilidade no desenvolvimento de produtos digitais, como esse o "Ágil" acontece na prática e quais são os modelos de organização e gestão do trabalho que melhor funcionam hoje no mercado.
+
+
+Resumo do bloco
+
+Agilidade é sobre conseguir chegar antes onde você quer chegar (e não em qualquer lugar).
+
+O "Manifesto Ágil", publicado há 20 anos, trouxe princípios que defendiam uma nova forma de trabalhar: indivíduos e interações mais que processos e ferramentas; software em funcionamento mais que documentação abrangente; colaboração com cliente mais que negociação de contratos; responder a mudanças mais que seguir um plano. Ou seja: mesmo havendo valor nos itens da direita, valorizamos mais os itens da esquerda.
+
+Nos dias de hoje, esses princípios podem ser traduzidos em: fomentar times autônomos e a confiança entre os times; aceitar mudanças ao longo do tempo; trabalhar em ciclos curtos; reduzir o tamanho dos "lotes"; parar e refletir sobre o produto e o processo.
+
+"O manifesto ágil não foi pensado para um modelo de produto de tecnologia, mas sim para um modelo de serviço de desenvolvimento de produtos" - Jeff Patton
+
+Agilidade é uma forma de pensar e trabalhar para reduzir o risco de investir em algo que não gera valor.
+
+Não faça uma entrega incremental (por partes prontas do que seria o produto final) mas uma entrega iterativa (com um objetivo em foco e entregando valor aos poucos rumo a esse objetivo).
+
+A partir dos princípios de Ágil/agilidade, muitos frameworks (modelos) de trabalho foram criados: scrum, kanban, FDD, lean startup, scrumban, extreme programming, dual track...
+
+Os mais usados no mercado são Scrum e Kanban.
+
+Scrum: tem uma cadência fixa (ex: sprints de 2 semanas); é bem estruturado - papéis, artefatos e rituais bem definidos; acontece um único planejamento, a cada ciclo; as principais métricas de eficiência são velocidade e burndown (trabalho a ser feito vs. tempo); e os princípios direcionadores são inspeção, adaptação e transparência.
+
+Kanban: não tem uma cadência definida, mas um fluxo contínuo; tem uma estrutura livre em relação a papéis, rituais e artefatos; o planejamento e priorização acontecem sempre que necessário; as principais métricas de eficiência são lead/cycle time (tempo de lead, tempo de ciclo) e throughput (capacidade de entrega em um ciclo de tempo). Os princípios direcionadores são: comece com o que você faz agora; busque mudanças incrementais e evolutivas; respeite os papéis, responsabilidades e cargos atuais; incentive atos de liderança em todos os niveis.
+
+Se seu time não tem maturidade para se organizar em um desses modelos ágeis, vale a pena contratar um agilista/scrum master para orientar a implementação e ajudar no processo.
+
+Os métodos ágeis têm uma coisa em comum: o backlog. Ele é a “pilha de pedidos” em espera, uma lista priorizada de tudo o que o time pretende fazer no futuro previsível.
+
+É responsabilidade da pessoa PM/PO manter o backlog organizado e refinado no nível adequado. É um trabalho "FDP": Fatiar / Descartar / Priorizar. Sempre explique o porquê dos itens terem sido descartados, fatiados ou priorizados
+
+
+BLOCO03 - Como definir o backlog?
+
+Chegou a hora de dar um verdadeiro mergulho nessa ferramenta essencial do trabalho de PMs que conhecemos como backlog, a lista completa de itens que precisam ser feitos - e priorizados. Como descrever esses itens da melhor forma para criar entendimento compartilhado e facilitar a priorização?
+
+
+Resumo do bloco
+
+O primeiro passo para definir um backlog é comunicar o que vamos fazer e por quê. Para isso, você pode usar como ferramenta os PRDs (ou "product briefs"), que servem para explicitar as motivações e resultados esperados; explicitar os entregáveis; e explicitar dúvidas e pontos de atenção.
+
+Depois disso, é hora da "especificação", definindo os elementos da solução que serão construídos. Há muitas formas de especificar: mapa mental, user story ou job story, documento de requisitos e regras de negócio, fluxograma, feature/funcionalidade. O mais importante é: o objetivo de uma especificação é chegar a um entendimento compartilhado do que será feito.
+
+O "story map" é um backlog bidimensional. Em vez de ter apenas um fluxo vertical (como no backlog tradicional) de ordem de tarefas, você também organiza as tarefas no eixo horizontal, separando por etapa da jornada do cliente. Ele dá a visão do todo e permite contar a história da jornada, descobrindo histórias e cenários, fatiando histórias, alinhando com stakeholders e planejando os releases (lançamentos).
+
+Dica: o Miro tem um template de story mapping que você pode usar.
+
+Uma maneira de simplificar e clarear o que precisa ser feito no seu mapa de histórias, é descrever os objetivos usando o modelo de "user story". Nesse modelo, você descreve algo que um usuário vai poder fazer, a partir de sua perspectiva. Isso substitui o "requisito" e resume o essencial: "o que", "por quem" e "para que". Use a fórmula "Como [PERSONA] quero [AÇÃO] para [BENEFÍCIO]". Ex: "Como aluna do curso de DPL na Tera, quero acessar as gravações das aulas para poder assistir depois."
+
+O modelo "job story" é uma alternativa que descreve uma necessidade em um contexto e quanto mais descrita ela estiver melhor. O foco é mais na motivação do que na implementação. Use a fórmula "Quando [SITUAÇÃO] quero [MOTIVAÇÕES/FORÇAS] para [RESULTADO]. Ex: "Quando estou lotada de trabalho, com um monte de coisas na cabeça, e no fim do dia não tenho condições de prestar atenção em uma aula de 2h30, quero poder assistir a aula depois para conseguir aproveitá-la melhor quando estiver com a cabeça no lugar."
+
+Critérios de aceite: breves check-lists, em linguagem simples, usados para determinar quando a funcionalidade produzida está completa e nada mais precisa ser feito.
+
+Não é preciso seguir nenhum desses templates para escrever boas histórias, são apenas direcionadores para você encontrar a sua maneira de se comunicar com o time. Com a prática esse processo vai ficando mais natural.
+
+Histórias não são um jeito de escrever requisitos melhores. Escrever um monte de requisitos detalhados e entregar para alguém ler não funciona. O objetivo é a colaboração das pessoas que precisam de algo com as pessoas que o constroem.
+
+Não importa tanto o que você escreveu no cartão, só escreva alguma coisa para ajudar a iniciar a conversa. Você conta sua história e a pessoa pode fazer perguntas - para então só depois registrar a confirmação do entendimento compartilhado.
+
+"A ideia das user stories nasceu de ouvir pessoas contando histórias sobre coisas legais que o software que usavam estava fazendo." - Jeff Patton
+
+Trazer citações de usuários e usuárias ajuda a tangibilizar a história e inspirar o time.
+
+Seu backlog não terá apenas histórias de usuários, mas também outros tipos de "PBIs" (product backlog itens) como tarefas e melhorias (ex: tracking, extração de dados, atualização de bibliotecas, refatoração) e problemas (bugs, débitos técnicos). Esses itens não são histórias mas também precisam de um porquê - custo de não fazer nada, criticidade vs. frequência/probabilidade.
+
+
+BLOCO04 - Por onde começar?
+
+A organização e priorização do backlog de produto é um processo tático que demanda também bastante pensamento estratégico para que a construção do produto seja efetivamente ágil, reduza riscos e entregue valor. Entenda como começar e refinar esse processo com ajuda de técnicas e ferramentas usadas no mercado.
+
+Resumo do bloco
+
+Priorizar é fazer escolhas em relação a um objetivo (muda o objetivo, muda a prioridade). O processo de priorização envolve avaliar opções a partir de critérios, dados, influências e intuição; escolher; e comunicar o que vai ou não vai ser feito.
+
+Estimativas de tempo ajudam a gerenciar o tempo do time e as entregas principais, mas não devem ser um compromisso. Usar "tamanho relativo" é mais fácil e assertivo. O mais valioso são as discussões que acontecem em torno das estimativas. Você pode usar imagens/metáforas para estimar o tamanho e duração de entregas para facilitar o alinhamento e evitar definir prazos. (ex: P/M/G, frutas, planning poker).
+
+Para colocar ainda mais ciência no seu processo de priorização, você pode usar frameworks criados para simplificar o processo de decisão. Há modelos qualitativos (ex: MoSCoW, Kano, feature buckets, ordenação de lista); quantitativos (ex: valor x custo/esforço, score ponderado, RICE, ICE, projeção de ROI, cost of delay, opportunity scoring -JTBD); e colaborativos (ex: Buy a feature, prune the product tree, story mapping, team backlog ranking, sequenciador de features).
+
+Exemplo - modelo "KANO": divide as tarefas em um eixo de satisfação/frustração e um eixo de +/-investimento, identificando 4 padrões: básica (não ter gera frustração e investir mais não faz diferença); performática (quanto mais investe, melhor); encantadora (senão tiver, não faz falta. Mas se tem é demais! E nem sempre precisa de muito investimento); e indiferente (não importa quanto invista, não gera valor).
+
+Nenhum framework vai cuspir uma ordenação pronta para ser seguida. Eles se complementam. Visão e experiência contam muito nesse processo. E tudo depende do seu objetivo (que pode mudar).
+
+
+Lembre-se
+
+O papel de PMs no time de produto é liderar e inspirar o time, garantindo que esteja fazendo as coisas certas.
+
+Não precisa de background técnico para liderar desenvolvimento de produto, mas conhecimentos essenciais de programação e bancos de dados ajudam a conversar com o time técnico e fatiar e priorizar melhor as entregas no backlog.
+
+Na prática, agilidade é conseguir chegar antes no objetivo traçado e métodos como SCRUM e KANBAN podem ser muito úteis na aplicação prática da mentalidade Ágil.
+
+O melhor backlog é aquele que cria um claro entendimento compartilhado de tudo o que será feito e quais critérios de aceite permitem entender quando a tarefa foi de fato entregue.
+
+Há muitos métodos e ferramentas para organizar e priorizar um backlog de produto, mas nenhuma delas entrega uma priorização pronta e a experiência de PMs conta muito nesse momento.
+
+
+
+
+
+
+Perguntas que foram respondidas
+
+Na prática, Qual é a formação ideal de um time de produto?
+
+Como envolver devs no discovery?
+
+Qualquer pessoa pode ser PM de um produto técnico?
+
+Quais estratégias são legais nessas "conversas difíceis" sobre prazo, por exemplo?
+
+Atuando como PM, como eu faço para desenvolver meu time em "metodologias ágeis"?
+
+Como começa na prática quando o time tá mais acostumado com o "BDUF"?
+
+Qual é o papel do agilista no processo?
+
+Vale a pena seguir as metodologias à risca? Como descobrir se estão ajudando meu time a evoluir?
+
+Scrum e Kanban, dá pra combinar os dois métodos?
+
+Pode dar um exemplo de casos de "bom" e "mau" uso do kanban ou scrum na sua experiência?
+
+Como trabalhar com iterações em produtos maiores?
+
+Por onde começar um Story Map?
+
+A definição do backlog ocorre em que momento do desenvolvimento do produto? Ex. nas plannings? fórum extra no meio da Sprint? No Discovery? Deve ser um momento recorrente?
+
+Qual a relação entre o user story map e o backlog?
+
+Qual a diferença entre "user stories" e "requisitos"? Uma coisa substitui a outra?
+
+De quem é a responsabilidade de escrever User Stories?
+
+Qual é sua dica para escrever bons critérios de aceite?
+
+Você usa as personas e mapa da jornada de experiência (de UX) para ilustrar melhor seu story map? O que não pode faltar numa boa User Story?
+
+Que ferramentas você recomenda para fazer o acompanhamento do story map?
+
+O que fazer com demandas top down?
+
+Qual a diferença entre priorizar roadmaps e backlogs?
+
+Como priorizar bugs e débitos técnicos no meio do desenvolvimento de novas features?
+
+Como você lida com estimativas na prática?
+
+Como saber se o time está inflando uma estimativa?
+
+O time de dev ajuda na priorização apenas na hora de dar estimativas ou participa também na escolha do que entrega mais valor?
+
+Onde você investe a maior parte do seu tempo? Mapeamento de user stories? Priorização do backlog? Negociação com times de devs ou stakeholders?
+
+
+
+Checklist
+
+Você deve sair desta aula entendendo:
+
+Como se encaixam os papéis de PMs e Devs em um time de produto;
+
+O que é a agilidade que tanto se fala e como ela se desdobra em métodos e ferramentas;
+
+A diferença entre os métodos ágeis mais usados no mercado - SCRUM e KANBAN.
+
+Como criar boas histórias de usuários para gerar entendimento compartilhado;
+
+
+
+
+
+
+ARQUITETURA, INFRAESTRUTURA E STACK DE TECNOLOGIA
+
+BLOCO01 - Como os produtos digitais funcionam
+
+Como se organiza a tecnologia por trás de um produto digital? O que é a arquitetura? Nesta primeira parte, Diógenes nos ajuda a entender como os produtos digitais funcionam.
+
+wappalyser ferramenta que analiza o que a aplicacao usa
+
+
+Resumo do Bloco
+
+Entender como os produtos digitais funcionam na perspectiva da tecnologia é importante para você entender melhor o seu produto, entender o que desenvolvedores falam e conseguir ajudar o time.
+
+Por trás das funcionalidades de um produto digital (como traçar rotas, mostrar o trânsito, criar listas, etc.) há uma série de componentes que precisam se integrar para que as funcionalidades funcionem (client side - servidor, APIS, backend, frontend, imagens, banco de dados, apps, URLs)
+
+Dependendo do objetivo a ser alcançado, esses componentes vão sendo desenvolvidos e atualizados de maneira independente ou em conjunto, gerando diferentes formatos, atualizações na interface, atualização nas funcionalidades e correção de problemas.
+
+As APIS são serviços de tecnologia que podem ser utilizados em outros ambientes ou contextos, sem o uso do produto em si. Por exemplo: você pode usar o serviço (API) de "traçar rotas" do Google Maps no seu próprio site, usando a tecnologia desenvolvida pelo Google para oferecer a seus usuários, sem ter que desenvolver esse serviço do zero nem ter que abrir o aplicativo Google Maps.
+
+Em alguns contextos, a API pode ser considerada um produto independente e monetizar a partir do serviço de tecnologia oferecido.
+
+A arquitetura de um produto define os diferentes fluxos, serviços, componentes e bancos de dados necessários para o funcionamento do produto.
+
+
+
+BLOCO02 - Almanaque de tecnologia para product managers
+
+Prepare-se para receber muita informação, pois nesta parte o expert faz um compilado do que é o dia a dia do time de desenvolvimento, passando por tutoriais, apresentação de ferramentas e exemplos práticos.
+
+
+
+rapid API
+
+Resumo do Bloco
+
+Domínios: um domínio na internet (endereço na web) é composto por 3 níveis - [www.][somostera] [.com]
+
+HTTP: é o protocolo de comunicação usado na maior parte da internet, definindo diretrizes para a troca de informações entre um navegador e um servidor.
+
+API: "Application Programming Interface". São mais do que detalhes técnicos em JSON ou XML, são uma forma de conectar unidades de negócios entre si, para expor funcionalidades e conhecimentos importantes. Podem ajudar a desbloquear algum valor que já existe na organização, gerando novos produtos e negócios. APIs podem ser privadas (uso interno da empresa); aberta para parceiros (acesso limitado); ou pública (aberta para consumo público com restrições mínimas).
+
+REST: um modelo de diretrizes e restrições de arquitetura que ajuda a simplificar o design das APIs e torná-las mais úteis na implementação. Sistemas que utilizam os princípios REST são chamados de RESTful.
+
+O protocolo HTTP tem diversos métodos de "request" (pedido): get, post, put, patch, delete. Para cada pedido, o servidor envia um código de retorno ("response"): informativos (1XX), indicativos de sucesso (2XX), redirecionamentos (3XX), erros do cliente (4XX) e erros no lado do servidor (5XX).
+
+Na arquitetura de software monolítica (de "monolito", bloco único) a interface de usuário e o código de acesso aos dados são combinados em um único programa, a partir de uma única plataforma. É um aplicativo autocontido e independente, podendo executar todas as etapas necessárias para completar uma função específica. Esse tipo de arquitetura é difícil de ser escalada; é inflexível, pois precisa seguir a tecnologia atual; alterações não podem ser empacotadas e implantadas ao mesmo tempo; o desenvolvimento é lento; e se uma feature não funciona o sistema todo não funciona.
+
+Uma arquitetura de microsserviços estrutura um aplicativo como uma coleção de serviços pequenos e fracamente acoplados, que operam juntos para atingir um objetivo comum. Como funcionam de forma independente, podem ser adicionados, removidos ou atualizados sem interferir em outros aplicativos, proporcionando testes mais fáceis, produtividade, flexibilidade e escalabilidade aprimoradas.
+
+Características dos microsserviços: são amplamente desacoplados; tratados como componentes independentes; desenvolvedores e equipes podem trabalhar de maneira simultânea e independente; permite lançamentos frequentes através de entrega contínua; liberdade para escolher tecnologias e ferramentas para o desenvolvimento; se uma feature apresentar problemas isso não necessariamente afeta as demais; componentes podem escalar conforme necessidade individual.
+
+Infraestrutura é "onde tudo fica armazenado".
+
+Na infraestrutura "tradicional", você gerencia a própria instalação dos componentes e datacenters para armazenar seu produto digital. Tem alto custo de implementação e demanda espaço físico, além de grande quantidade de hardware.
+
+Na infraestrutura "cloud" (na nuvem), você não necessita de espaço físico ou investimento em hardware, a entrega é on-demand (sempre disponível), é facilmente escalável e tem serviços de configuração e segurança que economizam trabalho do time.
+
+Os dois serviços de infraestrutura mais usados são a Google Cloud e a AWS (Amazon).
+
+Bancos de Dados é onde os serviços guardam as informações que recebem ou processam, podendo também recuperá-las quando necessário. Possui rotinas de backup de acordo com a necessidade do negócio e são uma peça fundamental para o bom funcionamento de uma empresa/produto/serviço.
+
+Bancos de dados relacionais: criados a partir de conjuntos armazenados em tabelas, com atributos, linhas ou registros responsáveis por organizar as informações. Linguagem utilizada: SQL (Structured Query Language).
+
+Bancos de dados não relacionais: têm um esquema dinâmico para dados não estruturados, podendo ser armazenado em várias formas - imagens, tabelas, documentos, grafos, etc. Linguagem utilizada: NoSQL (Not Only SQL).
+
+Gateway de API: é a interface que fica na frente de uma API e é o ponto de entrada único para APIs e microsserviços de back-end definidos (que podem ser internos ou externos) atuando como protetor, reforçando a segurança, garantindo escalabilidade e alta disponibilidade.
+
+API Manager: o gerenciamento de API vai além das barreiras de entrada e alcança todo o processo de distribuição, controle e análise de APIs que conectam aplicações e dados por toda a empresa e nas clouds. O objetivo é permitir às organizações que criam APIs (ou utilizam APIs de terceiros) a monitorar atividades e garantir que as necessidades dos desenvolvedores e das aplicações sejam atendidas.
+
+Linguagem de programação é o código que permite traduzir uma ideia de função ou serviço em linguagem de máquina, para que a máquina execute a lógica que foi imaginada.
+
+As linguagens mais utilizadas hoje são Python (12%), C (11%), Java (11%), C++ (8%).
+
+Frameworks são conjuntos estruturados de códigos prontos de uma determinada linguagem de programação que facilita o trabalho do desenvolvedor trazendo funcionalidades, comandos e estruturas já prontas para serem utilizadas na construção de sites e aplicativos.
+
+No mercado hoje existem diversos produtos de tecnologia "as a service": SaaS (software), IaaS (infrastructure - infraestrutura), PaaS (platform - plataforma), iPaaS (integration platform - plataforma de integração), STaaS (storage - armazenamento).
+
+"Cultura DevOps" é um modelo que preza pela integração contínua (fácil transferência de conhecimento e experiências entre as áreas de Desenvolvimento, Operações e Apoio); implantação contínua (liberação rápida e contínua de novas versões de software ou serviços); e feedback contínuo (feedbacks frequentes das equipes envolvidas em todas as fases do ciclo de vida do software ou serviço).
+
+Aprofunde seu conhecimento
+
+Entenda mais a fundo o que são APIS, como gerenciá-las e como são definidas como RESTful, seguindo os padrões que o mercado vem usando.
+
+Leia o artigo REST na wikipedia para se aprofundar nas diretrizes REST e conhecer um pouco mais da linguagem usada na descrição de APIs.
+
+Para entender mais como usar a ferramenta Postman para testar APIS e simular "requests" e "responses", acesse o "Easy Postman Tutorial for Beginners". (em inglês)
+
+Para descobrir APIS que já estão disponíveis e conjuntos de códigos disponíveis para usar em seu produto, explore o RapidAPI Hub.
+
+
+
+BLOCO03 - Engenharia e produto em conjunto
+
+Entender como o time de engenharia organiza seu tempo e como lidar com débitos técnicos e processos colaborativos é essencial para uma relação fluida entre PMs e pessoas desenvolvedoras. 
+
+Resumo do Bloco
+
+É preciso muita sinergia entre PMs e o time de desenvolvimento.
+
+Para isso, é importante: comunicação; escuta ativa; diagnósticos do produto; acompanhamento de métricas; gerenciamento/mapeamento de débitos técnicos; cooperação; confiança; e consenso.
+
+Como gerenciar débitos técnicos?
+
+Visibilidade e comunicação: dar visibilidade ao conceito e comunicá-lo em linguagem de negócios a executivos e demais stakeholders é fundamental.
+
+Consideração: utilizar a visibillidade da dívida técnica para avaliar impactos dela tanto na performance da organização quanto no desenvolvimento de novos projetos, assim como embasar a tomada de decisão.
+
+Gerenciamento explícito: criação de frameworks e adoção de ferramentas para gestão de dívidas técnicas existentes, como pagamento em iterações mínimas e releases de limpeza, avaliação de riscos.
+
+Monitoramento: mensurar níveis de dívida técnica ao longo do tempo, identificar e reconhecer tendências, disseminar boas práticas de integração da dívida técnica ao processo de desenvolvimento a fim de torná-la produtiva, etc.
+
+Para que o trabalho do time de tecnologia não seja tomado por trabalho não planejado e interrupções, separe bem as demandas incluindo tempo para inovação/experimentação; adicionar novas funcionalidades; melhorar funcionalidades existentes; gerenciar complexidade; trabalho não planejado. Quando você foca apenas adicionar novas funcionalidades, uma hora "a conta chega".
+
+Lembre-se
+
+É importante entender como os produtos digitais se comunicam para você conhecer melhor o seu produto, entender o que desenvolvedores falam e poder ajudar o time.
+
+A arquitetura é a camada básica do fluxo de informações no produto, como ele se comunica com servidores, navegadores e APIS. A arquitetura pode ser monolítica ou baseada em microsserviços.
+
+A infraestrutura são os serviços de armazenamento e proteção das informações nesse fluxo - onde elas estão hospedadas, quais são as rotinas de backup, quais são os serviços de segurança disponíveis.
+
+O stack de tecnologia são as linguagens de programação e frameworks utilizados para fazer a tradução das ideias do time em linguagem de máquina, tangibilizando o produto em diferentes plataformas e telas.
+
+Para fazer bons produtos, é preciso muita sinergia com o time de desenvolvimento. Para isso, dedique-se aos processos de comunicação com muita escuta ativa para gerar confiança e cooperação.
+
+Não olhe só para novas funcionalidades - dê atenção especial aos débitos técnicos que precisam ser cuidados para evitar problemas mais adiante.
+
+
+
+
+Perguntas que foram respondidas
+
+Sou PM e não tenho background técnico. Como saber se o produto que eu vou trabalhar é ou não é “muito técnico” para meu conhecimento?
+	Dependendo no caso de APIs pecisa contexto mais tecnicos
+	
+
+Entender a parte técnica de um produto pode me ajudar como PM a negociar melhor as entregas com meus stakeholders?
+	Importante conhecer para melhor comunicação
+	Conhecer arquitetura monolitica e ou microservicos
+	Linguagem, frameworks, etc
+
+Qual é o mínimo que qualquer PM deveria saber de tecnologia, na sua visão?
+	
+
+Existe produto digital sem banco de dados?
+
+Tem um "esperanto" das APIS, ou seja, uma linguagem-base na qual todas as APIS são escritas ou cada API é escrita em uma linguagem diferente? Se são diferentes linguagens, como elas se comunicam?
+	Comunicação por protocolos
+
+Em qual caso é melhor ter uma arquitetura monolítica?
+	Quando esta iniciando algo do Zero faz sentido usar o Monolitico
+
+APIs em si podem ser um produto? Como é na RD?
+	Sim API considerar como produto
+
+Definir a melhor arquitetura (ex: quantos e quais microsserviços) impacta diretamente o sucesso do produto/negócio. Quem toma decisão sobre a melhor arquitetura, PM ou time de tecnologia?
+
+Você sugere algum site ou canal de estudos bom para PMs continuarem se atualizando nesse "almanaque de tecnologia"?
+
+Na sua experiência, teve algum momento em que débitos técnicos ignorados tiveram consequências graves no produto ou negócio? Como evitar isso?
+
+"Technical Product Manager" é uma carreira por si só? Tem espaço no mercado para PMs mais técnicos se desenvolverem?
+
+
+
+
+

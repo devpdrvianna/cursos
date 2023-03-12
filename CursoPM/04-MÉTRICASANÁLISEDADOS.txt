@@ -1,0 +1,508 @@
+MÉTRICAS E ANÁLISE DE DADOS
+
+De onde vêm os dados?
+Para começar uma boa introdução aos dados, nada melhor que conhecer historicamente como eles surgiram. Vamos ver neste capítulo quando os principais conceitos e ferramentas relacionados ao trabalho com dados surgiram e como se desenvolveram ao longo do tempo até o momento que nos encontramos hoje. 
+
+
+Resumo
+
+Os dados e as tomadas de decisão baseadas em dados remontam a séculos, com o primeiro experimento estatístico registrado em 1663 e o termo Business Intelligence aparecendo em 1865.
+
+A partir da década de 1920, com o surgimento do primeiro método de armazenamento de dados, o mundo de dados começa a crescer de forma exponencialmente, sendo sequenciado pelos primeiros computadores e linguagens de programação até o cenário que conhecemos hoje.
+
+Com os avanços tecnológicos, o mundo hoje precisa lidar com um massivo volume de dados, conceitualmente conhecido como BIG DATA. Quando falamos desse assunto, alguns aspectos importantes precisam ser levados em consideração, são eles:
+
+Volume: A quantidade de dados produzida a todo momento e que precisa ser armazenada é absurdamente grande;
+
+Velocidade: Essa quantidade massiva de dados precisa ser lida e processada em tempo hábil;
+
+Variedade; Os tipos de dados que surgem são os mais diversos possíveis, podem ser textos, imagens, áudios, vídeos e etc., o que configuram dados estruturados, não estruturados ou ainda semi-estruturados;
+
+Veracidade: Com diversos tipos de dados, é preciso saber extrair informações de forma confiável desses dados;
+
+Valor: Qual o valor que é possível extrair desses dados, com base no propósito de negócio;
+
+
+BLOCO02 - Para que e para quem são os dados
+
+Agora que já vimos um pouco da história dos dados, vamos entender para que eles servem, isto é, algumas aplicações e para quem eles são úteis. Neste capítulo, Juliana traz um overview do (a) profissional que precisa lidar com dados no cotidiano, pensando sobre o que são consideradas habilidades importantes nessa área.
+
+
+Resumo
+
+Dados não são apenas para cases de negócios e empresas, no contexto de big data temos aplicações em qualquer situação onde: 1) há necessidades de melhoria; e 2) enquanto seres humanos não conseguimos captar;
+
+O avanço e a  inovação tecnológica exigem do mercado profissionais capazes de lidar com os novos desafios. Como consequência desse movimento, o número de aperfeiçoamento de profissionais na área de dados tem crescido exponencialmente - e não só em hard skills.
+
+Trabalhar com dados não é só ler gráficos. Uma pessoa educada em dados precisa saber ler dados, isto é, dado o contexto de negócio, qual a análise será realizada? É preciso saber armazenar e gerenciar dados, não a níveis ferramentais complexos como python e SQL, basta conseguir receber e abrir uma planilha de excel, por exemplo, e gerenciá-la de maneira crítica. Também é necessário saber se comunicar com dados, é preciso ter muita clareza ao transmitir uma informação a alguém. 
+
+Do ponto de vista de profissionais de dados que têm o objetivo de dar um direcionamento estratégico, nem todas técnicas são necessárias, é difícil acompanhar a evolução tecnológica do mercado. Porém, é importante ter clareza do seu trabalho analisando dados e sempre realizá-lo da forma mais ética possível. 
+
+Cultura Data-Driven é a cultura que envolve orientação por meio de dados, utilizando-os como base para qualquer decisão a ser tomada dentro da organização, desde a escolha de qual forma a empresa distribui água a seus colaboradores, até a aquisição de outras empresas e decisõesde negócio.
+
+Tecnologia de ponta não é suficiente. As empresas precisam romper barreiras culturais, organizacionais e encontrar um novo modelo de liderança.
+
+
+BLOCO03 - Usabilidade dos dados
+
+Agora a Juliana vai discutir, alguns cases onde dados são utilizados para resolver problemas práticos de mercado.
+
+Resumo
+
+Case redes de supermercados: por meio de um programa de recompensas (Clube Extra), o grupo conseguiu análises certeiras como os produtos mais comprados e o comportamento de compra dos clientes;
+
+Case da empresa de agricultura: através de análises de dados, a multinacional faz recomendações precisas sobre o plantio de sementes por agricultores;
+
+Case do Ifood: a IA permeia diferentes áreas, desde a maneira de como é feita a mensuração interna dos dados, até o planejamento das entregas.
+
+
+BLOCO04 - Processos de decisão com base em dados
+
+Conhecendo agora um pouco melhor como os dados nos ajudam a resolver problemas de negócios, vamos falar como são os processos de tomada de decisão a partir de dados.
+
+Resumo
+
+Quando fazemos uma tomada de decisão baseada em dados, é necessário se comunicar de forma clara e evitar determinados comportamentos de viés. Sendo destacados três tipos de vieses, de padrão, de curto prazo e de ganhar;
+
+Correlação é diferente de causalidade. Duas variáveis podem ser numericamente bem correlacionadas, mas não havendo nenhuma evidência de que uma causa ou influencie a outra;
+
+Em um processo de tomada de decisão, um viés é priorizar o curto prazo. Mas o quão é eficiente resolver o problema de forma mais rápida? É preciso avaliar se estamos de fato resolvendo uma dor ou apenas mascarando ela que pode retornar muito pior;
+
+A forma como a informação transmitida influencia a interpretação e a tomada de decisão feita a partir dela;
+
+
+
+
+INTRODUÇÃO AOS KPIS
+BLOCO01 - CONCEITO E TIPOS DE KPIs
+
+Para começar, Henrique apresenta o conceito de KPIs e seus diferentes tipos: de produtividade, de qualidade, de capacidade e de estratégia.
+
+Resumo
+
+Um KPI (Key Performance Indicator) é um indicador chave para a empresa e está normalmente associado a um conjunto de objetivos. Os KPIs proporcionam uma direção para atingimento de resultados desejados e podem ajudar o negócio a tomar melhores decisões.
+
+Os KPIs de produtividade têm o objetivo de otimizar a produção e acompanhar como (se) essa produtividade está crescendo. Dois exemplos desse tipo de KPI são: o CAC (Custo de Aquisição do Cliente) e o ROI (Retorno sobre o Investimento.
+
+Os KPIs de qualidade visam analisar se o produto consegue atender as necessidades e vontades dos clientes. Ex: a mensuração do número de Tickets e o SLA (Service Level Agreement - Acordo de Nível de Serviço, em Português).
+
+Os KPIs de capacidade tentam aferir como uma empresa consegue fazer "mais com menos", isto é, como aproveitar melhor a estrutura atual da empresa para potencializar as vendas. As requisições por minuto, no caso dos sistemas de e-commerce e a quantidade de entregas por dia em um serviço de delivery são exemplos de KPIs de capacidade.
+
+Os KPIs de estratégia buscam analisar o desempenho das estratégias seguidas pelas empresas. O Market Share e o NPS (Net Promoter Score ou Pontuação de Chances por Recomendação, em português) são exemplos bastante utilizados de KPIs de estratégia.
+
+
+BLOCO02 - ANÁLISE DOS KPIs POR NEGÓCIO
+
+A forma com que os KPIs são pensados e mensurados variam de acordo com o tipo de negócio. Neste capítulo, Henrique analisa alguns tipos de KPIs em diferentes negócios.
+Resumo
+
+Para empresas que trabalham com produção de conteúdo publicitário para sites, dois KPIs bastante utilizados são o “Tempo no Site”, que considera que quanto mais tempo você passa na página, mais chances o site tem de te apresentar propaganda; e o “Scroll Depth” (ou Limite de Rolagem) que considera quanto da página você visualizou como um indicador de relevância para a visualização do conteúdo.
+
+Para empresas de e-commerce, a quantidade de produtos adicionados no carrinho, o abandono do carrinho e o valor médio de compra são três KPIs bem importantes.
+
+Para empresas que trabalham com produtos por assinatura, a taxa de conversão de visitantes em clientes, o valor do cliente em longo prazo (quando adquirem planos de longa duração) e a taxa de evasão (churn) são KPIs utilizados para medir o desempenho dos produtos. 
+
+A taxa de conversão também é bastante utilizada para a Geração de Leads e Vendas convertendo Leads em Leads Qualificados. Depois que o Lead se torna qualificado, outro KPI importante é a Taxa de Fechamento, que afere a quantidade de vendas efetivamente feitas para esses Leads Qualificados.
+
+Para aplicativos móveis, a taxa de instalação, a taxa de ativação, que afere se você usou o app depois de baixado e a taxa de retenção que analisa se você se manteve usando o app são três KPIs fundamentais. 
+
+BLOCO03 - PIPELINE VS PLATAFORMA
+
+Neste capítulo, Henrique apresenta as diferenças entre Plataforma e Pipeline. Confira!
+Resumo
+
+Uma plataforma é um modelo de negócio que cria valor ao facilitar trocas entre dois ou mais grupos interdependentes, geralmente consumidores e produtores.
+
+Uber, iFood e Airbnb fazem parte de uma revolução em que plataformas “contactam as pontas” entre pessoas que oferecem produtos e serviços (producers) e as pessoas que querem adquirir ou contratar esses produtos e serviços (consumers). As empresas são as “owners”, ou seja, as donas das plataformas que possibilitam essa conexão.
+
+Um Pipeline é um fluxo que começa desde a matéria prima e vai até o produto final. A compra final faz com que esse fluxo continue acontecendo. As Plataformas ajudam a concretização dessa compra final.
+
+
+Lembre-se
+
+As empresas não são iguais. Então, não faz sentido utilizar as mesmas métricas. 
+
+Nem todo indicador vai ser um KPI.
+
+
+
+
+KPIS E SENSO CRÍTICO
+DEFINIÇÃO DOS OBJETIVOS
+
+Neste capítulo, Henrique apresenta duas metodologias bastante utilizadas para a definição de objetivos no contexto corporativo: o SMART e o OKR.
+
+
+Resumo
+
+O SMART é um acrônimo que nos ajuda a definir objetivos. Ele traz que um objetivo precisa ser Específico (Specífic), Mensurável (Mensurable), Atingível (Achievable), Relevante (Relevant) e Temporal (Time bound).
+
+O OKR é uma metodologia de gestão que foi criada pelo ex-CEO da Intel Andrew Grove e tem como objetivo simplificar a forma de encarar os chamados “objectives and key results”, ou seja, os objetivos principais de uma empresa.
+
+Uma "fórmula" utilizada para redigir e definir um OKR  é: "Vamos (Objetivo) até (prazo) medido por (esse conjunto de Key Results)"
+
+
+
+
+BLOCO02 - CONSTRUÇÃO DE KPIs
+ A construção de KPIs deve levar em consideração a jornada do cliente e as métricas que já são importantes para o negócio. Neste capítulo, Henrique apresenta informações importantes para construirmos KPIs.
+
+Resumo
+
+Construir e trabalhar com KPIs exige bastante foco. Então, estima-se que, para trabalhar com KPIs sejam definidos entre 5 e 9 KPIs.
+
+Os KPIs definidos precisam estar alinhados com a jornada do cliente. Essa jornada, geralmente, segue o seguinte fluxo: conhecimento, consideração, compra, serviço e lealdade. 
+
+O Framework Karta KPI é uma metodologia para construção de KPI. Nesse Framework, o processo de construção do KPI é iniciado com uma análise das metas e objetivos das empresas, depois uma avaliação dos fatores críticos de sucesso, em que são reconhecidas as métricas importantes para a empresa - e então algumas dessas métricas são “transformadas” em KPIs.
+
+
+
+BLOCO03 - COMUNICAÇÃO DE KPIs
+
+A comunicação é parte fundamental na construção, mensuração e na busca por atingir um KPI. Neste capítulo, Henrique traz a relevância da comunicação neste processo.
+
+
+Resumo
+
+O alinhamento de conceitos entre as equipes e pessoas que fazem parte de uma empresa é essencial para a mensuração e comunicação de um KPI.
+
+Além de alinhar os conceitos, é fundamental que haja ações em prol do engajamento dos times na busca por atingirem esse KPI.
+
+Contar história com dados (storytelling com dados) pode facilitar a compreensão do seu time e impulsionar o engajamento dele na busca por esse KPI.
+
+
+
+MÉTRICAS PARA PRODUTOS E NEGÓCIOS
+
+BLOCO01 - Cultura de Métricas
+
+Igor Torres começa falando sobre a importância das métricas no processo de tomada de decisão e o que caracteriza uma boa métrica.
+
+Resumo do Bloco
+
+Basear decisões com base em empatia ou intuição sobre como pensa o usuário tem um risco de viés cognitivo e o uso de personas pode gerar uma definição fixa e imutável. O produto muda e o cliente muda: os dados são o que nos ajuda a ler o contexto de maneira precisa e "em tempo real".
+
+Para chegar na métrica relevante, é necessário ter algo que queremos responder: sua questão-raiz.
+
+Dado é a forma mais simples de informação, geralmente representada por um número ou valor. Medida dá clareza ao grupo de dados agrupando por relação e dando um pouco de contexto. Informação dá contexto em forma de significado, deixando a medida entendível. Métrica conta a história completa, respondendo a questão-raiz.
+
+"Métricas de vaidade" é a organização de informações que partem de dados mas não têm contexto, não têm um parâmetro que define se é bom ou ruim, não tem um objetivo final.
+
+Uma boa métrica é uma comparação, é fácil de entender e é uma razão. Ela conta uma história usando dados, medidas e informações.
+
+Pesquisas qualitativas são mais ricas mas demandam muito mais trabalho para interpretar.
+
+Antes de usar métricas, pense em qual pergunta você está tentando responder.
+
+
+
+BLOCO02 - Métricas como ferramenta
+
+Então vamos lá: como conjuntos de métricas ajudam você a tomar decisões?
+
+Resumo do Bloco
+
+O roadmap de produto em 3 partes importantes: onde queremos ir; O que faremos para chegar lá; como saberemos que chegamos - a parte das métricas.
+
+Modelos que usam métricas para responder perguntas: KPI (indicadores-chave de performance) e OKR (Objetivos e resultados-chave).
+
+KPIS podem ter várias perspectivas: financeira, clientes, marketing e vendas, operacional, responsabilidade social, colaboradores internos.
+
+OKRs são compostos de uma parte inspiracional (objectives) e uma parte mensurável que quantifica a parte inspiracional (key results). No máximo 5 resultados-chave por objetivo.
+
+KPIs e OKRs podem coexistir e servem para ajudar seu negócio a materializar a visão.
+
+Uma boa "constelação de métricas" equilibra diferentes métricas essenciais e nos ajuda a saber se estamos impactando os negócios e a vida das pessoas.
+
+Métricas sempre vão ter uma relação entre si, pois falam sobre o comportamento do cliente na jornada do negócio/produto.
+
+Reflita
+
+Quais são os objetivos do seu negócio?
+
+Quais métricas podem te ajudar a validar esses objetivos?
+
+
+BLOCO03 - Frameworks de Métricas
+
+Agora Igor apresenta alguns modelos (frameworks) de métricas bastante usados no mercado e que tipos de decisões eles ajudam a tomar.
+
+
+
+Resumo do Bloco
+
+Definição importante: usuário é quem usa / cliente é quem paga. Nem sempre as métricas de usuários e clientes são as mesmas.
+
+Framework AARRR (aquisição, ativação, receita, retenção e indicação): visão de crescimento do negócio; funil; geralmente usado por Growth Marketing. Chamado de "métricas piratas", foi criado por Dave McClure, fundador da incubadora 500 startups.
+
+Framework HEART (adoção, engajamento, sucesso da tarefa, retenção e satisfação): visão de performance do produto; jornada do cliente; geralmente usado por Design.
+
+Custo de Aquisição por Cliente (CAC): Custo de vendas e marketing / Número de novos clientes.
+
+Usuários ativos por dia, semana ou mês (DAU, WAU, MAU): Usuários ativos por dia / Total de usuários * 100.
+
+Taxa de cancelamento de clientes (CHURN): Usuários que cancelaram no período atual / Total de usuários que iniciaram o período
+
+Receita Recorrente por mês (MRR - Monthly Recurring Revenue): pode ser calculada como um todo, por usuário (ARPU) ou por conta (ARPA).
+
+Margem Bruta (GM - Gross Margin): Receita / Lucro *100 - o quão rentável é o produto.
+
+Lifetime Value (LTV): ARPAPeríodoGM / Churn - Quanto cada cliente gera de receita por um período.
+
+Coeficiente Viral: Novos usuários via convite / total de usuários. O boca a boca funciona no meu produto?
+
+Net Promoter Score (NPS): %Promotores - %Detratores. Você indicaria o produto para um amigo?
+
+Engajamento é como o usuário interage. Retenção é se ele continua interagindo.
+
+Reflita
+
+Quais são os conjuntos de métricas que vão te ajudar a definir uma grande métrica do seu produto/negócio?
+
+
+
+Bloco04 - Aplicando Métricas no dia a dia
+
+Para concluir, Igor fala sobre a aplicação efetiva de métricas no dia a dia.
+
+
+Resumo do Bloco
+
+Métricas precisam ser analisadas e existem 4 tipos de análise: análise segmentada; teste A/B; análise multivariada; e coorte.
+
+Análise por segmento: comparação transversal sobre todas as pessoas divididas por alguma categoria (idade, gênero...).
+
+Teste A/B: Mudar uma coisa e mensurar o resultado.
+
+Análise Multivariada: mudar várias coisas de uma vez e ver a correlação de resultados.
+
+Coorte: Comparação de grupos similares durante uma timeline.
+
+Apresentação do framework "CRESCER" (Igor Torres, 2021), que combina elementos do HEART + AARRR + Constelação de Métricas com o mapeamento de 7 grandes indicadores.
+
+
+
+Perguntas que foram respondidas
+
+
+Existe um processo para definição de perguntas?
+
+Como você decide quais dados explorar e como valida se são os dados certos?
+
+Como PMs lidam no dia a dia com a relação entre métricas de produto e métricas de negócio?
+
+Como não cair na cilada de transformar métricas em metas?
+
+Como criar um storytelling para mostrar os dados?
+
+Como você usa métricas para fazer alinhamento com stakeholders?
+
+Como saber quais métricas acompanhar? Acompanho só aquilo que mexe no meu OKR?
+
+Como eu decido a métrica certa em situações em que diferentes stakeholders têm opiniões e necessidades diferentes?
+
+É melhor usar taxa ou valores acumulados?
+
+
+
+SQL PARA PMS
+
+
+Comece pelo básico
+
+Para selecionar todos os registros de uma tabela existente, use a query:
+
+SELECT * FROM <nome da tabela>;
+
+As palavras escritas em maiúsculas são operadores que dão instruções ao banco de dados. Embora esses operadores funcionem também em letras minúsculas, escrever em maiúsculas as distingue mais facilmente e é uma prática recomendada.
+
+; - Ao final da linha, o ponto-e-vírgula indica o fim da instrução.
+
+SELECT: sinaliza que você deseja extrair (visualizar e exportar) dados do bancos de dados.
+
+*: O asterisco é sinônimo de “tudo”, sinaliza que queremos extrair todas as linhas e colunas.
+
+FROM: define de onde (qual tabela) você quer extrair os dados.
+
+<nome da tabela>: nome da tabela de onde virão os dados.
+
+Vale ressaltar que a execução dessa consulta não altera os dados, apenas gera sua apresentação (uma “tabela de resultados” ou “result set). Por outro lado, o operador DELETE no SQL pode efetivamente excluir entradas na tabela, se você tiver permissões para isso.
+
+Selecione as colunas certas (SELECT / FROM)
+
+Use o operador SELECT para especificar a tabela e as colunas das quais você deseja extrair os dados. 
+
+Para selecionar 1 coluna:
+
+SELECT <nome_da_coluna> FROM <nome_da_tabela>;
+
+Para selecionar 2 colunas (escreva os nomes das colunas separados por vírgulas): 
+
+SELECT <Column_1>, <Column_2> FROM <Table_name>;
+
+Ex: Quero ver quanto cada cliente gastou, consultando a tabela de pagamentos.
+
+SELECT id_cliente, compras FROM pagamentos;
+
+Dica: se você não tiver certeza de quais colunas existem, use o comando abaixo para inspecionar todas as colunas (atributos) de uma única linha na tabela:
+
+SELECT * FROM nome_tabela LIMIT 1; 
+
+ 
+
+Obtenha colunas com um novo nome a sua escolha (AS)
+
+Depois de identificar as colunas certas, você pode renomeá-las com um apelido (alias) que seja mais fácil de reconhecer. Se o novo tiver mais de uma palavra deve ser escrito entre aspas.
+
+SELECT <coluna> AS “<Apelido>” FROM <table_name>;
+
+Ex: Renomeie a coluna id_vendedor para 'Lista de Vendedores' na tabela de resultados.
+
+SELECT nome_cliente, id_vendedor AS “Lista de Vendedores” FROM clientes;
+
+Ordene seus dados (ORDER)
+
+Organize os dados em uma ordem específica a partir dos dados de uma determinada coluna. Use ASC para ordem ascendente (do menor para o maior) e DESC para ordem descendente (do maior para o menor). 
+
+SELECT <coluna> FROM <tabela> ORDER BY <coluna> [“ASC” or “DESC”];
+
+Você pode também ordenar por diferentes critérios (colunas) que se somam. Por exemplo, para ordenar primeiro pela coluna A e depois pela coluna B, separe as colunas por vírgulas, use:
+
+SELECT <coluna> FROM <tabela> ORDER BY <coluna A> ASC, <coluna B> DESC;
+
+Ex: Entre clientes de Belo Horizonte, quais estão gastando mais em volume de transações mensais?
+
+SELECT * FROM clientes WHERE local = ‘Belo Horizonte’ORDER BY transacoes_mensais DESC;
+
+Limite o número de resultados (LIMIT)
+
+Se você quer extrair apenas uma amostra de resultados que atendem ao seu critério e não todos, pode limitar a quantidade de linhas exibidas.
+
+SELECT * FROM <tabela> LIMIT <numero de linhas>;
+
+Ex: Quais são os 3 itens mais vendidos do inventário? 
+
+SELECT * FROM inventario ORDER BY vendas DESC LIMIT 3;
+
+Extraia resultados que cumprem condições específicas (WHERE)
+
+Faça consultas que definem condições à lista de resultados. 
+
+SELECT <coluna> FROM <tabela> WHERE <coluna> <operador> <valor>
+
+Ex: Quais são todos os livros escritos pela Conceição Evaristo?
+
+SELECT titulo, autor FROM books WHERE autor= “Conceição Evaristo”;
+
+Ex: Quais são os títulos e autores de livros publicados em 1997?
+
+SELECT titulo, autor FROM livros WHERE primeira_publicacao=1997;
+
+Ex: Quais são todos os clientes que moram em Belo Horizonte?
+
+SELECT * FROM clientes WHERE local = “Belo Horizonte”;
+
+Você pode usar diferentes operadores para definir a condição: = (igual a), < (menor que), >(maior que), <= (menor ou igual a), != (diferente de).
+
+Ex: Quais clientes pagam mais de R$ 200 por mês em transações?
+
+SELECT * FROM clientes WHERE transacoes_mensais > 200;
+
+Ex: Quais são os títulos e autores de livros que NÃO foram publicados em 1997?
+
+SELECT titulo, autor FROM livros WHERE primeira_publicacao!=1997;
+
+AND ou OR podem ser usados para escrever múltiplas condições.
+
+Ex: Quais são os títulos de livros publicados por José Saramago antes do ano 2000?
+
+SELECT titulo FROM livros WHERE autor=“Jose Saramago” AND primeira_publicacao<2000
+
+Extraia resultados dentre um conjunto específico de valores (IN, NOT IN)
+
+Busque dados sobre determinados registros que estão dentro ou fora de uma lista que você indica.
+
+SELECT <coluna> FROM <tabela> WHERE <coluna> IN (<valor 1>, <valor 2>, …<valor n>)
+
+Ex: Quais são os nomes e emails de algumas IDs específicas de clientes?
+
+SELECT primeiro_nome, email FROM biblioteca WHERE id IN (“M101”, “M102” “M103”)
+
+Ex: Quais são os nomes e emails de pessoas que não são de São Paulo nem do Rio de Janeiro?
+
+SELECT primeiro_nome, email FROM biblioteca WHERE cidade NOT IN (“São Paulo”, “Rio de Janeiro”)
+
+Pesquise dentro de um intervalo de valores (BETWEEN)
+
+Extraia dados que cabem dentro de um intervalo determinado por você.
+
+SELECT <coluna> FROM <tabela> WHERE <coluna> BETWEEN <minimo> AND <maximo>
+
+Ex: Quais são os nomes e emails das pessoas entre 18 e 24 anos sócias da Biblioteca?
+
+SELECT primeiro_nome, email FROM Bilioteca WHERE idade BETWEEN 18 AND 24;
+
+Pesquise por termos parciais quando você não sabe exatamente o nome que precisa (LIKE, %)
+
+O operador LIKE é similar ao operador “=”, mas no caso do LIKE a capitulação das palavras não importa. Assim, você pode usá-lo para encontrar valores quando não souber se estão escritas em maiúsculas ou minúsculas.
+
+O símbolo % (porcentagem, ou wild card) é usado para representar um ou mais caracteres, como se fosse um “coringa” no baralho. 
+
+SELECT titulo FROM livros WHERE titulo LIKE “%caracteres_conhecidos%”
+
+Ex: Quais são as aulas da Tera que têm “dados” no nome?
+
+SELECT * FROM aulas WHERE nome LIKE “%dados%”
+
+Encontre valores faltando na tabela (IS, NOT IS - NULL)
+
+“IS NULL” quer dizer “está vazio” e “IS NOT NULL” quer dizer “não está vazio”. Esse operador é muito útilo quando você quer extrair apenas dados onde determinado valor está ou não preenchido. 
+
+SELECT <coluna> FROM <tabela> WHERE <coluna> IS Null;
+
+SELECT <coluna> FROM <tabela> WHERE <coluna> IS NOT Null;
+
+Uso de Funções
+
+Além dos operadores básicos a linguagem SQL conta com funções que são usadas para transformar os resultados.
+
+Por exemplo, use a função UPPER para deixar todos os valores de uma coluna específica em letras maiúsculas.
+
+SELECT UPPER(nome) FROM biblioteca;
+
+Use a função CONCAT para unir duas colunas, como juntar primeiro e segundo nome com um espaço no meio:
+
+SELECT CONCAT (primeiro_nome, “ ” , sobrenome) AS “Nome Completo” FROM Biblioteca
+
+Use a função REPLACE para substituir valores dentro de uma coluna.
+
+SELECT REPLACE(<value or column>, <target>, <replacement>
+
+SELECT REPLACE(estado, “São Paulo”, “SP”)
+
+Use a função AVG() para calcular o valor médio em uma função numérica.
+
+SELECT AVERAGE(custo) AS media FROM pedidos;
+
+
+
+Pode dar um exemplo de quando uma métrica fez toda a diferença para o negócio?
+
+Como lidar com os imprevistos no meio do caminho e mudar as métricas conforme muda a estratégia da empresa?
+
+Como convencer stakeholders de que uma métrica parou de fazer sentido?
+
+Como o framework CRESCER ajuda a se comunicar melhor com stakeholders? Tem um guia de uso?
+
+Quando as métricas indicam que não estamos indo bem, como e em quanto tempo estabelecer uma nova rota? Como equilibrar o reativo com o estratégico?
+
+
+
+
+	
+
+
+
+
+
+

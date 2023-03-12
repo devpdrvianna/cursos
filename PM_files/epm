@@ -1,0 +1,36 @@
+##EDIÇÂO DE ARQUIVOS
+
+# Arquivo hosts
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/vim -Z /etc/hosts
+
+### INSTALAÇÂO DE SOFTWARES
+
+# podman
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install podman
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update podman
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install podman-docker
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update podman-docker
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install buildah
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update buildah
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install skopeo
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update skopeo
+%itau.corp.ihf\\domain\ users ALL=(ALL) NOPASSWD: /usr/bin/podman
+%itau.corp.ihf\\domain\ users ALL=(ALL) NOPASSWD: /usr/bin/podman-compose
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install podman-compose
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update podman-compose
+#%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install python* # Install_python
+#%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update python* # Update_puthon
+%itau.corp.ihf\\domain\ users ALL=(ALL) NOPASSWD: /opt/vmware/ws1-hub/bin/ws1HubUtil enroll*
+%itau.corp.ihf\\domain\ users ALL=(ALL) NOPASSWD: /usr/bin/ansible-pull -U https\://fabiluq\:x1Fd373sf3x4dxb5JGRp@git.prod.cloud.ihf/automacao_doti/SSTA/engenharia-end-user/plataformas/linux/management/ansible.git
+
+# code
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum install code
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /usr/bin/yum update code
+
+# java
+%itau.corp.ihf\\domain\ users ALL=(ALL) NOPASSWD: /sbin/update-alternatives --config java
+
+# managing services
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /bin/systemctl start podman.socket
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /bin/systemctl restart podman.socket
+%itau.corp.ihf\\domain\ users ALL=PASSWD: /bin/systemctl stop podman.socket

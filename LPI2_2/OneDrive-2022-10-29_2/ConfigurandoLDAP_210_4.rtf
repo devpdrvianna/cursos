@@ -1,0 +1,239 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red251\green0\blue7;
+\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;
+\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid3\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li2160\lin2160 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid4\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li2880\lin2880 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid5\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li3600\lin3600 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh19180\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 210.4 Configurar OpenLDAP\
+	Lightweighted Directory Access Protcol\
+			Protocolo que armazena e acessa dados em modelo de arvore diret\'f3rios - tipo organograma\
+\
+	muito usado armazenar info de usu\'e1rios e equipamentos (invent\'e1rios)\
+	favorece leitura de dados, grava\'e7\'e3o de muito dados nao tem muita performance (Escrita e mais lenta)\
+	Cada no representa conjunto de atributos e valores\
+\
+	LDAP - e organizado relacionando com dominio da empresa \
+	\
+	DC - domain componente\
+		OU - Organization unit\
+				cn=comom name\
+\
+	dn - distinguish name como se desquite\
+		dn:  cn=paulo, ou=funcionarios, dc=empresa, dc.com\
+\
+	\
+	dn: cd=henrique, ou=suporte, st=MS, c=BR\
+\
+	\
+ SCHEMAS ObjectClasses e Attributes\
+	dn: cd=paulo, ou=funconario, dc=empresa, dc=com\
+\
+	Shemas\
+		ObjectClasses\
+			Attributes\
+				nome\
+				Telefone\
+				email\
+				cargo\
+\
+\
+\
+Instalacao\
+	apt-get install slapd ldap-utils\
+		solicita uma senha e administrador ao instalar\
+	ps aux | grep salpe\
+	netstat -nalp | treo slapd\
+	\
+	yum install openldap openldap-servers openldap-clientes. (centOs)\
+\
+	/etc/ldap (debian)\
+	/etc/openldap (centOS)\
+\
+\
+	/etc/ldap/slapd.d. (diretorio de confoguracao)\
+	ou\
+	/etc/default/slapd  (arquivo de configura\'e7\'e3o). - Precisa definir o arquivo de configura\'e7\'f5es que vai usar conforme pr\'f3xima linha\
+		SLAPD_CONF=/etc/ldap/slapd.conf\
+	cp /usr/shar/doc/slapd/exemples/slapd.conf /etc\
+	systemctl restart slapd\
+\
+	/etc/sysconfig/slapd (centOs)\
+\
+\
+ /etc/slapd.conf\
+		Loglevel - defini a prioridade de logs atrav\'e9s de n\'fameros 1 mais logs e demais vai diminuindo\
+\
+		shemas Includes no inicio\
+\
+		backend	passwd , ldap, bdb, hdb, ldif, meta monitor mdb, null perl relay, shell, sql\
+		database	hdb\
+	\
+		suffix \'93dc=dominioexemplo,dc=com,dc=br\'94\
+\
+		rootdn	\'93cn=admin, dc=dominioexemplo, dc=com, dc=br\'94\
+		rootpw 	3h3i3rh2l2r3lkrbrlk23bri \
+\
+		access to attrs=usePassword, shadowLastChange.   (ACL de controle de acesso) (Acesso padr\'e3o, todos tem acesso leitura)\
+			by dn=\'93cn=admin, dc=dominioexemplo, dc=com, dc=br\'94\
+\
+\
+   Slappasswd <enter> Comando para gerar um hash de senha\
+	3h3i3rh2l2r3lkrbrlk23bri \
+\
+  Slaptext -f  /etc/ldap/slapd.conf mostra se a config esta correta \
+\
+\
+\
+	/var/lib/ldap - estrutura de biblioteca, banco de dados armazenados \
+			\
+	\
+   Exemplo de slapd.conf\
+		https://cursos.linuxsemfronteiras.com.br/wp-content/uploads/2020/12/slapd.conf_.txt\
+\
+\
+\
+ADICIONAR CONJUNTO DE DADOS NA BASE\
+  Foi criado um arquivo.ldif\
+\
+	https://cursos.linuxsemfronteiras.com.br/wp-content/uploads/2020/12/arvore.ldif_.txt\
+\
+\
+	Formato ldif - Cada linha tem que ter um DN e deve ser separado por uma linha em branco\
+	formato do arquivo precisa ser UTF-8. Texto\
+	\
+\
+\
+\
+		descrito  dn  objectClass.  Dc \
+	tem aplcacoes que geram e exportam arquivos lido\
+\
+\
+\
+ Ldapadd -x -D \'93cn=admin, dc=dominioexemplo, dc=com, dc=br\'94 -w -r arvore.ldif  (adicionar os dado do arquivo)\
+		adiciona as novas entradas do arquivo.ldif\
+\
+Slapadd. Faz o mesmo mas adiciona direto no banco de dados no /var/lib e o servi\'e7o deve estar parado.\
+\
+\
+Slapcat -f /etc/ldap/slapd.conf. traz um dump da base e do que foi criado\
+\
+Slapindex -f  /etc/ldap/slapd.conf  faz um indexa\'e7\'e3o da base. ,  precisa parar o servi\'e7o do systemctl start slapd\
+	\
+\
+EXERCICIOS\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+1.
+\f0\b0 \'a0Utilizando um servidor OpenLDAP configurado com base no arquivo de configura\'e7\'e3o\cf2 \cb1 \uc0\u8232 \cf2 \cb3 slapd.conf, configure e inclua a base de dados \'93empresa.com\'94 cujo detalhes e entradas est\'e3o\cf2 \cb1 \uc0\u8232 \cf2 \cb3 contidas no arquivo exercicio-ldap.ldif (em anexo).\
+A base de dados cont\'e9m a seguinte estrutura:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+com\cb1 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\partightenfactor0
+\ls1\ilvl1\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+empresa\cb1 \
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+filial1\cb1 \
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880\partightenfactor0
+\ls1\ilvl3\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+administrativo\cb1 \
+\pard\tx3100\tx3600\pardeftab720\li3600\fi-3600\partightenfactor0
+\ls1\ilvl4\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Antonio Lopes\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Luciano Silva\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Maria Souza\cb1 \
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880\partightenfactor0
+\ls1\ilvl3\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+producao\cb1 \
+\pard\tx3100\tx3600\pardeftab720\li3600\fi-3600\partightenfactor0
+\ls1\ilvl4\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Claudia Silva\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Maria Moreira\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Jorge Almeida\cb1 \
+\pard\tx1660\tx2160\pardeftab720\li2160\fi-2160\partightenfactor0
+\ls1\ilvl2\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+filial2\cb1 \
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880\partightenfactor0
+\ls1\ilvl3\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+administrativo\cb1 \
+\pard\tx3100\tx3600\pardeftab720\li3600\fi-3600\partightenfactor0
+\ls1\ilvl4\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Elaine Silva\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Mario Siqueira\cb1 \
+\pard\tx2380\tx2880\pardeftab720\li2880\fi-2880\partightenfactor0
+\ls1\ilvl3\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+producao\cb1 \
+\pard\tx3100\tx3600\pardeftab720\li3600\fi-3600\partightenfactor0
+\ls1\ilvl4\cf2 \cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Eduardo Lopes\cb1 \
+\ls1\ilvl4\cb3 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Maria Silva\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 	\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf4 \cb5 \expnd0\expndtw0\kerning0
+	Criar a nova base de dados, adicionando ao final do arquivo /etc/ldap/slapd.conf as seguintes\cb1 \uc0\u8232 \cb5 	entradas:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	database hdb\cb1 \
+\cb6 	suffix "dc=empresa,dc=com"\cb1 \
+\
+\cb6 	rootdn "cn=admin,dc=empresa,dc=com"\cb1 \
+\cb6 	rootpw \{SSHA\}MJsurJqAoi12J+tjAPtDIp9Gzj1M02kU\cb1 \
+\
+\cb6 	directory "/var/lib/ldap"\cb1 \
+\
+\cb6 	dbconfig set_cachesize 0 2097152 0\cb1 \
+\cb6 	dbconfig set_lk_max_objects 1500\cb1 \
+\cb6 	dbconfig set_lk_max_locks 1500\cb1 \
+\cb6 	dbconfig set_lk_max_lockers 1500\cb1 \
+\
+\cb6 	index objectClass eq\cb1 \
+\cb6 	lastmod on\cb1 \
+\cb6 	checkpoint 512 30\cb1 \
+\
+\cb6 	access to attrs=userPassword,shadowLastChange\cb1 \
+\cb6     		by anonymous auth\cb1 \
+\cb6     		by self write\cb1 \
+\cb6     		by * none\cb1 \
+	\
+\cb6 	access to dn.base="" by * read\cb1 \
+\
+\cb6 	access to *\cb1 \
+\cb6     		by * read\cb1 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 	Reiniciar o servidor slapd:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 		# systemctl restart slapd\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 	Incluir os dados no banco:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 		# ldapadd -x -D "cn=admin,dc=empresa,dc=com" -W -f exercicio-ldap.ldif\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+\
+	\
+\
+	}

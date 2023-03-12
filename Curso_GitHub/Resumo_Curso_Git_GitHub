@@ -1,0 +1,305 @@
+RESUMO GIT
+
+INSTALAÇÃO DE ITENS DO GIT
+
+yum install code
+	Adcionar as extenções:
+		Dracula Dark
+		Git lens - Gt Super Charge			
+yum install git
+Acessa o github.com (criar conta)  (conta: devpdrvianna Oleg2023
+
+
+
+COMANDOS DO GIT
+
+ -Config iniciais
+	git config --global init.defaultBranch main
+	git config --global user.name "devpdrvianna"
+	git config --global user.email "ppvianna@gmail.com"
+
+ -Inicializar o git
+	Criar um diretório e copiar o codigo para ele e Navegar até o diretório do codigo que deseja iniciar
+		git init (iniciar um repo no diretório que possui o codigo)
+		git status
+		git add .  (Envia tudo no diretorio para ser comitado) 
+			git add <nome do arquio> Envia so o arquivo para ser comitado
+		git commit -m "Todos os arquivos commit" (se não especificar o arquivo ele commita tudo no diretório)
+			git commit empresa.txt -m "Estou criando arquivo com nome da empresa"   (Fazer commit de 1 arquivo)
+ 
+  -Configurar o GitHub
+	Logar githib.com 
+	Criar o repositorio
+	Configurar o token de acesso em perfil > settings > Developer settings > Personal Access Tokens
+
+
+  -Subir o codigo
+		git branch -M main (configurar localmente o nome do branch principal - o padrão é main)	
+		git remote add origin https://github.com/devpdrvianna/curso_git.git (configurar o seu repositório remoto, onde deseja subri o codigo)
+ 			PARA MUDAR depois de configurado -  git remote set-url origin https://github.com/devpdrvianna/curso_git.git
+			COM TOKEN  git remote set-url origin https://devpdrvianna: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@github.com/devpdrvianna/cursos.git
+	Criado o token para linux: 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
+		git push -u origin main (ou somente git push - para subir o codigo)
+
+
+  - Valida a configuração 
+	git config -l
+
+
+  - Dia dia 
+	git add .
+ 	git commit -m "descricao"
+ 	git push
+
+  - Atualizar o repositorio local, puxando do github.com
+	github pull
+
+
+  - PARA CLONAR
+  	Criar um diretório vazio e entrar nele 
+	git clone https://github.com/devpdrvianna/curso_git.git . (colocar o . no final para trazer os arquivo para o local, sem criar diretório) 
+		O caminho para clonar pode ser pego no github.com, dentro do repositorio do botão clone
+
+  - LOGS
+	git log (Mostra todos os commints e ajuda a direcionar onde estava)
+	
+
+  - RollBack
+ 	git checkout <arquivo alterado>  (faz o restore para o ultimo estado do arquivo, rollback do ultimo commit)
+	
+
+  - Ignorar arquivos para nao enviar para GitHub
+	criar o arquivo .gitignore no raiz do diretório do codigo e adicionar os diretório que não deseja que sincronize.
+		ex.: /mode_modules
+		ex.: /novoig
+
+  - RESET
+  	Volta ao estado inicial do que foi enviado para branch Main, antes de fazer o push - busca o ultimo commit e traz as alterações 
+	git reset --hard origin/main
+
+
+BRANCHS
+
+  - Gerenciar projetos - Branch
+	É possivel separar o codigo por features, nao corre o risco de alterar direto na main
+	a branch deixa a pagina main intacta e ao final faz um merge do banch com a main.
+
+
+
+  - git branch (mostram as branchs e onde vc está)
+	* main
+  	  page_home
+
+
+  - git branch <nome_brach>  (cria nova branch)
+	Cria a branch a partir da que vc esta, geralmente a main
+
+	git checkout -b "<nome_brach>" (cria a branch e ja muda para ela)
+
+  - git checkout page_home (navegar para outra branch)
+
+  - git branch -d <nome_brach (apaga a branch)
+
+
+MERGE
+	Nevegue até a branch que quer atualizar
+	- git merge <nome_branch> (precisa estar na main para puxar a outra branch)
+
+	caso esteja em uma branch, pode puxar e fazer merge do que esta na main
+	- git merge main
+
+
+GIT STASH
+   	restaura a ultima versao da branch, volta ao estado inicial
+	- git stash
+
+REVERTER o STASH
+	pode escolher qual stash irá retornar
+	- git stash list (lista as stash por id)
+	- git stash apply 0 (volta a git stash com id 0)
+	- git stash show -p 0 (mostra as alterações na stash do id 0)
+
+
+TAGS 
+	Ajuda a criar versoes do codido com TAGs - Cria Tags no Github.com como versoes
+  	- git tag -a v1.0 -m "Primeira versao do so"
+  	- git tag (mostra as tag)
+  	- git show v1.0 (Visualiza as altreacoes por TAG)
+	- git checkout v1.0 (troca entre as tags informando o nome v1.0)
+	- git push origin v1.0  (Sobre para gitHub so a tag v1.0)
+  	- git push origin --tags (envia todas as Tags)
+
+
+PROCURANDO BRANCHS
+	É possivel procurar e listar todas as branchs existentes de outros usuários	
+	
+	ex.:
+  	Em um repositorio, criar uma branch (git branch cadastro)
+  	Dentro da branch atualizar o que precisa nos arquivos
+	fazer git add .  e git commint -m "descricao"
+  	e em seguida subir a branch (git push --set-upstream origin cadastro)
+
+
+ 	Em outra maquina ou local, pode buscar todas as branch que estao no projeto
+	- git fetch -a  (mostra as branch criadas no repositório)
+	
+
+   	Após Mostrar e atualizar as branchs pode se fazer o acesso as branchs
+	- git checkout <nome da branch>
+	Pode fazer as alteracoes na branch e subir com git push 
+	
+	Na primeira maquina que originou os dados, pode dar git pull dentro da branch e pegar as alteracoes
+
+
+COMANDOS GERAIS
+
+	Arquivos em Cache , limpar cache (melhora performance)
+	- git gc    (garbage collector)
+
+	Ver os commints, tipo um historico de todos os commits dos usuarios que trabalham no repositório
+	- git shortlog  
+
+	comando diff - fazer comparacoes, diferenca entre arquivos, compara arquivo no local com o que tem no github
+	No repositório local, dentro da branch rodar o comando git diff <arquivo> ou git diff
+
+	
+	git reflog
+  	muito parecido com o git log porem com muito mais detalhes, inclusive mudancas de branch (mostra um log de até 30 dias)
+	- git reflog  (mostra os detalhes do repo que vc está)
+
+
+
+
+GITHUB.COM
+
+	Issues - Serve para trabalhamos em partes do codigo, seria uma tarefa de algo que precisa fazer.  Linkar a issue para pull requeste antes de fechar
+
+
+	Pull request - forma de aprovar ou reprova um codigo com comentarios 
+
+
+	Wiki - Legal ser usado para apontar(link) para site com documentacao.  Se colocar como privado o reporsitorio o Wiki não fica disponivel
+		Pode se criar uma pagina de documentacao do projeto
+		Pode criar paginas separando a documentacao
+
+
+
+Projetos
+	Criar um projeto no formato template.
+	Tem template de metodologia agil (forma de kanban)
+		
+	Consegue montar um roadmap com as etapas/atividades em colunas. Formato kanban (arrastar conforme vai sendo executado)
+
+	gist - Caso deseje compartilhar um pedaço de codigo com alguém  
+	- Clicar no avatar > new gist
+	Bom para publicar pequenos codigos e compartilhar
+
+
+MACKDOWN
+	
+	liguagem maracao de texto usado no preview do repositório, configurado no README.md
+	No README do git deve so fazer referencias rapidas sobre aplicacao
+	Comando são interpretados dentro do README.md do git
+	
+	
+
+	Configurar 
+		Adiconar extensão no code (Auto-Open Markdown Preview). Esse irá criar um preview conform for colocando os comandos
+
+
+	Adicionar Logo
+		![Logo do git](https://sujeitoprogramador.com/wp-content/uploads/2021/04/gitimage.png)    - Coloca o logo/imagem conforme link
+
+	Criar um menu
+		[Bemvindo](#bem-vindo-ao-curso) |	
+		[Modulos](#modulos) |
+		[Titulos](#titulos) |
+		[Negrito-Italico](##enfase-de-texto-negrito-e-italico)
+
+	Títulos
+		# Titulo <h1>
+		## Titulo <h2>
+		### Titulo <h3>
+		#### Titulo <h4>
+		##### Titulo <h5>
+		###### Titulo <h6>
+
+		Nesse grupo vc vai aprender a dominar  (Se o # mostra como descrição normal)
+
+
+
+	Enfase de texto negrito e italico
+		**git**  - negrito
+		_git em italico_ 
+		_Texto **misturando** italico e negrito_
+
+	Imagem e links (Usado para rede sociais)
+
+		[**Instagran**](https://instagram.com/sujeitoprogramador)
+		[**Youtube**](https://youtube.com/sujeitoprogramador)
+
+
+
+	Listas nao ordenada
+		* Comecando com git
+		* Aprendendo sobre branchs		
+		* Git Avancado
+		* usando git profisional
+
+	lista ordenada
+		1. Comecando com git
+        		1. o que e git
+        		2. treinamento 
+		2. Aprendendo sobre branchs
+		3. Git Avancado
+        
+
+
+	Block code (Cria um bloco que destaca o texto)
+		>Este e um block code para destacar o texto
+		>Segunda area destacada
+		>
+		>Pulando uma linha no blockcode
+
+	
+	Exemplo de codigo (Cria um quadrado e o digo fica em outro relevo)
+
+		**Comando para rodar o projeto**
+		```
+		mpm start
+		```
+		
+		**Outro Exemplo**		
+		```js
+		Function shownname(name){
+    			return 'Bem vindo'
+
+		}
+		```
+
+		**Uso Html**
+		```html
+		<h1>
+    			Titulo do projeto
+		</h1>
+		```
+	Task List (Mostra uma list de tarefas e pode se sinalizar com x)
+
+	**Ultimos update:**
+	- [x] Login com facebook
+	- [ ] Site responsivo
+	- [ ] pagina sobre 
+
+	
+	Tabelas - (pode se montar uma tabela com dados, links, imagens dentro)
+
+	Propriedades | Descrição
+	-----------  | --------
+	Name | Informar o nome do user
+	Size | Para definir o tamanho
+	background | Cor de fundo
+	onpress | Funcao clicar no botao
+
+
+
+

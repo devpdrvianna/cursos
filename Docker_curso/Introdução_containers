@@ -1,0 +1,1713 @@
+Cada containers possui sua hierarquia de arquivos e diretorios e rede
+
+Os containers são isolados pelo Kernel Namespace do Linux
+		permite ter contas de root dentro do containers, diretorios, rede e configurações isoladas
+		
+		cara containers possui Cgroup (customização de recursos para os containers) com ele pode-se customizar e aumentar ou diminuir recursos.
+
+ Capability - pode fazer privilegios especificos, ao invés de root
+			CAP_AUDIT_CONTROL
+			CAP_CHOWN
+			CAP_DAC_OVERRIDE
+			CAP_KILL
+			CAP_NET_BIND_SERVICE
+			CAP_SETUID
+
+ DOCKER - todas as capability são negadas exceto as listadas na white list
+
+
+ Dcoker Hub(Registry), Docker Swarm(clustering), Docker compose(Orchestration), libchan(Networking)
+
+  
+
+ Escrito pelo GO do google e licenciado pelo APACHE (docker como open Source)
+
+ Diferneçca do docker e lxc -> o lxc foi substituido pelo libcontainers
+	o lxc nao era contrilado pelo docker, esse componente fazia a comunicacao central entre docker e controles (namespace, cgroup, capability)
+
+	hoje o libcontainers é o driver oficial do docker
+
+
+   Arquitetura 64bits
+   Kernel 3.8->
+	suportar namespace, capability
+
+
+ docker client -> docker deamon
+
+
+yum install docker
+systemctl status podman.service
+
+docker -v
+docker version (pouco mais de detalhe)
+docker info (ainda mais detalhes) quando tiver containers
+
+
+ATUALIZAR DOCKER
+https://docs.docker.com/install/linux/docker-ce/centos/
+sudo yum remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-engine
+				  
+yum update
+sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+ls /etc/yum.repos.d/
+sudo yum install docker-ce docker-ce-cli containerd.io
+systemctl start docker.service
+systemctl status docker.service
+docker info
+
+
+
+CONFIGURACAO ROOTLESS
+   DOCKER Precisa de root (configurar namespace cgroup ger Capabilities)
+	
+    o docker deamon escuta um socket no /var/run/docker.sock
+
+  ls -l /run tem o docker.sock e o dono é o root e grupo docker
+  Pode dar permissão ao grupo docker para usuarios comuns 
+
+
+	
+ INICIAR UM CONTAINER
+ex: iniciar um container, interativo, com acesso ao terminal, com base imagem ubunto, e tem acesso ao bash
+
+docker run -it centos /bin/bash
+ em usuario comum da erro de acesso ao arquivo sock, precisa adiconar ele no grupo do docker
+ gpasswd -a homeuser docker
+
+ao montar a imagem se ele nao achar no local va buscar no docker hub
+Unable to find image 'centos:latest' locally
+
+
+CONFIGURAR O DOCKER CLIENT ACESSAR  ODOCKER DEAMON OUTRA MAQUINA
+	systemctl stop docker
+	dockerd -H tcp://192.168.56.106:2375 &  (iniciando o docker em modo demon informando o ip e socket de saida que vai escutar as conexões)
+		-H identifica o host e o & roda em backgroud
+
+
+	na Outra Maquina set o docker Client
+	export DOCKER_HOST='TCP://192.168.56.106:2375' 
+	docker version (faz o acesso na maquina deamon)
+	docker info
+
+	para voltar DOCKER_HOST= (setar como vazio)
+
+
+
+docker ps    lista todos os container em execução
+
+docker ps -a  mostra todos mesmo parados
+
+docker start <numero ID>   Inicia o container
+docker attach <numero ID> Entra no container
+
+Nome container pode a-z A-Z 0-9 e _ -
+
+
+
+COMPONENTES DO DOCKER
+ Container
+ Podem conter codigo nocivo malicioso
+ 
+ Docker engine,  ou docker deamon  ou docker run
+	Stack de arquivos, rotas, variaveis acesso ao disco, etc
+	Tudo padronizados
+	pode transportar para outro ambiente que esteja com o docker runtime
+	Pode ser executado em qualquer plataforma 
+	
+
+ Docker images
+	docker run -it fedora /bin/bash  (sempre baixa a versão mais recente)
+	ctrl + p +q   sai do container sem encerrar
+	
+	docker pull -a fedora    Baixa todas as imagens do fedora
+	docker images fedora   mostra as imagens do fedora locais
+	Tem varias versões da mesma imagem
+
+	
+   docker ps
+   docker attach a81a5f0641ca 
+
+
+DOCKER REGISTRY (Repos- Contém as imagens oficiais e as com usuarios verificados)
+ https://hub.docker.com
+	repos oficiais de todas tecnologia (ubunto, centos, mysql, etc)
+
+
+
+  IMAGENS & CONTAINERS
+  
+			
+
+  Podem ter uma imagem por camada, (SO na base, java na Layer 1 e update na Layer 2)
+	Cada camada recebe UUID
+	
+	Union mount - conssegue montar varios sistema de arquivo um em cima do outro. 
+		Monta todas as camandas como somente leitura e cria uma camada no topo que unica pode escrever
+
+	
+	Onde as imagens são armazenados
+	/var/lib/docker/overlay2
+
+COPIAR IMAGEM DE HOST PARA OUTRO
+	docker images
+	docker run ubuntu /bin/bash -c "echo 'Nice content' > /tmp/nice-content"
+		vai escrever no arquivo quando iniciar o container
+	docker ps -a
+	docker commit <ID OU NOME> foo-bar   (cria nova imagem)
+	docker history foo-bar
+	docker save -o /mnt/shared/foo-bar.tar foo-bar  (compacta a imagem foo-bar como foo-bar.tar
+	
+  na outra maquina
+	tar -tf /mnt/shared/foo-bat.tar
+	docker load -i /mnt/shared/foo-bar.tar
+
+	docker images (aparece a imagem foo-bar)
+
+	docker run -it foo-bar /bin/bash	
+	cat /tmp/nice-content
+
+
+ Um processo por Container
+	Qundo encerra o processo o contaner encerra
+
+	docker run -d centos  /bin/bash -c "ping 8.8.8.8 -c 50"  (subir imagem centos, e vai pingar o google 50 vezes 
+	depois ele encerra, executa os 50 pings e a imagem encerra
+
+	docker top <hash>  ele mostra o serviço e ping. Mostra apenas 1 processo
+	
+
+	COMANDOS DE CONTAINERS
+	docker run --cpu-shares=250
+	docker run memory=1g
+	docker run -d  centos:7 /bin/bash -c "ping 8.8.8.8"  (usa  ditro centos 7 e faz ping. o -d vai rodar em detach)
+	docker inspect <containerID>  Mostra as config do container, status atual, plataforma, config de host etc....  motra tudo do container)
+	docker logs <id ou nomes>  mostra o que esta fazendo ping
+	docker attach <id ou nome>  e ele entra e mostra o ping sendo executado
+	
+	
+
+	
+CONTAINER GERENCIAR	
+	
+	
+  docker -it ubunto:19.04 /bin/bash
+	baixa as 4 camadas
+  CRTL+P+Q
+  docker ps
+  docker stop <id ou nome>   manda um sigterm dentro do container
+  docker ps (mostra que o container parou)
+  docker kill <signal>
+  docker ps -l   mostra p container que foi executado por ultimo
+  
+  docker start <id>  inicia desatachado
+  docker attach <id> Entra no container
+ 
+  docker restart <id>   reinicitar o container
+
+
+ PID
+   PID=1 (INIT) no Linux
+   NÃo tem PID-1 (pode ser o shell, mysql, java, redis, NGINX) no Container
+	temos um processo dentro de um container (1 processo por container)
+	Existem imagens que podem rodar mais de 1 processo dentro de um contaner
+
+  DELETAR CONTAINER
+	docker ps
+	docker info (informacoes gerais do docker)
+	ls -l /var/lib/docker/containers
+	ls -l /var/lib/docker/containers | wc -l (quantidade de containers)
+	
+	docker rm <id ou nome>   (Se estiver em execução não apaga)
+	docker stop <id ou nome>
+	docker rm <id ou nome>
+
+	docker rm <id ou nome> -f   vai forçar a exclusão mesmo em execução
+	docker info (mostra que tem menos 1 container)
+
+	ls -l /var/lib/docker/containers | wc -l   (terá menos 1 container)
+
+	
+   definindo alias
+    alias dps=docker ps
+
+ IMAGEM EXECUTAR MAIS DE 1 PROCESSO
+	
+	docker run --rm -t -i phusion/baseimage /sbin/my_init -- bash -l (Ele baixa a imagem que gera varias imagens)
+	CTRL P Q
+	docker ps
+	docker top <id>
+		
+  	olhando os processo não começca com PID 1, e sim os processos rodando
+	docker attach <id ou nome>
+	ps ef  (vai mostra que tem pid 1 dentro do container)
+
+	docker logs <id nome>
+
+
+  CONTAINER BAIXO NIVEL
+	docker ps
+	docker inspect <id ou nome> (info amazenados em JSON)
+
+	ls -la /var/lib/docker/containers/<id containers>/config.v2.json
+		mostra as infoações ne JSON
+
+  docker attach <id> ele se conecta no pid id, mas se estiver rodando o apache o pid 1 nao sera amigavel
+	
+  Quando esta rodando aplicação ao inves de bash , melhor forma de conectar e o 
+	nsenter (Entrar no namespace)
+		docker ps
+		docker inspect <id> | pid  (pega os id de  dentro container)
+		nsenter -m -u -n -p -i -t 3480 /bin/bash  (mount uts networks process target de vinculo)  Entra na container da aplicacao
+		
+		docker exec <id ou nome> /bin/bash (tb entra no container com aplicacao)
+			Esses podem sair com exit sem matar o container
+
+
+
+DOCKER FILES
+	precisa escrever : Dockerfile em texto sem extensão
+	docker build para criar a imagem a partir do Dockerfile
+	
+	mkdir udemy ; cd udemy	
+	vim Dockerfile
+		#Hello World with ubunto Based image
+		from ubunto:18.04
+		MAINTAINER ppvianna@gmai.com
+		RUN apt-get update  (cada instrução RUN cria uma camada)
+		RUN apt-get install -y nginx
+		RUN apt-get install -y golang
+		CMD ["echo","hello world"]
+
+	
+	docker build -t="helloworld:0.1" ./udemy/  (o que tiver nesse diretorio vai ser incluido no build) cria a imagem com a TAG helloworld:0.1
+
+	docker history:0.1  mostra o que aconteceu
+
+	docker run hellowworld:0.1 (vai imprimir o helloworld e encerra)
+
+
+ em hub.docker.com  e valide os Docker images para conhecer melhor
+
+	explorer e filtre por Sistema operacionais
+	 se tiver FROM scrath (foi construida do zero)
+	
+	
+DOCKER REGISTRY
+  DOCKER HUB (mais popular - https://hub.docker.com/)-Publico
+	onde ficam os repositorios
+	podemos criar os nosso próprios repos
+
+	
+	entrar no hub.docker.com
+	Create Repotitory
+		Public ou Private
+		Nome da imagem: helloWorld
+		Descrição: Docker curse
+		
+	create
+	
+	na pagina tem o comando para enviar a imagem para docker HUB
+	
+	docker tag <id> <Docker_Hub_User>/<Destination_image>:<TAG>
+	docker tag <id> ppvianna/helloworld:1.0  (criei outra imagem com TAg)
+	
+	docker login docker.io  (pede usuario e senha do site)
+	docker push vianped/helloworld
+
+	outra maquina
+	docker rmi <id> <id> <id>  apagar todas as imagens do local
+	docker pull vianped/helloworld:1.0
+	docker images
+	docker run vianped/helloworld:1.0
+
+   APAGAR IMAGES
+	docker rmi <id> <id> <id> (pegar id no docker images)
+   APAGAR CONTAINERS
+	docker rm <id> (pegar id no docker ps -a)
+	
+  
+   REGISTRY PRIVADOS
+
+	Crianção de um repo particular
+	docker era escrito em python e foi reinscrito em Golang
+
+	
+    Precisa do 
+	docker version	
+	openssl version -a
+	mkdir -p /docker_data/certs
+	openssl req -newkey rsa:4096 -nodes -sha256 -keyout /docker_data/certs/domain.key -x509 -days 365 -out /docker_data/certs/domain.crt
+		cria uma chave ecrypt 256 e vai gravar o .key e .crt
+
+	  common name: hotname.domain.com.br
+
+	mkdir -p /docker_date/images
+	
+	docker search registry (mostra no hub na internet as images)
+
+	docker run -d -p 5000:5000 \
+	-v /docker_data/imges:/var/lib/library \
+	-v /docker_data/certs:/certs \
+	-e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/domain.crt \
+	-e REGISTRY_HTTP_TLS_KEY=/certs/domains.key \
+	--restart on-failure  \
+	--name myregistry  \
+	registry 
+
+	docker ps (sobe a imagem)
+	
+	docker pull nginx
+
+	docker images
+	docker tag docker.io/nginx localhost:5000/my-nginx
+
+	docker images
+	docker push localhost:5000/my-nginx
+
+	
+	ls -lia /docker_data/images/docker/registry/v2/repositories
+		mostra a my-nginx
+
+	
+	Nas outras maquinas
+	Precisa trazer os certificados para as maquinas clients
+	mkdir /mnt/share
+	mount -t vboxsf shared /mnt/shared
+	
+	scp -r /docker_data/certs/domain.crt /mnt/shared
+	
+
+   Nos clientes baixar certificdo
+	mkdir -p /etc/docker/certs.d/ppvianna.domain.com.br:5000/
+	cp -rf /mnt/shared/domain.crt /etc/docker/certs.d/ppvianna.domain.com.br:5000/
+	ls -lia
+	echo 192.168.56.107 ppvianna.domain.com.br >> /etc/hosts
+	
+	docker images
+	docker pull vianped.domain.com.br:5000/my-nginx:latest
+	
+		
+
+CONSTRUIR IMAGEM E REGISTRAR
+
+    na primeira maquina gerar a imagem e subir ela
+	docker images
+	docker tag <ID> vianped.domain.cm.br:5000/hello-private-registry:1.1
+	
+		
+	docker images (mostra as 2 imagens)
+
+	docker push vianped.domain.com.br:5000/hello-private-registry:1.1
+	
+	no server  - ls -lia /docker_date/images/docker/registry/v2/repositories/  mostra o hello-privates-regstry
+
+
+	na terceira maquina
+		docker pull vianped.domain.com.br:5000/hello-private-registry:1.1
+	
+	docker images (aparece a imagem que baixou
+	docker run vianped.domain.com.br:5000/hello-private-registry:1.1
+
+
+Docker Hub -> docker registr padrao
+Docker Enterprise edition roda dentro de empresas
+
+
+DOCKER FILES APROFUNDAR
+	
+  CACHE BUILD
+	docker info para ver as imagens
+	docker images para ver o que esta de imagem no local
+
+	mkdir foo-bar
+	cp udemy/Dockerfile foo-bar/
+	cd foo-bar
+	
+	vim Dockerfile
+		#Hello World with ubunto Based image
+		from ubunto:18.04
+		MAINTAINER ppvianna@gmai.com
+		RUN apt-get update  (cada instrução RUN cria uma camada)
+		RUN apt-get install -y apache2
+		RUN apt-get install -y vim
+		CMD ["echo","hello world"]
+		:wq!
+
+	docker build -t="build1" .  (Para montar a tag)
+	docker build -t="build2" .  (faz muito mais rapido pois o cache ja montou, reaproveita o cache ele olha se as instruções ja foram excutado para essa image)
+	
+
+DOCKER CAMADAS
+	docker images (mostra varias camadas que foram pelo Docker info acima
+	ls -lia /var/lib/docker/overlay2  (mstra os arquivo das camadas)
+
+	docker images mostra 3 camadas
+
+	cd foo-bar
+	   vim Dockerfile
+		#Hello World with ubunto Based image
+		from ubunto:18.04
+		MAINTAINER ppvianna@gmai.com
+		RUN apt-get update  (cada instrução RUN cria uma camada)
+		RUN apt-get install -y apache2
+		RUN apt-get install -y vim
+		RUN apt-get install -y golang
+		CMD ["echo","hello world"]
+		:wq!
+		
+	docker build -t="build3" . (As instções que ja usou pega do Cache, demais ele faz download)
+	docker images (mostra 4 images)
+
+	docker info (mostra 8 images por que ele tem varias camadas)
+		
+	docker history build3 (mostra todas as camadas de forma invertida do que esta no dockerfile)
+		o Ideal é reduzir o numero de camadas para reduzir processamente o e tempo e espaço
+
+
+ CONSTRUIR SERVIDOR WEB
+	mkdir webserver
+	cp foo-bar/Dockerfile webserver
+	cd webserver
+	   vim Dockerfile
+		#Working with Webserver
+		from ubunto:18.04
+		RUN apt-get update  (cada instrução RUN cria uma camada)
+		RUN apt-get install -y apache2
+		RUN apt-get install -y vim
+		RUN apt-get install -y apache2-utils
+		RUn apt-get clean
+		EXPOSE 80	(O container expoes na porta 80 por defaul)
+		CMD ["apache2ctl","-D","FOREGROUND"]
+		:wq!
+
+	docker build -t="werbserver" . (colocar o ponto)
+	
+	INICIAR O CONTAINER
+	docker images
+	docker run -d -p 80:80 webserver (-d rodar detachado  -p roda na porta 80 na maquina e 80 no container)
+	 teste: http://localhost  (mostra pagina) a porta 80 do hospedeiro faz bind com porta 80 do container
+
+	PARANDO
+	docker ps
+	docker stop <id>
+	http://localhost (não funciona mais)
+	
+
+	REDUZINDO NUMERO DE CAMADAS
+	docker history webserver
+		mostram 7 camadas
+	 
+	vim Dockerfile
+		#Working with Webserver
+		from ubunto:18.04   
+		(abaixo usa \ para melhor visualizar)
+		RUN apt-get update && apt-get install -y \ 
+			apache2 \
+			apache2-utils \
+			vim 
+			&& apt-get clean \
+			&& rm -rf /var/lib/apt/lists/* /tmp/* /vartmp/*
+		EXPOSE 80	(O container expoes na porta 80 por defaul)
+		CMD ["apache2ctl","-D","FOREGROUND"]
+		:wq!
+
+	docker build -t="webserver-smaller" .
+
+	docker history webserver-smaller (camadas reduziram em 4 camadas)
+	docker images (o tamanho da imagem tb diminui)
+	
+	
+ CONHECENDO CMD
+	CMD - (executa dentro do container quando iniciado)
+		so pode ter 1 cmd por Dockerfile
+		Shell form -  CMD echo "hello world"  ou echo $VAR1
+		Exec form - usa JSON array style
+			["command","arq"]
+		  Preferencial para uso
+		  Não tem alguns itens do shell (variáveis, &&, ||, >...)
+	RUN - compila e adiconar a camada no container para executar
+		usados na instalação da imagem
+
+ FUNÇÃO ENTRYPOINT 
+	
+	vim Dockerfile
+		#Working with instrutions
+		from ubunto:18.04   
+		RUN apt-get update && apt-get install -y iputils-ping
+		ENTRYPOINT ["echo"]
+		:wq!
+
+	docker build -t"instrutions" .
+	docker run instrutions Hi everyone (o Hi everyone mostra no cont.)
+	docker run instrutions /bin/bash (imprime o /bin/bash no container)
+	
+	vim Dockerfile
+		#Working with instrutions
+		from ubunto:18.04   
+		RUN apt-get update && apt-get install -y iputils-ping apache2
+		ENTRYPOINT ["apache2ctl"]
+		:wq!
+	
+	docker build -t="webserver2" .
+
+	docker run -d -p 80:80 webserver2 -d FORGROUND (-D FOREGROUD argumentos)
+	docker ps
+	
+
+  INSTRUÇÃO ENV
+	vim Dockerfile
+		#Working with ENV
+		from ubunto:18.04   
+		RUN apt-get update && apt-get install -y iputils-ping apache2
+		ENV var1=Lenadro var2=Costa
+		#ENTRYPOINT ["apache2ctl"]
+		:wq!
+
+	docker build -t="Enviroment" .
+
+	docker run -it Enviroment /bin/bash
+	env (comando env dentro do containere para ver as variaveis)
+
+
+	  vim Dockerfile
+		#Working with ENV
+		from ubunto:18.04   
+		RUN apt-get update && apt-get install -y iputils-ping apache2
+		ENV var1=ping var2=8.8.8.8
+		CMD $var1 $var2
+		#ENTRYPOINT ["apache2ctl"]
+		:wq!
+
+	 docker build -t="pnguer" .
+	 docker logs <id> (mostra o retorno do ping)
+	 docker logs -f <id>  assim acompanha o log, como o Tail
+
+  VOLUMES
+	desvinular os dados armazenamento
+	fazer um mount para os containers mapear
+
+	docker volume ls   (esta se volumes)
+
+	docker run -it -v /foo-bar --name=vols centos /bin/bash
+		-v mostra o diretorio no hospedeiro e o name o volume que ele cria dentro
+	ls -l (vai mostra o diretorio foo-bar dentro do container)
+		o docker cria o volume e disponibiliza
+	yum -y vim
+	vim /foo-bar/testefileVolume
+		#texto para teste d evolumes
+		:wq!
+	
+	CTRL+P+Q
+
+	docker volume ls
+	docker inspect vols
+		em Mounts vc valida o volume mapeado (pegar caminho)
+
+	ls -la <caminho> (/var/lib/docker/volumes/HASH/_data/)
+	pode fazer cat /var/lib/docker/volumes/HASH/_data/testefilevolume
+
+	
+	SUBIR OUTRO CONTAINER MESMO VOLUME
+	docker run -it --volumes-from=vols centos /bin/bash
+		--volumes-from aponta o volume ja criado
+
+	ls -la foo-bar
+	cat foo-bar/testefileVolume
+
+	CRTL+P+Q
+	docker ps (mostra 2 containers)
+	
+	
+	  vim Dockerfile
+	     #Working with instruction
+	     from ubunto:18.04   
+	     RUN apt-get update && apt-get install -y iputils-ping apache2
+	     ENV var1=ping var2=8.8.8.8
+	     volume /foo-bar  (todo container iniciar a partir desse usaria o volume no foo-bar
+	     CMD $var1 $var2
+	     #ENTRYPOINT ["apache2ctl"]
+	     :wq!
+
+	docker volume ls (mostra o volume)
+	docker volume rm <id_volume>  Apaga o volume
+		precisa parar os 2 containers
+	docker stop <id> <id>  (parando 2 containers)
+	
+	docker rm -v <id_containet> <id_volume> (remove container e volume)
+		o -f remove o container mesmo que estiver em start	
+	docker volume rm <id_volume>  (remove so o volume)
+	docker ps (mostra sem volumes)
+
+RESUMO
+ O docker tem limitação de camadas, cerca de 127
+ Devemos customizar para diminuir as camadas
+	Ruduz processamento e espaço
+ 
+
+
+REDES
+  
+ VIRTUAL BRIDGE docker0 ou docker bridge
+	ip a (mostra redes - interfaces)
+	docker0 - interface criado pelo docker
+		
+	yum install bridge-utils
+	brctl show docker0
+		mostra as interfaces quando cada container conecta
+
+	
+	vim Dockerfile
+	     #Working with Bridge
+	     from ubunto:18.04   
+	     RUN apt-get update && apt-get install -y \
+		iproute2 iputils-ping traceroute apache2
+	     #ENTRYPOINT ["/bin/bash"]
+	     :wq!
+	docker build -t="my-net"
+	
+	run -it -name=net1 my-net
+	CRTL+P+Q
+	brctl show docker0  (aparece em interface o id)
+	
+	run -it -name=net2 my-net
+	CRTL+P+Q
+	brctl show docker0  (aparece em interface 2 id)
+		
+		cada novo container recebe interface conectado a bridge0
+
+	docker attach net1
+	ip a
+		cria a eth0 e recebe um ip 172.17.0.2
+	ping 8.8.8.8 funciona normal
+	traceroute 8.8.8.8
+	     mostra o gateway 172.17.0.1 (mesmo do docker0 no hospedeiro)
+
+	CRTL + P + Q
+	
+	ip a (mostra as interfaces do hospedeiro e o docker0=172.17.0.1)
+
+	
+ ARQUIVOS DE CONFIGURAÇÃO REDE NO DOCKER
+	docker -it -name=net3 my-net
+	
+	docker inspect net3
+	no Gateway vc visualiza o 172.17.0.1
+	
+	ip a
+	  vi mostrando s interfaces abaixo do docker0
+		veth<id>  onde estao em bind com a docker0
+
+	docker inspect net3
+		mostra macaddress
+
+	docker ps (pegar id container)
+	ls -l /var/lib/docker/containers/<id_container>
+		tem o hosts e o resolv.conf
+		o resolv.conf e uma copia do hospedeiros
+		o host tb é igual cnforme linux
+		todas as config neles é perdido quando containers stop
+	
+	docker run --dns=8.8.4.4 --name=dnstest my-net
+	CRTL + P + Q
+	docker inspect dnstest
+		consegue ver que o DNS mudou
+		
+	
+	
+EXPOSIÇÃO DE PORTAS
+	mkdir my_apache
+	vim my_apache/Dockerfile
+	     #Working with exposição portas
+	     from ubunto:18.04   
+	     RUN apt-get update && apt-get install -y \
+		iproute2 iputils-ping traceroute apache2
+	     EXPOSE 80	
+	     ENTRYPOINT ["apache2ctl"]
+	     CMD ["-D","FOREGROUND"] 
+		(opções padroes passado para o entrypoint)
+		( se passar instruções no docker run, sobrepôes essas)
+	     :wq!
+		
+	
+	docker build -t="my_apache" my_apache/	
+	
+	docker run -d -p 5001:80 --name=web1 my_apache
+		(usa 5001 do hospedeiro e 80 do docker)
+	docker ps  (Tb mostra as portas mapeadas)
+	
+	No Browser 
+	http://localhost:5001
+
+	outra forma de ver portas
+	docker port web1
+		80/tcp -> 0.0.0.0:5001
+
+	
+	Outro contaiers
+	docker run -d -p 5002:80/udp --name=web2 my_apache
+	docker port web2
+		80/udp -> 0.0.0.0:5002
+
+
+	na maquina
+		ip -f inet a
+			inet 192.168.56.106
+
+	
+	docker run -d -p 192.168.56.106:5003:80 --name=web3 my_apache
+	docker port web3
+		80/tcp -> 192.168.56.106:5003
+
+
+
+	docker run -d -p 192.168.56.106:5003:80 --name=web3 my_apache
+
+		
+ Voltando no DockerFile
+
+	vim my_apache/Dockerfile
+	     #Working with exposição portas
+	     from ubunto:18.04   
+	     RUN apt-get update && apt-get install -y \
+		iproute2 iputils-ping traceroute apache2
+	     EXPOSE 80 500 600 700 800 900
+	     ENTRYPOINT ["apache2ctl"]
+	     CMD ["-D","FOREGROUND"]
+	     :wq!
+
+	docker build -t="too-many-ports" my_apache/
+
+	docker run -d -p --name=too-many-ports too-many-ports
+	docker port too-many-ports
+		80/tcp -> 0.0.0.0:32770
+		500/tcp -> 0.0.0.0:32771
+		600/tcp -> 0.0.0.0:32772
+		700/tcp -> 0.0.0.0:32773
+		800/tcp -> 0.0.0.0:32774
+		900/tcp -> 0.0.0.0:32775
+
+
+
+LINKANDO CONTAINERS
+	mkdir my_link
+	vim my_link/Dockerfile
+	     #Working with link containers
+	     from ubunto:18.04   
+	     RUN apt-get update && apt-get install -y \
+		iproute2 iputils-ping traceroute apache2
+	     EXPOSE 80
+	     ENTRYPOINT ["apache2ctl"]
+	     CMD ["-D","FOREGROUND"]
+	     :wq!
+ 	docker build -t="my_link" my_link/
+
+	docker run --name=source -d my_link
+	docker ps
+	
+	docker run --name=receiver --link=source:src-alias -it ubuntu:18.04 /bin/bash
+	CRTL+P+Q
+	docker ps
+
+	docker inspect receiver
+		consegue visualizar o link
+
+	docker attach receiver
+	env (mostram variaveis de ambiente fixadas pelo source)
+		o source tb fixa dados no host
+		é mais seguro do que expor postas 
+		todas as varias sao fixada com o nome src-alias
+
+	podemos vincular 1 container a varios sources e 1 sources a varios container
+
+RESUMO
+	A DOCKER0 e criado ao instalar o docker
+	cada container se conectam a docker0
+	criam as vetch (docker0 -> as interfaces de container)
+	
+	docker port web1
+	 80tcp -> 0.0.0.0:5001 (vincula porta 5001 do hospedeiro ao 80 do container)
+
+	
+
+RESOLVER PROBLEMAS
+  LOGS
+	Niveis de log (debug info warm error fatal)
+	
+	service docker stop 
+	docker ps (foi parado o deamon)
+	dockerd --debug &  (ja entre em modo debug)
+	
+	antes
+	dockerd -l info &
+	ps -ef | grep docker
+	kill <process_ID>
+
+	dockerd -l debug &
+	docker ps 
+		mostra mais linhas e informacoes para os comandos
+	docker images (mostra mais detalhes)
+
+	ps -sf | grep docker
+	kill <process_id>
+
+	service docker start
+		Inicia normalmente
+
+	
+  LOGS CONTAINER
+	docker logs <id_container> mostra o logs do que acontece no container
+	docker -f logs <id_container> monitora em tempo real
+
+	
+   PLANEJAR BUILD DAS IMAGENS
+     o melhor é primeiro testar manualmente e depois construir os comandos do Dockerfile
+	docker run -it --name test ubuntu:18.04 /bin/bash
+		cai dentro do container
+	apt-get update	
+	apt-get install iputils-ping	
+	ping 8.8.8.8
+
+	montar os comandos
+	FROM ubuntu:18.04
+	RUN apt-get update && \
+	    apt-get y install iputils-ping	
+	CMD ping 8.8.8.8
+
+   
+
+   RESOLVER ERROS
+	
+     vim intermediate_images/Dockerfile
+	FROM ubuntu:18.04
+	RUN apt-get update
+	RUN apt-get y install iputils-ping	
+	CMD ping 8.8.8.8
+	:wq1
+
+      docker build -t="foo" intermediate_images/  
+		(apresentou erro ao gerar a camada do ping)
+      
+      docker images (Pega o id da imagem)
+      docker run -it <id_image> /bin/bash (entra na imagem)
+	dentro da imagem pode executar cada etapa até chegar no erro
+
+   
+
+    RESOLVER ERROS DE REDE
+	Pode ser que o docker0 pegue um intervalo de rede que ja é usado na rede do hospedeiro
+
+	service docker stop
+	docker ps
+	ip a
+	ip link del docker0
+	ip a
+	vim /etc/docker/deamon.json  (por padrao não existe esse arquivo)
+		{
+		"bip":"150.150.0.1/24"
+		}
+	:wq!
+	
+	service docker start
+	ip a
+		agora a interface docker0 vem com o range 150
+
+	docker run -it ubuntu:18.04 /bin/bash
+		apt-get update
+		apt-get install -y iproute2
+		ip a
+			recebe um ip no range do 150.xxx
+
+	
+
+    IPTABLES
+	docker inspect bridge
+	docker ps -a
+	docker start <id_containers> <id_containers> <id_containers>
+	docker inspect bridge
+		aparecem os containers
+
+	iptables -L 
+		mostra configuracoes do docker
+	
+	vim /etc/docker/deamon.json
+		{
+		"icc":false   (interrompe comunicação entre containers)
+		}
+	:wq!
+	service docker start
+	docker ps
+	iptables -L V
+		foi adicionado um DROP para docker0 interrompendo comunicação entre containers
+	
+	service docker stop
+	docker ps   (parou o docker)
+	   vim /etc/docker/deamon.json
+		{
+		"icc":true   (interrompe comunicação entre containers)
+		"iptables":false  (Docker não consegue mudar o iptables
+		}	
+	:wq!
+
+	service docker start
+	iptables -L -v
+	
+	docker run -it --name icc-teste1 centos /bin/bash
+	CTRL+P+Q
+	docker run -it --name icc-teste1 centos /bin/bash
+	CRTL+P+Q
+	docker ps
+	docker instpect icc-teste2  (ip 172.17.0.3)
+	
+	docker attach icc-teste1 (IP 172.17.0.2)
+	ip a 
+	ping 172.17.0.3  (não pinga pois o icc esta como true, mas o docker não pode mudar o iptables para permitir a comunicação porque o iptables esta como iptables:false
+
+LIMPANDO O AMBIENTE DOCKER
+	docker system prune  (remove todas a imgens e containers e cache nao usados)
+	docker system prune -a (apaga tudo)
+	docker rmi<id_images> apaga imagens
+	docker images -q -a (lista o ID de todas as images)
+	docker rmi $(docker images -q -a) remove todas as images
+	
+	docker ps -a -q  (lista o ID de todos os containers)
+	docker rm $(docker ps -a -q) -f (limpa todos os containers forcados)
+	
+	docker images (lista images)
+	docker ps (lista containers)
+
+
+
+DOCKER COMPOSE 
+
+  Para haver comunicação entre 2 containers 
+	Pode configurar tudo por docker client manual
+	Ou usar o docker-compose
+	
+  docker-compose é instalado separado
+  	Esse invoca o docker client
+	inicializa multiplus conteiners simultaneos
+	simplifica encapsula argumentos do docker run
+
+
+ Instalar conforme link do docker-compose
+	fazer curl
+	mover para /usr/bin/docker-compose
+ docker-compose -v
+
+
+INICIANDO - PRATICA
+	Ele consolida todos os comando de docker run, docker buid, modificando e melhorando e gravando em dockercompose.yml
+	
+	vim docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    ports:
+		      - "3308:3306"      
+		  wordpress:
+		    image: wordpress:latest
+		    ports:
+		      - 80:80
+		    depends_on:
+		      - db
+
+	VARIAVEIS E VOLUMES
+
+	Vai criar um DB e wordpress e fazer os 2 se comunicarem entre si. É criado uma rede entre os 2 conteiners e se comunicam 
+	a identação é fundamental para funcionar	
+	
+	vim docker-compose/docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASSWORD: docker
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: wordpress		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- wordpress-network     
+		  wordpress:
+		    image: wordpress:latest
+		    volumes:
+		    - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+		    - ./wp-app:/var/www/html
+		    environment:
+		    TZ: America/Sao Paulo
+		    WORDPRESS_DB_HOST: DB
+		    WORDPRESS_DB_NAME: wordpress
+		    WORDPRESS_DB_USER: root
+		    WORDPRESS_DB_PASSWORD: docker
+		    ports:
+		      - 80:80
+		    depends_on:
+		      - db	
+		    networks:
+			- wordpress-network
+		  networks:
+		    wordpress-network:
+			driver: bridge	
+
+
+
+COMANDOS DOCKER COMPOSE
+	docker run image -> docker-compose up
+	docker build	 -> docker-compose up (se for a primeira vez ja compila e sobe)
+	docke run myimage
+
+	
+	
+			   docker-compose up --buid (para força que seja recompliado)
+
+
+   cd docker-compose
+   docker-compose up  (estando no mesmo diretorio do docker-compose.yml)
+	na primeira vez e faz o build e inicia
+   
+   http://localhost:80
+
+
+PARANDO CONTEINER NO DOCKER COMPOSE
+   ANTES	
+	docker run -it ubuntu:18.04 /bin/bash CRTL+P+Q
+	docker stop <id>
+
+
+   DEPOIS
+	docker-compose up -d (ele sobre detachado e libera o terminal)
+
+	docker-compose down (no mesmo diretorio do docker-compose.yml)
+	
+
+MNUTENÇÃO DE CONTEINER
+	
+	vim docker-compose/docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASWORD: docker (tirou o S daqui, força erro)
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: wordpress		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- wordpress-network     
+		  wordpress:
+		    image: wordpress:latest
+		    volumes:
+		    - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+		    - ./wp-app:/var/www/html
+		    environment:
+		    TZ: America/Sao Paulo
+		    WORDPRESS_DB_HOST: DB
+		    WORDPRESS_DB_NAME: wordpress
+		    WORDPRESS_DB_USER: root
+		    WORDPRESS_DB_PASSWORD: docker
+		    ports:
+		      - 80:80
+		    depends_on:
+		      - db	
+		    networks:
+			- wordpress-network
+		  networks:
+		    wordpress-network:
+			driver: bridge	
+		
+		    :wq!
+
+		docker-compose up (apresenta erro de conectar ao DB
+		docker ps -a
+		docker logs <id_conteiners>
+			mostra que apresenta problema com autenticação
+
+		
+    REINICIALIZAÇÃO AUTOMATICA DE CONTEINERS
+	Codigo de erro: (0-Sucesso   1,2,3,4..-Erro)
+	
+	
+
+	vim docker-compose/docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASWORD: docker (tirou o S daqui, força erro)
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: wordpress		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- wordpress-network     
+		  wordpress:
+		    image: wordpress:latest
+		    volumes:
+		    - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+		    - ./wp-app:/var/www/html
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    WORDPRESS_DB_HOST: DB
+		    WORDPRESS_DB_NAME: wordpress
+		    WORDPRESS_DB_USER: root
+		    WORDPRESS_DB_PASSWORD: docker
+		    ports:
+		      - 80:80
+		    depends_on:
+		      - db	
+		    networks:
+			- wordpress-network
+		  networks:
+		    wordpress-network:
+			driver: bridge	
+		
+		    :wq!
+
+	Adicionado o restart: always para ele sempre iniciar no erro
+	o DB fica reiniciando por causa do erro do PASWORD
+
+
+ STATUS DE CONTEINER DOCKER COMPOSE
+	docker run -it ubuntu:18.04 /bin/bash
+	CTRL+P+Q
+	docker-compose up -d  (subir detachado libera o terminal)
+	
+	docker ps
+	docker-compose ps (so mostra o que foi executado do *.yml
+	docker-compose down
+
+
+		vim docker-compose/docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASSWORD: docker (corrigiu o S dessa linha)
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: wordpress		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- wordpress-network     
+		  wordpress:
+		    image: wordpress:latest
+		    volumes:
+		    - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+		    - ./wp-app:/var/www/html
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    WORDPRESS_DB_HOST: DB
+		    WORDPRESS_DB_NAME: wordpress
+		    WORDPRESS_DB_USER: root
+		    WORDPRESS_DB_PASSWORD: docker
+		    ports:
+		      - 80:80
+		    depends_on:
+		      - db	
+		    networks:
+			- wordpress-network
+		  networks:
+		    wordpress-network:
+			driver: bridge	
+		
+		    :wq!
+	
+
+
+		docker-compose up -d
+		docker-compose-ps  (precisa estar no diretório do docker-compose.yml)
+
+RESUMO
+	Facilita e abstrai comunicação entre conteiners
+	
+
+DOCKERIZAR UMA APLICAÇÃO COM JAVA
+  APLICAÇÃO JAVA
+	criar Dockerfile e docker-compose.yml
+
+
+	vim Dockerfile
+		FROM openjdk:11-jdk-slim
+		VOLUME /tmp
+		ADD app/target/docker-from-zero-to-master-0.0.1-SNAPSHOT.jar app.jar  (aplicação compactada do java para app.jar)
+		EXPOSE 8080
+		RUN bash -c 'touch /app.jar'
+		ENTRYPOINT ["java","-Djava.security.edg=file:/dev/./urandom","-jar","/app.jar"]
+		:wq!
+
+
+ CONTRUINDO O docker-compose.yml
+
+	vim docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASSWORD: docker
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: docker_from_zero_to_mastery_java		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- udemy-network
+		    docker-from-zero-to-mastery-java:
+			image: docker-from-zero-to-mastery-java
+			restart: always
+		    build:
+			   context: .
+			   dockerfile: app/Dockerfile
+ 		    workingdir: /app
+		    environment:
+				TZ: America/Sao Paulo
+		    ports:
+			  - "8080:8080"
+		    command: mvn spring-boot:run
+		    depends_on:
+			   -udemy-network
+		  networks:
+			udemy-network:
+				driver : bridge
+		 :wq!
+
+
+	docker-compose up  (precisa estar no mesmo diretorio do docker-compose.yml
+	ou
+	docker-compose up -d --build  (-d libera o terminal e --build nao pega do cache)
+
+
+
+ENVIAR IMAGEMS PARA O DOCKER HUB
+
+	docker images
+	docker tag docker-from-zero-to-mastery-java:latest vianped/docker-from-zero-to-mastery-java:latest
+	
+	docker login docker.io  (pede usuario e senha do site)
+
+	docker images
+	docker push vianped/docker-from-zero-to-mastery-java
+
+olha no hub.docker.com
+
+
+EXECUTANDO NO UBUNTU A IMAGEM CRIADA EM OUTRA MAQUINA COM DOCKER
+
+	mkdir scprint
+	cd spring
+	vim docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: mysql:5.7.22
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    restart: always
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASSWORD: docker
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: docker_from_zero_to_mastery_java		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- udemy-network
+		    docker-from-zero-to-mastery-java:
+			image: vianped/docker-from-zero-to-mastery-java (usuario do repo do dochub e a imagem para baixar)
+			restart: always
+ 		    workingdir: /app
+		    environment:
+				TZ: America/Sao Paulo
+		    ports:
+			  - "8080:8080"
+		    command: mvn spring-boot:run
+		    depends_on:
+			   -udemy-network
+		  networks:
+			udemy-network:
+				driver : bridge
+		 :wq!
+
+		
+		docker-compose up -d
+
+		docker ps
+		
+		http://localhost:8080
+		
+
+ 
+DOKERIZAÇÃO APLICAÇÃO EM ASP NET
+
+	vim docker-compose.yml (não usar TAB, e sim espaço para tabular)
+		version: '3.4'
+		services:
+		  db:
+		    image: docker-from-zero-to-mastery-dotnet-mysql-db
+		    command: mysqld --default_authentication_plugin=mysql_native_password
+		    restart: always
+		    build:
+		    context:
+			dockerfile: db/Dockerfile
+
+		    environment:
+		    TZ: America/Sao Paulo
+		    MYSQL_ROOT_PASSWORD: docker
+		    MYSQL_USER: docker
+		    MYSQL_PASSWORD: docker
+		    MYSQL_DATABASE: docker_from_zero_to_mastery_dotnet		
+		    ports:
+		      - "3308:3306" 
+		    networks:
+			- udemy-network
+		    docker-from-zero-to-mastery-dotnet:
+			image: docker-from-zero-to-mastery-dotnet
+		    build:
+			context:
+			dockerfile: DockerFromZeroToMastery/Dockerfile
+
+		    environment:
+		    	TZ: America/Sao Paulo
+			ASPNETCORE_ENVIRONMENT: Production
+		    ports:
+		      - "5000:80"
+
+		    depends_on:
+			   - db
+		    networks:
+			   - udemy-network
+		
+		networks:
+			udemy-network:
+				driver : bridge
+		 :wq!
+	
+	
+   		vim db/Dockerfile
+			FROM mysql:5.7.22
+			EXPOSE 3306
+			COPY ./DockerFromZeroToMastery/db/migrations /home/database
+			COPY ./DockerFromZeroToMastery/db/dataset /home/database
+			COPY ./DockerFromZeroToMastery/ci/init_database.sh /docker-entrypoint-initdb.d/init_database.sh
+			:wq!
+
+	
+		docker-compose -d --build  (-d detach e --build forcar a construção)
+
+		docker ps
+		docker-compose logs <conteiner>
+
+
+
+IMPLANTANDO DOCKER NA AWS
+
+	Criar uma instancia EC2  na Aws (entrar em EC2 e launch)
+
+	Acessar o KeyPairs, procurar o serviço e gerar uma PEM
+	Usar essa Keypair na instancia para criar.
+
+	no Windows (baixar i Puttygen e o putty)
+
+	instalar na instancia
+		Instalar o docker e docker-compose
+
+		sudo apt-get -y docker.io
+		sudo usermod -aG docker $(USER)
+		
+		sudo apt-get -y docker-compose
+	
+		chmod +x /usr/bin/docker-compose
+		
+
+	FAZER PUSH NA AWS
+
+	vim docker-compose.yml
+version: '3.7'
+services:
+  db:
+    image: mysql:5.7.22
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: docker_from_zero_to_mastery_node_react
+    ports:
+      - 3306:3306
+    networks:
+      - udemy-network
+  backend:
+    image: leandrocgsi/node-react-backend
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - 5000:5000 
+    command: ./wait-for.sh db:3306 -- ./startup.sh
+    depends_on:
+      - db
+    networks:
+      - udemy-network
+  frontend:
+    image: leandrocgsi/node-react-frontend
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+    ports:
+      - 80:80
+    depends_on:
+      - backend
+    networks:
+      - udemy-network
+networks:
+    udemy-network:
+        driver: bridge
+	:wq!
+	
+	docker-compose up -d 
+	docker ps -a
+	
+	Abre o AWS no EC2 > public ID para abrir 
+	
+
+
+
+INSTALAÇÃO DE UM BD (BONUS)
+
+	Conteiner Postgress
+	
+	docker run --name containerPostgres -e POSTGRESS_PASSORD=admin123 -p 5432:5432	-d postgres
+
+	Abrir pelo DBeaver (Client de varios bancos de dados)
+	
+	
+	CONTEINER SQLSERVER
+	docker run --name containerSQLServer -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=admin123!" -p 1433:1433  -d mcr.microsft.com/mssql/server:2017-latest
+	docker ps
+	Abrir pelo DBeaver (Client de varios bancos de dados)
+	
+
+	CONTEINET MYSQL
+	docker run --name containerMySQL -e MYSQL_ROOT_PASSWORD=admin123 -e MYSQL_DATABASE=docker_db -p 3308:3306 -d mysql
+	docker ps
+	pode usar o HeidiSQL, mais leve para MySQL (Client de varios bancos de dados)
+	
+	
+
+	CONTEINET ORACLE
+	
+
+
+   **********awk '{ print $4 }' ****************
+
+
+  	docker run --name containerOracle -e ORACLE_PWD=admin123 -p 1521:1521 -d oracle/database:18.4.0-xe
+
+	SQL Developer 19.2.1 Downloads
+	==============================
+	https://www.oracle.com/tools/downloads/sqldev-v192-downloads.html
+
+
+
+CONHECENDO O PODMAN
+   Não precisa de serviço de deamon 
+   Totalmente opensource e free
+
+   Pode adicionar alias docker=podman
+   apt-get install podman buildah skopeo 
+	(buildah - ajuda a contruir as docker images)
+	(skopeo - inspecionar docker images em source remotos, não oficial)
+	
+	
+	podman --version
+	buildah --version
+	skopeo --version
+
+	podman info  (pode validar os register)
+
+	podman search apache --filter=is-official
+	
+	podman run -dit -p 8080:80 -v /home/vianped/website/:/usr/local/apache2/htdocs/	httpd
+	(-dit - ser detach e iterativo)
+	
+	vim /home/vinaped/website/podman.html
+	<DOCTYPE  html>
+	<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title> Hellp podman</title>
+        </head>
+        <body>
+                <h1>Learning Podman</h1>
+        </body>
+	</html>
+	:wq!
+
+	podman run -dit -p 8000:80 -v /tmp/website/:/usr/local/apache2/htdocs/  httpd
+	
+	podman exec -it <id> sh
+
+	podman logs <id>
+	podman logs -f <id>
+	
+	podman rm <id> -f  (para mesmo ele rodando)
+	podman images
+	podman rmi <id>  apaga a imagem
+	podman images
+
+	podman ps
+
+
+CONHECENDO O SKOPEO
+	Consegue inspecionar a imagem sem fazer download
+	Ajuda a copiar images da docker image para particular
+
+ 	Mostra as caracteristicas da imagem sem baixar
+	
+	skopeo inspect docker://<nome da Doker Image>
+		com docker search pode listar as docker images
+
+	
+	docker search mysql --filter=is-official
+
+	skopeo inspect docker://docker.io/library/MySQL
+		Busca informacoes do Docker registry do SQL
+
+	skopeo inspect --config docker://docker.io/library/MySQL
+		Mostra as configs em JSON
+		Usar ferramenta de JSON para ler
+			JSON Formater & validator
+
+
+CONHECENDO O BUILDAH
+	RootLess igual o podman
+
+	vim Dockerfile
+		#Working with Webserver
+		from ubunto:18.04   
+		RUN apt-get update && apt-get install -y \ 
+			apache2 \
+			apache2-utils \
+			vim 
+			&& apt-get clean \
+			&& rm -rf /var/lib/apt/lists/* /tmp/* /vartmp/*
+		EXPOSE 80
+		CMD ["apache2ctl","-D","FOREGROUND"]
+		:wq!
+	
+		buildah bud -t my_apache:1.0 Dockerfile
+		buildah images
+		podman run -d -p 8080:80 <nome_image_aparece buildah images>
+		
+	podman ps
+	podman stop <id>
+	
+
+CONSTRUIR A IMAGE COM A BUILDAH
+
+	buildah from fedora <enter>
+		criar um container intermediario para instalar o que precisa
+
+	buildah run <nome_conteiner> dnf install httpd -y
+	
+	vim /home/vinaped/website/podman.html
+	<DOCTYPE  html>
+	<html lang="en">
+        <head>
+                <meta charset="UTF-8">
+                <title> Hellp podman</title>
+        </head>
+        <body>
+                <h1>Learning Podman</h1>
+        </body>
+	</html>
+	:wq!
+	
+	buildah <nome_conteiner> /home/vianped/website /var/www/html/index.html
+	buildah config --entrypoint "/usr/sbin/httpd -DFORGROUND" <nome_conteiner>
+	buildah commint <nome_conteiner> hello-buildah
+
+	buildah images
+
+	buildah ps
+
+	buildah mount <nome_conteiner>
+	cd nome_path - acessa os diretorios do conteiner
+	
+	buildah umount <nome_conteiner>
+
+	podman images
+	podman run -d -p 8080:80 <conteiner_image>:latest
+
+
+ENVIO DOCKER IMAGE DO BUILDAH PARA DOCKERHUB
+	docker login
+	bulldah images
+	buildah tag <image_id> docker.io/vianped/hello_buildah:1.0 (vianped meu usuario no dockerhub)
+	buildah push docker.io/vianped/hello_buildah:1.0
+
+	http://hub.docker.com
+	
+BAIXAR E EXECUTAR A DOCKER IMAGE DO BUILDAH DO DOCKERHUB
+	podman ps
+	podman rm --all  (remove todos os conteiner)
+	podman images
+	podman rmi --all -f  (limpa todas as images)
+
+	podman run -d -p 8080:80 docker.io/vianped/hello_buildah:1.0
+
+	podman ps
+
+	docker run -d -p 8081:80 vianped/hello_buildah:1.0
+	
+
+
+PODMAN INSTALAR
+	apt-get install podman buildah skopeo podman-compose podman-docker
+	alias docker=podman
+	alias docker-compose=podman-compose
+	
+	
+
+
+

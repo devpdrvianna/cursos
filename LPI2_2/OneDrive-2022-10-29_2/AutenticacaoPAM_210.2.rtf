@@ -1,0 +1,182 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 Courier-Bold;
+\f3\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red19\green19\blue19;\red62\green23\blue1;\red44\green44\blue44;
+\red255\green255\blue255;\red251\green0\blue7;\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c9412\c9412\c9412;\cssrgb\c31373\c12549\c0;\cssrgb\c22745\c22745\c22745;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16700\viewh11160\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 210.2\
+\
+PAM Pluggabl Authentication Modules. - Interface de autentica\'e7\'e3o\
+\
+	Login			\
+	ssh\
+	telnet\
+	gdm\
+	etc\
+\
+	/etc/pam.conf\
+	etc/pam.d\
+\
+	pam_unix.so\
+	pam_ldap.so\
+	pam_nis.so\
+	pam_kr5.so\
+	\
+	unix/Linux\
+	LDAP\
+	NIS\
+	Kerberos\
+	etc\
+\
+Applica\'e7\'e3o chama o PAM e o PAM fala com o modulo\
+\
+	/etc/pam.d \
+		cada processo que faz autentica\'e7\'e3o tem configura\'e7\'e3o aqui(mais usado).  Arquivos\
+ Nos diret\'f3rio tem prioridade sobre \
+	/etc/pam.conf\
+\
+	Tpo\
+	Controle\
+	Modulo\
+	Parametros\
+	Obs: vale para o /etc/pam.d <arquivos>\
+	   Se for usar o /etc/pam.conf precisa colocar o servi\'e7o\
+		Servi\'e7o tipo controle modulo argumentos\
+		Login  auth optional. Modulo  argumentos\
+		login auth. Optional pamfaildelay.so delau=3000000\
+			\
+	\
+	Tipos de configuracao visto dentro do PAM\
+			auth - processo de autentica\'e7\'e3o (senha biometria, retina, chip, (passwd, LDAP, Kerberus)\
+			Account - definir pode ou nao usar o servi\'e7o, autorizar  (tem lock, esta expirado, numero conex\'f5es simult\'e2neas )\
+			password - Referente atualiza\'e7\'e3o da autentica\'e7\'e3o, Atualiza\'e7ao do Token altera\'e7\'e3o da senha\
+			session - Processo a ser realizado ap\'f3s o login		\
+\
+	PAM configura\'e7\'f5es e Controle\
+\
+		requisite - se o modulo negar ou falhar todo o processo \'e9 interrompido - \'e9 requisito que essa linha  ou processo funciona\
+		required - se o modulo falhar o nega o acesso mas segue lendo od demais modelos de outras configura\'e7\'f5es\
+		sufficient - Se o modulo tiver sucesso a falha de outros modelos ser\'e3o ignoradas, \
+		optional - sucesso ou falha nao \'e9 relevante, a Menos que sea \'fanica\
+\
+	Pam configuracoes modulos\
+	\
+	pam_unix.so p relacionados a passwd/shadown\
+	Pam_limits.so - cpu , memora, recurso usados pelo usurario\
+	Pam_ldap.so - Acesso via LDAP\
+	PAM_cracklib.so - Checagem de senhas fracas\
+	pam_listfile.so - Uso de arquivos externos para controle\
+	pam_sss uso do sss\
+	pam_krb5.so\
+	pam_userdb.so \
+	pam_nologin.so uso do /etc/nologin\
+	pam_time.so console de Horacio\
+	pam_console.so - controle de acesso ao console por usuario\
+\
+    Modulos do PAM\
+	/lib/x86_g4LinuxGnu/ (Debian)\
+	/usr/lib64/security (centoSO)\
+	/usr/lib/pam.d\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs22 \cf2 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2        /etc/pam.conf\
+           the configuration file\
+\
+       /etc/pam.d\
+           the 
+\f2\b \cf3 \strokec3 Linux-PAM 
+\f1\b0 \cf2 \strokec2 configuration directory. Generally, if this\
+           directory is present, the /etc/pam.conf file is ignored.\
+\
+       /usr/lib/pam.d\
+           the 
+\f2\b \cf3 \strokec3 Linux-PAM 
+\f1\b0 \cf2 \strokec2 vendor configuration directory. Files in\
+           /etc/pam.d override files with the same name in this\
+           directory.
+\fs32 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+\
+     /etc/pam.d/login\
+		session	optional 	pam.motd.so 	nouodate\
+		session	required	pam_limits.so\
+\
+    /etc/pam.d/ssh\
+	session required	pam_limits.so\
+  Vi /etc/securiy/limits.conf\
+	Ricardo maxlogins 	2\
+\
+\
+\
+LDAP.  Squarcia deve ser seguida\
+	auth sufficient	pam_ldap.so. 		o sufficient se nao consegui tenta com a linha de baixo e o try_first usa a mesmo senha ja informada\
+	auth required. 	pam_unix.so	try_first_pass\
+	account	sufficient	pam_ldap.so\
+	account	required	pam_unix.so\
+	\
+\
+SSSD	System security services deamon\
+	Implementa melhorias noproceso auteticacao\
+	interface entre PAM  NSS e o sistema\
+	Interface para obter informares dos usu\'e1rios de diversas fontes\
+		(Local, LDAP, AD, Kerberos, etc)\
+	uso do Cache\
+	Autentica\'e7\'e3o Offline\
+\
+	/etc/sssd..comf\
+\
+\
+	https://www.youtube.com/watch?v=YYZQcK_LP-o\
+\
+\
+\
+EXERCICIOS\
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f3\b\fs29\fsmilli14592 \cf4 \cb5 \expnd0\expndtw0\kerning0
+1.
+\f0\b0 \'a0Utilize o m\'f3dulo pam_listfile para implementar uma configura\'e7\'e3o no PAM que impe\'e7a o acesso via SSH dos usu\'e1rios que estejam listados no arquivo /etc/ssh/sshd.deny.\cb1 \
+\cb5 Utilize o man para obter mais detalhes sobre os argumentos do m\'f3dulo\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf6 \cb7 		Adicionar ao arquivo /etc/pam.d/sshd a seguinte entrada:\
+
+\f1 \cb8 			auth required pam_listfile.so item=user sense=deny file=/etc/ssh/sshd.deny onerr=succeed\cb1 \
+\cb8 			ou\cb1 \
+\cb8 			account required pam_listfile.so item=user sense=deny file=/etc/ssh/sshd.deny onerr=succeed \
+
+\f0 \cb7 		* As duas entradas funcionar\'e3o, mas de maneiras um pouco diferentes.\
+\pard\pardeftab720\sa510\partightenfactor0
+\cf4 \cb5 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\f3\b \cf4 2.
+\f0\b0 \'a0Por padr\'e3o, ap\'f3s se realizar o login, \'e9 exibido para o usur\'e1rio a data/hora do \'faltimo login. Configure o sistema para que essa informa\'e7\'e3o n\'e3o seja exibida quando o login for feito atrav\'e9s do terminal do sistema.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf4 \kerning1\expnd0\expndtw0 		\cf6 \cb7 \expnd0\expndtw0\kerning0
+Alterar o arquivo /etc/pam.d/login, comentando a seguinte entrada:\
+\pard\pardeftab720\partightenfactor0
+\ls1\ilvl0
+\f1 \cf6 \cb8 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+session optional pam_lastlog.so\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\f0 \cf4 \cb5 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 	\
+\
+	}

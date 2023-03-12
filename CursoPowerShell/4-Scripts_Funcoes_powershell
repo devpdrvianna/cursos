@@ -1,0 +1,101 @@
+Funções e Workflow
+	
+	#Exemplo Função
+	Function  Meu-HD
+	{  }
+
+	
+	#Exemplo Função Soma
+	Function soma
+	{
+	  param ($a, $b)     (Chama o script com os 2 parametros 
+	  $resultado = $a + $b
+	  Write-Host "A resposta é $resultado"
+	}
+
+
+
+WorkFlows
+ Permite execução paralela e supender partes
+
+	#WorkFlow - Hello World
+	workflow tipo-cmdlet
+	{
+	Write_output "Hello World"  (usar ao invés do Write-Host) uso remoto
+	}
+	
+
+	#tarefa ao mesmo tempo
+	function Iniciar-editores
+	{
+	  Start-process Notepad
+	  sleep5
+	  Start-process Wordpad
+	}
+
+	workflow start-editores
+	{	
+	Parallel {
+	  Start-Process Notepad
+	  Sleep 5
+	  Start-Process WorkPad 
+	  }
+	 }
+
+
+
+Job e Squeduled Jobs
+	
+	Workflow workflowdemorado
+	{
+	while(1)
+		{
+		(get-date).ToString() + " Script Demoradinho"
+		Start-sleep -Seconds 2
+		}
+	}
+	$wfjob = workflowDemorado -Asjob # Esse script vai ficar em infinito
+ em job background
+
+	
+ 	Comando para trablhar com jobs
+		Receive-job $wfjob
+		Suspend-job $wfjob
+		Stop-job $wfjob
+		Resume-job $wfjob
+
+
+	AGENDAMENTO
+	
+	Clear-Host
+	get-Command - Module PSScheduledjob Sort-Object Noun
+	
+	$diario = New-jobTrigger -Daily -At 3am
+	$umavez = New-jobTrigger -Once -At (Get-Date).AddHours(1)
+	$semanal = New-jobTrigger -Weekly -DaysOfWeek Monday -At 6pm
+	
+	Register-Scheduledjob -Name Backup -Trigger $diario ScriptBlock {
+	Copy-Item c:\scrip\*.* c:\onedrive\Script\ -Rescue -Force
+
+	Get-Scheduledjob Backup | Get-JobTrigger (pegar p triger)
+
+	Get-Scheduledjob Backup | unregister  (tirar o registro)
+	Get-Scheduledjob (mostra todos os jobs)
+
+	
+  New-Object (WScript.shell)
+	
+	$wshell = New-Object -ComObject WScript.shell
+	
+	$wshell | Get-Member (mostra tudo que pode fazer 
+
+	$wshell.Popup ("Este cria um popup grafico na tea windows")
+	
+	$wshell.run("notepad")  Abre o notepad
+	$wshell.AppActivate("notepad")
+	$wshell.SendKeys ("Esse recurso e muito legal) (depois do Notepad aberto ele escreve a frase)
+
+
+
+	
+

@@ -1,0 +1,173 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red243\green235\blue10;\red44\green44\blue44;\red255\green255\blue255;
+\red251\green0\blue7;\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c96264\c92423\c0;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww22640\viewh15300\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 212.3  SSH\
+\
+	/etc/ssh\
+		ssh_config - confoguracoes do cliente\
+		sshd_config configuracoes do Servidor ssh\
+\
+		tem arquivos com chaves publicas e privadas\
+\
+	sshd_config\
+		Port 22\
+		PermiteRootLogin no   (E o padrao assist loga com usuario e faz sudo,  se coloca yes permite logar com root direto)\
+\
+		PasswordAuthentication yes.  Permite login alem de chaves mas tb por senha\
+\
+		ChallengeresponseAuthentication on   alem de logar por senha, faz tb por op\'e7\'f5es de perguntas\
+\
+		X11Forwarding yes acesso a interfaces gr\'e1ficas via ssh\
+\
+		\
+		Protocol 2  (recomendado que seja vers\'e3o 2)\
+		AllowUsers usuario1 , usuario 2, usuario 3  (somente esse usu\'e1rios podem logar)\
+		AllowGroup\
+		DenyUsers \
+		DenyGroups\
+\
+\
+	systemctl restart sshd\
+\
+\
+\
+Uso de chaves\
+\
+	no home do usual\
+		~/.ssh	\
+			cat known_hosts\
+		ssh -v 192,168.1.20.  mostra todo o modelo verbose e mostra detalhes da conex\'e3o\
+		\
+		Posso pegar as chaves e jogo no cat \'98./known_hosts >> /etc/known_hosts  ai vale para todos usurious\
+\
+	\
+	Autenticar via chaves\
+\
+	criar chave\
+		ssh-keygen -t rsa -b 2048\
+			gera a chave privada id_rsa  e a chave publica id_rsa.pub\
+			gera no \'98./ssh/\
+\
+			a chave publica vai ser enviada para o servidor e eu cliente fico com a chave privada\
+\
+		\
+		No Servidor\
+			coloco no arquivo no /home/<user>/.ssh/.authorized_keys (edit id_rsa_pub copy  e Cole nesse authorized_keys)\
+\
+		\
+\
+	 	ou ssh-copy-id Ricardo@192.168.1.210   envia a minha chave publica para o servidor\
+			o servitor cria o authorized_keys\
+\
+		o ssh Ricardo@192.168.1.210 e entra sem senha\
+\
+	\
+	Outra forma\
+		gerenciador de chaves\
+\
+			ssh-keygen -t rsa -b 2048 (gero a senha e coloco senha nessa chave)\
+			ssh-copy-id Ricardo@192.168.1.210 \
+			\
+			ssh-agent bash\
+			pas aux | grep ssh-agent\
+				habilitam 2 vari\'e1veis \
+\cb2 						SSH_AUTH_SOCK=/tmp/ssh-EHKHKCwwe/agent.2825\
+						SSH_AGENT_PID=2826\cb1 \
+\
+				ssh-add  <password>. Adiciona a chave no meu \'98/.ssh/\
+\
+		Assim toda a primeira vez que entro, pede a senha da primeira vez.\
+\
+\
+Recursos do SSH\
+\
+	Tunel SSH\
+		ssh -N -f -L 4321:192.168.1.210:1234 Ricardo@192.168.1.210\
+		netstat -nalp | grep 4321\
+\
+		no servidor remoto posso escutar a porta como nc -k -l -p 1234\
+		telnet localhost 4321 ele conecta local, e usa o 192.168.1.210:1234 \
+\
+		-N  ( Para nao executar comando remotos )\
+		-f   ( para executar em background	)\
+		-L  ( indicando Listen)\
+		4312 e a porta local\
+		1234 porta escutando remota\
+\
+\
+	Acessar app gr\'e1fica remotas\
+\
+	ssh -X Ricardo@192.168.1.210 \'93mousepad\'94\
+	vi /etc/ssh/sshd_config\
+			X11 Forwarding yes precisa estar habilitado\
+\
+	\
+        TCPWrapper\
+		ldd /usr/sbin/sshd\
+\
+		vim /etc/hosts.allow\
+			sshd:  192.168.1.*	10.0.0.10	localhost\
+		vim /etc/hoss.deny\
+		deny:ALL\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf3 \cb4 \expnd0\expndtw0\kerning0
+1.
+\f0\b0 \'a0Fa\'e7a a configura\'e7\'e3o de acesso ao servidor SSH com o uso de chaves e o configure para que apenas essa forma de autentica\'e7\'e3o seja aceita. N\'e3o deve ser permitido o acesso com o uso senhas.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb6 	Gerar as chaves na m\'e1quina e usu\'e1rio local:\
+
+\f2 \cb7 	# ssh-keygen -t rsa -b 2048\
+
+\f0 \cb6 	Enviar a chave p\'fablica para o arquivo ~/.ssh/authorized_keys no host/usu\'e1rio remoto\
+
+\f2 \cb7 	# ssh-copy-id usuario@IP\
+
+\f0 \cb6 	Configurar o servidor SSH alterando o arquivo /etc/ssh/sshd_config, definindo os seguintes\cb1 \uc0\u8232 \cb6 	par\'e2metros:\
+
+\f2 \cb7 	PasswordAuthentication no\cb1 \
+\cb7 	ChallengeResponseAuthentication no\cb1 \
+\cb7 	UsePam no\
+
+\f0 \cb6 	* Em geral, apenas o par\'e2metro PasswordAuthentication precisa ser desabilitado. No entanto, h\'e1 cen\'e1rios em que o uso do 	UsePam e ChallengeResponseAuthentication\'a0tamb\'e9m podem disponibilizar o acesso via senha.\
+\'a0\
+	Reiniciar o servidor SSH\
+
+\f2 \cb7 	# systemctl restart sshd\
+
+\f0 \cb6 	Realizar o teste a partir de um outro usu\'e1rio. O seguinte resultado \'e9 esperado na tentativa de\cb1 \uc0\u8232 \cb6 	acesso:\
+
+\f2 \cb7 	$ ssh ricardo@192.168.1.220\cb1 \
+\cb7 	ricardo@192.168.1.220: Permission denied (publickey,gssapi-keyex,gssapi-with-mic).\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+		\
+\
+			\
+				\
+		\
+\
+			\
+	\
+		\
+	\
+\
+		\
+			\
+		\
+		\
+\
+		}

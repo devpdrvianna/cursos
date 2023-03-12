@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red251\green0\blue7;
+\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;
+\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww17600\viewh19140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 212.2.  FTP  File transfer Protocol\
+	Portas 20 21\
+	Modelos Ativo Passivo\
+\
+	Ativo\
+		cliente come\'e7a conectando na porta 21\
+		a transferencia \'e9 via 20 saindo do servidor ( O servidor abre a conex\'e3o de volta)\
+\
+		\'e9 ativo por abre a conex\'e3o de dados e o servidor abre outra para reformar\
+\
+\
+	Passivo\
+		o cliente abre a conex\'e3o port 21 e depois abre um socket para receber, o servidor nao abre so recebe pedido\
+\
+	\
+Teste\
+	ftp 192.168.1.210\
+\
+		https://major.io/2007/07/01/active-ftp-connections-through-iptables/\
+\
+Sfvftd\
+	yum install vsftd\
+\
+	/etc/vsfpd.conf Ivsftpd unicarquivo)\
+\
+		Listen_ipv6=YES\
+		\
+		anonymous_Enable=yes\
+		\
+		anon root=/var/sftpd\
+\
+		o anonymous nao consegue gravar, precisa colocar permiss\'e3o no diret\'f3rio\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+OBS: No arquivo de configura\'e7\'e3o do vsftpd, notar tamb\'e9m o par\'e2metro \'93ftp_username\'94, cujo padr\'e3o \'e9 \'93ftp\'94, e define o nome do usu\'e1rio que ir\'e1 manipular os acessos de usu\'e1rios an\'f4nimos.
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+\
+\
+Pure-ftpd\
+	apt-get install pure-ftpd. Ou yum install pure-ftp\
+\
+	/etc/pure-ftpd/prue-ftpd.conf. (centos)\
+\
+		configura\'e7\'f5es semelhantes com o ftp\
+\
+	/etc/default/pure-ftpd-common\
+\
+	/etc/pure-ftpd/conf\
+			tem uma estrutura de arquivos para cara opcao que sera alterada.\
+				exemplo tem um arquivo chamado anonymous para configurar se ser anonymou ou nao\
+				exemplo editar o vim chrooteveryone e colocar o yes dentro\
+				vim Noanonymous e colocar o No dentro para permitir o anonymous\
+\
+\
+	systemctl status pure-ftpd\
+	systemctl stop pure-ftpd\
+	\
+	iniciar por linha de comando\
+		pure-ftpd \'97help\
+		pure-ftpd -e -i &    (ativa com op\'e7\'e3o de anonymous only e nao permite execu\'e7\'e3o)\
+				\
+\
+\
+\
+Proftpd\
+Apt-get install proftpd ou yum install proftpd\
+\
+	/etc/proftpd/proftpd.conf. (debian)\
+	/etc/proftpd.d\
+	\
+	/etc/proftpd.conf (centOs)\
+\
+	systemctl start proftpd\
+\
+	\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+1.
+\f0\b0 \'a0Configure um servidor vsftpd para que seja poss\'edvel apenas o login como usu\'e1rio an\'f4nimo e que ao realizar o acesso o usu\'e1rio seja direcionado ao diret\'f3rio /opt/updates, podendo ent\'e3o apenas fazer o download dos arquivos dispon\'edveis , n\'e3o deve ser permitido realizar uploads.\
+\
+	\cf4 \cb5 Configurar vsftpd.conf com os seguintes par\'e2metros:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	anonymous_enable=YES\cb1 \
+\cb6 	local_enable=NO\cb1 \
+\cb6 	write_enable=NO\cb1 \
+\cb6 	anon_upload_enable=NO\cb1 \
+\cb6 	anon_mkdir_write_enable=NO\cb1 \
+\cb6 	anon_root=/opt/update\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \cb3 2.
+\f0\b0 \'a0Execute um servidor Pure-FTPd via linha de comando, de modo que ele permita o login apenas de usu\'e1rios an\'f4nimos, mas que permita o upload de arquivos e a cria\'e7\'e3o de subdiret\'f3rios. No entanto, os arquivos e diret\'f3rios presentes n\'e3o devem ser visualizados.
+\f2 \cf4 \cb6 \
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf4 \cb5 \expnd0\expndtw0\kerning0
+	Iniciar o servidor com as seguintes op\'e7\'f5es:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	# pure-ftpd --anonymousonly --anonymouscancreatedirs &\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 	Adicionar o usu\'e1rio \'93ftp\'94, que ser\'e1 usado para indicar o diret\'f3rio raiz do usu\'e1rio an\'f4nimo\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	# useradd ftp\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf4 \cb5 	Para evitar a visualiza\'e7\'e3o dos arquivos e diret\'f3rios presentes, remova a permiss\'e3o de leitura\cb1 \uc0\u8232 \cb5 	do diret\'f3rio home do usu\'e1rio ftp:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	# grep ftp /etc/passwd\cb1 \
+\cb6 	# chmod -r /home/ftp\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\
+}

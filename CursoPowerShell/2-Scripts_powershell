@@ -1,0 +1,148 @@
+Criação Script
+
+	Criar aquivo *.ps1
+	
+	notepad Newscript.psi
+		#Novo arquivo
+		Write-Host "Mais um teste do Curso de Posh"
+	
+	./NewScript.psi
+
+	ren NewScript.psi Novo.psi
+	
+
+
+VARIAVEIS
+	#Script Basico
+	# Comment !!!
+	Clear-Host
+	$nome = "Pedro Vianna"
+	Write-host "Hello $nome" 
+	#fim
+
+	$env:HOME    (Se apertar tab olha todas)
+	$env:HOSTNAME
+
+	Write-Host "nome: $env:LOGNAME"
+
+
+
+	#Script Basico
+	# Comment !!!
+	Clear-Host
+	$nome = Read-Host "Qual o seu nome ? "
+	$saudacao = "Ola"
+	$frase = "$saudacao, $nome"
+	Write-host "$frase ToUpper()" 
+	#fim
+	
+   Array
+	#Script Array
+	Clear-Host
+	$GoogleDNS = @("8.8.8.8", "8.8.4.4")
+	$TotalDNS = $GoogleDNS.Count
+	Write-Host Pingando todos os $TotalDNS DNS do Google
+	Test-Connection $GoogleDNS -Count 1
+	sleep 3
+	Write-Host FIM !
+
+
+  HashTable
+	Adicionar informacoes aos pares
+
+	#Teste com Hash Table
+	Clear-Host
+	$servidores = [ordered] @{server1="127.0.0.1";server2="127.0.0.2";server3="127.0.0.3"}
+	
+	
+	#Adicionar
+	$servidores["server4"]="127.0.0.4"
+
+	#Remover
+	$servidores.remove("server1")
+	
+	Test-connection $servidores.server1 -Count 2
+	
+	#Exibir Valores
+	$servidores.values
+
+	$servidores
+
+
+
+ Operadores Condicionais e Logicos
+	-lt menor que
+	-le Meno e igual
+	-gt maior que
+	-ge maior e igual
+	-eq igual
+	-ne não igual
+	-like usar wildcard para comparar
+	-nolike
+	-contains
+	notcontains
+	-match
+	-nomatch
+	-replace  (a replace b,c)
+
+
+	4 -gt 3
+	Get-Process | Where-Object {$_.CPU -gt "611"}
+	
+	"abcdefg" -replace "def","xyz"
+	2+5
+	5%2 (resto da divisão)
+	
+	$a = 10 
+	$b = 20
+	$a ++
+	
+	$a *= $b
+	$a (mostra resultado de a*b
+
+   Select-String
+	Funciona como grep
+
+	Get-Content ./sc.ps1
+	Get-Content ./sc.ps1 | Select-String Hello  (seleciona so a linha com Hello)
+	Get-Content /etc/group | Select-String docker
+	Get-Content /etc/group | Select-String docker -Context 1.1 (linha acima e abaixo)
+	Get-Content /etc/group | Select-String docker -NotMatch  todos menos os escrito
+
+
+  Expressôes regulares
+	\d numerico [0-9]
+	\w alpha [a-zA-Z0-9]
+	\s espaço em branco	
+	. Qualquer caracter
+	() sub-expression
+	\ Próximo caracter
+
+	
+	Script
+	$email = Read-host Qua seu email ?
+	$regex = "[a-z]+\.[a-z]+@contoso.com$"
+	if ($email -notmatch $regex) {
+		Write-host "Errou o endereço de email $email"
+		Exit
+		}
+	Write-Host Acertou!
+
+
+	Get-Content ./cpf.txt | Select-String -Pattern '\d.\d.\d-\d'	
+
+
+  Passar no email 
+		echo "manager" | sudo -S ls
+
+
+
+	
+
+	
+
+	
+	
+	
+
+

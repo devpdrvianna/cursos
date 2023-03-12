@@ -1,0 +1,110 @@
+
+yum install code
+yum install git
+giihub.com (criar conta)
+
+comandos-
+
+git config --global init.defaultBranch <name>
+git config --global user.name "vianped"
+git config --global user.email "ppvianna@gmail.com"
+
+
+Iniciar 
+Navegar até p diretório do codigo que deseja replicar
+git init (iniciar um repo da maquina)
+git status
+
+git add <nome do arquio> Envia so o arquivo para ser comitado
+git add .  (Envia tudo no diretorio para ser comitado) 
+
+git commit empresa.txt -m "Estou criando arquivo com nome da empresa"   (Fazer commit de 1 arquivo)
+
+git commit -m "Todos os arquivos commit" (se não especificar o arquivo ele commita tudo)
+
+  Tudo que é comitado esta alterado no repo .git
+
+
+Acesso via Token para fazer git Push
+ Primeiro crie o repositorio
+ depois em perfil > settings > Developer settings > Personal Access Tokens
+
+
+No github.com apos criar o repositorio são informados algumas instrucao 
+
+Para conectar o seu repo local 
+	echo "# curso_git" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/devpdrvianna/curso_git.git
+ PARA MUDAR git remote set-url origin https://github.com/devpdrvianna/curso_git.git
+
+ COM TOKEN  git remote set-url origin https://devpdrvianna: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@github.com/devpdrvianna/curso_git.git
+
+git push -u origin main
+
+
+	 (mostra todas as configs)
+
+Para push um existente repositorio do github
+git remote add origin https://github.com/PedroVianna2022/curso_git.git
+git branch -M main
+git push -u origin main
+ DEPOIS de funcionando so precisa fazer git push
+
+
+ APARTIR quando alterar algum arquivo
+ git add .
+ git commit -m "descricao"
+ git push
+
+
+ PARA PEGAR ALTERACOES do GIT
+ git pull
+
+  PARA CLONAR
+  Criar uma pasta e 
+	git clone https://github.com/devpdrvianna/curso_git.git .
+	o ponto no final tras os arquivo no local 
+
+LOGS
+
+  git log (mostra do mais novo para o mais antigo) mostra os commits
+	Mostra todos os commints e ajuda a direcionar onde estava
+
+RollBack
+ git checkout <arquivo alterado>  (faz o restore para o ultimo estado, rollback)
+	rollback do ultimo commit
+
+Ignorar arquivos para nao enviar para GitHub
+
+
+RESET
+  Volta ao estado inicial do que foi enviado para branch Main, antes de fazer o push - busca o ultimo commit e traz as alterções 
+	git reset --hard origin/main
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+

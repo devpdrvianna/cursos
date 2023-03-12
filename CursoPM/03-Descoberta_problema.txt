@@ -1,0 +1,1397 @@
+Bloco01 - Quem ja viveu essa situação
+	Quando alguem traz uma visao apenas baseado na sua convicção, não é consistente.
+	Não está sustentando, e o desenvolvedor não compra a ideia
+	o Designer tb nao sabe para onde vc esta indo
+
+	Obter maketing share
+	conversa com pessoas que ja tiverma a experiencia(entrevistas)
+	Estabeler conversas com mentoras, compartilhar experiência
+	Falhas e ciclos curto de interação (mesmo falhando gera aprendizado)
+	leitura, youtube, fontes de aprendizado
+	
+	Buscar informações em varias fontes
+	
+	Ferramenta MATRIZ CSD, ajuda a nivelar conhecimento do problema
+	
+Resumo do Bloco
+
+Quem lida com produto deve ter uma visão inicial sobre um problema, indo além de construir algo porque "aquele app chinês fez teve sucesso".
+
+Falhas e ciclos curtos de aprendizado ajudam a sustentar sua visão do problema com fatos e evidências
+
+A matriz CSD ajuda a organizar seu conhecimento atual sobre o problema, separando fatos de convicções: você divide tudo o que sabe em "certezas", "suposições" e "dúvidas"
+
+Uma "visão empírica" é quando você tem alta convicção e baixa evidência. Nessa situação, você pode se apaixonar pela solução, caindo no "paradoxo do product manager"
+
+Uma "visão validada" é quando você tem alta convicção e alta evidência. O risco de tentar chegar nessa visão é entrar em um discovery eterno e não sair mais do processo de descoberta
+
+A busca deve ser por uma "visão plausível", onde sua convicção é fortalecida por evidências e aprendizados
+
+Apresentação de caso: a queda de crescimento na Dog Hero.
+
+Answer First vs Answer Last: quando você já tem proficiência suficiente sobre o problema e pode partir para validação e quando você precisa aprender mais sobre o problema
+
+
+Bloco02 - Porque as empresas Falham.
+
+Resumo do Bloco
+
+Apresentação de caso: PlayKids Fly. O time tinha certeza que ia dar certo: passou 4 meses desenvolvendo o novo produto. No terceiro mês após o lançamento, o app foi tirado das lojas.
+
+No modelo clássico de "product development" o aprendizado demora muito tempo para acontecer. Há pouco aprendizado nas fases de conceito, desenvolvimento e teste de alpha/beta; e muito aprendizado no lançamento.
+
+Quando você cria um produto sem entender qual problema resolve - e a hipótese de solução não é uma hipótese, mas uma certeza sustentada apenas na sua convicção - essa iniciativa tem uma chance enorme de falhar.
+
+Nada e mais certo para que um produto falhe do que o mal entendimento do problema que ele resolve.
+
+
+Bloco03 O que é customer development ?
+  Alinhamento entre produto e mercado
+	product maket fit
+
+ 
+Resumo do Bloco
+
+Customer Development é o processo que busca encontrar o alinhamento entre produto e mercado (product/market fit)
+
+Tudo começa no problema. Por isso, é fundamental declarar o problema de forma clara e objetiva, sem vieses de solução. Esta declaração torna-se uma hipótese que precisa ser testada, refinada e validada constantemente
+
+O processo de Customer Development compreende quatro etapas: Customer Discovery, Customer Validation, Customer Creation, Company Building
+
+Proposta de exercícios: definição do problema e elaboração de hipótese
+
+
+"Antes de começar a vender , você precisa investir tempo e dinheiro na tarefa  de entender o que seu cliente precisa"
+
+
+
+Exercício 1 - Entendimento do Problema
+
+Responda individualmente ou convide colegas para discutir com você.
+
+Pegue papel e caneta (ou um editor de texto) e responda com a máxima clareza que puder:
+
+Qual é o problema que seu produto está tentando endereçar?
+	Falta de auto atendimento na instalação de aplicativos na plataforma Linux
+
+Quem tem esse problema?
+	Todos os usuarios da plataforma Linux
+
+Como essas pessoas resolvem esse problema hoje?
+	Necessitam ligar no suporte, e abrir um ticket para que o atendente faça a instalação.
+
+
+Exercício 2 - Elaboração e teste de hipóteses
+
+Transforme essa sua descrição do problema em uma hipótese passível de ser validada.
+
+Uma boa hipótese tem as seguintes características:
+
+Não é uma pergunta, é uma afirmação.
+
+Deve ser simples e expressar o que é esperado.
+
+Pode ser negada.
+
+É quantificável.
+
+Para facilitar, você pode usar o seguinte modelo:
+
+Nós acreditamos que : Disponibiliando uma Central de software  
+
+para : Todos o usuários da plataforma Linux
+
+resultará : No auto atendimento para instalação de aplicativos
+
+Saberemos que isso é verdade quando tivermos : redução nos tickets abertos para instalação de software.
+
+
+
+Bloco04 - Jobs To Be Done
+	
+	Compra um produto pela dor que ele vai resolver, necessidade vai ser atendida.
+
+ JBTD - Os clientes nao querem uma furadeira, mas sim deixar a sala mais bonita. 
+
+	A Furadeira é so o meio para deixar a sala bonita
+
+   VERBO AÇÃO + OBJETO AÇÃO + CONTEXTO
+
+	
+    OUVIR + MUSICA + INDO AO TRABALHO (essa sim trata a dor JTBD)
+    CRIAR + UMA PLAYLIST + NO SPOTIFY  (Essa é so um mail e nao JBTD
+
+
+Resumo do Bloco
+
+Seus clientes compram da sua empresa não pelo produto em si, mas pela tarefa que ele resolve
+
+"Jobs to be done" é uma lente que observa como concorrentes e consumidores atendem às necessidades das pessoas. Com ela, você deixa de buscar entender o que o público quer comprar e passa a se preocupar com o que ele quer resolver
+
+A declaração do Job tem uma maneira consistente de se escrever, combinando VERBO DE AÇÃO + OBJETO DE AÇÃO + CONTEXTO
+
+“Um Job pode ser um objetivo, uma meta ou uma tarefa, um problema a ser resolvido, ou algo para ser evitado, uma meta de "ser ou fazer", qualquer coisa que as pessoas estão tentando realizar. “ - Anthony Ulwick
+
+
+
+Exercício 3 - Definição do Job
+
+Defina o Job principal do seu produto, considerando as boas práticas de como redigir (verbo de ação + objeto de ação + contexto).
+
+    AUTO SE ATENDER INSTALAÇÃO + SOFTWARE + NA ESTAÇÃO DE TRABALHO
+
+ 
+Estruture uma visão inicial do problema que você quer endereçar com base em fatos e evidências
+
+Saia de uma visão empírica para adotar uma visão plausível.
+
+Falhas geram aprendizados: falhe rápido (ciclos curtos) para aprender mais rápido
+
+O método JTBD (jobs to be done) ajuda a entender qual é a tarefa que as pessoas desejam completar para então trabalhar na solução que você vai oferecer para completarem a tarefa
+
+
+
+
+Perguntas que foram respondidas
+
+Como você se sentiu quando você descobriu que estava falhando?
+	
+
+Em produtos como o Instagram, que não são painkillers, como é a validação de hipóteses? Muda a lógica?
+
+Qual é a relação entre Customer Development e Product Discovery?
+	PD faz parte do Development, Discovery nao esta sustentada por dados, vc precisa mitigar os riscos, responder duvidas validar suposições. Precisa aprender mais esse problemas, conversar com pessoas...
+
+E depois, para saber onde eu vou e como evoluo a hipótese que eu tinha, faz sentido trazer esse processo de Customer Development?
+	Visao empirica vc tem a visao baseado na sua fe, é importante rodar os conceitos de Customer Development
+
+Eu preciso ter uma linha de base para conseguir validar minha hipótese?
+	Importante e a metrica que vai mostrar 
+	
+
+Como eu trago hipóteses de outros problemas que não resolvem o job principal mas seriam oportunidades de monetização para o negócio?
+
+Jobs To Be Done é dentro do ciclo de vida de produto ou é para validar o discovery?
+JBTD voltado para o problema que eu preciso resolver
+
+Um produto pode ter um job to be done principal e outros secundários?
+
+A declaração do job to be done é feita depois da declaração de hipóteses de dores das pessoas?
+a JBTD auxilia no problema que vc precisa resolver
+
+
+Se a criação da playlist no spotify não é o job to be done, essa feature não deveria ter sido construída?  a playlist e o meio para habilitar a solução do problema
+
+Quais outros exemplos de jobs to be done de empresas que você já trabalhou? Pode dar exemplos de onde a declaração de jobs to be done fez diferença real para o negócio?
+
+Declaração de hipóteses e jobs to be done são criadas em conjunto pelo time ou apresentadas ao time pela PM?
+	Sao estilos.  Pode ser envolvido o TIME. e É importante a colaboração com a equipe para ter os pontos divergentes.
+	Construido juntos, o time compra a ideia.
+
+
+
+
+PRODUCT MARKET FIT
+
+ BLOCO01 - O QUE É ?
+
+	Customer development - Framework pegar aprendizado de empresas que deram errado ou certo e colocou em uma receita 
+
+	Esta dividido em
+		Busca por um negocio (interação - Customer Discovery e Customer validação)
+	
+	       	O crecimento do negocio (Execução - Customer Creation e customer Building) 	
+  	
+	Aqui foca no customer validation (Validação do cliente)
+	
+		Customer Discovery)Problem solution Fit - Suposição de uma solução para resolver o problema de grupo de pessoas
+
+		(Customer Validation)Product Market-Fit- aqui conseguiu validar o problem e entra na etapa de escala.  Aqui valida o mercado se o mercado é grande o suficiente e pronto para comprar, para saber se vale investirmos e migramos para mercado maior e justificar o crescimento.
+
+		Caso algo nao esteja ok fazemos o pivot que ajusta a rota ou caminho para melhorar e em fim validar o product-fit
+
+		em seguida vamos para p crescimento, e validamos se o negocio é escalável e se os departamentos estão prontos para esse produto e assim viramos um maior empresa.
+
+	
+		Estágios
+		problem-solution Fit -> Product market Fit -> Scale
+
+	
+	Problem Solution Fit (encaixe do problema-solução) ->  Tem algum problema que possa resolver ?
+		Isso é algo que os cliente querem?
+		Ele irão pagar por isso ?
+		E algo que pode ser resolvido ?
+
+	Product Market Fit (encaixe do produto-mercado) - Ja lancamos o produto com a proposta para resolver o problema
+		Vc consegue adquirir novos Clientes ?
+		Vc consegue reter Clientes ?
+		Vc esta sendo pago pelos clientes ?
+
+	
+	Ana Luiz Pucca Pm do ITAU
+
+	
+	o que é Product-Market-Fit(encaixe do produto no mercado)  - Produto que atende bem o mercado e que os clientes procuram pela sua solução
+
+	Piramide do Market Fit
+	
+	    PRODUTO		
+		UX (Olhar para usabilidae e experiência do usuario)
+		
+		  Feature Set -> MVP  (Construir o MVP para entregar proposta de Valor)
+		  Value Proposition (proposta de valor)
+	
+	     PRODUCT/MARKET FIT (interliga a parte de cima e a debaixo)		  
+
+			MARKET
+			  undeserved Needs (necessidades nao atendidas)
+			  target Customer (alvo do mercado)
+		
+		
+Resumo do Bloco
+
+A busca por product-market fit acontece na segunda fase do framework de Customer Development (desenvolvimento de clientes)
+
+Não faz sentido buscar product-market fit ("encaixe produto-mercado") se você não tem um problem-solution fit ("encaixe problema-solução"). O problem-solution fit, que acontece na fase de "Customer Discovery" é uma suposição: [determinado produto/serviço] resolve [um problema conhecido] para [um grupo identificável de pessoas]
+
+Na segunda fase, de "Customer Validation", você parte do que aprendeu na primeira fase testando com usuários iniciais ("early adopters") para validar uma nova suposição, que sinaliza se há product-market fit: o [mercado] está [pronto para comprar] e é [grande o suficiente] para que um negócio viável seja construído
+
+"Pivotada" (do inglês "pivot") é o ajuste de direção após um aprendizado relevante (feedbacks, métricas...). Geralmente envolve ajuste em algum elemento do modelo de negócio
+
+Após a validação do product-market fit é quando você vai para a fase de busca do crescimento ("Scale execution"), onde suas suposições passam a ser: 1) o negócio é escalável por meio de um modelo de vendas e roadmap de marketing replicáveis; 2) os processos e departamentos da empresa permitem que a empresa escale suas operações e cresça
+
+Em resumo, os 3 estágios de um novo produto são "problem-solution fit", "product-market fit" e "scale"
+
+Na fase de problem-solution fit, você deve responder à pergunta: "Existe um problema que vale a pena resolver?". Para isso, analise: 1) Isso é algo que os clientes querem? (must have); 2) Eles vão pagar por isso? (viável); 3) É algo que pode ser resolvido? (factível)
+
+Na fase de product-market fit, você deve responder à pergunta: "Você construiu algo que as pessoas querem?". Para isso, analise: 1) Você consegue adquirir novos clientes?; 2) Você consegue reter clientes?; 3) Você está sendo pago pelos clientes?
+
+Product-market fit significa estar em um bom mercado com um produto que consegue satisfazer esse mercado. (definição de Mark Andreessen)
+
+O mercado é o elemento de maior peso na busca e validação do product-market fit. De nada adianta ter um bom produto e um time competente: se você não tem um bom mercado para atender, as chances de fracasso são grandes
+
+Avalie se seus clientes reconhecem valor verdadeiro: você está servindo certas necessidades que não eram (tão bem) atendidas antes por quem está no mercado? Seu produto é melhor do que as alternativas existentes?
+
+Um mercado é um grupo identificável de pessoas/empresas que têm uma dor/necessidade não (tão bem) atendida em comum.
+
+Apresentação da pirâmide de product-market fit (Dan Olsen): mercado deve vir antes do produto para criar uma base sólida.
+
+
+
+
+
+BLOCO02 -MVP como ferramenta na busca por Market Fit
+
+		
+	Interceção: Minimum e viable 
+		Conseguir validar uma hipotese com menos esforço possível
+		Melhor amigo para reduzir incerteza de construir algo que o mercado nao quer
+		
+		MVP precisa de dias para ser construido e testado
+
+		 Quanto maior o escopo/tamanho -> maior risco e maior o aprendizado
+
+			quando temos certeza do que o mercado quer, nao precisa de MVP
+			Quando faz entregas curtas, evitamos risco e acumulamos aprendizados
+				
+		MVP - Uma versao do produto final, com menor esforço e que entregue algum valor ao usuário
+			Deve gerar vontade de usar ou comprar 
+			Deve reter early adopters (pessoas querem coisas novas e não se preocupam com produtos não completos
+			Obter feedback
+
+
+		TIPO de VALIDAÇÃO
+			Estágio 1 -Landing Pages (Buffer) (So validando a proposta de valor, não tem fisicamente nada) somente uma msg
+			Estagio 2 -Wizard of OZ(MVP Manual) Da trabalho mas funciona
+			
+			Estagio 3 -Software Funcional(tende lado automatizado)
+
+
+			Se nao tiver incerteza nao precisa MVP
+			Se vc nao esta envergonhado da primeira versao do seu produto, vc demorou tempo demais para lançar.
+				
+			Aqui estamos testando a Hipotese de valor.
+
+
+
+Resumo do Bloco
+
+MVP é o "mínimo produto viável". É uma ferramenta de validação de hipóteses construída com o menor esforço possível.
+
+Um bom MVP deve demorar dias para ser construído (e não meses) e imediatamente testado
+
+O MVP nos ajuda a reduzir o acúmulo de riscos. Quanto maior o tamanho/escopo da nossa entrega, mais tempo pensando e planejando (sem testar) significa mais risco. Quando você faz entregas menores, em vez de acumular riscos você acumula aprendizados
+
+MVP é a versão da solução construída com o menor esforço possível que entrega algum valor para o cliente. Não existe MVP se não há entrega de valor
+
+Estudo de caso: Buffer - landing page como meio de aprendizado
+
+Estudo de caso: Pebble - pre-order/crowdfunding
+
+Estudo de caso: Dropbox - vídeo explicativo no Hacker News
+
+Estudo de caso: Groupon - "piecemeal MVP" - agrupamento de serviços manuais
+
+Estudo de caso: Pin People - SaaS e PaaS - uso de ferramentas prontas, como Survey Monkey
+
+Estudo de caso: Zappos - MVP manual (ou "wizard of OZ", "mágico de OZ") - simulação de ecommerce com processos manuais
+
+MVP serve para reduzir a incerteza. Conforme você reduz o tamanho da incerteza, cada novo MVP se torna um pouco mais complexo
+			
+		
+
+
+BLOCO 03 - Como medir se atingiu Product-Market Fit?
+		Product Market Fit não é eterno	
+
+		Não basta alcancar o Market Fit
+			
+			Estratégia de Distribuição Eficaz
+			Economics Favoravel (Bussness Model)
+			mercado grande em Crescimento 
+
+
+	COMO MEDIR SE ATINGIU O MARKET FIT
+		Vc consegue provar que os cliente nao vivem mais sobre o produto ?
+		Vc entende métricas como CAC, LTV, ROI ?
+		Vc tem pedidos validando o roadmap de vendas ?
+		Modelo financeito faz sentido ? Tem negocio viável ?  Faz sentido a longo prazo, um produto que se baque, 
+
+		Se tudo sim, pod eavançar para fase senguinte Scale
+
+	
+		As decisões precisam ser baseados em metricas e nao em HIPPOs, opnioes do chefe, ou pessoas mais bem paga
+		
+		Cuidado metricas de vaidade
+			Numeros/estatisticas estão bonitas em papel 
+			Downloads / visitantes / likes, se estiver olhando somente essa metrica, ou se estao fazendo dislike dia seguinte.
+
+			Dica: Sempre parear metricas. Olhar Download / Desinstalações  ou Metricas de Like e Dislikes
+
+		
+
+		AARRR! startup metrics for pirates (usar algum framework para medir)
+			Como os user te encontram?
+			User tem uma boa primeira experiencia ?
+			Ele voltam depois primeiro uso ?
+			Eles contam sobre vc para outros ?
+			Vc faz dinheiro ?
+
+
+Unit Economics - O Quao saudavel e o negocio, valor que ele gera menos o valor que se paga
+	
+Product Economics Fit e a habilidade de um produto de atrair economics atrativos em escala.
+
+NPS - Medir o amor do seu cliente ao produdo, medir a fidelidade 
+
+	0 - 6 Detractores
+	7 - 8 Passives 
+	9 - 10 Promoters
+	
+	Net promoter Score = Promoters - Detractores
+
+	
+	Se 40 % dos cliente ficam insatisfeito em nao poder mais usar seu produto, vc atingiu o Product Market Fit (Muito simplista, mas combinado com outros metricas, podemos ter mais certeza)
+
+
+Construi um produto bem suceido e fundamentalmente mitigar riscos
+	Risco do produto - Criei produto certo
+	Risco do produto - Contrui um caminho ate os clientes
+	Risco do mercado - Construi um negocio viavel
+
+
+Resumo do Bloco
+
+Se você alcançou product-market fit significa que você construiu algo que o mercado quer. Porém, isso não garante que seu produto/negócio vai continuar tendo sucesso ao longo do tempo
+
+Estudo de caso: Groupon - empresa de mais rápido crescimento no mundo que rejeitou uma proposta de 6Bi do Google e, por fim, acabou sendo muito copiada e faliu
+
+Para ter sucesso, não basta ter product-market fit: é preciso uma estratégia de distribuição eficaz; um "economics" favorável (modelo de negócio); mercado grande e em crescimento
+
+De acordo com Steve Blank, para saber se seu negócio está pronto para sair da fase de product-market fit e entrar na fase de escala, deve se perguntar: é possível provar que seus usuários/clientes não vivem mais sem seu produto? Há clareza sobre métricas como CAC, LTV, ROI, etc.? Você tem "pedidos" ($) validando seu roadmap de vendas? O modelo financeiro faz sentido / você tem um negócio viável?
+
+Use métricas e evite HIPPO´s (highest paid person’s opinion - "opinião da pessoa com maior salário"): métricas são a única forma de sair de uma discussão baseada em opinião e evoluir para uma discussão baseada em dados
+
+Evite métricas de vaidade: números ou estatísticas que parecem bonitas no papel mas não significam nada importante de fato. (ex: #downloads, #visitantes, #likes). Uma dica para evitar métricas de vaidade é parear métricas: sempre olhar duas ou mais métricas relacionadas em conjunto, em vez de isoladamente
+
+O "funil pirata" (AARRR, de Dave Mclure) é um conjunto de perguntas/métricas muito útil para saber se o product-maret fit foi alcançado
+
+Atenção ao "unit economics" (resumo do desempenho atual da sua empresa): receita direta e custos associados a um modelo de negócios com base em uma unidade. Exemplo: em um SaaS, o unit economics é composto pela diferença entre o valor gerado ao longo do tempo (LTV) por um cliente (unidade) e seu custo de aquisição (CAC).
+
+Product economic fit é a habilidade de um produto de atrair economics atrativos em escala
+
+Use NPS para medir o amor do seu cliente pelo seu produto: existe uma forte correlação entre NPS alto e retenção
+
+Sean Ellis (autor do termo "growth hacking"): se em uma pesquisa 40% ou mais usuários disserem que ficariam muito desapontados caso não pusessem mais usar seu produto, você atingiu product-market fit
+
+Erros e armadilhas na busca do product-market fit: 1) não ser objetivo à luz da evidência (negativa); 2) perseguir o mainstream market antes de conquistar early adopters; 3) "comprar crescimento" dificulta saber se você alcançou o product-market fit; 4) ter a ilusão de que seu product-market fit é eterno; 5) cair em um dos mitos do product-market fit; 6) achar que os princípios só são válidos para startups de tecnologia
+
+Os 3 maiores riscos de um novo produto: criar o produto certo; construir um caminho até os clientes; construir um negócio viável. Priorize o seu maior risco
+
+Para mitigar riscos do produto: tenha certeza de que você tem um problema que vale a pena ser revolvido; defina a menor solução possível (MVP); construa e valide o MVP em pequena escala (demonstre a UVP); verifique em larga escala
+
+Para mitigar riscos do cliente: identifique quem tem a dor; reduza para early adopters que realmente querem o produto; tudo bem começar com canais outbound (pagos), mas gradualmente construa/desenvolva canais inbound (orgânicos) - quanto mais cedo, melhor.
+
+Para mitigar riscos do mercado: identifique a competição por meio de soluções alternativas e escolha um preço para sua solução; teste o preço primeiro ao medir o que os clientes dizem (compromissos verbais de comprar); teste então o pricing pelo que os clientes efetivamente fazem (compra); otimize sua estrutura de custo para fazer com que o modelo de negócio funcione
+
+
+
+Lembre-se
+
+Independentemente da definição, product-market fit não é resultado do acaso, mas sim de um processo estruturado que depende de variáveis como o mercado e a proposta única de valor
+
+A busca por product-market fit é um processo iterativo de validação de hipóteses de valor
+
+MVP é mais do que uma ferramenta - é uma mentalidade de aprendizado por validação da hipótese de valor com o menor desperdício possível
+
+Product-market fit não possui uma medida binária, devendo ser medido com uma combinação de métricas e sinais
+
+Product-market fit não é eterno e é repleto de armadilhas
+
+
+
+METODOS DE PESQUISA
+
+Quais são os métodos de pesquisa?
+ Atitudinal X comportamental - Atitudes e comportamento das pessoas
+ Qualitativo X quantitativo - 
+ Contexto de uso do produto
+
+
+Resumo
+
+Muito além de saber descrever o método, é preciso entender quais os fatores que são levados em consideração para a escolha da abordagem da pesquisa. Por isso, é útil visualizá-los ao longo de uma estrutura tridimensional com os seguintes eixos:
+
+Atitudinal vs. comportamental. O que o usuário fala, geralmente ele não faz. A pesquisa atitudinal mede as crenças das pessoas, o que elas dizem que fazem. Um exemplo são os testes de usabilidade. Já a comportamental foca em entender o que as pessoas fazem.
+
+Qualitativo vs. Quantitativo. Os dados comportamentais quantitativos dizem quanto e os qualitativos o porquê. 
+
+Contexto de uso do produto. Como os participantes do estudo estão usando o produto, desde se trata de um produto com uso natural, até se é um produto novo no mercado.
+
+
+Desk Research  Usa na fase de descobertas, ponto de referencia
+	
+ 	Desk research é o uso depesquisas que já foram realizadas por institutos conhecidos ou outras empresas relacionadas ao seu negócio e estão publicadas e com livre acesso.
+		
+		
+		
+	Resumo
+
+O método “desk research” é a busca pelos dados em contextos internos e externos a sua empresa. O ponto mais importante desta abordagem é ter atenção para as fontes da pesquisa. Exemplo: artigos acadêmicos, artigos com fontes confiáveis, jornais e revistas.
+
+A boa prática é ser usada na fase de descoberta, mas não como decisor. É uma abordagem suporte para o início do planejamento, para fazer novas perguntas e correlacionar com o dado que você já tem.
+
+Identifique o contexto do mercado e como ele se relaciona a seu contexto do produto para começar sua desk research. O principal resultado desta metodologia é gerar novas perguntas para seu próprio objetivo
+
+	
+
+
+Teste de usabilidade
+	O teste de usabilidade é uma técnica utilizada para medir a usabilidade de um produto ou serviço. Ela pode usar diferentes tipos de pesquisa.
+
+
+
+Resumo
+
+Alguns tipos de teste de usabilidade:
+
+Exploratório: testar conceitos preliminares, é uma abordagem de validação de hipóteses.
+
+Avaliativo: testar funcionalidades do protótipo durante a implementação.
+
+Comparativo: testar com o usuário duas alternativas de design dentro de um determinado contexto.
+
+Validativo: validar conformidades e padrões, entender se o fluxo do usuário está satisfatório.
+
+No teste validativo, busque apresentar os resultados com uma abordagem mais qualitativa do que quantitativa. O questionamento do “por que” é mais proveitoso para você e seu stakeholder.
+
+Os testes de usabilidade podem ser moderados presencialmente ou remotamente. Para escolher a melhor abordagem, é preciso ter conhecimento do seu contexto e objetivo. Cada modalidade conta com suas vantagens e desvantagens.
+
+A amostra do teste de usabilidade é um ponto de discussão recorrente nos dias de hoje. Uma abordagem comum do mercado é aplicar o teste em cinco usuários. Mas atenção, ao testar produtos e necessidades diferentes, faça dois testes com cinco pessoas diferentes.
+
+Os testes de usabilidade são mais complexos do que parecem. É preciso pensar na estrutura do processo, considerando: moderador e observador, recompensas, script e documento de anotações.
+
+Ao planejar o teste de usabilidade, compartilhe com a equipe e convide os times a participarem. Dê o contexto da pesquisa e da pessoa usuária que será acompanhada. Quando há participação de mais pessoas do time, você evita vieses por ter várias perspectivas do mesmo contexto.
+
+Elencamos quatro tipos principais de testes de usabilidade:
+
+Teste de navegação. Analisa como os usuários navegam em seu site ou aplicativo, de acordo com uma tarefa ou objetivo específico.
+
+Teste de preferência. Ajudam a escolher entre variações de design, simplesmente perguntando aos usuários qual preferem.
+
+Teste de cinco segundos. Permite medir quão bem um design comunica rapidamente uma mensagem. É a primeira impressão da interface.
+
+Teste de um clique. Método para medir a usabilidade de um site, aplicativo ou design, descobrindo como é fácil concluir uma determinada tarefa. Estatisticamente é um teste pouco usado, mas pode ser um diferencial aplicar este teste ao seu escopo.
+
+
+
+
+
+Entrevista
+
+A entrevista pode ser usada em qualquer fase, seja início, meio ou fim. Contudo, é preciso ter uma justificativa plausível para utilizar o método.
+Podemos mapear alguns momentos cruciais para a pesquisa. Sendo eles:
+
+Objetivo. O que você deseja testar? Tenha esse propósito claro durante todo o processo.
+
+Roteiro. As tarefas são cenários, situações de uso que propomos para as pessoas utilizarem o produto. Tenha um script que irá guiar a pesquisa.
+
+Recrutamento. Faça sua pesquisa com quem utiliza o seu produto ou serviço. Podem ser clientes atuais, pessoas que não são clientes mas tem um perfil similar aos seus clientes ou pessoas que estão à procura do produto vendido em seu site, por exemplo.
+
+Teste. Valide sua amostra e evite interrupções desnecessárias ao processo.
+
+Resultados. Evite isolar os números do quantitativo, preocupe-se em entender e interpretar o contexto. Pergunte “por que?” durante todo o processo.
+
+
+Resumo
+
+As entrevistas podem:
+
+Apontar o que você deseja explorar. Elas apresentam as atitudes gerais dos usuários e como eles pensam sobre o problema
+
+Complementar um questionário quantitativo ou qualitativo. Com as entrevistas, é possível entender o “por que?” do que precisa ser melhor explorado.
+
+Atuar como o fator inicial de uma pesquisa. É possível iniciar o processo com uma pesquisa qualitativa para identificar  o público alvo do produto ou serviço.
+
+Trazer resultados qualitativos dos dados. Elas trazem novas perguntas e insights.
+
+Ao elaborar uma entrevista, evite:
+
+Perguntas que abordam um produto futuro, que ele ainda não conhece. Usuários não são pragmáticos e concretos como designers. 
+
+Pedir para que os usuários se lembrem de experiências anteriores distantes do contexto atual. Valide a reticência dos clientes a partir de um passado próximo.
+
+Acreditar apenas no que as pessoas falam. O que os usuários dizem e o que eles fazem pode ser muito diferente. Observe o que as pessoas realmente fazem.
+
+Entrevistas bem escritas possuem: perguntas com objetivos diferentes e roteiro bem escrito, definição de como a entrevista será conduzida e hospedada, além de uma boa análise de dados qualitativos.
+
+
+
+
+Survey
+
+O survey é uma ferramenta poderosa que tem sido banalizada no mercado. Muitas survey estão com perguntas enviesadas e não utilizam escalas de sentimento usadas corretamente.
+
+
+Resumo
+
+Survey é uma metodologia baseada em questionários on-line que permite um processo amplo, eficaz e ágil. Seu principal resultado é gerar grandes quantidades de amostras quantitativas.
+
+As surveys podem ser usadas para: pesquisas de opinião, medir a satisfação do cliente, conhecer o nível socioeconômico e educacional da população e até avaliar a equipe ou conhecer o nível de satisfação no trabalho.
+
+Evite muitas perguntas abertas em survey, pois muitas podem não ser respondidas e você irá desperdiçar sua amostra de público. Além disso, lembre-se de que é preciso energia do time para analisar as respostas.
+
+As vantagens da survey são:
+
+Obter informações em tempo real
+
+Obter um grande número de respostas de maneira rápida
+
+São em muitos casos mais baratos do que outros métodos
+
+Facilidade no envio: Email, mensagem, redes sociais, etc.
+
+As desvantagens das survey são:
+
+Não saberemos o quão confiável é a resposta do usuário.
+
+Usuários dizem que fazem uma coisa, mas tem outro comportamento.
+
+Fornece pouca profundidade sobre os usuários comparada a outros métodos.
+
+A amostra restrita ou errada pode distorcer o resultado da pesquisa.
+
+Não tenha apenas a survey como seu resultado de pesquisa, preocupe-se em entrevistar seu público qualitativamente para melhor leitura dos dados quantitativos.
+
+Surveys mais curtas tem mais chance de serem respondidas. Foque nas perguntas corretas e que mais lhe aproximam do seu objetivo.
+
+Na amostra é um subconjunto da população. Para chegar ao número ideal é preciso considerar dados estatísticos e margem de erro. Para um resultado mais exato da sua amostra, use calculadoras de amostra, como a do Survey Monkey.
+https://pt.surveymonkey.com/mp/margin-of-error-calculator/
+
+
+
+
+Grupo Focal
+
+Grupo focal são sessões de entrevista realizadas com um grupo de pessoas convidadas que interagem entre si com a orientação de um moderador.
+
+
+
+Resumo
+
+Com o “grupo focal” é possível avaliar o que os clientes “dizem que fazem”, mas não é possível avaliar o que os clientes “realmente fazem”.
+
+Como são muitas pessoas de grupos e opiniões diferentes, é importante ser criterioso com o que será perguntado e como as perguntas serão estruturadas.
+
+Viés de grupo. É possível que um número maior de pessoas, por terem a mesma opinião, oprima opiniões diferentes de um grupo minoritário ou de um indivíduo. Por isso, ao moderar um grupo focal é importante ouvir todas as vozes participantes.
+
+Essa metodologia é utilizada quando você precisa descobrir algo com rapidez e qualidade qualitativa. É possível falar com um número maior de pessoas em um espaço menor de tempo.
+
+Em comparação a entrevista qualitativa, o grupo focal é menos profundo do que a pesquisa individual. Contudo, essa abordagem oferece maior quantidade de amostras.
+
+Tente trazer perfis diferentes para resolver o mesmo problema. É preciso entender se a solução que você está pesquisando consegue atender perfis opostos.
+
+
+
+
+Perguntas e Respostas
+Perguntas que foram respondidas
+
+Quais desses métodos você mais utiliza no seu dia a dia em processos de discovery de produto?
+
+Qual método te dá mais trabalho?
+
+Qual desses métodos é o mais caro?
+
+Qual é o método mais difícil de analisar e consolidar as informações?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CONSOLIDAÇÃO DE PESQUISA EM PRODUTOS
+
+
+CONSOLIDAÇÃO DE PESQUISA
+
+Bloco01 - Como transformar os dados coletados na pesquisa em informações valiosas?
+Resumo do Bloco
+
+A etapa de consolidação de pesquisa é o momento de observar padrões e organizar insights relevantes, de maneira que possam ser consumidos e ajudem a orientar o desenvolvimento da solução.
+
+Nesta etapa você vai usar as informações coletadas para analisar e “destilar” os elementos mais importantes.
+
+É o momento da análise e da síntese de todas as informações coletadas nas diferentes pesquisas realizadas.
+
+Síntese: processo de criação de sentido; priorização dos achados e aprendizados; momento para compartilhar histórias; criar um resumo coerente do que você aprendeu. O objetivo de fazer a síntese é obter consenso com o time sobre os aprendizados. Ela nos permite fazer um diagnóstico da jornada “como ela é”.
+
+Lembre-se: a pesquisa também ajuda a refutar hipóteses.
+
+Quanto mais tempo você dedica para síntese, mais significado você consegue extrair dos dados.
+
+Questione-se a todo momento: O que estou aprendendo?; o que aprendemos muda a forma como devemos enquadrar o objetivo da pesquisa?; Nós validamos ou refutamos nossas hipóteses? Existe um padrão nos dados que sugere novas considerações? Quais resultados são mais importantes para comunicar o que descobrimos?
+
+Bloco02 - IDENTIFICAÇÃO E ORGANIZAÇÃO DE INSIGHTS
+
+Entenda agora como identificar e organizar insights para definir melhor o problema que você está tentando resolver.
+
+
+Resumo do bloco
+
+A síntese nos permite identificar insights, revelações inesperadas que nos ajudam a extrapolar as histórias e olhar seu desafio com novas lentes.
+
+As boas ideias não surgem por acaso: passam por momentos de preparação, incubação, iluminação e verificação.
+
+Avanços criativos acontecem quando exercitamos nosso pensamento lateral: uma maneira não linear de pensar, que envolve buscar soluções em mais de uma direção e explorar diferentes perspectivas em direção a novas soluções. Pensamento lateral ajuda a fugir do óbvio.
+
+Cartões de insights: registro de alguma reflexão que surge com um embasamento de dados reais da pesquisa.
+
+Busque documentar os insights durante a pesquisa.
+
+Insights de pesquisa são fragmentos que apontam direções para os desafios de design. Você começa mapeando observações e citações, agrupa essas informações em temas, define os insights inspirados nesses temas, mapeia oportunidades e, por fim, define o problema que será abordado (”como nós podemos...?).
+
+Definir claramente seu ponto de vista (POV) permitirá que você foque em resolver seu desafio de maneira orientada a objetivos, mantendo o foco nos usuários, suas necessidades e percepções. Use a fórmula “[usuário] precisa de [necessidade] porque [ insight]”.
+
+Declarar claramente o problema (HMW - “como nós podemos...) é o que ajudará a transformar os insights de pesquisa em desafios de design. A frase não deve ser nem muito aberta nem muito fechada; não deve sugerir uma solução específica; e deve descrever o problema a partir de um recorte ideal, que estimule a exploração do desafio e das possíveis soluções.
+
+
+Bloco 03 - DEBRIEFING E DISCUSSÃO DE RESULTADOS
+
+Extrair e compartilhar histórias reais das entrevistas com pessoas usuárias tem um potencial enorme de aumentar o valor da sua pesquisa. Nesta parte, Renata conta como ela faz isso na prática.
+
+Resumo do Bloco
+
+“Download” ou “debriefing” é o processo de fazer uma documentação eficiente da sua pesquisa para compartilhar os insights e histórias.
+
+Antes de começar, configure um local para organizar seus dados. Sua organização pode ser digital (em ferramentas como Miro ou Mural) ou física, em painéis.
+
+Dica: faça boas anotações durante a pesquisa! Com isso você economiza tempo nas etapas posteriores da pesquisa.
+
+É importante das visibilidade da pesquisa para todas as pessoas envolvidas.
+
+Crie um sistema para organizar o caos: use códigos de cores (por participante, por perguntas do roteiro, etc); separe citações, observações, ideias; use tags e emojis.
+
+Compartilhe as histórias de cada usuário: siga a sequência do roteiro e conte uma história por vez; divida as informações em fragmentos; use exemplos, citações e frases para ilustrar.
+
+Registre as principais descobertas: discuta o significado e a importância da descoberta (sobre o que foi percebido, anotado, sentido ou observado); escreva frases que demonstrem um comportamento.
+
+Não confie na memória: lembre-se sempre de fazer anotações durante as pesquisas (mesmo se estiverem sendo gravadas) porque a percepção momentânea não volta.
+
+Questione: os dados realmente respondem minhas hipóteses?
+
+Planilhas são uma boa ferramenta para organização de pesquisas também, com a vantagem de poder filtrar os dados.
+
+Busque anonimizar os dados e cuide para não expor dados sensíveis das pessoas.
+
+Mapa de afinidades: a técnica de organizar informações em padrões. Ao fazer agrupamentos, indicamos padrões que ajudam a definir a abordagem de design.
+
+Você pode agrupar os dados por afinidade, similaridade, dependência ou proximidade.
+
+Em resumo: relatos, frases e citações de usuários viram dados (fatos); os dados viram padrões; os padrões viram insights; os insights viram “design principles” (direcionadores de experiência), que orientam a etapa de design da solução.
+
+Como fazer o mapa de afinidades na prática
+
+O objetivo é organizar ideias, problemas e soluções em grupos.
+
+1) Distribua todos os post-its em um mural (real ou virtual)
+
+O brainstorm começa em silêncio.
+
+Busque ideias que pareçam estar relacionadas. coloque-as lado a lado, reflita e repita até que todos os post-its estejam agrupados.
+
+É normal ter post-its soitários que parecem não se encaixar.
+
+Não tem problema mover um post-it que outra pessoa moveu.
+
+Se um post-it parece pertencer a dois grupos, faça uma cópia.
+
+2) Brainstorm terminado? Todas as pessoas podem falar agora.
+
+Discutam como organizar os padrões surpreendentes.
+
+Se necessário, façam mais alterações.
+
+Dê um título que capte a essência de cada grupo.
+
+É útil destacar de alguma forma o título das categorias.
+
+
+
+Lembre-se
+
+Uma boa pesquisa envolve necessariamente a etapa de análise e síntese.
+
+A síntese é o momento de consolidar os pontos chave da entrevistas.
+
+Organize seus dados - considere fotos, vídeos e anotações. A organização por cores ajuda muito.
+
+Explore seus dados - busque por fatos e descobertas. Vasculhe todos os arquivos de cada participante para identificar as descobertas, lembrando que elas podem vir em forma de citações do usuário.
+
+Classifique e agrupe - use técnicas para classificar, agrupar e reformular os dados. Lembre-se do mapa de afinidades, que permite que você descubra padrões em seus dados mais rapidamente.
+
+Identifique os insights - discuta cada padrão, insight e ponto de síntese identificado. Use citações exatas dos participantes, expressões faciais, sentimentos e atitudes relacionadas aos padrões e insights.
+
+Socialize os insights - mostre para as pessoas. Dê um contexto para as pessoas que não participaram da pesquisa e compartilhe os insights para confirmar o potencial da sua pesquisa de originar produtos relevantes.
+
+
+
+
+Personas
+
+Para começar, vamos entender o que são personas, como elas são desenvolvidas e como empresas de alto crescimento no mercado digital usam personas no time de produto.
+
+
+Resumo do Bloco
+
+Boas soluções são feitas pensando nas pessoas
+
+Antes dos produtos digitais, as companhias usavam veículos de comunicação de massa para repetir constantemente atributos de diferenciação como forma de vantagem competitiva. Hoje, temos uma possibilidade muito maior de encontrar vantagem competitiva real, devido à quantidade de informações que podemos obter das pessoas usuárias
+
+Persona é uma narrativa, não é uma fotografia estática. É menos sobre recortes demográficos e mais sobre motivações, modelos mentais e hábitos de consumo
+
+Personas devem ser baseadas em dados reais. Não é um texto criativo.
+
+Há várias maneiras de coletar dados: ouvindo o que as pessoas sabem (entrevistas); ver o que as pessoas fazem (observações); e fazer o que as pessoas fazem (vivências)
+
+Os times de UX são especializados na coleta e análise dessas informações, mas quem é PM também pode (e deve) participar para entender melhor as pessoas usuárias
+
+Proto-persona é uma variação da persona típica não resultante de pesquisa com usuários. Originam-se de de workshops de livre debate - colaboradores tentam encapsular as crenças da organização sobre quem está usando
+
+Estudo de caso: personas do Nubank
+
+Estudo de caso: personas do Airbnb
+
+Um produto de plataforma (como Airbnb, iFood) sustenta a relação entre clientes de diferentes perfis (hóspede+anfitrião / restaurante+consumidor+entregador). Nesse caso, é importante mapear personas separadas para cada perfil
+
+
+
+BLOCO 02 - Mão na MASSA
+	
+Resumo do bloco
+
+Comece simples, conversando com 2 ou 3 pessoas relacionadas ao produto. Manda um whatsapp, marca uma video chamada individual. Prepare-se criando um roteiro de perguntas
+
+Entenda seu dia a dia, suas necessidades, o que não tem sido bom e o que poderia tornar a experiência melhor. Como elas pensam e agem? Quais caminhos percorrem antes de comprar ou usar o produto? O que pensam depois do uso? Como o produto entra em sua vida e supre suas aspirações e necessidades?
+
+Registre as respostas e as organize em uma tabela, separando cada pergunta em uma coluna para ficar mais fácil de comparar respostas e identificar padrões
+
+Monte sua persona organizando as principais informações num quadro ("canvas") fácil de visualizar
+
+Um dia na vida dessa pessoa: uma análise do contexto de uso do produto dentro da rotina da pessoa usuária
+
+MiniBio: Qual é a história dessa pessoa, que a coloca no contexto do seu produto?
+
+Objetivos: uma tarefa que precisa ser cumprida; uma meta a ser alcançada; uma experiência que almeja
+
+Dores: qual é a dificuldade no contexto desta pessoa que o produto de alguma forma atende? No produto atual, o que mais atrapalha do que ajuda? O que não funciona?
+
+Objetivos e dores são o core (parte principal) da ferramenta persona.
+
+Nome, foto e citação são elementos que ajudam a tangibilizar a persona, deixá-la mais real para o time, facilitar a comunicação e o exercício de empatia
+
+Agora vamos colocar essas personas em movimento, investigando seus pontos de interação com o produto no mapa da jornada de experiência.
+
+Vamos lá?
+
+
+
+BLOCO03 - Mapa da jornada de experiência do usuário
+
+
+
+Resumo do Bloco
+
+Jornada de experiência do usuário é o caminho que a pessoa percorre dentro do seu produto ou serviço
+
+Para cada app, funcionalidade ou mesmo dentro de uma loja é possível aplicar o conceito de jornada
+
+Estudo de caso: mapa da jornada do Airbnb
+
+
+
+Como começo?
+
+Entenda agora como dividir e compor seu mapa da jornada de experiência.
+Resumo do Bloco
+
+Primeiro passo: escolha um momento essencial da experiência com seu produto e a partir dele divida em antes, durante e depois. Em seguida, quebre as três partes em etapas de acordo com os diferentes processos e pontos de contato entre a pessoa e seu produto
+
+Segundo passo: escreva as ações da sua persona em cada etapa; os pontos de contato disponíveis para interação com a pessoa em cada etapa; as emoções de usuários em cada etapa (feliz, satisfeito, chateada)
+
+Terceiro passo: identifique oportunidades. O que pode tornar cada etapa melhor para as pessoas usuárias? O que é relevante para o negócio?
+
+Se estiver trabalhando com mais de uma persona, descreva na parte de "ações" quais são as ações de cada persona nas diferentes etapas
+
+
+
+Lembre-se
+
+A jornada tem uma relação com o funil de vendas e pode funcionar como ferramenta transversal de comunicação entre os times
+
+Faça dinâmicas com post-its, seja em um mural virtual ou colando na parede mesmo
+
+Foque nessas questões: qual problema/objetivo da persona estamos resolvendo?; qual benefício entregamos para o cliente?; como a pessoa vai se sentir depois de usar seu produto?
+
+As pessoas usuárias são o verdadeiro centro entre negócios, UX e tecnologia - e é trabalho de PMs ajudar da melhor maneira a resolver os problemas dessas pessoas. Apaixone-se pelo problema, não pela solução
+
+
+
+
+
+MITIGAÇÃO DE RISCOS E EXPERIMENTAÇÃO
+
+Bloco 01 - Por que fazer experimentos?
+	Resumo do Bloco
+
+A história da Gabriela: PM que recebe uma "sugestão" de sua liderança para uma melhoria no produto e precisa testar se essa ideia vai de fato melhorar o resultado
+
+O mundo mudou e mudou sua forma de mudar. A mudança nunca foi tão rápida, em um volume tão alto e com tanto efeito de rede devido à interligação entre as coisas
+
+"Mundo VUCA" (década de 1980) uma maneira de descrever os padrões que definem um ambiente em rápida mudança: volatilidade (muda o tempo todo); incerteza (difícil de fazer previsões); complexidade (tudo está conectado); ambiguidade (não existe resposta certa)
+
+"Mundo BANI" (2018) é uma maneira de descrever como fica um mundo regido ao extremo por esses padrões de mudança acelerada: frágil (tudo muda ao menor impulso); ansioso (tudo é para ontem); não linear (adeus planejamento); incompreensível (difícil entender o porquê)
+
+Essas características do mundo nos levam a um contexto onde vantagens competitivas são temporárias - e sua duração é cada vez menor
+
+Nunca o comportamento do consumidor mudou tanto - e nunca houve tanta exigência em relação ao valor que está sendo proposto
+
+Nunca foi tão fácil desafiar as lógicas vigentes do mercado - novas start-ups podem ganhar mercado de gigantes do mercado
+
+É preciso repensar constantemente a proposta de valor para se manter competitivo além do curto prazo. Para isso, precisamos mudar a forma de criar e gerir negócios
+
+Para construir negócios nos dias de hoje, considere 3 grandes desafios: o investimento é cada vez mais escasso; a proposta de valor deve ser cada vez melhor para atender à alta exigência; e a captura de valor é cada vez mais difícil com a grande concorrência e expectativa de "pagar barato".
+
+A melhor forma de lidar com esses desafios é usar processos e ferramentas para, com velocidade, entregar mais valor mitigando ao máximo os riscos de insucesso de uma iniciativa
+
+Os problemas da mentalidade antiga de construção de produtos são: necessidades de negócio colocadas acima das necessidades de usuários; projetos entregues tardes demais e com alto custo; o contato com usuários é feito apenas com o produto lançado
+
+A mentalidade mais recente de construção de produtos envolve ciclos rápidos e contínuos de identificação de oportunidades e teste de novas soluções
+
+Um experimento é o processo de observação de um novo possível comportamento a partir de uma mudança que geramos em um determinado sistema. Essa é a base do método científico
+
+Experimentação é uma forma de tomar melhores decisões, mitigando riscos de uma nova inciativa. Por isso, é parte central da cultura das maiores empresas digitais que conhecemos hoje
+
+
+
+BLOCO02  - Cultura de experimentação
+	Agora que ficou mais claro por que as mudanças do mundo atual exigem que a gente adote uma mentalidade de experimentação, vamos entender como essa mentalidade acontece nas empresas - e qual é o papel de PMs na construção de uma cultura de experimentação.
+
+ Resumo do bloco
+
+Fazemos discovery para descobrir qual valor precisamos entregar para atender uma dor ou necessidade do cliente contribua para os resultados desejados pela empresa, reduzindo gradualmente as incertezas para evitar falhas maiores.
+
+Velocidade é uma premissa - e a duração do processo depende diretamente da facilidade de se obter dados quantitativos e qualitativos.
+
+Oriente seu time para alcançar outcomes em vez de outputs. Assim, cada pessoa consegue ter mais autonomia para descobrir o que precisa fazer.
+
+A experimentação se encaixa no ciclo de gestão de produto principalmente em dois momentos: a validação qualitativa e a validação quantitativa, na ponte entre discovery e delivery.
+
+A pessoa PM tem 5 funções importantes: 1) garantir que o outcome esperado pelo time esteja alinhado com os objetivos estratégicos da empresa e que ele seja claro e mensurável; 2) garantir a correta exploração do espaço de oportunidades e do espaço de solução, levando sempre em consideração o outcome buscado e a jornada do usuário; 3) garantir que as melhores oportunidades e soluções sejam priorizadas, levando em consideração o negócio, o usuário e o outcome buscado; 4) garantir que os riscos associados à nova entrega de valor sejam mapeados e que os melhores processos possíveis sejam executados para diminuir o risco da entrega de valor; e 5) validar a relação entre a entrega de valor gerada e a expectativa de impacto no outcome buscado pelo time.
+
+É preciso deixar o ego de lado e se entregar genuinamente ao melhor que o processo pode te trazer, evitando se deixar levar por vieses (por exemplo, de confirmação ou de investimento).
+
+Mapeamento de riscos: é quando um time de produto mapeia todas as suposições envolvidas em um par oportunidade-solução e, para cada suposição, atrela um risco envolvido caso esta suposição não seja verdadeira
+
+Risco de necessidade: os usuários realmente desejam isso?
+
+Risco de viabilidade: é viável construir isso?
+
+Risco de usabilidade: é fácil e simples utilizar isso?
+
+Risco ético: existe algum mal em potencial nisso?
+
+Estudo de caso Picpay - hipótese: se tivermos áudio no chat, aumentaremos a taxa de usuários que interagem em uma conversa, porque 70% dos usuários preferem conversar por voz do que digitar texto.
+
+Ter uma cultura de experimentação forte - que envolve crenças, valores, papéis, rituais e processos - significa ter este sistema estabelecido, compartilhado e nutrido em todas as áreas e times da empresa.
+
+Experimentação é sobre ressignificar o erro. Em vez de punir o erro, devemos entender que errar rápido significa aprender rápido quais caminhos seguir e, principalmente, quais não devemos seguir, evitando o gasto de recurso desnecessário na companhia.
+
+Ter uma cultura de experimentação é sobre engajar e envolver toda a empresa no processo de evolução e iteração do próprio produto.
+
+Experimentar é a forma mais rápida e mais barata de fazer com que seu usuário, a pessoa que precisa se encantar com seu produto, construa a solução junto com você.
+
+
+   "Experimentação não é sobre buscar verdades - é sobre reduzir incertezas.
+
+
+
+BLOCO 03 - Planejando um experimento
+
+Heider nos convida agora para um verdadeiro mergulho no planejamento de experimentos. Confira!
+
+
+Resumo do bloco
+
+É importante definir uma série de atributos e informações no planejamento de um experimento e você pode usar um quadro ("canvas") para te ajudar a organizar.
+
+O primeiro passo do planejamento é entender o estágio do produto ou negócio: "problema-solution fit", "product-market fit", "modelo de negócios replicável", "escala". Nos dois primeiros estágios (fase de start-up), os experimentos qualitativos são mais relevantes. Nos dois últimos estágios, experimentos quantitativos costumam ter mais relevância estatística.
+
+Realizar um experimento envolve 4 passos: 1) análise de dados; 2) definição da hipótese; 3) design do experimento; 4) análise de resultados.
+
+Invista 80% do seu tempo na preparação e 20% na análise.
+
+A maior parte dos problemas na tomada de decisão envolvendo experimentos está no pouco tempo dedicado à etapa de planejamento.
+
+Escolha o tipo de experimento que você vai fazer (POC, Protótipo, Piloto, MVP, Teste A/B) de acordo com o tipo de validação que você está buscando (factível? como? funciona? resolve? melhorou?).
+
+O único método quantitativo efetivo é o teste A/B. Ele funciona e é muito utilizado porque: é um método científico de análise de hipóteses; tem um processo bem definido de construção e análise; é um modelo claro e simples para tomada de decisão; permite grande escalabilidade de experimentos; tem integração com outras ferramentas de otimização de produto.
+
+Teste de hipótese: procedimento estatístico que permite aceitar ou rejeitar uma hipótese observando dados de um determinado experimento.
+
+
+BLOCO 04 - O que é teste A/B?
+
+Você sabe o que é um teste A/B e por que ele é tão importante para a mitigação de risco? Descubra neste capítulo!
+
+Resumo do bloco
+
+O Teste A/B é uma famosa ferramenta que auxilia na tomada de decisão. Ele tem sua origem conceitual no Teste de Hipótese.
+
+O Teste A/B é bastante funcional por, dentre outras coisas:
+
+
+Conter processos bem definidos de construção de análise.
+
+Representar frameworks precisos e simples para tomada de decisão.
+
+Integrar bem com outras ferramentas de otimização do produto.
+
+ A estrutura básica de um teste A/B é separar usuários em dois grupos (tratamento x controle) e exibir uma pequena variação no produto para o grupo tratamento
+
+
+
+
+
+BLOCO 04 - Quando usar e quando não usar teste A/B?
+
+Neste bloco, Heider explica o melhor momento de utilizar o Teste A/B em seus experimentos. Aperte o play e confira!
+
+
+Resumo do bloco
+
+Quando usar teste A/B: 
+
+
+Quando você quer testar novas funcionalidades (ex: Netflix variando seu mecanismo de recomendação);
+
+Quando você quer testar mudanças na interface (ex: Webmotors testando a interface de apresentação dos resultados de busca);
+
+Para testar hipóteses de comunicação e design (ex: google testou 41 tons de azul em um botão);
+
+Para otimização de páginas (ex: Amazon trabalhando na velocidade de carregamento das páginas).
+
+Quando não usar:
+ 
+
+Na criação de novas experiências completas (ex: um produto que muda completamente suas características/experiência. Nesse caso é preciso esperar uma curva de aprendizado da pessoa usuária, principalmente quando pensamos nos usuários recorrentes);
+
+Mudanças completas de modelo de negócios;
+
+Mudanças de médio/longo prazo. 
+
+
+
+
+BLOCO 05 - Identificação de oportunidades de experimento
+
+Chegou a hora de colocar a mão na massa! Neste capítulo, o expert aborda o primeiro passo para planejar um experimento: análise de dados. Vem conferir!
+
+
+Resumo do bloco
+
+PASSO 1 - análise de dados: comece identificando uma oportunidade de experimento para validar uma necessidade ou solução. É onde você combina o outcome esperado com a jornada do usuário. 
+
+Analise os dados: 
+
+Dados quantitativos ajudam a identificar "onde realizar o teste";
+
+Enquanto dados qualitativos ajudam a identificar "o que devo testar".
+
+Estudo de caso: funil de conversão na Webmotors.
+
+
+
+BLOCO 06 - 
+DEFINIÇÃO DA HIPÓTESE DE UM EXPERIMENTO
+
+Avançando na jornada, Heider nos explica o segundo passo para planejar um experimento. 
+
+
+Resumo do bloco
+
+PASSO 2 - definição da hipótese: defina sua hipótese em uma frase simples, seguindo o modelo:
+
+
+se [variação - mudança proposta pelo teste];
+
+então [resultado esperado pela mudança];
+
+porque [racional dos dados - por que a mudança trará esse resultado].
+
+Estudo de caso: troca de texto no botão da interface mobile da Webmotors.
+
+Manter o backlog de hipóteses ajuda a visualizar e priorizar as ideias de experimentos de acordo com o momento ou resultado que está sendo buscado.
+
+Na prática, a maior parte dos testes não são realizados corretamente. Entre os que são realizados corretamente, a maior parte deles resultam inconclusivos. Porém, a pequena porção de testes realizados corretamente e que foram conclusivos podem gerar um impacto real e significativo para o negócio.
+
+Para fazer experimentações com qualidade, lembre-se de que experimentos bem elaborados também são uma ferramenta de comunicação: invista tempo preparando e comunicando os motivos e racional por trás do experimento para ter melhores resultados.
+
+
+
+
+BLOCO 07 - Design de um experimento
+
+Após analisar os dados e formular hipóteses, vamos agora para o terceiro passo do nosso processo: design do experimento. Confira!
+
+Resumo do bloco
+
+PASSO 3 - design do experimento: primeiro, defina o tipo de experimento. Dentro do conceito de teste A/B;
+
+Há ainda dois tipos: 
+
+- Teste A/B/C (no qual mais de uma variação é comparada com a versão de controle). 
+- Teste multivariável (onde a variação e controle diferem em mais de um ponto).
+
+Quanto mais variações, maior a divisão do tráfego e mais tempo demora para chegar em um tamanho mínimo de amostra.
+
+Segmentação: nem sempre você vai querer incluir todas as pessoas no seu experimento. Você quer testar sua hipótese com qualquer visitante ou apenas visitantes novos? Qualquer plataforma ou apenas mobile? Visitantes logados ou deslogados? Por qualquer fonte de origem de tráfego?
+
+
+BLOCO 08 - Estudo de caso: home no app do PicPay.
+
+Fluxo do teste: onde o teste começa? Qual % do tráfego será destinado para o teste? Quais pontos da experiência serão impactados? Como marcaremos os participantes do teste (cookies, utm)?
+
+Monitoramento e métricas: todo teste é uma oportunidade de coleta e validação de dados. 
+
+Quais eventos eu desejo monitorar? 
+
+Qual o comportamento esperado desses eventos? 
+
+Métricas primárias ou secundárias? 
+
+Não existe análise de dados após o experimento ser concluído, os dados são monitorados e analisados durante o experimento.
+
+Métricas de sucesso: você pode medir o que quiser durante um teste, mas apenas uma métrica será considerada para definir o sucesso. A métrica de sucesso é o que vai definir se sua hipótese é verdadeira ou falsa. 
+
+Prefira sempre métricas relativas em vez de métricas absolutas.
+
+
+Estudo de caso: definição das métricas de sucesso na Webmotors.
+
+Critério de parada: protege o negócio com relação a resultados negativos. Estabeleça critérios e limites para interromper o teste caso haja uma resposta negativa.
+
+Conjunto de métricas
+
+Métricas de sucesso —> Validação de hipótese.
+
+Métricas de acompanhamento ou health metrics —> Monitoramento de análises.
+
+Métricas de contenção ou guardrails —> Critérios de parada.
+
+
+Cálculo da amostra, duração e confiança de um experimento
+
+Qual a quantidade mínima que eu preciso para dizer que um teste foi concluído? Qual a amostragem? E a duração? Saiba mais neste vídeo:
+Resumo do bloco
+
+Amostra mínima e expectativa de duração: a amostra mínima garante que, se aquela variação na métrica ocorrer, este é o número mínimo de visitas que garantem que o resultado obtido é reproduzível no percentual de ocorrências igual à Significância Estatística definida para o teste. 
+
+Há ferramentas online para fazer cálculo de significância estatística.
+
+O quarto passo, a etapa final do processo de experimentação é a análise de resultados. É o momento que podemos conferir se o nosso experimento teve um resultado eficaz ou se restaram lacunas.
+
+
+BLOCO 09 - Vida real
+
+O fim do ciclo de experimentação é a análise dos resultados. Entenda qual é o melhor processo e cenários possíveis de resultado em um experimento.
+
+
+Resumo do Bloco
+
+Análise de resultados: enquanto nos passos anteriores o objetivo da pessoa PM é fazer gestão de expectativas, agora é momento de tomada de decisão
+
+Em um experimento qualitativo, você faz uma análise a posteriori (após o experimento) - o resultado normalmente é comunicado a partir de um relatório que traz a avaliação das suposições, da hipótese e os insights identificados. Em um experimento quantitativo, a análise é em tempo real - o resultado do experimento pode ser acompanhado em ferramentas de monitoramento de dados disponibilizado para todos os stakeholders envolvidos no experimento
+
+Quando o teste chega ao final, a grande afirmação que buscamos fazer a respeito dele é: com 95% de certeza, podemos afirmar que a variação (ou o controle) venceu o teste e a hipótese avaliada é verdadeira (ou falsa)
+
+São 5 cenários possíveis no resultado de um teste: 1) variação ganha e o resultado é bom para o negócio; 2) variação ganha e o resultado não é bom para o negócio; 3) variação perde; 4) resultado empata; 5) resultado é muito danoso, porém não significante estatisticamente
+
+Segure a ansiedade (sua e do seu time): o processo de experimentação não é instantâneo, é contínuo e tem uma série de riscos. E NUNCA manipule o teste para dar o resultado que você espera. Isso será muito prejudicial para a cultura de experimentação da companhia
+
+Ferramentas úteis
+
+A/B Testguide: calculadora de significância estatística e outras ferramentas para estes A/B
+	https://abtestguide.com/calc/
+
+
+
+Lembre-se
+
+Ter experimentação como a base para construção e iteração de produtos significa dar autonomia para os times de produto.
+
+Cultura de experimentação é sobre ressignificar o erro: errar rápido significa aprender rápido quais caminhos seguir e, principalmente, quais não devemos seguir evitando o gasto indevido de recursos da companhia.
+
+Dentro do ciclo de gestão de produto, consistência é muito mais importante que tentativa e erro.
+
+Converse com sua liderança e alinhe o que é esperado do seu papel ao longo desse processo.
+
+Atente-se para os vieses de confirmação e de investimento de tempo e reafirme sempre o compromisso genuíno de se ater ao processo para garantir o melhor para o negócio e a pessoa usuária.
+
+Foco no usuário: experimentar é a forma mais rápida e mais barata de fazer com que seu usuário, a pessoa que precisa se encantar com seu produto, construa a solução junto com você.
+
+Construir bons produtos, que resolvem problemas reais, é mais que um trabalho - é uma missão.
+
+
+
+PERGUNTSAS
+
+
+Experimento é mais um processo ou é mais uma mentalidade, um jeito de pensar?
+	Começam com processo mas a beleza é quando vira mentalidade, no dia dia, forma de pensar
+
+A experimentação acontece na fase de discovery ou delivery?
+	Começa na fase de discovery
+	
+
+Experimentação só serve para novos produtos? Experimentação serve para qualquer tipo de produto e mercado?
+	Não serve so para novo produtos, pode ser para existentes, e serve para lancar qualquer tipo de produto e mercado
+
+Como convencer minha liderança que experimentar é um bom caminho?
+	Cada tipo de liderança tem um tipo de discursos (gestao e negocio tem discursos diferentes)
+	Mais facil convencer quando ja se tem resultados, melhor argumento do que so teorias. Otima ferramenta
+	
+
+Como equilibrar experimentos com entrega de features?
+	
+
+Comecei na empresa agora. Como notar se a experimentação já é parte da cultura ou se preciso criar essa cultura?
+	Vc tera que ser o prmeiro a convencer os steakholder a executar experimentos
+
+Sou a primeira pessoa de produto da minha empresa. Como dar o primeiro passo? Por onde e com quem começo a fazer experimentos?
+	Influenciar camadas superiores que esse é o caminho
+	
+
+Como cultivar a cultura de experimentos no time? Como envolver o time no processo de planejamento, além da execução?
+	Se for TI eles querem estar incluidos na entrega, eles querem estar envolvidos. precisam estar em todos as fases para ficar engajados.  Envolvimentos faz elas se engajarem.
+
+Na sua experiência, gerir por outcome é realmente melhor?	
+	Coloca o time em situação de desconforto em gerir produto
+
+
+Qual o maior desafio da pessoa Product Manager na hora de criar uma cultura de experimentação?
+	Precisa de uma jornada de interempreendorismo
+	
+	
+
+Quais os principais desafios com as outras pessoas do time, como as pessoas de tecnologia?
+	Envolva o Dev no Discovery, os Eng de Software trazem as expertizes
+
+E quando o negócio é B2B? Muda algo?
+	o Tamanho de base de experimento é menor, então o ponto de decsao mais apertada
+	o Core do processo não muda, mas a quantidade de pessoas é menor
+
+E quando eu tenho pouco tráfego? Dá para fazer um teste ab?
+	Da para fazer mas vai ter que tomar decisao com certezas menor, devido a amostra menor
+	Consegue tomada de decisao com 70%, mesmo com a margem de erro alta
+	Lembrar dos tipos de experimentos, pois esse metodo é par agrandes amostra
+
+O teste AB é quantitativo, mas a elaboração da hipótese envolve às vezes variações de comportamento humano. Você envolve o time de UX design na elaboração dos testes?
+	Com certeza envolvemos o UX, os insight qualitativos vem do usuario
+
+Como você "quebra" seu outcomes em partes "experimentáveis"? Como saber o que (e até onde) testar?
+	o outcome esta ligado a jornadas, entao temos outcome principal, trazemos varios experimentos
+	Um conjunto pequeno de teste com qualidade é melhor do que sair testando tudo
+
+Como estimar o impacto a ser gerado pelo experimento?
+	Quando tem um imapcto bem mensuravel, consegue ter teste conclusivo, teste para pagar ou nao ferramenta
+	quando o teste esta em produção, a medida é online
+		
+
+O teste foi concluído e a variação ganhou. Paro imediatamente e coloco a variação para todos?
+	Necessario sempre considerar a janela minima para ter a sanzionalidade coberta pois o usuario tem comportamento diferente conforme o tempo.  Espera a janela definida concluir, sendo negativo ou positivo
+
+Se meu teste for inconclusivo, o que eu faço?
+	primeiro comunica, não mexemos na meta então tem um plano de ação para tratar porque nao teve efeito a melhoria
+	de olho nas metricas, e se for positivo podemo sdisponibilizar como melhorias
+
+Alguma dica prática para quebrar vieses, em geral, ao longo de todo o processo?
+	Auto questionmento, e vies de confirmação a todo momento
+	fazer bem o mapemaneto de riscos e suposições
+	
+
+
+
+
+
+O que é prototipar?
+
+Afinal, o que é prototipar e por que isso é importante?
+
+ Resumo do Bloco
+
+Prototipar é tornar tangível uma ideia ou solução. Às vezes gastamos muito tempo em reuniões tentando explicar uma ideia (abstrata, por natureza) e a prototipagem é o processo que permite dar clareza coletiva à mesma ideia.
+
+É possível prototipar praticamente qualquer coisa: um novo produto, serviço, aplicativo, interface, etc.
+
+Quanto mais rápido você colocar sua ideia "na mão das pessoas", mais rápido você consegue coletar feedbacks para melhorar sua ideia.
+
+Quando identificamos um problema, criamos protótipos para testar se a solução proposta atende os objetivos e necessidades de usuários.
+
+Protótipos são ferramentas de comunicação: ajudam a explicar, obter feedback, negociar, colaborar e persuadir.
+
+No processo de discovery, seu protótipo pode ser construído de diferentes maneiras, desde uma folha de papel desenhada até ferramentas como Power Point, Keynote, XD ou Figma.
+
+Não faça protótipos que você não queira descartar. Lembre-se que sua solução pode funcionar e pode não funcionar, então não gaste tempo fazendo algo muito refinado.
+
+A "fidelidade" de um protótipo (baixa/média/alta) tem a ver com a qualidade ou refinamento do protótipo.
+
+Protótipos de baixa fidelidade são usados para definir de modo simples como seria a interação essencial do usuário com o produto, sem preocupação com a aparência visual. Não exige muito tempo nem esforço de designers e product managers. Para protótipos de baixa fidelidade, você pode usar papel e caneta ou apps como Balsamiq ou Powerpoint.
+
+
+
+
+Arquitetura da informação
+
+O que é arquitetura de informação e por que é importante olhar para isso em um processo de prototipagem?
+
+Resumo do Bloco
+
+Arquitetura de informação (AI) é uma disciplina que se concentra na organização , estruturação e rotulagem de conteúdo de sites, sistemas de informação ou aplicativos. Uma boa arquitetura de informação ajuda usuários a encontrar informações e concluir tarefas.
+
+Você deve criar sua arquitetura de informação considerando 3 componentes: usuários (necessidades, hábitos, comportamento na busca de informações, expectativas, experiência); conteúdo (objetivo, tipos de documentos e dados, volume de informações, taxonomia, estrutura existente);e contexto (onde usam, como usam, cultura, tecnologia, restrições).
+
+A sigla LATCH representa as 5 maneiras mais conhecidas e eficientes de organizar informações, de acordo com Richard Saul Wurman: localização, alfabeto, tempo, categoria e hierarquia.
+
+Há 4 tipos de topologias de navegação: linear, hierárquica, não linear e composta.
+
+Há uma diferença grande entre a organização do fluxo de informações no desktop e no mobile. No ecossistema mobile, há padrões diferentes de topologia: estrutura hierárquica, hub-and-spoke, lista aninhada, Bento box (dashboard) e visualização com filtros.
+
+Estudo de caso: Amazon Prime
+
+
+
+
+
+Custo e benefício da prototipagem rápida
+
+Qual é o benefício que a prototipagem traz para empresas e equipes de produto? Quais são as principais técnicas e ferramentas de prototipagem?
+
+ Resumo do Bloco
+
+A ideia principal da prototipagem é reduzir o tempo e o custo necessário para desenvolver algo que possa ser testado pelos usuários.
+
+A prototipagem rápida estabelece a base para um produto futuro, simulando os aspectos mais valiosos e "vitais" do produto final.
+
+Do ponto de vista de desenvolvimento de produto, a prototipagem elimina funcionalidades redundantes ou desnecessárias nos primeiros estágios de desenvolvimento.
+
+A prototipagem pode acontecer em todas as etapas do ciclo de design.
+
+Você pode prototipar e testar várias alternativas de design do mesmo produto. Assim, as decisões mais difíceis podem ser tomadas ponderadamente, comparando várias soluções.
+
+Protótipos horizontais focam na abrangência, incluindo interfaces do sistema todo. Protótipos verticais focam na funcionalidade, onde há poucas tarefas mas elas são cheias de funcionalidades.
+
+Storyboard é uma técnica interessante de prototipagem, ela ajuda a deixar mais claro o contexto de uso do produto.
+
+A técnica "wizard of Oz" (mágico de Oz) é quando há uma pessoa atrás da máquina simulando um sistema automático. É uma forma simples de prototipar ideias tecnicamente complexas.
+
+
+
+
+
+
+Perguntas que foram respondidas
+
+Qual a diferença entre um protótipo de alta fidelidade e o produto "final"?
+	na alta ja simula o produto final ja foi codado
+
+
+Quando usar cada nível de fidelidade? Quando é hora de pular da prototipagem de baixa fidelidade para alta fidelidade?
+	se o que ja esta na folha ja foi discutido se passa alta fideidade
+
+Como identifico o melhor público para testar meu protótipo? O que é melhor, buscar early adopters ou os "clientes mais difíceis" que eu quero alcançar?
+	primiero o early adopter
+
+Qual a melhor hora de apresentar os resultados do meu protótipo para meus stakeholders?
+	mais cedo possivel
+
+Em empresas grandes, como funciona a prototipação de baixa fidelidade para produtos?
+
+A arquitetura de informação é o primeiro passo de um protótipo?
+
+O que é melhor: investir recursos na criação de uma arquitetura de informação original/inovadora que seja uma experiência melhor para usuários; ou "imitar" padrões de arquitetura que as pessoas já estão acostumadas?
+
+A arquitetura muda conforme o canal (ex: desktop, mobile) ou ela é uma só e apenas a interface é que muda em cada canal?
+
+Quais cuidados preciso tomar ao definir a arquitetura da informação de um produto? Onde eu acho um “manual” para isso?
+
+Pode dar exemplos de bons a maus usos de arquitetura da informação de produtos no mercado?
+
+Existem alguns produtos que usam um grande volume de informação na interface com objetivo de conversão, como o famoso caso do Booking.com. Qual sua opinião sobre esses produtos cheios de informação?
+
+Qual é o processo ideal de colaboração entre PMs e o time de UX na criação de um protótipo?
+
+Testei meu protótipo e os feedbacks foram péssimos. Porém, acredito que minha ideia ainda faz sentido e meu protótipo é que ficou ruim. Já aconteceu isso com você? Como eu sei se o problema é com a ideia ou com o protótipo?
+
+Como saber se eu preciso de um protótipo mais horizontal ou mais vertical?
+
+Quem é responsável pela consolidação de aprendizados de um protótipo? Qual a melhor forma de comunicar esses aprendizados com o resto do time?
+
+
+
+
+
+
+
+			

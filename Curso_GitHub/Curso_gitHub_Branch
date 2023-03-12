@@ -1,0 +1,117 @@
+Gerenciar projetos - Branch
+	possivel separar o codigo por features, nao correr o risco de alterar direto na main
+	a branch deixa a pagina main intacta e ao final faz um merge do banch com a main.
+
+  git branch (mostram as branchs)
+	* main
+  	  page_home
+
+
+  git branch page_home  (cria nova branch)
+	Cria a branch a partir da que vc esta, geralmente a main
+
+  git checkout page_home (mudar para outra branch)
+
+  git checkout -b "page_teste" (cria a branch e ja muda para ela)
+
+  git branch -d page_teste (apaga a branch teste)
+
+
+MERGE
+
+git merge page_home (precisa estar na main para puxar a page_home)
+
+caso esteja em uma branch, pode puxar e fazer merge do que esta na main
+	git merge main
+
+
+
+GIT STASH
+   Busca  a ultima versao da branch, volta ao estado inicial
+	git stash
+
+REVERTER o STASH
+	git stash list (lista as stash por id)
+	git stash apply 0 (volta a git stash com id 0)
+
+	git stash show -p 0 (mostra o que tem na stash do id 0)
+
+TAGS (ajuda a criar versoes do codido) - Cria Tags no Github como versoes
+  git tag -a v1.0 -m "Primeira versao do so"
+  git tag (mostra as tag)
+  git show v1.0 (Visualiza as altreacoes por TAG)
+
+  git checkout v1.0 (troca entre as tags informando o nome v1.0)
+
+  git push origin v1.0  (Sobre para gitHub so a tag v1.0)
+  git push origin --tags (envia todas as Tags)
+
+
+
+	
+procurando branchs
+
+  Em um repositorio, criar uma branch (git branch cadastro)
+  Dentro da branch atualizar o que precisa nos arquivos
+	fazer git add .  e git commint -m "descricao"
+  e em seguida subir a branch (git push --set-upstream origin cadastro)
+
+
+
+ Em outra maquina ou local, pode buscar todas as branch que estao no projeto
+	git fetch -a  (mostra as branch que achou e trouxe)
+	
+   Mostrara que trouxe a branch ai pode acessar ele com
+	git checkout <nome da branch>
+
+  Pode fazer as alteracoes na branch e subir com git push 
+	na primeira maquina que originou pode dar git pull dentro da branch e pegar as alteracoes
+
+
+COMANDOS
+
+	Arquivos em Cache , limpar cache (melhora performance)
+	git gc    (garbage collector)
+
+	Ver os commints, tipo um historico de todos os commits dos usuarios
+	git shortlog  
+
+	comando diff - fazer comparacoes, diferenca entre arquivos
+	compara arquivo no local com o que tem no github
+	No projeto, dentro da branch como colocar git diff <arquivo> ou git diff
+
+	
+	git reflog
+  	muito parecido com o git log porem com muito mais detalhes, inclusive mudancas de branch
+
+	mostra um log com expiração de 30 dias, pois reset
+
+	git reflog  (mostra os detalhes do repo que vc está)
+	
+
+	
+	
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+

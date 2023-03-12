@@ -1,0 +1,11 @@
+Todos os exercícios e projetos estão em ... 
+
+https://github.com/leandrocgsi/DockerFromZeroToMastery,
+
+https://github.com/leandrocgsi/DockerFromZeroToMastery-SpingBootAndJava,
+
+https://github.com/leandrocgsi/DockerFromZeroToMastery-ASP-NETCore e
+
+https://github.com/leandrocgsi/DockerFromZeroToMastery-NodeJS-ReactJS
+
+Baixe o e-Book grátis "Docker um guia Rápido" -> https://pub.erudio.com.br/guia-docker

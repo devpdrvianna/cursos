@@ -1,0 +1,55 @@
+IF ELSE
+	#Consultar servico do windows
+	Clear-Host
+	$serv = Get-Service -Name EFS
+	if ($serv.status -eq "Running")
+	{
+	Write-Host "Serviço em execução"
+	}
+	Else
+	{
+	Write-Host "Serviço parado"
+	}
+
+
+
+
+	#Teste de internet
+	Clear-Host
+	$conn = (Test-Connection www.mcsesolution.com.br -Cont 1-Quiet)
+	if ($conn -eq "true") {Write-Host "Internet funcionando"-ForegroundColor Yellow}    Muda a cor do retorno na tela
+
+For FOREACHE While
+	
+	#Exemplo do comando FOR
+	Clear-Host
+	for ($var=1; $var -le 10; $var ++) {Test-Connection 192.168.0.$var}
+
+
+	#Exemplo FOREACH
+	Clear-Host
+	#foreach ($numeros in 1,2,3,4,5,6,7,8) {echo $numeros}
+	foreach ($arquivos in Get-ChildItem) {
+	 if ($arquivos.IsReadOnly) {
+		Write-Host $arquivos.FullName
+	 }
+	}
+
+
+	#Matando processo
+	Get-Process sshd | foreach kill  (se tiver mais e um mata todos)
+	
+
+
+  
+	#Exemplo While
+	Clear-Host
+	$i = 0 
+	While ($true)
+	{
+	$i++
+	Write-Host "Vou contar até $i"
+	if ($i -ge 1000) {break}
+	}
+
+	

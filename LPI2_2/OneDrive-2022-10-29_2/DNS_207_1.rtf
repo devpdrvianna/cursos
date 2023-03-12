@@ -1,0 +1,256 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\froman\fcharset0 Times-Bold;
+\f3\froman\fcharset0 Times-Roman;\f4\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red234\green234\blue234;
+\red251\green0\blue7;\red251\green0\blue7;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c93333\c93333\c93333;
+\cssrgb\c100000\c0\c0;\cssrgb\c100000\c0\c0\c20000;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid2\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 207 DNS\
+\
+Domain Name Space\
+	. \'e9 o root\
+		Top Level Domain(TLD): .edu  .us  .com  .br,  Dominios logo apos a RAIZ\
+			Second level domain.  Ubuntu.com.  red-hat.com\
+				Third LEvelhost/subdomain.  Www.   www.sofware. www.access.\
+\
+www.yourname.com.\
+	.  Root Level domain	\
+	.com Top-Level Domain\
+	your name. Second Level domain\
+	www.  Third-Level domain\
+\
+\
+\
+\
+ NS Name Server - Administram as zonas de DNS\
+ NS -responsaveis pelo com.\
+NS - respons\'e1veis pelo redita.com\
+\
+   Os name server conseguem as informa\'e7\'f5es de cada zona\
+\
+  Tipos  (Pode ter no m\'ednimo 2 DNS e 1 precisa ser master)\
+	Primario (MASTER)\
+	Secondario (SLAVE)\
+	Caching\
+	Forwarding\
+\
+  MASTER \
+	Obrigatorio\
+	Authoritative - Possui autoridade sobre o dom\'ednio\
+\
+ Secondary or Salve\
+	tambem considerando como Authoritative server\
+	Recebe as informa\'e7\'f5es do Master \\\
+	Pode se rosado como backup do Master\
+\
+ Caching\
+	Opcional\
+	Nao tem autoridade do dominio\
+	Receber s info do Master ou Slave\
+	Armazena local e faz o cache\
+	\
+ ForWarding\
+	opcional \
+	considerado tipo de cache\
+	Encaminha consulta para outro srv e armazena resultado como cache\
+\
+DNS Resolver\
+	Biblioteca que faz a consulta DNS, faz o trabalho de encontrar os enderecos\
+	Usado no sistema DNS Client e tb na parte do DNS Server\
+	Normal armazena resultados no Cache\
+	\
+\
+    No ping \
+	 Sd fizer a ldd /bin/ping consegue ver as bibliotecas do ping e a libresolv.do.2 \'e9 a biblioteca que resolve o nome\
+\
+\
+\
+BIND\
+	Software que implementa o recurso do servi\'e7o de DNS\
+	Open Source DNS Server\
+	  Berkeley Internet Domain Server\
+	  DNS server mais utilizadas\
+	Prova cobra o BIND 9.x\
+\
+\
+	djbdns - \
+	dnsmasq - DNS catching DHCP e usado na maior parte dos desktop\
+	PowerDns - Implemenacao grande porte, concorrente do BIND\
+\
+	\
+\
+Pr\'e1tica\
+\
+	yum install bind\
+	yum install bind-utils (dig, etc)\
+\
+	apt-get install bind9\
+	apt-get install dnsutils\
+\
+\
+  /etc/named.conf (CentOs)\
+	Consultas de query s\'e3o via UDP\
+	type hint. - Mostra que faz consulta no local- modo cache\
+\
+		zone \'93.\'94 IN \{\
+				type hint;\
+				file \'93name.ca\'94;\
+		\};\
+\
+	Pode adicionar qual ip vai escutar o porta 53 e qual rede pode fazer consulta.\
+\
+ /etc/bind/named.conf (Debian).   Tem o caminho de outros arquivos espec\'edficos\
+\
+\
+  /var/named/ - onde ficam as zonas de DNS, onde configura\
+  	tem o named.ca onde constem a info de todos os SRV relatcionados ao ROOT. (Sao os name server do ponto)\
+\
+  No debian fica tudo no /etc/bind/\
+	\
+  Systemctl start named\
+\
+\
+\
+LOGGING\
+	/etc/named.conf. (Defini\'e7\'e3o de log)\
+		criando um log pr\'f3prio\
+			channel Ricardo \{					onde vai guardar o log\
+					file \'93data/curso.log\'94;\
+					severity dynamic;\
+			\};\
+			category queries \{					o que vai guardar no log\
+				ricardo;\
+			\};\
+\
+	named-checkconf  - Valida as configura\'e7\'f5es do named.conf.  (no Debian precisa colocar o named-checkconf /etc/bind/named.conf)\
+	\
+	rndc reload - vai reiniciar o servi\'e7o named\
+\
+         	reload - recarrega o arq de config e todas zonas\
+		reload teste.com.br so faz da zona\
+		flush  Limpa o cache do srv\
+		reconfig - so recarrega o config e da nova zona que esta sendo configurada.\
+\
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+		Para que o log passe a ser registrado, com o servi\'e7o rodando, \'e9 preciso utilizar o seguinte comando:
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\fs29\fsmilli14592 \cf2 \cb4 \expnd0\expndtw0\kerning0
+		# rndc querylog\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+		Ou reiniciando totalmente o servi\'e7o:\
+\pard\pardeftab720\partightenfactor0
+
+\f1 \cf2 \cb4 		# rndc stop	\
+		# rndc start\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 	/var/named/data possui todas as consultas feitas \
+\
+\
+EXERCICIOS\
+ \
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+1. Configure o servidor DNS para que ele escute conex\'f5es em todas as suas interfaces de rede ativas.
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0
+\fs29\fsmilli14592 \cf5 \cb6 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Verificar as interfaces com o ifconfig\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+No arquivo /etc/named.conf, na se\'e7\'e3o options, configurar o par\'e2metro listen-on:\cb1 \
+\pard\tx940\tx1440\pardeftab720\li1440\fi-1440\partightenfactor0
+\ls1\ilvl1\cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+listen-on port 53 \{ localhost; IP1; IP2; \};\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf5 \cb6 \kerning1\expnd0\expndtw0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+Executar o comando rndc reload\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \
+\
+\pard\pardeftab720\sa510\partightenfactor0
+
+\f2\b\fs29\fsmilli14592 \cf0 \expnd0\expndtw0\kerning0
+2.
+\f3\b0 \'a0Configure seu servidor DNS para funcionar como \'93Caching-Only\'94.\
+\pard\pardeftab720\partightenfactor0
+
+\f4\b \cf5 \cb6 	Em um sistema baseado em Red Hat:
+\f0\b0 \
+
+\f1 \cb4 		zone "." IN \{\cb1 \
+\cb4    		type hint;\cb1 \
+\cb4    		file "named.ca";\cb1 \
+\cb4 		\};\
+
+\f4\b \cb6 	Em um sistema baseado em Debian:
+\f0\b0 \
+
+\f1 \cb4 		zone "." \{\cb1 \
+\cb4 		type hint;\cb1 \
+\cb4 		file "/etc/bind/db.root";\cb1 \
+\cb4 			\};\
+
+\f0 \cb6 	Ao final do processo reinicie o servi\'e7o:\
+
+\f1 \cb4 		# rndc reload\
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\pardeftab720\partightenfactor0
+
+\f4\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+3.
+\f0\b0 \'a0Crie 2 arquivos de logs diferentes no sistema, um chamado \'93seguranca\'94 e que registre as informa\'e7\'f5es referentes aprova\'e7\'e3o e bloqueio de requisi\'e7\'f5es, e um chamado \'93consultas\'94 que contenha as pesquisas realizadas no servidor. Use a severidade debug no arquivo \'93seguran\'e7a\'94 e info no \'93consultas\'94.\
+	
+\f1 \cf5 \cb4 logging \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb4    		channel seguranca \{\cb1 \
+\cb4       		file "data/seguranca.log";\cb1 \
+\cb4       		severity debug;\cb1 \
+\cb4    		\};\cb1 \
+\cb4    		channel consultas \{\cb1 \
+\cb4       		file "data/consultas.log";\cb1 \
+\cb4       		severity info;\cb1 \
+\cb4    		\};\cb1 \
+\cb4    		category security \{\cb1 \
+\cb4       		seguranca;\cb1 \
+\cb4    		\};\cb1 \
+\cb4    		category queries \{\cb1 \
+\cb4       		consultas; \cb1 \
+\cb4    		\};\cb1 \
+\cb4 	\};\
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\
+\
+\
+\
+	\
+\
+}

@@ -1,0 +1,339 @@
+Blocos do Terraform overview
+
+terraform {
+
+provider "aws" {
+
+resource "aws_instance" "vmi" {
+
+data "aws_ami" "ami" {  dados que irao entrar
+
+module "vpc" {
+
+variable "ip" {
+
+output "vmi_ip" {  saida de dados
+
+locals {  Serve para pegar funções, e consegue chamar codigos gerais aqui.
+
+
+
+Configuração do Blocos
+
+https://developer.hashicorp.com/terraform/language/settings
+
+
+terraform {
+  required_version = "~> 1.1.0" # 1.1.0 até 1.1.n   	(Pode força funcionar 1 versao ou conjunto)
+							("-1.1.0" ou para maiores de "->1.1.0)
+
+  required_providers {		(Quais provides vamos usar, funciona => igual maior)
+    aws = {
+        version = ">= 3.50.0"
+        source = "hashicorp/aws"	(inidicar o conteiner)
+    }
+    azurerm = {
+        version = "2.70.0"
+        source = "hashicorp/azurerm"
+    }
+  }
+
+
+  backend "s3" {		(Servc para guardar o stack do terra forma remotamente)
+    
+  }
+}
+
+provider "aws" {
+  
+}
+
+resource "aws_instance" "vm1" {
+  
+}
+
+data "aws_ami" "ami" {
+  
+}
+
+module "vpc" {
+  
+}
+
+variable "ip" {
+  
+}
+
+output "vm1_ip" {
+  
+}
+
+locals {
+  
+}
+
+
+
+Comandos
+https://developer.hashicorp.com/terraform/cli
+
+
+	terraform -help
+
+
+bucket.tf (declanado uma bucket s3 que quero criar)
+resource "aws_s3_bucket" "first_bucket" {
+	bucket = "exemplo-curso-terraform-cli"
+}
+
+no terminal do code (terraform init) para inicializar o diretorio, pega os provider e modulos do main.tf
+
+main.tf
+terraform {
+  required_version = "~> 1.1.0" 
+
+
+  required_providers {		
+    aws = {
+        version = ">= 3.73.0"
+        source = "hashicorp/aws"
+    }
+ 
+  }
+}
+  
+
+provider "aws" {
+	region = "eu-central-1"
+	
+	default_tags {
+  		tags = {
+		  owner = "danielgil"
+		  manager-by = "terraform"
+		}
+	}
+}
+
+será criado o .terraform com configurações
+
+
+ no terminal do code 
+	terraform validade (validar a a sintaxe do codigo e informar erros se houver)
+
+	terraform plan (faz apenas o plano do que será feito)
+		-out (pode salvar o plano em arquivo externo)
+
+	terraform apply (comando que faz o deploy do que esta enviando)
+		Primeiro mostra o plan e pergunta se quer realmente fazer
+		terraform apply -help para ver opções
+		terraform apply <plan.out> que foi criado antes com o terraform plan
+			informando o plano nao pergunta nada e faz
+
+		terraform destroy  o mesmo que terraform apply -destroy (mostra um plan antes de fazer)
+
+	terraform fmt (organiza e alinha todo o codigo, formata as linha com espaçcos e alinha)
+	
+
+Criação do bucket na aws
+https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html (zonas aws)
+
+criar uma pasta e dentro criar o main.tf
+	terraform {
+
+	  required_version = ">=1.0.0"
+
+	  required_providers {
+		aws = {
+		  source = "hashicorp/aws"
+		  version = "3.73.0"
+	  	}
+	  }
+	}
+
+	provider "aws" {
+		region = "eu-central-1"	
+		default_tags {
+			tags = {
+			  owner = "daniel"
+			  managed-by = "terraform"
+			}
+		}
+	}
+
+Criar o arquivo Bucket
+bucket.tf (declanado uma bucket s3 que quero criar)
+resource "aws_s3_bucket" "first_bucket" {
+	bucket = "curso-terraform-daniel"
+}
+
+terminal code - terraform init
+		terraform validate
+		terraform fmt
+		
+copiar e colar as variaveis com as credenciais no terminal
+	export AWS_ACCESS_KEY_ID=AKIAQFDGTAZWWVP
+	export AWS_SECRET_ACCESS_KEY=6HiLAANBZeooaWp/i5p06nE+Xzf2WxeI3
+
+	terraform plan (mostra o status de OK)
+	terraform apply  <yes>
+
+	Ele irá criar o bucket na aws
+	
+	para destruir
+		terraform destroy  <yes>
+
+
+Variáveis e Output
+https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
+
+Criar o main.tf
+	terraform {
+
+	  required_version = ">=1.0.0"
+
+	  required_providers {
+		aws = {
+		  source = "hashicorp/azurerm"
+		  version = "2.94.0"
+	  	}
+	  }
+	}
+
+	provider "azurerm" {
+		features {}
+
+	}
+
+
+
+
+
+
+
+
+Criar o storage-account.tf
+	
+	resource "azurerm_resource_group" "first_rsource_group" {
+	  name = "storage_accrount_resource_group"
+	  location = var.location  (Pegando a variavel do arquivo variables.tf)
+
+	  tags = local.common_tags 
+	}
+
+
+	resource "azurerm_storage_account" "firs_storage_account" {	
+		name 			= danielglitonageaccount"
+		resource_group_name 	= azurerm_resource_group.first_rsource_group.name (pega a referencia de cima)
+		location		= var.location (Pegando a variavel do arquivo variables.tf)
+		account_tier		= var.account_tier (Pegando a variavel do arquivo variables.tf)
+		accrount_replication_type = var.accrount_replication_type (Pegando a variavel do arquivo variables.tf)
+
+		tags = local.common_tags
+	}
+
+
+	resource "azurerm_storage_container" "first_container" { 
+		name 			= "imagens"
+		storage_account_name 	= azurerm_storage_account.firs_storage_account.name
+	}
+
+
+
+
+Variables
+	https://developer.hashicorp.com/terraform/language/values/variables
+	https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview
+
+	terraform apply -var="variave=xxx"
+	criar arquivo terminal com .tfvars  ou .tfvars.json
+	export TF_vars
+	
+criar o arquivo variables.tf
+	variable "location" {
+		description = "Variável que indica a regiao onde os recursis serão criados"	
+		type string
+		defalut = "West Europe"
+	
+	}	
+
+	variable "account_tier" {
+		description = " Tier da stotage Account na azure"
+		type string
+		defalut = "standart"
+		
+	}
+		variable "account_replication_type" {
+		description = "Tipo de replicação de dados de storage account"
+		type string
+		defalut = "LRS"
+		sensitive = true (terraform não mostra a variavel quando terraform plan)
+		
+	}
+
+
+
+
+Se fosse no terminal do code
+	export TF_VAR_location = "Brazil south"
+
+	ou
+	terraform apply var='location=Brazil South"
+
+	ou 
+	criar arquivo terraform.tfvars
+		localtoin = "location=Brazil South"
+
+
+
+
+referenciar atributos de outros blocos
+https://developer.hashicorp.com/terraform/language/expressions/references
+
+Referenciado no codigo acima
+	resource_group_name 	= azurerm_resource_group.first_rsource_group.name (pega a referencia de cima)
+	
+	azurerm_resource_group.first_rsource_group.id (pode usar o id de uma resource account por exemplo)
+
+
+
+Local Values
+	Permite dar o nome a uma função
+	Criar o arquivo local.tf
+	locals {
+		common_tags = {
+			owner = "daniel"
+			manager-by = "terraform"
+		}
+	}
+
+
+no arquivo Storage-account.tf 
+	
+		tags = local.common_tags
+
+
+
+Falando sobre OutPut (enviar info para fora do Terraform
+https://developer.hashicorp.com/terraform/language/values/outputs
+
+	criar arquivo output.tf
+
+	output "storage_account_id" {
+		value = "azurerm_storage_account.first_storage_account.id"
+	}
+
+
+terraform init para inicialiar o diretorio
+terraform fmt para formatar
+terraform plan (ver se apresenta erros)
+terraform apply <yes>
+
+terraform output storage_account_id moostra o output
+
+fazendo destroy
+	terraform destroy <yes>
+
+
+
+

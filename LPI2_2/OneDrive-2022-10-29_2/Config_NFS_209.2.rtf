@@ -1,0 +1,205 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fmodern\fcharset0 Courier;
+}
+{\colortbl;\red255\green255\blue255;\red44\green44\blue44;\red255\green255\blue255;\red251\green0\blue7;
+\red251\green0\blue7;\red234\green234\blue234;}
+{\*\expandedcolortbl;;\cssrgb\c22745\c22745\c22745;\cssrgb\c100000\c100000\c100000;\cssrgb\c100000\c0\c0;
+\cssrgb\c100000\c0\c0\c20000;\cssrgb\c93333\c93333\c93333;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 209.2. NFS\
+\
+	apt-get install. Rpcbind nfs-common nfs-kernet-server\
+\
+	systtemctl start rpcbind nfs-server\
+\
+	ps aux | grep nfs\
+	ps aux | grep rpcbind\
+\
+	\
+	yum install nfs-utils rpcbind. (Redhat)\
+	systemctl start rpcbind\
+	systemctl start nfs\
+\
+	showmount -e. (Para ver se esta funcionando)\
+	rpcinfo -p   (mostrar se esta funcionando)\
+\
+			portmapper roda na porta 111. (Cliente consulta esse servi\'e7o para saber a porta que o moun esta funcionando)\
+			mountd roda sempre em. Portas diferentes \
+		\
+	debian config\
+		/etc/default\
+			nfs-ker kernek-server\
+			nfs-common\
+				STATDOPTS=.  Serve para fixar uma porta para trabalhar para caso de uso de um firewall\
+\
+	centOs\
+		/etc/sysconfig/nfs\
+\
+\
+\
+CRIANDO COMPARTILHAMENTO\
+	\
+	Np Server. (Foca config do V3)\
+		vim /etc/exports\
+			/varlog 192.168.1.111(ro,sync, no_subtree_check)  192.168.2.220(rw,sync, no_subtree_check) 192.168.1.0/24(rw,async, no_subtree_check)\
+			/home/Ricardo	192.168\ul .1.220(\ulnone rw,async, no_root_squash\ul )\
+			/opt/nfs 192.168.1.0/24 (\ulnone rw,async, no_root_squash\ul )\
+\
+		exportfs comando para validar as altera\'e7\'f5es\
+			exportfs -a valida tudo\
+			exportfs -r  refaz quando faz altera\'e7\'f5es no arquivo\
+			exportfs -v mostra tudo \
+			\
+			exportfs -u desmonta tudo\
+\
+			showmount -e mostra tudo montado na maquina\
+			showmount -e 192.2.10.220 mostra tudo dispon\'edvel no ip\
+\
+			exportfs 192.168.1.220;/etc -o ro, sync   o que vou disponibilizar. O ip e do cliente\
+		\
+	como montar\
+			mount -t nfs 192.168.1.210:/var/log /mnt/nfs\
+			\
+	\
+		grep nfs /proc/mounts\
+\
+	Montar  fstab\
+		192.168.1.210:/home/Ricardo	mnt/teste1		nfs	defaults    0.  0 \
+		mount -a\
+\
+	nfsstat. - mostra estat\'edstica do NFS\
+		nsfstat -n mostra os mounts\
+			\
+		nfsstat -c  - mostra estat\'edstica de uso\
+		\
+	\
+\
+	man export\
+		sync so retort o cliente quando grava em disco\
+		async melhora a performance mas se tiver boot pode perder dados\
+\
+		no subtree_check -  e comum ativar esse, ele faz checagem de montagem de uma parti\'e7\'e3o que n\'e3o foi totalmente montada\
+\
+		root_squash - Transforma usuario em usuario an\'f3nimos, mapeia UID 0 3m usuario anonymous\
+\
+		se no root squash habilitado e os usu\'e1rio mapear ele vai ter acesso de root \
+\
+\
+NFS v4\
+	pseudo filesystem\
+		mount 192.168.1.210:/. /mnt/nfs  - vc monta o / mas e o raiz do diret\'f3rio que esta sendo mapeado.\
+\
+	\
+TCP Wrappers\
+		hosts.allow e o hosts.deny no /etc\
+			rpcbind: 192.168.1.220 (bloqueia o portmaper). \
+			roc.mountd 192.168.1.220  consegue listar as portas com shoumont mas n\'e3o consegue mapear\
+\
+\
+Bloquer o NFSVa\
+	/etc/defaukt vim nfs-kernel-server (debian)\
+		RPCMOUNTDOPTS=\'93 \'97manager-gids \'97no-nfs-version 4\'94.  Para desabilitar \
+\
+	sustemctl start nfs-server\
+	mount -t nfs 192.168.1.210;/opt/nfs /mnt/nfs assim ele monta mas so pea vers\'e3o 3\
+	mount | grep nfs\
+\
+	\
+	/etc/sysconfig/nfs\
+		RPCNFSARGS=\'98\'97no-nfs-version 4\'94\
+	\
+ Dominar /etc/exports e exportfs\
+\
+\
+\
+\
+EXERCICIOS\
+\
+	
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\ulnone \outl0\strokewidth0 \strokec2 1.
+\f0\b0 \'a0Utilizando um servidor NFS, crie os seguintes compartilhamentos de maneira permanente.\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Diret\'f3rio /var/log, para toda a rede interna, em modo somente leitura\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Diret\'f3rio /usr/src, apenas para um IP espec\'edfico, permitindo leitura e escrita, utilizando a op\'e7\'e3o no_root_squash\cb1 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\fs24 \cf0 \kerning1\expnd0\expndtw0 \ul \ulc0 \outl0\strokewidth0 	
+\fs29\fsmilli14592 \cf4 \cb5 \expnd0\expndtw0\kerning0
+\ulnone \outl0\strokewidth0 \strokec4 Edite o arquivo /etc/exports adicionando os seguintes registros:\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 		/var/log 192.168.1.0/24(ro,no_subtree_check)\cb1 \
+\cb6 		/usr/src 192.168.1.111(rw,no_subtree_check,no_root_squash)\
+
+\f0 \cb5 	Execute o comando:\
+
+\f2 \cb6 		# exportfs -a\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 2.
+\f0\b0 \'a0Habilite de maneira tempor\'e1ria, sem o uso do /etc/exports, o compartilhamento do diret\'f3rio /opt para toda a rede. Mantenha as op\'e7\'f5es padr\'e3o do NFS.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb5 \strokec4 	Execute o seguinte comando:\
+
+\f2 \cb6 	# exportfs 192.168.1.0/24:/opt\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b \cf2 \cb3 \strokec2 3.
+\f0\b0 \'a0Em uma m\'e1quina cliente, monte o diret\'f3rio /opt do NFS Server, de maneira tempor\'e1ria, sem o uso do /etc/fstab, no diret\'f3rio /mnt/exercicio3.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb5 \strokec4 	Execute o seguinte comando:\
+
+\f2 \cb6 	# mount -t nfs IP-NFS-Server:/opt /mnt/exercicio3\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \ul \ulc0 \outl0\strokewidth0 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\ulnone \outl0\strokewidth0 \strokec2 4.
+\f0\b0 \'a0Em uma m\'e1quina cliente, configure o arquivo /etc/fstab para montar automaticamente o compartilhamento /var/log criado no primeiro exerc\'edcio, no diret\'f3rio /mnt/logs.\
+\
+\
+\pard\pardeftab720\partightenfactor0
+\cf2 	\cf4 \cb5 \strokec4 Incluir a seguinte entrada no arquivo /etc/fstab\
+\pard\pardeftab720\partightenfactor0
+
+\f2 \cf4 \cb6 	IP-NFS-Server:/var/log /mnt/logs nfs defaults 0 0\
+
+\f0 \cb5 	Executar o comando:\
+
+\f2 \cb6 	# mount -a\
+\pard\pardeftab720\partightenfactor0
+
+\f0 \cf2 \cb3 \strokec2 \
+
+\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \ul \ulc0 \outl0\strokewidth0 \
+
+\fs29\fsmilli14592 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\ulnone \outl0\strokewidth0 \strokec2 5. Configure o sistema para negar o uso do servi\'e7o NFS de qualquer m\'e1quina da rede 10.0.0.0/8.\
+\
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb5 \strokec4 	Editar o arquivo /etc/hosts.deny, adicionando a seguinte entrada:\
+
+\f2 \cb6 	rpcbind: 10.0.0.0/8\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs24 \cf0 \cb1 \kerning1\expnd0\expndtw0 \ul \ulc0 \outl0\strokewidth0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \ulc0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \ulc0 		\ulnone \
+			}

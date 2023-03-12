@@ -1,0 +1,1 @@
+comando 1 #Teste de executar
